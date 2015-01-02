@@ -82,3 +82,11 @@ nnoremap k gk
 "reverse swap
 nnoremap gj j
 nnoremap gk k
+
+"typo resilience
+command! Q q
+command! Qall qall
+command! W w
+command! Wall wall
+command! Wq wq
+command! WQ wq
