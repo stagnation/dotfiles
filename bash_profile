@@ -11,7 +11,11 @@ stty -ixon
 #path variable
 #vim "$acnd"/httpd.confO
 
-#ignore git fir in grep
+#tolerate typos
+#in cd commands
+shopt -s cdspell
+
+#ignore git dir in grep
 alias grep='grep --exclude-dir=.git'
 #quake 3 cpma alias
 alias cpma='quake3 +set fs_game cpma'
