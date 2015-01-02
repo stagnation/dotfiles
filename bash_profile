@@ -45,5 +45,11 @@ function ytclip()
 youtube-viewer $(xclip -o) best -q --no-interactive &
 }
 
+function mkpy()
+{
+cp ~/arbete/resources/python/stub.py ./${1}
+vim ./${1}
+}
+
 #vi(m) mode for bash, rathr than emacs
 set -o vi
