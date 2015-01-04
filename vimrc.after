@@ -39,7 +39,7 @@ set encoding=utf-8        "utf-8 encoding
 set backupdir=~/.vim/backup "centralized backup
 set backspace=indent,eol,start "backspace everywhere
 set noswapfile            "no swap files
-
+set foldmethod=indent     "creates fold based on indentation levels
 " Move up and down in autocomplete with <c-j> and <c-k>
 "inoremap <expr> <c-j> ("\<C-n>")
 "inoremap <expr> <c-k> ("\<C-p>")
