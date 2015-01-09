@@ -40,6 +40,7 @@ set backupdir=~/.vim/backup "centralized backup
 set backspace=indent,eol,start "backspace everywhere
 set noswapfile            "no swap files
 set foldmethod=indent     "creates fold based on indentation levels
+set cursorline            "hilights the line cursor is at
 " Move up and down in autocomplete with <c-j> and <c-k>
 "inoremap <expr> <c-j> ("\<C-n>")
 "inoremap <expr> <c-k> ("\<C-p>")
@@ -96,3 +97,19 @@ command! W w
 command! Wall wall
 command! Wq wq
 command! WQ wq
+
+"cursor line only in active window
+au WinEnter * setlocal cursorline
+au WinLeave * setlocal nocursorline
+
+"this seems like nice undo history
+if has("persistent_undo")
+    set undodir=~/.vim/undodir
+    set undofile
+endif
+
+"return to cursor location when reopenning file
+if has("autocmd")
+      autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
