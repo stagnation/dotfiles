@@ -33,7 +33,7 @@ set ignorecase            "ignore case when searching
 set smartcase             "will override ignore case if searching w/ diff cases
 set modeline              "use modelines ??????
 set ttimeoutlen=50        "faster twitching for everything
-set virtualedit=block     "allow cursor to be moved into empty space in visual 
+set virtualedit=block     "allow cursor to be moved into empty space in visual
 set laststatus=2          "always show status line
 set encoding=utf-8        "utf-8 encoding
 set backupdir=~/.vim/backup "centralized backup
@@ -75,6 +75,12 @@ let mapleader =" "
 "center window after jumping forward
 nnoremap n nzz
 nnoremap } }zz
+
+"turn off search hilighting for current search
+nnoremap <leader>l :nohlsearch<CR>
+"turn off search hilighting for in insert mode
+autocmd InsertEnter * :setlocal nohlsearch
+autocmd InsertLeave * :setlocal hlsearch
 
 "move by row rather than line
 nnoremap j gj
