@@ -51,5 +51,15 @@ cp ~/arbete/resources/python/stub.py ./${1}
 vim ./${1}
 }
 
+function streamtest()
+{
+if livestreamer $(xclip -o) best -Q & > /dev/null; then
+    printf 'livestreamer ok\n' >&2
+else
+    printf 'livestreamer not ok' >&2
+    youtube-viewer $(xclip -o) best -q & > /dev/null &
+fi
+}
+
 #vi(m) mode for bash, rathr than emacs
 set -o vi
