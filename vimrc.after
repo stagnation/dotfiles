@@ -40,10 +40,16 @@ set backupdir=~/.vim/backup "centralized backup
 set backspace=indent,eol,start "backspace everywhere
 set noswapfile            "no swap files
 set foldmethod=indent     "creates fold based on indentation levels
+set foldlevel=20          "by defualt open folds to level 20
 set cursorline            "hilights the line cursor is at
+
 " Move up and down in autocomplete with <c-j> and <c-k>
 "inoremap <expr> <c-j> ("\<C-n>")
 "inoremap <expr> <c-k> ("\<C-p>")
+
+" retain selection after visual indentation operations
+vnoremap > >gv
+vnoremap < <gv
 
 " Copy/Paste with os buffer
 noremap <leader>y "+y
