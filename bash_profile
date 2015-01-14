@@ -35,6 +35,11 @@ function mkcd()
 mkdir ${1}; cd ${1}
 }
 
+function mvcd()
+{
+mv ${1} ${2}; cd ${2}
+}
+
 function streamclip()
 {
 livestreamer $(xclip -o) best &
