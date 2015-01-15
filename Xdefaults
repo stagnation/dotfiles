@@ -1,0 +1,46 @@
+URxvt*scrollBar: false
+URxvt*saveLines: 8000
+URxvt.urlLauncher: firefox
+
+
+URxvt*font: xft:Inconsolata:style=Medium:pixelsize=14:antialias=true:hinting=true:hintstyle=hintfull
+URxvt*boldFont: xft:Inconsolata:style=Medium:bold:pixelsize=14:antialias=true:hinting=true:hintstyle=hintfull
+urxvt.font: xft:DejaVu Sans Mono:pixelsize=12
+urxvt.letterSpace: -1
+
+! Colors
+URxvt.foreground: #7e7e7e
+URxvt.background: #0A1015
+*color0: #303030
+*color8: #5F5F5F
+*color1: #c03000
+*color9: #FF3A78
+*color2: #8AB22C
+*color10: #A6CD07
+*color3: #B5C865
+*color11: #fecf35
+*color4: #426870
+*color12: #4A7781
+*color5: #6D506D
+*color13: #FF3B77
+*color6: #4bb5c1
+*color14: #4bb5c1
+*color7: #b2b2b5
+*color15: #c2c2c5
+URxvt*colorUL: #4682B4
+
+!disable interfering unicode insert w/ ctrl-shift
+URxvt.iso14755: false
+
+!also add CLIPBOARD buffer when ordinarily copying
+!to only primary
+URxvt.clipboard.autocopy: true
+
+URxvt*perl-ext-common: default,matcher
+URxvt*url-launcher: /usr/bin/firefox
+URxvt*matcher.button: 1
+
+URxvt*keysym.C-Delete: perl:matcher:last
+URxvt*keysym.M-Delete: perl:matcher:list
+
+
