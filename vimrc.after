@@ -52,6 +52,11 @@ let mapleader =" "
 vnoremap > >gv
 vnoremap < <gv
 
+color lakris256
+if has("gui_running")
+    color lakris
+endif
+
 " Copy/Paste with os buffer
 noremap <leader>y "+y
 noremap <leader>Y "+y$
