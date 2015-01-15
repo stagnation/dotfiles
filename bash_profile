@@ -33,11 +33,13 @@ livestreamer ${1} best &
 function mkcd()
 {
 mkdir ${1}; cd ${1}
+echo ${1}
 }
 
 function mvcd()
 {
 mv ${1} ${2}; cd ${2}
+echo ${2}
 }
 
 function streamclip()
