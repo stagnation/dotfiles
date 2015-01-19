@@ -1,4 +1,5 @@
 URxvt*scrollBar: false
+URxvt*geometry: 80x45
 URxvt*saveLines: 12000
 !old
 !URxvt*font: xft:Liberation Mono:pixelsize=13:antialias=true:hinting=true
@@ -51,7 +52,7 @@ URxvt.url-launcher: firefox
 ! perls selection
 ! Copy stuff into /usr/lib/urxvt/perl/ or $HOME/.urxvt/ext/ instead.
 !URxvt.perl-lib: /home/oliver/Configuration-files/urxvt-perls/
-URxvt.perl-ext-common: default,matcher,url-select,clipboard,keyboard-select,testskit
+URxvt.perl-ext-common: default,matcher,url-select,clipboard,keyboard-select,
 
 ! url-select config
 URxvt.keysym.Shift-Control-P: perl:url-select:select_next
@@ -74,3 +75,7 @@ URxvt.keysym.Shift-Control-Y: perl:keyboard-select:activate
 URxvt.keysym.Shift-Control-L: perl:keyboard-select:search
 URxvt.clipboard.copycmd:  xclip -i -selection clipboard
 URxvt.clipboard.pastecmd: xclip -o -selection clipboard
+
+!in lieu of unbinding keys
+URxvt.keysym.C-Up: perl:keyboard-select:search
+URxvt.keysym.C-Down: perl:keyboard-select:search
