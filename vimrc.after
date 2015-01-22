@@ -43,7 +43,7 @@ set foldmethod=indent     "creates fold based on indentation levels
 set foldlevel=20          "by defualt open folds to level 20
 set cursorline            "hilights the line cursor is at
 
-let mapleader =" "
+let g:mapleader =" "
 " Move up and down in autocomplete with <c-j> and <c-k>
 "inoremap <expr> <c-j> ("\<C-n>")
 "inoremap <expr> <c-k> ("\<C-p>")

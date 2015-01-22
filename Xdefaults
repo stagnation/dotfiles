@@ -1,5 +1,5 @@
 URxvt*scrollBar: false
-URxvt*geometry: 80x45
+URxvt*geometry: 80x56
 URxvt*saveLines: 12000
 !old
 !URxvt*font: xft:Liberation Mono:pixelsize=13:antialias=true:hinting=true
