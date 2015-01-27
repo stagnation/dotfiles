@@ -31,4 +31,10 @@ echo "Moving any existing dotfiles from ~ to $olddir"
 mv ~/.$file ~/dotfiles_old/
 echo "Creating symlink to $file in home directory."
 ln -s $dir/$file ~/.$file
+
+echo "Moving any existing dotfiles from ~ to $olddir"
+mv ~/.i3/config ~/dotfiles_old/
+echo "Creating symlink to i3/config in home directory."
+ln -s $dir/i3cfg ~/.i3/config
+
 done
