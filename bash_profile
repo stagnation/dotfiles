@@ -5,6 +5,12 @@ __pwd_ps1() { echo -n $PWD | sed -e "s|${HOME}|~|" -e "s|\(/[^/]*/\).*\(/.\{${PS
 GIT_PS1_SHOWDIRTYSTATE=1
 PS1='\[\033[01;34m\]$(__pwd_ps1)$(__git_ps1 " \[\033[01;31m\](%s)")$\[\033[00m\] '
 
+#load .Xmodmap for caps -> control
+xmodmap ~/.Xmodmap
+
+#set swedish mac keyboard mapping
+setxkbmap -layout se -variant mac
+
 #turn flow control off
 stty -ixon
 
