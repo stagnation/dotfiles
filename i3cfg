@@ -42,7 +42,7 @@ bindsym $mod+d exec dmenu_run
 
 #xinput settings
 # disable touchpad tap click
-exec --no-startup-id xinput set-prop "SynPS/2 Synaptics Touchpad" "Synaptics Tap Time" 0
+exec --no-startup-id xinput set-prop "SynPS/2 Synaptics TouchPad" "Synaptics Tap Time" 0
 
 # move focus
 bindsym $mod+h focus left
