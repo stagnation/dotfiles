@@ -174,3 +174,9 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+
+#volume keys bindings
+#-c 1 for sound card with index 1.
+bindsym XF86AudioRaiseVolume exec amixer -c 1 -q set Master 3%+ unmute
+bindsym XF86AudioLowerVolume exec amixer -c 1 -q set Master 3%- unmute
+bindsym XF86AudioMute exec amixer -q -D pulse set Master toggle
