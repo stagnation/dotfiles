@@ -11,6 +11,9 @@
 
 set $mod Mod4
 
+set $quickswitch  /home/spill/bin/quickswitch.py --dmenu "dmenu -i -l 20 -fn 'DejaVu Sans 10' -sb '#E17800' -sf '#000000' -h 23"
+
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
 #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -36,6 +39,7 @@ exec --no-startup-id nm-applet
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
+bindsym $mod+space exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -99,7 +103,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+#bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -118,6 +122,17 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
+
+#quickswitch binds
+bindsym $mod+m exec $quickswitch -e
+#bindsym $mod+Shift+M exec $quickswitch -e; exec /usr/bin/urxvt
+#bindsym $mod+Shift+M exec $quickswitch -ej
+bindsym $mod+Shift+M exec /home/spill/bin/quickswitch.py
+bindsym $mod+n exec $quickswitch -n
+bindsym $mod+p exec $quickswitch -p
+#bindsym $mod+Tab exec $quickswitch
+bindsym $mod+Tab exec /home/spill/bin/quickswitch.py
+#bindsym $mod+§ exec /home/spill/bin/quickswitch.py
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -180,3 +195,6 @@ bar {
 bindsym XF86AudioRaiseVolume exec amixer -c 1 -q set Master 3%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -c 1 -q set Master 3%- unmute
 bindsym XF86AudioMute exec amixer -q -D pulse set Master toggle
+
+assign [class="Vlc"] 9
+for_window [title="^VLC$"] move workspace 8
