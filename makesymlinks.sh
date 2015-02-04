@@ -9,7 +9,8 @@
 
 dir=~/dotfiles # dotfiles directory
 olddir=~/dotfiles_old # old dotfiles backup directory
-files="Xdefaults Xmodmap bash_profile vimrc.after tmux.conf vimrc.before gvimrc" # list of files/folders to symlink in homedir
+files="Xdefaults Xmodmap bash_profile vimrc.after tmux.conf vimrc.before gvimrc vimperatorrc"
+# list of files/folders to symlink in homedir
 
 ##########
 # create dotfiles_old in homedir
