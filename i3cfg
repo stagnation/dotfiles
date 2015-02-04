@@ -124,10 +124,10 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 #quickswitch binds
-bindsym $mod+m exec $quickswitch -e
+bindsym $mod+m exec  $quickswitch -e
 #bindsym $mod+Shift+M exec $quickswitch -e; exec /usr/bin/urxvt
 #bindsym $mod+Shift+M exec $quickswitch -ej
-bindsym $mod+Shift+M exec /home/spill/bin/quickswitch.py
+bindsym $mod+Shift+M exec /home/spill/bin/spillswitch.py
 bindsym $mod+n exec $quickswitch -n
 bindsym $mod+p exec $quickswitch -p
 #bindsym $mod+Tab exec $quickswitch
@@ -190,11 +190,18 @@ bar {
         status_command i3status
 }
 
-#volume keys bindings
+#volume key bindings
 #-c 1 for sound card with index 1.
 bindsym XF86AudioRaiseVolume exec amixer -c 1 -q set Master 3%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -c 1 -q set Master 3%- unmute
 bindsym XF86AudioMute exec amixer -q -D pulse set Master toggle
 
+#brightness key bindings
+bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 5
+
 assign [class="Vlc"] 9
 for_window [title="^VLC$"] move workspace 8
+
+#apply keyboard remaps
+#exec /usr/bin/xmodmap ~/.Xmodmap
