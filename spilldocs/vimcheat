@@ -1,0 +1,44 @@
+) hoppa till slut av mening
+} hoppa till slut av paragraf
+
+INDENTERING
+
+vai markerar hela indenteringsnivån + en rad super
+vaI markerar hela intenterignsnivån + super + super-under
+ai indenteringsnivå + en rad super
+
+hoppa runt
+gi - till senaste stället som text insertades
+g; | g, gå igenom 'change list' av positioner
+
+Capital registers
+"Ay lägger till vad som yankades i slutet av register a
+
+K öppnar man page för ordet man står på, kan vara najs för c programmering
+
+FUGITIVE
+:Gstatus gör git status,
+    - stage:ar eller inte för commit
+    D gör vimdiff på filen!
+    C commitar
+TAGS
+:!ctags -R kör ctags rekursivt på hela projektet.
+:tag <tagnamn> söker efter tag.
+:tagselect visar en lista över alla taggar
+:tn, :tp söker fram o bakåt efter användingar av den taggen i projektet.
+
+
+FOLDS
+zc stänger
+zo öppnar
+za togglar
+zr öppnar en mer nivå fold genom hela buffern
+zm stänger en mer nivå fold genom hela buggern
+-stor bokstav på andra gör sakerna mer globala.
+
+SÖKNING
+c-o, c-i går fram o tillbaka i sök träffar
+ggn går till första träffen i dokumentet
+GN går till sista träffen i dokumentet
+
+:g/<expr> visar linjer som matchas av <expr>
