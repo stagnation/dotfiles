@@ -21,6 +21,7 @@ FUGITIVE
     - stage:ar eller inte för commit
     D gör vimdiff på filen!
     C commitar
+
 TAGS
 :!ctags -R kör ctags rekursivt på hela projektet.
 :tag <tagnamn> söker efter tag.
