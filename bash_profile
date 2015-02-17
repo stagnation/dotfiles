@@ -20,9 +20,7 @@ stty -ixon
 shopt -s cdspell
 
 #ignore git dir in grep
-alias grep='grep --exclude-dir=.git'
-#quake 3 cpma alias
-alias cpma='quake3 +set fs_game cpma'
+alias grep='grep --exclude-dir=.git --color'
 
 function lsext()
 {
