@@ -45,12 +45,15 @@ set cursorline            "hilights the line cursor is at
 
 let g:mapleader =" "
 " Move up and down in autocomplete with <c-j> and <c-k>
-"inoremap <expr> <c-j> ("\<C-n>")
-"inoremap <expr> <c-k> ("\<C-p>")
+inoremap <expr> <c-j> ("\<C-n>")
+inoremap <expr> <c-k> ("\<C-p>")
 
 " retain selection after visual indentation operations
 vnoremap > >gv
 vnoremap < <gv
+
+" remap Join lines to spilt lines
+nnoremap J i<CR><ESC>
 
 color lakris256
 if has("gui_running")
@@ -99,11 +102,17 @@ autocmd InsertLeave * :setlocal hlsearch
 "move by row rather than line
 nnoremap j gj
 nnoremap k gk
+nnoremap 0 g0 "with better line break handling these sohuldn't matter anyhow...
+nnoremap $ g$
 "reverse swap
 nnoremap gj j
 nnoremap gk k
+nnoremap g0 0
+nnoremap g$ $
 
-"typo resilience
+
+
+"typo resilience for commands
 command! Q q
 command! Qall qall
 command! W w
@@ -126,3 +135,4 @@ if has("autocmd")
       autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
+nmap <leader>t :TagbarToggle<CR>
