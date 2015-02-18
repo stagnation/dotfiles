@@ -135,6 +135,8 @@ bindsym $mod+p exec $quickswitch -p
 #bindsym $mod+Tab exec $quickswitch
 bindsym $mod+Tab exec /home/spill/bin/quickswitch-for-i3/quickswitch.py
 #bindsym $mod+§ exec /home/spill/bin/quickswitch.py
+#
+bindsym $mod+i exec /home/spill/bin/streampy
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1

@@ -7,3 +7,28 @@ nnoremap h 4h
 nnoremap j 4j
 nnoremap k 4k
 nnoremap l 4l
+
+"vimfx like - swapped new tab - movement
+"up down in accordance with tree-style tabbar
+
+nnoremap J <c-n>
+nnoremap K <c-p>
+
+nnoremap B t
+nnoremap t <c-t>
+
+" Press 'C-a' to select all
+noremap <C-a> <C-v><C-a>
+
+" Press 'C-c' to copy, 'C-v' or 'S-Insert' to paste, or 'C-x' to cut
+"noremap <C-c> <C-v><C-c>
+"noremap <C-v> <C-v><C-v>
+"noremap <C-x> <C-v><C-x>
+"cnoremap <C-c> <C-v><C-c>
+"cnoremap <C-v> <C-v><C-v>
+"cnoremap <S-Insert> <C-v><C-v>
+"cnoremap <C-x> <C-v><C-x>
+"inoremap <C-c> <C-v><C-c>
+"inoremap <C-v> <C-v><C-v>
+"inoremap <S-Insert> <C-v><C-v>
+"inoremap <C-x> <C-v><C-x>

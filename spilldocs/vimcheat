@@ -9,12 +9,13 @@ ai indenteringsnivå + en rad super
 
 hoppa runt
 gi - till senaste stället som text insertades
-g; | g, gå igenom 'change list' av positioner
+g; | g, gå igenom 'change list' av positioner (komma - semikolon)
 
-Capital registers
+Capital registers - append
 "Ay lägger till vad som yankades i slutet av register a
 
 K öppnar man page för ordet man står på, kan vara najs för c programmering
+verkar inte funka.
 
 FUGITIVE
 :Gstatus gör git status,
@@ -27,6 +28,7 @@ TAGS
 :tag <tagnamn> söker efter tag.
 :tagselect visar en lista över alla taggar
 :tn, :tp söker fram o bakåt efter användingar av den taggen i projektet.
+:tags verkar visa tagar man sökt på
 
 
 FOLDS

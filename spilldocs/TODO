@@ -1,0 +1,9 @@
+* mkcd, mvcd, cpcd. kontrollera att legalt arguemnt. framförallt mv
+
+* mkpy, mktex .. 
+skapa ett skript med unifierat template i arbete/res. som kopierar en blank till pwd.
+
+* interactive kill
+echoar processen från ps och ber om ja.
+:wq
+
