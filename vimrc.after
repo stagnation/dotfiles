@@ -111,7 +111,12 @@ nnoremap gk k
 nnoremap g0 0
 nnoremap g$ $
 
-
+"ignore settings for ctrlP
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll|aux|pdf|out)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
 
 "typo resilience for commands
 command! Q q
