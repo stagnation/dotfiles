@@ -24,6 +24,10 @@ shopt -s cdspell
 #ignore git dir in grep
 alias grep='grep --exclude-dir=.git --color'
 
+alias xclipin='xclip -i -selection clipboard'
+
+alias gitclone='git clone $(xclip -o)'
+
 function lsext()
 {
 find . -type f -iname '*.'${1}'' -exec ls -l --color=auto {} \; ;
@@ -36,14 +40,27 @@ livestreamer ${1} best &
 
 function mkcd()
 {
+#if [ ${1} != '' ] ; then
+if [ ${1}  ] ; then
 mkdir ${1}; cd ${1}
-echo ${1}
+echo $(pwd)
+fi
 }
 
 function mvcd()
 {
+echo $#
+if [ $# == 2 ] ; then
 mv ${1} ${2}; cd ${2}
-echo ${2}
+echo $(pwd)
+else
+echo "need two arguments"
+fi
+}
+
+function copyfile()
+{
+cat ${1} | xclip -i -selection clipboard
 }
 
 function streamclip()
@@ -71,6 +88,7 @@ else
     youtube-viewer $(xclip -o) best -q & > /dev/null &
 fi
 }
+
 
 #vi(m) mode for bash, rathr than emacs
 set -o vi
