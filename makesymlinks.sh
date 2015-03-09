@@ -8,7 +8,7 @@
 ########## Variables
 
 dir=~/dotfiles # dotfiles directory
-olddir=~/dotfiles_old # old dotfiles backup directory
+olddir=~/bak_dotfiles# old dotfiles backup directory
 files="Xdefaults Xmodmap bash_profile vimrc.after tmux.conf vimrc.before gvimrc vimperatorrc"
 # list of files/folders to symlink in homedir
 
