@@ -45,3 +45,6 @@ ggn går till första träffen i dokumentet
 GN går till sista träffen i dokumentet
 
 :g/<expr> visar linjer som matchas av <expr>
+
+:read <cmd> skriver output från kommand vid pekaren
+ex. :read !echo $PATH

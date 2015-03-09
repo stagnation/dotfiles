@@ -7,3 +7,11 @@ skapa ett skript med unifierat template i arbete/res. som kopierar en blank till
 echoar processen från ps och ber om ja.
 :wq
 
+*pdflatex wrapper, 
+gör pdflatex, ger vettiga namn på allt (prefixar skitfiler)
+stoppar det i .tex filens dir inte pwd
+
+*irssi
+se till att den inte kopierar färg kodning
+
+*litebatterimonitor, ta bort när mycket batteri
