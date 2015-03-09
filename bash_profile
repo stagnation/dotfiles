@@ -100,6 +100,7 @@ set -o vi
 complete -f -X '*.@([ao]|so|so.!(conf|*/*)|[rs]pm|gif|jp?(e)g|mp3|mp?(e)g|avi|asf|ogg|class|pdf)' vim
 # this is default taken  from: http://anonscm.debian.org/gitweb/?p=bash-completion/bash-completion.git;a=blob;f=bash_completion;h=c684a8fd9ded8b79b3ecbbbe30728679dbded276;hb=e777395ac3ce25527e58e04bfc406ae03bdb3b12#l1821
 # but with addition of pdf
+complete -f -X '*.@([ao]|so|so.!(conf|*/*)|[rs]pm|gif|jp?(e)g|mp3|mp?(e)g|avi|asf|ogg|class|pdf)' vtex
 
 #load .Xmodmap for prtscr -> alt gr
 xmodmap ~/.Xmodmap
