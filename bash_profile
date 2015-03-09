@@ -12,7 +12,9 @@ setxkbmap -layout se -variant mac -option ctrl:nocaps
 #turn flow control off
 stty -ixon
 
-#path variable
+#add local clang dir to path variable
+export PATH=~/arbete/resources/clang/clang+llvm-3.6.0-x86_64-linux-gnu/bin/:$PATH
+
 #vim "$acnd"/httpd.confO
 
 #tolerate typos
