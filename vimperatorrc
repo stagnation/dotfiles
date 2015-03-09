@@ -13,14 +13,22 @@ nnoremap l 4l
 
 nnoremap J <c-n>
 nnoremap K <c-p>
+"-
+nnoremap <a-j> :tabnext<CR>
+nnoremap <a-k> :tabprevious<CR>
 
 nnoremap B t
 nnoremap t <c-t>
 
+"go to first and last tab
+noremap <a-g><a-g> :tabfirst<CR>
+noremap <a-S-g> :tablast<CR>
+
 " Press 'C-a' to select all
-noremap <C-a> <C-v><C-a>
+"noremap <C-a> <C-v><C-a>
 
 " Press 'C-c' to copy, 'C-v' or 'S-Insert' to paste, or 'C-x' to cut
+"normal mode remap are not wanted , fixed in like 2011
 "noremap <C-c> <C-v><C-c>
 "noremap <C-v> <C-v><C-v>
 "noremap <C-x> <C-v><C-x>
@@ -28,7 +36,14 @@ noremap <C-a> <C-v><C-a>
 "cnoremap <C-v> <C-v><C-v>
 "cnoremap <S-Insert> <C-v><C-v>
 "cnoremap <C-x> <C-v><C-x>
+
+"Insert mode remap are not wanted.
 "inoremap <C-c> <C-v><C-c>
 "inoremap <C-v> <C-v><C-v>
 "inoremap <S-Insert> <C-v><C-v>
 "inoremap <C-x> <C-v><C-x>
+
+"want c-a in insert
+inoremap <C-a> <C-Home><C-S-End>
+
+"want c-a in url
