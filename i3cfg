@@ -11,7 +11,7 @@
 
 set $mod Mod4
 
-set $quickswitch  /home/spill/bin/quickswitch-for-i3/quickswitch.py --dmenu "dmenu -i -l 20 -fn 'DejaVu Sans 10' -sb '#E17800' -sf '#000000' -h 23"
+set $quickswitch  /home/spill/bin/gits/quickswitch-for-i3/quickswitch.py --dmenu "dmenu -i -l 20 -fn 'DejaVu Sans 10' -sb '#E17800' -sf '#000000' -h 23"
 
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -29,6 +29,7 @@ floating_modifier $mod
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec /usr/bin/urxvt
+bindsym $mod+Shift+Return exec ~/bin/openterm.sh
 #bindsym $mod+o exec "/usr/bin/urxvt && exec $quickswitch -ej"
 #bindsym $mod+Return exec /home/spill/bin/color-urxvt.sh
 
@@ -133,7 +134,7 @@ bindsym $mod+Shift+M exec $quickswitch -ej
 bindsym $mod+n exec $quickswitch -n
 bindsym $mod+p exec $quickswitch -p
 #bindsym $mod+Tab exec $quickswitch
-bindsym $mod+Tab exec /home/spill/bin/quickswitch-for-i3/quickswitch.py
+bindsym $mod+Tab exec /home/spill/bin/gits/quickswitch-for-i3/quickswitch.py
 #bindsym $mod+§ exec /home/spill/bin/quickswitch.py
 #
 bindsym $mod+i exec /home/spill/bin/streampy
@@ -205,7 +206,7 @@ bindsym XF86MonBrightnessUp exec /usr/bin/xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec /usr/bin/xbacklight -dec 5
 
 assign [class="Vlc"] 9
-for_window [title="^VLC$"] move workspace 8
+assign [class="mpv"] 9
 
 #fullscreen for games
 for_window [title="^Warsow$"] fullscreen
