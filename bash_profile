@@ -28,6 +28,17 @@ alias xclipin='xclip -i -selection clipboard'
 
 alias gitclone='git clone $(xclip -o)'
 
+#to remove function:
+#unset -f <functionname>
+#
+#
+#basic calculator syntax - function
+=() {
+    calc="${@//p/+}"
+    calc="${calc//x/*}"
+    bc -l <<<"scale=10;$calc"
+}
+
 function lsext()
 {
 find . -type f -iname '*.'${1}'' -exec ls -l --color=auto {} \; ;
@@ -73,11 +84,7 @@ function ytclip()
 youtube-viewer $(xclip -o) best -q --no-interactive &
 }
 
-function mkpy()
-{
-cp ~/arbete/resources/python/stub.py ./${1}
-vim ./${1}
-}
+
 
 function streamtest()
 {
