@@ -1,10 +1,19 @@
 #!/bin/bash
+FILENAME="$1"
+TMPFILE="/home/spill/scratch/tmp_aelvul"
 
-if [ $# -ge 1 ] ; then
-    scp ${1} spill@aelv.se:~/public_html/ul/${1}
-    echo spill@aelv.se:~/public_html/ul/${1}
+if [ -f $FILENAME ] ; then
+    cp $FILENAME $TMPFILE
+    chmod 644 $TMPFILE
+    scp $TMPFILE spill@aelv.se:~/public_html/ul/${1}
+    echo "saved to spill@aelv.se:~/public_html/ul/$FILENAME"
     if [ $# -ge 2 ] ; then
-        echo spill@aelv.se:~/public_html/ul/${1} | xclip -i -selection clipboard
+        echo http://aelv.se/spill/ul/$FILENAME | xclip -i -selection clipboard
+        echo "http://aelv.se/spill/ul/$FILENAME copied to clipboard"
     fi
+else
+    echo "file does not exist"
+    echo $FILENAME
+
 
 fi
