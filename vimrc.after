@@ -83,10 +83,17 @@ map Q <Nop>
 nnoremap <silent> <leader>ff :setlocal spell!<cr>
 nnoremap <silent> <leader>fs :setlocal spelllang=sv<cr>
 nnoremap <silent> <leader>fe :setlocal spelllang=en<cr>
+
+"SPELLING
 "go to next error
 nnoremap <leader>fn ]s
 "go to previous error
 nnoremap <leader>fp [s
+
+"location list
+"go to next or previous instance (usually error)
+nnoremap <leader>en :lne<CR>
+nnoremap <leader>ep :lp<CR>
 
 
 "center window after jumping forward
@@ -117,6 +124,7 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll|aux|pdf|out)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
+nnoremap <c-p> :CtrlPClearCache<CR> :CtrlP<CR>
 
 "typo resilience for commands
 command! Q q
@@ -125,6 +133,9 @@ command! W w
 command! Wall wall
 command! Wq wq
 command! WQ wq
+
+" select last pasted or changed text
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 "cursor line only in active window
 au WinEnter * setlocal cursorline
@@ -171,3 +182,25 @@ set sw=4
 set iskeyword+=:
 """""""""""""""""""""""""""""""""""""""""""""""""
 "END VIM_LATEX
+
+
+"YCM don't ask for confirmation on loading ycm_extra_conf.py
+let g:ycm_confirm_extra_conf = 0
+
+" Always show line numbers, but only in current window.
+set number
+:au WinEnter * :setlocal number
+:au WinLeave * :setlocal nonumber
+
+" Automatically resize vertical splits.
+:au WinEnter * :set winfixheight
+        :au WinEnter * :wincmd =
+
+"indentGuide settings
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
+let g:indent_guides_enable_on_vim_startup = 1
+
+"showmark settings
+"let g:showmarks_include="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyx"
