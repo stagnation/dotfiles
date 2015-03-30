@@ -24,6 +24,8 @@ shopt -s cdspell
 #ignore git dir in grep
 alias grep='grep --exclude-dir=.git --color'
 
+alias naelv='urxvt -e sh -c "mosh aelv -- screen -dr" &'
+
 alias xclipin='xclip -i -selection clipboard'
 
 alias gitclone='git clone $(xclip -o)'
