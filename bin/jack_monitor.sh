@@ -1,5 +1,6 @@
 #!/bin/bash
 # This scripts detecs unplugging headphones.
+# based on http://askubuntu.com/questions/133809/mute-sound-on-headphone-unplug
 
 oldstatus="unrelated string"
 cd ~/scratch
