@@ -47,3 +47,9 @@ noremap <a-S-g> :tablast<CR>
 inoremap <C-a> <C-Home><C-S-End>
 
 "want c-a in url
+
+:set hintchars=hjklasdfgyuiopqwertnmzxcvb
+
+"format for link hints
+:highlight Hint font-size:150%;color:white;background-color:red;padding:2px;
+"to rever: :highlight clear Hint
