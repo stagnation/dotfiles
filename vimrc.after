@@ -42,6 +42,8 @@ set noswapfile            "no swap files
 set foldmethod=indent     "creates fold based on indentation levels
 set foldlevel=20          "by defualt open folds to level 20
 set cursorline            "hilights the line cursor is at
+set cursorcolumn
+
 
 let g:mapleader =" "
 " Move up and down in autocomplete with <c-j> and <c-k>
@@ -59,6 +61,7 @@ color lakris256
 if has("gui_running")
     color lakris
 endif
+hi CursorLine term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f "guifg=fg ctermfg=fg
 
 let g:syntastic_disabled_filetypes=['tex']
 
@@ -138,14 +141,15 @@ command! WQ wq
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
 "cursor line only in active window
-au WinEnter * setlocal cursorline
-au WinLeave * setlocal nocursorline
+"au WinEnter * setlocal cursorline
+"au WinLeave * setlocal nocursorline
 
 "this seems like nice undo history
 if has("persistent_undo")
     set undodir=~/.vim/undodir
     set undofile
 endif
+nnoremap <leader>u :UndotreeToggle<cr>
 
 "return to cursor location when reopenning file
 if has("autocmd")
@@ -204,8 +208,8 @@ set number
 
 "indentGuide settings
 let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=234
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
 let g:indent_guides_enable_on_vim_startup = 1
 :IndentGuidesEnable
 
@@ -214,3 +218,76 @@ let g:indent_guides_enable_on_vim_startup = 1
 
 "mathematica conceal
 let g:mma_candy = 1
+
+"vim-swoop selection
+nmap <Leader>/ :call Swoop()<CR>
+vmap <Leader>/ :call SwoopSelection()<CR>
+nmap <Leader>7 :call Swoop()<CR>
+vmap <Leader>7 :call SwoopSelection()<CR>
+
+"startify, session management
+let g:startify_session_persistence = 1 "autosave sessions
+let g:startify_bookmarks = [ '~/dotfiles/vimrc.after' ]
+
+let g:startify_list_order = [
+        \ ['   These are my bookmarks:'],
+        \ 'bookmarks',
+        \ ['   These are my sessions:'],
+        \ 'sessions',
+        \ ['   My most recently', '   used files'],
+        \ 'files',
+        \ ['   My most recently used files in the current directory:'],
+        \ 'dir',
+        \ ]
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <C-n> :call NumberToggle()<cr>
+
+
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <C-n> :call NumberToggle()<cr>
+
+
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <C-n> :call NumberToggle()<cr>
+
+"toggle relative number for lines
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set relativenumber!
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <C-n> :call NumberToggle()<cr>
+
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
+
+"for when split/buffer gets focus
+autocmd FocusLost * :set number
+autocmd FocusGained * :set nonumber
