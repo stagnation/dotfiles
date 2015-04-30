@@ -53,3 +53,4 @@ inoremap <C-a> <C-Home><C-S-End>
 "format for link hints
 :highlight Hint font-size:150%;color:white;background-color:red;padding:2px;
 "to rever: :highlight clear Hint
+  highlight Hint z-index:5000;font:normal 8pt sans-serif;font-size:150%;color:white;background:rgba(192,0,0,0.7); padding:0px 1px 0px 1px;position:absolute
