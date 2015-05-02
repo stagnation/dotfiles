@@ -88,6 +88,8 @@ nnoremap <silent> <leader>fs :setlocal spelllang=sv<cr>
 nnoremap <silent> <leader>fe :setlocal spelllang=en<cr>
 
 "SPELLING
+"suggestions
+nnoremap <leader>fa z=
 "go to next error
 nnoremap <leader>fn ]s
 "go to previous error
@@ -98,6 +100,9 @@ nnoremap <leader>fp [s
 nnoremap <leader>en :lne<CR>
 nnoremap <leader>ep :lp<CR>
 
+"git gutter go to next, prev git chunk
+nnoremap <leader>gn :GitGutterNextHunk<CR>
+nnoremap <leader>gp :GitGutterPrevHunk<CR>
 
 "center window after jumping forward
 nnoremap n nzz
@@ -136,6 +141,14 @@ command! W w
 command! Wall wall
 command! Wq wq
 command! WQ wq
+
+"convenient word recognition inside camel/snake case
+map <silent> w <Plug>CamelCaseMotion_w
+map <silent> b <Plug>CamelCaseMotion_b
+map <silent> e <Plug>CamelCaseMotion_e
+sunmap w
+sunmap b
+sunmap e
 
 " select last pasted or changed text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
@@ -199,12 +212,10 @@ let g:ycm_always_populate_location_list = 1
 
 " Always show line numbers, but only in current window.
 set number
-:au WinEnter * :setlocal number
-:au WinLeave * :setlocal nonumber
 
 " Automatically resize vertical splits.
 :au WinEnter * :set winfixheight
-        :au WinEnter * :wincmd =
+:au WinEnter * :wincmd =
 
 "indentGuide settings
 let g:indent_guides_auto_colors = 0
@@ -285,9 +296,3 @@ endfunc
 
 nnoremap <C-n> :call NumberToggle()<cr>
 
-autocmd InsertEnter * :set norelativenumber
-autocmd InsertLeave * :set relativenumber
-
-"for when split/buffer gets focus
-autocmd FocusLost * :set number
-autocmd FocusGained * :set nonumber
