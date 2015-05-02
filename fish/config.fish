@@ -10,4 +10,8 @@ function gitclone
     git clone (xclip -o)
 end
 
+function pstime
+    ps -eo "%p %y %t %c"
+end
+
 xmodmap ~/.xmodmap
