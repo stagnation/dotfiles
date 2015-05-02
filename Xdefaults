@@ -53,7 +53,7 @@ URxvt.url-launcher: firefox
 ! Copy stuff into /usr/lib/urxvt/perl/ or $HOME/.urxvt/ext/ instead.
 !URxvt.perl-lib: /home/oliver/Configuration-files/urxvt-perls/
 urxvt*perl-lib: /home/spill/.urxvt/ext/
-URxvt.perl-ext-common: default,matcher,url-select,clipboard,keyboard-select,vim-scrollback
+URxvt.perl-ext-common: default,matcher,url-select,clipboard,keyboard-select,vim-scrollback,fork-here
 !
 !
 ! configure the background and foreground colors used for the status bar while
@@ -91,3 +91,6 @@ URxvt.clipboard.pastecmd: xclip -o -selection clipboard
 !in lieu of unbinding keys
 URxvt.keysym.C-Up: perl:keyboard-select:search
 URxvt.keysym.C-Down: perl:keyboard-select:search
+!
+!fork-here
+URxvt.keysym.Mod4-Shift-Return: perl:fork-here:fork-at-cwd
