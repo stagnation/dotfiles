@@ -5,6 +5,7 @@ end
 
 function tmux_new_session
 	bash ~/bin/createtmuxsession.sh
+    tmux attach
 end
 
 if status --is-login
@@ -29,4 +30,6 @@ function pstime
     ps -eo "%p %y %t %c"
 end
 
-xmodmap ~/.xmodmap
+if status --is-not-login
+    xmodmap ~/.xmodmap
+end
