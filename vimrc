@@ -5,15 +5,6 @@ if $SHELL =~ 'bin/fish'
     set shell=/bin/sh
     endif
 
-"tmux vim conavigation
-let g:tmux_navigator_no_mappings = 1
-
-nnoremap <silent> {c-h} :TmuxNavigateLeft<cr>
-nnoremap <silent> {c-j} :TmuxNavigateDown<cr>
-nnoremap <silent> {c-k} :TmuxNavigateUp<cr>
-nnoremap <silent> {c-l} :TmuxNavigateRight<cr>
-nnoremap <silent> {c-o} :TmuxNavigatePrevious<cr>
-
 "rebind common typos
 command! Q q
 command! Qall qall
@@ -52,7 +43,7 @@ set cursorline            "hilights the line cursor is at
 set cursorcolumn
 
 
-let g:mapleader =" "
+" let g:mapleader =" "
 " Move up and down in autocomplete with <c-j> and <c-k>
 inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
@@ -311,3 +302,11 @@ endfunc
 
 nnoremap <C-n> :call NumberToggle()<cr>
 
+"tmux vim conavigation
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
+nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
+nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
+nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <c-o> :TmuxNavigatePrevious<cr>
