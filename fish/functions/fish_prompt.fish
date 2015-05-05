@@ -38,7 +38,7 @@ end
 
 function _remote_hostname
   if test -n "$SSH_CONNECTION"
-    echo (whoami)@(hostname)
+    echo SSH (whoami)@(hostname)
   end
 end
 
