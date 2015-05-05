@@ -9,6 +9,7 @@ if [ -f $FILENAME ] ; then
     echo "saved to spill@aelv.se:~/public_html/ul/$FILENAME"
     if [ $# -ge 2 ] ; then
         echo http://aelv.se/spill/ul/$FILENAME | xclip -i -selection clipboard
+        echo http://aelv.se/spill/ul/$FILENAME | xclip -i -selection primary
         echo "http://aelv.se/spill/ul/$FILENAME copied to clipboard"
     fi
 else

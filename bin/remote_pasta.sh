@@ -11,6 +11,7 @@ if [ $# -ge 1 ] ; then
         scp $FILE spill@aelv.se:~/public_html/pasta.txt
         if [ $# -ge 2 ] ; then
             echo http://aelv.se/spill/pasta.txt | xclip -i -selection clipboard
+            echo http://aelv.se/spill/pasta.txt | xclip -i -selection primary
             echo "http://aelv.se/spill/pasta.txt copied to clipboard"
         fi
     fi
