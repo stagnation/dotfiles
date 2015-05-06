@@ -63,7 +63,7 @@ urxvt.vim-scrollback-fg: 10
 urxvt.vim-scrollback: M-m
 !
 !urgent when a bell is issued, to interact with urgent in i3
-URxvt.urgenntOnBell: true
+URxvt.urgentOnBell: true
 !
 ! url-select config
 URxvt.keysym.Shift-Control-P: perl:url-select:select_next
