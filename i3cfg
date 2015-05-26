@@ -29,7 +29,8 @@ floating_modifier $mod
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec /usr/bin/urxvt
-bindsym $mod+Shift+Return exec ~/bin/openterm.sh
+# bindsym $mod+Shift+Return exec ~/bin/openterm.sh
+bindsym $mod+Shift+Return exec ~/bin/newterm.sh
 #bindsym $mod+o exec "/usr/bin/urxvt && exec $quickswitch -ej"
 #bindsym $mod+Return exec /home/spill/bin/color-urxvt.sh
 
@@ -40,7 +41,7 @@ bindsym $mod+Shift+q kill
 exec --no-startup-id nm-applet
 
 # at startup run redshift
-exec gtk-redshift
+exec gtk-redshift -l 59.33:18.07
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
