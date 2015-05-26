@@ -1,7 +1,13 @@
 mkdir -p ~/.vim/autoload ~/.vim/bundle && \
     curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 mkdir -p ~/.vim/backup
+mkdir -p ~/.vim/colors
+ln -s ~/dotfiles/lakris256.vim ~/.vim/colors/
 
+git clone https://github.com/junegunn/vim-peekaboo          ~/.vim/bundle/vim-peekaboo
+git clone https://github.com/ntpeters/vim-better-whitespace ~/.vim/bundle/vim-better-whitespace
+git clone https://github.com/ludovicchabant/vim-gutentags   ~/.vim/bundle/vim-gutentags
+git clone https://github.com/eparreno/vim-matchit           ~/.vim/bundle/vim-matchit
 git clone https://github.com/michaeljsmith/vim-indent-object ~/.vim/bundle/vim-indent-object
 git clone https://github.com/scrooloose/syntastic/           ~/.vim/bundle/syntastic
 git clone https://github.com/majutsushi/tagbar               ~/.vim/bundle/tagbar
@@ -23,7 +29,7 @@ git clone https://github.com/godlygeek/tabular               ~/.vim/bundle/tabul
 git clone https://github.com/tpope/vim-commentary            ~/.vim/bundle/vim-commentary
 
 # macro to grab end of github link and write corresponding plugin path
-# 0f/;;;lvEyA ~/.vim/bundle/p0
+# 0f/;;;lvEyA ~/.vim/bundle/pIgit clone^[0
 
 # align on ~
 # :Tabularize /\~<cr>
