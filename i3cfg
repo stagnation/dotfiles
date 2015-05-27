@@ -26,6 +26,9 @@ font pango:DejaVu Sans Mono 10
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# use 1 pixel borders by default
+new_window 1pixel
+
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec /usr/bin/urxvt
@@ -219,3 +222,4 @@ assign [class="mpv"] 9
 #fullscreen for games
 for_window [title="^Warsow$"] fullscreen
 for_window [title="^ioquake3$"] fullscreen
+# vim:filetype=i3
