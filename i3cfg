@@ -233,4 +233,9 @@ assign [class="mpv"] 9
 # fullscreen for games
 for_window [title="^Warsow$"] fullscreen
 for_window [title="^ioquake3$"] fullscreen
+for_window [class="XMathematica"] border normal
+# unsaved mathematica
+for_window [title=".*\* - Wolfram.*" ] border normal
+
+# WM_CLASS(STRING) = "XMathematica"
 # vim:filetype=i3
