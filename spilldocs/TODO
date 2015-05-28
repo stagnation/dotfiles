@@ -1,15 +1,39 @@
 * mkcd, mvcd, cpcd. kontrollera att legalt arguemnt. framförallt mv
 
-* mkpy, mktex .. 
+* mkpy, mktex ..
 skapa ett skript med unifierat template i arbete/res. som kopierar en blank till pwd.
 
 * interactive kill
 echoar processen från ps och ber om ja.
 :wq
 
-*pdflatex wrapper, 
+*pdflatex wrapper,
 gör pdflatex, ger vettiga namn på allt (prefixar skitfiler)
 stoppar det i .tex filens dir inte pwd
 
 *irssi
 se till att den inte kopierar färg kodning
+
+*urxvt-perls öppna länk med wget till ~/Downloads
+*urxvt-perls öppna länk med wget, fråga om path§
+
+vim:
+appendafter word, noremap ??? Ea
+annan bkgrund för linjenummers bordern
+EOF tilden i annan färg kankse?
+syntastic: kirra så unused variable varnar mildare.
+
+gvim:
+ta bort sista kanter ( höger, ner )
+
+i3/mathematica:
+om titeln har *, (osparat dokument)
+ändra bordern
+
+i3/firefox:
+svårt att se vilket ff som är aktivt!
+
+i3, ta bort turkosfärg som finns ibland.
+
+vimeperator:
+läs fontsize från sidan och använd för hints. framförallt gmail / reddit
