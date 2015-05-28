@@ -1,4 +1,4 @@
-"tmux vim conavigation
+" "tmux vim conavigation
 let g:tmux_navigator_no_mappings = 1
 
 nnoremap <silent> {c-h} :TmuxNavigateLeft<cr>
@@ -32,7 +32,7 @@ set incsearch             "incremental searching as soon as typing begins
 set ignorecase            "ignore case when searching
 set smartcase             "will override ignore case if searching w/ diff cases
 set modeline              "use modelines ??????
-set ttimeoutlen=50        "faster twitching for everything
+set ttimeoutlen=150        "faster twitching for everything
 set virtualedit=block     "allow cursor to be moved into empty space in visual
 set laststatus=2          "always show status line
 set encoding=utf-8        "utf-8 encoding
@@ -45,7 +45,7 @@ set cursorline            "hilights the line cursor is at
 set cursorcolumn
 
 
-let g:mapleader =" "
+let g:mapleader ="§"
 " Move up and down in autocomplete with <c-j> and <c-k>
 inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
@@ -61,8 +61,10 @@ color lakris256
 if has("gui_running")
     color lakris
 endif
-hi CursorLine term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f "guifg=fg ctermfg=fg
-hi CursorColumn term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f "guifg=fg ctermfg=fg
+
+
+" highlight CursorLine term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f
+" highlight CursorColumn term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f
 
 call lengthmatters#highlight('ctermbg=235')
 
@@ -83,6 +85,9 @@ set splitright
 " Disable Ex mode
 map Q <Nop>
 
+"warning when file is chenged
+autocmd FileChangedShell * echo "Warning: File changed on disk"
+
 " Spell checking mappings {{{ "
 " Pressing <leader>ff will toggle and untoggle spell checking,
 " fe sets checking to english and fs sets checking to swedish.
@@ -92,7 +97,7 @@ nnoremap <silent> <leader>fe :setlocal spelllang=en<cr>
 
 "SPELLING
 "suggestions
-nnoremap <leader>fa z=
+nnoremap <leader>fh z=
 "go to next error
 nnoremap <leader>fn ]s
 "go to previous error
@@ -104,6 +109,8 @@ nnoremap <leader>en :lne<CR>
 nnoremap <leader>ep :lp<CR>
 
 "git gutter go to next, prev git chunk
+"populate quicklist with commited version of current file - fugitive
+nnoremap <leader>gl :silent Glog<CR>
 nnoremap <leader>gn :GitGutterNextHunk<CR>
 nnoremap <leader>gp :GitGutterPrevHunk<CR>
 
@@ -132,10 +139,14 @@ nnoremap g$ $
 "ignore settings for ctrlP
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll|aux|pdf|out)$',
+  \ 'file': '\v\.(exe|a|o|so|dll|aux|pdf|out)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
 nnoremap <c-p> :CtrlPClearCache<CR> :CtrlP<CR>
+let g:ctrlp_user_command = [
+    \ '.git', 'cd %s && git ls-files . -co --exclude-standard',
+    \ 'find %s -type f'
+    \ ]
 
 "typo resilience for commands
 command! Q q
@@ -152,6 +163,29 @@ map <silent> e <Plug>CamelCaseMotion_e
 sunmap w
 sunmap b
 sunmap e
+" change status line colour if it is in insert mode
+if version >= 700
+    if has("autocmd")
+    augroup StatuslineColorGroup
+        " Clear autocmds for this group
+        autocmd!
+        au InsertEnter * hi StatusLine gui=NONE guifg=#FFFFFF guibg=#9D3569 ctermbg=127
+        au InsertEnter * hi CursorLineNr guibg=#9D3569 ctermbg=127
+        au InsertLeave * hi StatusLine gui=NONE guifg=#d6d6d6 guibg=#602040 ctermbg=53
+        au InsertLeave * hi CursorLineNr guibg=#602040 ctermbg=53
+    augroup end
+    endif
+endif
+
+" betterfixwhitespace
+let g:strip_whitespace_on_save=1
+highlight ExtraWhitespace ctermbg=52
+
+" augroup MyBetterWhitespace
+"   au!
+"   au FileType * if &buftype == 'nofile' | exec 'DisableWhitespace' | else | exec 'EnableWhitespace' | endif
+"   au FileType diff,gitcommit DisableWhitespace
+" augroup END
 
 " select last pasted or changed text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
@@ -177,7 +211,16 @@ if has("autocmd")
       autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-nmap <leader>t :TagbarToggle<CR>
+nmap <leader>tt :TagbarToggle<CR>
+nnoremap <leader>tp :CtrlPTag<CR>
+
+set tags=tags;/
+
+nmap <leader>gt <c-w>}
+
+"quicklist shortcut
+nmap <leader>qn :cn<CR>
+nmap <leader>qp :cp<CR>
 
 "VIM_LATEX SUITE
 """""""""""""""""""""""""""""""""""""""""""""""""
