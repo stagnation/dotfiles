@@ -3,7 +3,11 @@ function grep
 end
 
 function naelv
-    urxvt -e sh -c "mosh aelv -- screen -dr" &
+    urxvt -e sh -c "mosh aelv -- tmux attach" &
+end
+
+function cd..
+    cd ..
 end
 
 function xclipin
