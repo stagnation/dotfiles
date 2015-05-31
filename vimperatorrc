@@ -1,3 +1,4 @@
+let leader="§"
 "close / reopen tab
 nnoremap x D
 nnoremap X u
@@ -56,6 +57,11 @@ inoremap <C-a> <C-Home><C-S-End>
   highlight Hint z-index:5000;font:normal 8pt sans-serif;font-size:150%;color:white;background:rgba(192,0,0,0.7); padding:0px 1px 0px 1px;position:absolute
 
 nnoremap yf ;y
+nnoremap af ;F
 
+colorscheme dorkness
+
+map <Leader>t :set gui=invmenu,invnavigation<cr>
+map <C-k> :set gui=invmenu,invnavigation<cr>
 
 " vim: set ft=vimperator:
