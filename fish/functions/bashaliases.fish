@@ -3,7 +3,7 @@ function grep
 end
 
 function naelv
-    urxvt -e sh -c "mosh aelv -- tmux attach" &
+    urxvt -e sh -c "mosh aelv" &
 end
 
 function cd..
