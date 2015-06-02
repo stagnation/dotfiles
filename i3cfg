@@ -214,7 +214,23 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
         status_command i3status
+        workspace_buttons yes
+        # bindsym button5  nop
+        wheel_up_cmd nop
+        wheel_down_cmd nop
+        # bindsym button4  nop
         # status_command i3bar.sh
+
+        colors {
+            background #000000
+            statusline #999999
+            separator #000000
+
+            focused_workspace  #ffffff #285577
+            active_workspace   #ffffff #333333
+            inactive_workspace #888888 #222222
+            urgent_workspace   #ffffff #900000
+    }
 }
 
 # volume key bindings
