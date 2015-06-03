@@ -260,5 +260,8 @@ for_window [class="XMathematica"] border normal
 # unsaved mathematica
 for_window [title=".*\* - Wolfram.*" ] border normal
 
+#larger firefox/vimperator border
+for_window [class="Firefox"] border pixel 2
+
 # WM_CLASS(STRING) = "XMathematica"
 # vim:filetype=i3
