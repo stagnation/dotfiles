@@ -22,6 +22,7 @@ appendafter word, noremap ??? Ea
 annan bkgrund för linjenummers bordern
 EOF tilden i annan färg kankse?
 syntastic: kirra så unused variable varnar mildare.
+syntasyic/ycm, båda har samma warning status, error
 
 gvim:
 ta bort sista kanter ( höger, ner )
@@ -37,3 +38,7 @@ i3, ta bort turkosfärg som finns ibland.
 
 vimeperator:
 läs fontsize från sidan och använd för hints. framförallt gmail / reddit
+bind för att toggla tabbar
+
+weechat:
+responsive layout small, ta bort nick align för bättre visning
