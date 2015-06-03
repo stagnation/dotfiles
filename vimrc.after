@@ -216,6 +216,12 @@ endif
 nmap <leader>tt :TagbarToggle<CR>
 nnoremap <leader>tp :CtrlPTag<CR>
 
+"disable mouse scroll
+noremap <ScrollWheelUp> <Nop>
+noremap <ScrollWheelDown> <Nop>
+inoremap <ScrollWheelUp> <Nop>
+inoremap <ScrollWheelDown> <Nop>
+
 set tags=tags;/
 
 nmap <leader>gt <c-w>}
