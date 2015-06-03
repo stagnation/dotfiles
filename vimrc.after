@@ -87,6 +87,7 @@ map Q <Nop>
 
 "warning when file is chenged
 autocmd FileChangedShell * echo "Warning: File changed on disk"
+autocmd Cursorhold * checktime
 
 " Spell checking mappings {{{ "
 " Pressing <leader>ff will toggle and untoggle spell checking,
