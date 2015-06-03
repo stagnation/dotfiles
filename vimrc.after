@@ -310,6 +310,13 @@ let g:startify_list_order = [
         \ 'dir',
         \ ]
 
+" toggle location and quickfix lists
+" mnemonic: list/ ( quick | location )
+nnoremap <leader>ll :call ToggleLocationList()<CR>
+nnoremap <leader>lq :call ToggleQuickfixList()<CR>
+
+nnoremap <silent> <leader>nt :<c-u>split<cr><c-w>k:resize 10<cr>gg
+
 function! NumberToggle()
   if(&relativenumber == 1)
     set number
