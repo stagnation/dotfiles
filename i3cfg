@@ -233,6 +233,13 @@ bar {
     }
 }
 
+# Scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+# toggle focus (for floating or non-floating)
+bindsym $mod+Control+space focus mode_toggle
+
 # volume key bindings
 # -c 1 for sound card with index 1.
 bindsym XF86AudioRaiseVolume exec amixer -c 1 -q set Master 3%+ unmute
