@@ -12,10 +12,10 @@ command! Q q
 command! Qall qall
 
 "basic settings
-syntax enable             "enables syntax hilighting
+syntax enable             "enables syntax highlighting
 filetype plugin indent on "react on filetyps with plugins and syntax
 set scrolloff=4           "minimum number of lines to display around cursor
-set hlsearch              "hilight search results
+set hlsearch              "highlight search results
 set smarttab              "<TAB> inserts 'shiftwidth' spaces
 set tabstop=4             "tab spacing
 set expandtab             "use spaces instead of tab
@@ -41,7 +41,7 @@ set backspace=indent,eol,start "backspace everywhere
 set noswapfile            "no swap files
 set foldmethod=indent     "creates fold based on indentation levels
 set foldlevel=20          "by defualt open folds to level 20
-set cursorline            "hilights the line cursor is at
+set cursorline            "highlights the line cursor is at
 set cursorcolumn
 
 
@@ -118,9 +118,9 @@ nnoremap <leader>gp :GitGutterPrevHunk<CR>
 nnoremap n nzz
 nnoremap } }zz
 
-"turn off search hilighting for current search
-nnoremap <leader>l :nohlsearch<CR>
-"turn off search hilighting for in insert mode
+"turn off search highlighting for current search
+nnoremap <silent> <leader>l :nohlsearch<CR>
+"turn off search highlighting for in insert mode
 autocmd InsertEnter * :setlocal nohlsearch
 autocmd InsertLeave * :setlocal hlsearch
 
