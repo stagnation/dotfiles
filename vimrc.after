@@ -339,3 +339,23 @@ endfunc
 
 nnoremap <C-n> :call NumberToggle()<cr>
 
+highlight LineNr term=underline cterm=NONE ctermbg=232 ctermfg=243 gui=italic guibg=#0e0e0e guifg=#727272
+highlight SignColumn term=NONE cterm=NONE ctermbg=232 ctermfg=255 gui=NONE guibg=#0e0e0e guifg=#f0f0f0
+highlight NonText term=bold cterm=bold ctermbg=bg ctermfg=125 gui=bold guibg=bg guifg=#808080
+
+highlight GitGutterAdd          ctermbg=232 ctermfg=22
+highlight GitGutterChange       ctermbg=232 ctermfg=yellow
+highlight GitGutterDelete       ctermbg=232 ctermfg=red
+highlight GitGutterChangeDelete ctermbg=232 ctermfg=yellow
+
+highlight WarningMsg ctermbg=232
+highlight Exception ctermbg=232
+" idealy ask signature to use another highlight group for these, but doesn't
+" seem to work
+" let g:SignatureMarkerTextHL='GitGutterAdd'
+" let g:SignatureMarkTextHL='GitGutterAdd'
+" let g:SignatureMarkTextHL = "'GitGutterAdd'"
+
+let syntastic_error_symbol='<>' "doesn't seem to change anything
+let ycm_error_symbol='<>' "nor this
+highlight YcmErrorSign ctermbg=232
