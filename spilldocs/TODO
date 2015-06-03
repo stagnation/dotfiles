@@ -11,21 +11,17 @@ echoar processen från ps och ber om ja.
 gör pdflatex, ger vettiga namn på allt (prefixar skitfiler)
 stoppar det i .tex filens dir inte pwd
 
-*irssi
-se till att den inte kopierar färg kodning
-
 *urxvt-perls öppna länk med wget till ~/Downloads
 *urxvt-perls öppna länk med wget, fråga om path§
 
 vim:
 appendafter word, noremap ??? Ea
-annan bkgrund för linjenummers bordern
-EOF tilden i annan färg kankse?
 syntastic: kirra så unused variable varnar mildare.
 syntasyic/ycm, båda har samma warning status, error
 
 gvim:
 ta bort sista kanter ( höger, ner )
+    +verkar vara mismatch mellan i3 bakgrundsfärg och vim bakgrund, vim målar bara heltal kolon, rader men i3 fönstret kan ha godtycklig storlek -> färg mismatch
 
 i3/mathematica:
 om titeln har *, (osparat dokument)
@@ -33,8 +29,6 @@ om titeln har *, (osparat dokument)
 
 i3/firefox:
 svårt att se vilket ff som är aktivt!
-
-i3, ta bort turkosfärg som finns ibland.
 
 vimeperator:
 läs fontsize från sidan och använd för hints. framförallt gmail / reddit
