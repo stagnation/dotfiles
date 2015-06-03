@@ -108,6 +108,7 @@ nnoremap <leader>fp [s
 "go to next or previous instance (usually error)
 nnoremap <leader>en :lne<CR>
 nnoremap <leader>ep :lp<CR>
+nnoremap ]l :try<bar>lnext<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>lfirst<bar>endtry<cr>
 
 "git gutter go to next, prev git chunk
 "populate quicklist with commited version of current file - fugitive
