@@ -25,12 +25,14 @@ vim-matchit/
 vim-mathematica/
 vim-opencl/
 vim-peekaboo/
+vim-repeat/
 vim-signature/
 vim-startify/
 vim-surround/
 vim-swoop/
 vim-tmux-navigator/
 vim-togglelist/
+vim-unimpaired/
 YouCompleteMe/
 latextags*
 ltags*
