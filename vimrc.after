@@ -76,10 +76,10 @@ noremap <leader>Y "+y$
 nmap <leader>p "+p
 nmap <leader>P "+P
 
-"Y consistent with D
+" Y consistent with D
 nnoremap Y y$
 
-"intuitive split placement
+" intuitive split placement
 set splitbelow
 set splitright
 " Disable Ex mode
@@ -263,8 +263,10 @@ set iskeyword+=:
 "YCM don't ask for confirmation on loading ycm_extra_conf.py
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf ='~/dotfiles/ycm_extra_conf.py.DOT'
+
 "YCM go to definiotn of sometihng.
 noremap <leader>jd :YcmCompleter GoTo<CR>
+
 let g:ycm_goto_buffer_command = 'horizontal-split'
 "always fill location list with ycm errors/warnings
 let g:ycm_always_populate_location_list = 1
