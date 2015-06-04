@@ -115,10 +115,13 @@ nnoremap ]l :try<bar>lnext<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>
 nnoremap <leader>gl :silent Glog<CR>
 nnoremap <leader>gn :GitGutterNextHunk<CR>
 nnoremap <leader>gp :GitGutterPrevHunk<CR>
+nnoremap ]g :GitGutterNextHunk<CR>
+nnoremap [g :GitGutterPrevHunk<CR>
 
 "center window after jumping forward
 nnoremap n nzz
 nnoremap } }zz
+nnoremap { {zz
 
 "turn off search highlighting for current search
 nnoremap <silent> <leader>l :nohlsearch<CR>
@@ -213,7 +216,7 @@ if has("autocmd")
       autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-nmap <leader>tt :TagbarToggle<CR>
+nnoremap <leader>tt :TagbarToggle<CR>
 nnoremap <leader>tp :CtrlPTag<CR>
 
 "disable mouse scroll
@@ -224,11 +227,12 @@ inoremap <ScrollWheelDown> <Nop>
 
 set tags=tags;/
 
-nmap <leader>gt <c-w>}
+noremap <leader>gt <c-w>} " go tag
+noremap <leader>tp <c-w>} " tag preview
 
 "quicklist shortcut
-nmap <leader>qn :cn<CR>
-nmap <leader>qp :cp<CR>
+noremap <leader>qn :cn<CR>
+noremap <leader>qp :cp<CR>
 
 "VIM_LATEX SUITE
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -292,10 +296,10 @@ let g:indent_guides_enable_on_vim_startup = 1
 let g:mma_candy = 1
 
 "vim-swoop selection
-nmap <Leader>/ :call Swoop()<CR>
-vmap <Leader>/ :call SwoopSelection()<CR>
-nmap <Leader>7 :call Swoop()<CR>
-vmap <Leader>7 :call SwoopSelection()<CR>
+nnoremap <Leader>/ :call Swoop()<CR>
+vnoremap <Leader>/ :call SwoopSelection()<CR>
+nnoremap <Leader>7 :call Swoop()<CR>
+vnoremap <Leader>7 :call SwoopSelection()<CR>
 
 "startify, session management
 let g:startify_session_persistence = 1 "autosave sessions
