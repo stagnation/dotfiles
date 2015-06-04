@@ -145,6 +145,8 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 # section key, paragraph, keycode 49
 bindsym $mod+0xa7 workspace 9
+# toggle between last workspaces, acute ´ keycode 21
+bindsym $mod+0xb4 workspace back_and_forth
 
 # quickswitch binds
 bindsym $mod+m exec  $quickswitch -e
