@@ -1,0 +1,6 @@
+$ git log -Lstart,end:fil
+
+visar alla log events som berör aktuella området i nuvarande filen.
+onödigt verbos diff dock
+
+fugitive: markera en linje och gör :Glog
