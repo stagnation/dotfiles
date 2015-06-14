@@ -43,7 +43,7 @@ set foldmethod=indent     "creates fold based on indentation levels
 set foldlevel=20          "by defualt open folds to level 20
 set cursorline            "highlights the line cursor is at
 set cursorcolumn
-
+set showcmd
 
 let g:mapleader ="§"
 " Move up and down in autocomplete with <c-j> and <c-k>
@@ -69,12 +69,21 @@ endif
 call lengthmatters#highlight('ctermbg=235')
 
 let g:syntastic_disabled_filetypes=['tex']
+let g:syntastic_always_populate_loc_list=1
+"
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 " Copy/Paste with os buffer
 noremap <leader>y "+y
 noremap <leader>Y "+y$
-nmap <leader>p "+p
-nmap <leader>P "+P
+noremap <leader>p "+p
+noremap <leader>P "+P
+
+noremap <leader>ss :source ~/.vimrc.after<CR>
 
 " Y consistent with D
 nnoremap Y y$
@@ -87,7 +96,7 @@ map Q <Nop>
 
 "warning when file is chenged
 autocmd FileChangedShell * echo "Warning: File changed on disk"
-autocmd Cursorhold * checktime
+autocmd Cursorhold * checktime "also check for file changes, more sublte
 
 " Spell checking mappings {{{ "
 " Pressing <leader>ff will toggle and untoggle spell checking,
@@ -168,6 +177,7 @@ map <silent> e <Plug>CamelCaseMotion_e
 sunmap w
 sunmap b
 sunmap e
+
 " change status line colour if it is in insert mode
 if version >= 700
     if has("autocmd")
@@ -176,6 +186,7 @@ if version >= 700
         autocmd!
         au InsertEnter * hi StatusLine gui=NONE guifg=#FFFFFF guibg=#9D3569 ctermbg=127
         au InsertEnter * hi CursorLineNr guibg=#9D3569 ctermbg=127
+
         au InsertLeave * hi StatusLine gui=NONE guifg=#d6d6d6 guibg=#602040 ctermbg=53
         au InsertLeave * hi CursorLineNr guibg=#602040 ctermbg=53
     augroup end
@@ -284,6 +295,7 @@ autocmd WinEnter * :wincmd =
 
 "indentGuide settings
 let g:indent_guides_auto_colors = 0
+" TODO: why is the aucmd?
 autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=235
 autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=234
 let g:indent_guides_enable_on_vim_startup = 1
@@ -347,6 +359,7 @@ nnoremap <C-n> :call NumberToggle()<cr>
 
 highlight LineNr term=underline cterm=NONE ctermbg=232 ctermfg=243 gui=italic guibg=#0e0e0e guifg=#727272
 highlight SignColumn term=NONE cterm=NONE ctermbg=232 ctermfg=255 gui=NONE guibg=#0e0e0e guifg=#f0f0f0
+" area below text in doc, including tildes
 highlight NonText term=bold cterm=bold ctermbg=bg ctermfg=125 gui=bold guibg=bg guifg=#808080
 
 highlight GitGutterAdd          ctermbg=232 ctermfg=22
