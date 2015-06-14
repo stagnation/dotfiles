@@ -54,6 +54,9 @@ bindsym $mod+Shift+q kill
 # at startup run network-manager applet
 exec --no-startup-id nm-applet
 
+# at startup use keyboard script
+exec --no-startup-id ~/bin/swekb
+
 # at startup run redshift
 exec gtk-redshift -l 59.33:18.07
 
