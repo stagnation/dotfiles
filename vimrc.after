@@ -375,6 +375,15 @@ highlight Exception ctermbg=232
 " let g:SignatureMarkTextHL='GitGutterAdd'
 " let g:SignatureMarkTextHL = "'GitGutterAdd'"
 
-let syntastic_error_symbol='<>' "doesn't seem to change anything
-let ycm_error_symbol='<>' "nor this
+" let syntastic_error_symbol='<>' "doesn't seem to change anything
+" let ycm_error_symbol='<>' "nor this
+
 highlight YcmErrorSign ctermbg=232
+
+runtime! plugin/unimpaired.vim
+" experimental insert row above/below,
+" marks -> signature side effects!
+noremap ]f <Esc>mao<Esc>`a:delmarks a<CR>:SignatureRefresh<CR>
+noremap [f <Esc>maO<Esc>`a:delmarks a<CR>:SignatureRefresh<CR>
+
+noremap <BS> <Nop>
