@@ -45,7 +45,7 @@ set cursorline            "highlights the line cursor is at
 set cursorcolumn
 set showcmd
 
-let g:mapleader ="§"
+let g:mapleader ='\'
 " Move up and down in autocomplete with <c-j> and <c-k>
 inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
