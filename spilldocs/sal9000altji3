@@ -1,0 +1,115 @@
+# [[[cog
+# uc = ['parenright', 'exclam', 'at', 'numbersign', 'dollar', 'percent', 'asciicircum', 'ampersand', 'asterisk', 'parenleft']
+# for i in range(0,10):
+# 	ws = 10 if i == 0 else i
+# 	cog.outl("bindsym $mod+%i workspace %i" % (i, ws))
+# 	cog.outl("bindsym $mod+Shift+%s move container to workspace %i" % (uc[i], ws))
+# 	cog.outl("bindsym $mod+Mod1+Shift+%s move container to workspace %i; workspace %i" % (uc[i], ws, ws))
+# ]]]
+bindsym $mod+0 workspace 10
+bindsym $mod+Shift+parenright move container to workspace 10
+bindsym $mod+Mod1+Shift+parenright move container to workspace 10; workspace 10
+bindsym $mod+1 workspace 1
+bindsym $mod+Shift+exclam move container to workspace 1
+bindsym $mod+Mod1+Shift+exclam move container to workspace 1; workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+Shift+at move container to workspace 2
+bindsym $mod+Mod1+Shift+at move container to workspace 2; workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+Shift+numbersign move container to workspace 3
+bindsym $mod+Mod1+Shift+numbersign move container to workspace 3; workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+Shift+dollar move container to workspace 4
+bindsym $mod+Mod1+Shift+dollar move container to workspace 4; workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+Shift+percent move container to workspace 5
+bindsym $mod+Mod1+Shift+percent move container to workspace 5; workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+Shift+asciicircum move container to workspace 6
+bindsym $mod+Mod1+Shift+asciicircum move container to workspace 6; workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+Shift+ampersand move container to workspace 7
+bindsym $mod+Mod1+Shift+ampersand move container to workspace 7; workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+Shift+asterisk move container to workspace 8
+bindsym $mod+Mod1+Shift+asterisk move container to workspace 8; workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+Shift+parenleft move container to workspace 9
+bindsym $mod+Mod1+Shift+parenleft move container to workspace 9; workspace 9
+# [[[end]]] (checksum: b7825ccbcbf39281029569fcd597e720)
+
+# extended workspaces
+bindsym $mod+j mode "s-j-"
+bindsym $mod+Shift+J mode "s-S-J-"
+mode "s-j-" {
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $mod+j exec i3-input -F 'exec i3-msg "workspace %s" && i3-msg "mode default"'
+	bindsym $mod+g mode "default"
+	bindsym Ctrl+g mode "default"
+	# [[[cog
+	# sjmode_fmt = """exec i3-input -F 'exec i3-msg "%%(cpref)-18sworkspace %(p)1s%%%%s" && i3-msg "mode \\"default\\""' -P '%%(cpref)sworkspace > %(n)i' -l 1;"""
+	# for i in range(0,10):
+	#    execl = sjmode_fmt % {'n' : i, 'p': "" if i == 0 else "%s" % i}
+	#    cog.outl("bindsym       %-11s %s" % ("%s" % i, execl % {'cpref' : ""}))
+	#    cog.outl("bindsym Shift+%-11s %s" % (uc[i], execl % {'cpref' : "move container to "}))
+	# ]]]
+	bindsym       0           exec i3-input -F 'exec i3-msg "                  workspace  %s" && i3-msg "mode \"default\""' -P 'workspace > 0' -l 1;
+	bindsym Shift+parenright  exec i3-input -F 'exec i3-msg "move container to workspace  %s" && i3-msg "mode \"default\""' -P 'move container to workspace > 0' -l 1;
+	bindsym       1           exec i3-input -F 'exec i3-msg "                  workspace 1%s" && i3-msg "mode \"default\""' -P 'workspace > 1' -l 1;
+	bindsym Shift+exclam      exec i3-input -F 'exec i3-msg "move container to workspace 1%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 1' -l 1;
+	bindsym       2           exec i3-input -F 'exec i3-msg "                  workspace 2%s" && i3-msg "mode \"default\""' -P 'workspace > 2' -l 1;
+	bindsym Shift+at          exec i3-input -F 'exec i3-msg "move container to workspace 2%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 2' -l 1;
+	bindsym       3           exec i3-input -F 'exec i3-msg "                  workspace 3%s" && i3-msg "mode \"default\""' -P 'workspace > 3' -l 1;
+	bindsym Shift+numbersign  exec i3-input -F 'exec i3-msg "move container to workspace 3%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 3' -l 1;
+	bindsym       4           exec i3-input -F 'exec i3-msg "                  workspace 4%s" && i3-msg "mode \"default\""' -P 'workspace > 4' -l 1;
+	bindsym Shift+dollar      exec i3-input -F 'exec i3-msg "move container to workspace 4%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 4' -l 1;
+	bindsym       5           exec i3-input -F 'exec i3-msg "                  workspace 5%s" && i3-msg "mode \"default\""' -P 'workspace > 5' -l 1;
+	bindsym Shift+percent     exec i3-input -F 'exec i3-msg "move container to workspace 5%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 5' -l 1;
+	bindsym       6           exec i3-input -F 'exec i3-msg "                  workspace 6%s" && i3-msg "mode \"default\""' -P 'workspace > 6' -l 1;
+	bindsym Shift+asciicircum exec i3-input -F 'exec i3-msg "move container to workspace 6%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 6' -l 1;
+	bindsym       7           exec i3-input -F 'exec i3-msg "                  workspace 7%s" && i3-msg "mode \"default\""' -P 'workspace > 7' -l 1;
+	bindsym Shift+ampersand   exec i3-input -F 'exec i3-msg "move container to workspace 7%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 7' -l 1;
+	bindsym       8           exec i3-input -F 'exec i3-msg "                  workspace 8%s" && i3-msg "mode \"default\""' -P 'workspace > 8' -l 1;
+	bindsym Shift+asterisk    exec i3-input -F 'exec i3-msg "move container to workspace 8%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 8' -l 1;
+	bindsym       9           exec i3-input -F 'exec i3-msg "                  workspace 9%s" && i3-msg "mode \"default\""' -P 'workspace > 9' -l 1;
+	bindsym Shift+parenleft   exec i3-input -F 'exec i3-msg "move container to workspace 9%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 9' -l 1;
+	# [[[end]]] (checksum: 152af91135a16262c501cd74dee96fda)
+}
+
+mode "s-S-J-" {
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $mod+j exec i3-input -F 'exec i3-msg "move container to workspace %s" && i3-msg "mode default"'
+	bindsym $mod+g mode "default"
+	bindsym $mod+Shift+G mode "default"
+	bindsym Ctrl+g mode "default"
+	bindsym Ctrl+Shift+G mode "default"
+	# [[[cog
+	# for i in range(0,10):
+	#    execl = sjmode_fmt % {'n' : i, 'p': "" if i == 0 else "%s" % i}
+	#    cog.outl("bindsym       %-11s %s" % ("%s" % i, execl % {'cpref' : "move container to "}))
+	#    cog.outl("bindsym Shift+%-11s %s" % (uc[i], execl % {'cpref' : "move container to "}))
+	# ]]]
+	bindsym       0           exec i3-input -F 'exec i3-msg "move container to workspace  %s" && i3-msg "mode \"default\""' -P 'move container to workspace > 0' -l 1;
+	bindsym Shift+parenright  exec i3-input -F 'exec i3-msg "move container to workspace  %s" && i3-msg "mode \"default\""' -P 'move container to workspace > 0' -l 1;
+	bindsym       1           exec i3-input -F 'exec i3-msg "move container to workspace 1%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 1' -l 1;
+	bindsym Shift+exclam      exec i3-input -F 'exec i3-msg "move container to workspace 1%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 1' -l 1;
+	bindsym       2           exec i3-input -F 'exec i3-msg "move container to workspace 2%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 2' -l 1;
+	bindsym Shift+at          exec i3-input -F 'exec i3-msg "move container to workspace 2%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 2' -l 1;
+	bindsym       3           exec i3-input -F 'exec i3-msg "move container to workspace 3%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 3' -l 1;
+	bindsym Shift+numbersign  exec i3-input -F 'exec i3-msg "move container to workspace 3%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 3' -l 1;
+	bindsym       4           exec i3-input -F 'exec i3-msg "move container to workspace 4%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 4' -l 1;
+	bindsym Shift+dollar      exec i3-input -F 'exec i3-msg "move container to workspace 4%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 4' -l 1;
+	bindsym       5           exec i3-input -F 'exec i3-msg "move container to workspace 5%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 5' -l 1;
+	bindsym Shift+percent     exec i3-input -F 'exec i3-msg "move container to workspace 5%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 5' -l 1;
+	bindsym       6           exec i3-input -F 'exec i3-msg "move container to workspace 6%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 6' -l 1;
+	bindsym Shift+asciicircum exec i3-input -F 'exec i3-msg "move container to workspace 6%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 6' -l 1;
+	bindsym       7           exec i3-input -F 'exec i3-msg "move container to workspace 7%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 7' -l 1;
+	bindsym Shift+ampersand   exec i3-input -F 'exec i3-msg "move container to workspace 7%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 7' -l 1;
+	bindsym       8           exec i3-input -F 'exec i3-msg "move container to workspace 8%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 8' -l 1;
+	bindsym Shift+asterisk    exec i3-input -F 'exec i3-msg "move container to workspace 8%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 8' -l 1;
+	bindsym       9           exec i3-input -F 'exec i3-msg "move container to workspace 9%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 9' -l 1;
+	bindsym Shift+parenleft   exec i3-input -F 'exec i3-msg "move container to workspace 9%s" && i3-msg "mode \"default\""' -P 'move container to workspace > 9' -l 1;
+	# [[[end]]] (checksum: 47e129cad2c46108ae8b4e56246bd0e2)
+}
