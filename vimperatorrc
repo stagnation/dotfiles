@@ -21,6 +21,9 @@ nnoremap <a-k> :tabprevious<CR>
 nnoremap B t
 nnoremap t <c-t>
 
+"for some reason yy broke, fix map
+nnoremap yy y;
+
 "go to first and last tab
 noremap <a-g><a-g> :tabfirst<CR>
 noremap <a-S-g> :tablast<CR>
