@@ -51,6 +51,9 @@ bindsym $mod+Shift+m exec "/home/spill/bin/gits/quickswitch-for-i3/quickswitch.p
 # kill focused window
 bindsym $mod+Shift+q kill
 
+# move to urgent window
+bindsym $mod+a [urgent=latest] focus
+
 # at startup run network-manager applet
 exec --no-startup-id nm-applet
 
@@ -130,7 +133,7 @@ bindsym $mod+Shift+space floating toggle
 # bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+# bindsym $mod+a focus parent
 
 # focus the child container
 # bindsym $mod+d focus child
@@ -146,6 +149,7 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
+bindsym $mod-` workspace 9
 # section key, paragraph, keycode 49
 bindsym $mod+0xa7 workspace 9
 # toggle between last workspaces, acute ´ keycode 21
