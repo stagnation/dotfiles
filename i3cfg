@@ -40,6 +40,7 @@ client.urgent           #2f343a #900000 #ffffff #900000
 bindsym $mod+Return exec /usr/bin/urxvt
 # start a terminal with same working dir, using https://github.com/schischi-a/xcwd
 bindsym $mod+Shift+Return exec ~/bin/newterm.sh
+bindsym $mod+Control+Return exec ~/bin/newranger.sh
 
 # move window to new terminal
 bindsym $mod+Shift+m exec "/home/spill/bin/gits/quickswitch-for-i3/quickswitch.py -je"
@@ -64,8 +65,12 @@ exec --no-startup-id ~/bin/swekb
 exec gtk-redshift -l 59.33:18.07
 
 # start dmenu (a program launcher)
-# bindsym $mod+d exec dmenu_run
-bindsym $mod+space exec dmenu_run
+bindsym $mod+d exec dmenu_run
+
+# demnu2 required https://bitbucket.org/melek/dmenu2
+
+bindsym $mod+space exec dmenu_run -i -y 18 -o 0.8 -l 100 -w 300 -p "\$"
+# bindsym $mod+space exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
