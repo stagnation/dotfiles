@@ -371,6 +371,23 @@ function! NumberToggle()
   endif
 endfunc
 
+"toggle slimed down display to handle files with very long lines
+function! SpillToggleLongLineDisplay()
+  if(&cursorline == 1)
+    set filetype=
+    set nocursorline
+    set nocursorcolumn
+    LengthmattersDisable
+    set nowrap
+  else
+    set cursorline
+    set cursorcolumn
+    LengthmattersEnable
+    set wrap
+  endif
+endfunc
+nnoremap <leader>st :call SpillToggleLongLineDisplay()<cr>
+
 nnoremap <C-n> :call NumberToggle()<cr>
 
 highlight LineNr term=underline cterm=NONE ctermbg=232 ctermfg=243 gui=italic guibg=#0e0e0e guifg=#727272
@@ -493,3 +510,6 @@ nmap <leader>jo  <Plug>(exjumplist-go-first)
 " nmap <C-M-o>  <Plug>(exjumplist-go-first)
 " nmap <M-)>  <Plug>(exjumplist-next-buffer)
 " nmap <M-(>  <Plug>(exjumplist-previous-buffer)
+"
+" vim-rsi overloads some keys I need
+iunmap ä
