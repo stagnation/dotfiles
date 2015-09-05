@@ -1,6 +1,6 @@
 #!/bin/bash
 delay=0.35
-urxvt -e sh -c "mosh aelv" &
+urxvt -depth 32 -bg rgba:0a00/1000/1500/dddd -e sh -c "mosh aelv" &
 sleep $delay
 i3-msg floating enable >/dev/null
 i3-msg move right 475 >/dev/null
