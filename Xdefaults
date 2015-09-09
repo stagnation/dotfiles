@@ -94,3 +94,7 @@ URxvt.keysym.C-Down: perl:keyboard-select:search
 !
 !fork-here
 URxvt.keysym.Mod4-Shift-Return: perl:fork-here:fork-at-cwd
+urxvt*depth:32
+!URxvt.background: #0A1015
+!urxvt*background:rgba:2000/2000/2000/cccc
+!urxvt*background:rgba:000a/00a0/00a0/cccc
