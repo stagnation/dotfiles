@@ -66,5 +66,6 @@ colorscheme dorkness
 
 map <Leader>t :set gui=invmenu,invnavigation<cr>
 map <C-k> :set gui=invmenu,invnavigation<cr>
+map <leader>l :lowlight<CR>
 
 " vim: set ft=vimperator:
