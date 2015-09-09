@@ -229,10 +229,10 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
         workspace_buttons yes
-        # bindsym button5  nop
-        wheel_up_cmd nop
-        wheel_down_cmd nop
-        # bindsym button4  nop
+        bindsym button5  nop
+        # wheel_up_cmd nop
+        # wheel_down_cmd nop
+        bindsym button4  nop
         # status_command i3bar.sh
 
         colors {
@@ -270,12 +270,48 @@ assign [class="mpv"] 9
 # fullscreen for games
 for_window [title="^Warsow$"] fullscreen
 for_window [title="^ioquake3$"] fullscreen
-for_window [class="XMathematica"] border normal
+# for_window [class=".*athematica.*"] border normal # not working
 # unsaved mathematica
-for_window [title=".*\* - Wolfram.*" ] border normal
+# mathematica allegedly uses instance prop rather than class
+# second item in the 'class string' or something, wrt xprop
+# for_window [title=".*\* - Wolfram.*" ] border normal
+
 
 #larger firefox/vimperator border
 for_window [class="Firefox"] border pixel 2
 
-# WM_CLASS(STRING) = "XMathematica"
+for_window [class="^.*"] border pixel 2
+
+# vim-like marks
+# bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+# bindsym $mod+n exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Go to: '
+# bindsym $mod+Shift+I mark i
+bindsym $mod+Shift+G mark g
+# bindsym $mod+Shift+Q mark q
+# bindsym $mod+Shift+O mark o
+# bindsym $mod+Shift+P mark p
+# bindsym $mod+Shift+M mark m
+bindsym $mod+Shift+semicolon mark ";"
+bindsym $mod+Shift+apostrophe mark "'"
+bindsym $mod+Shift+comma mark ","
+# bindsym $mod+i [con_mark="i"] focus
+bindsym $mod+g [con_mark="g"] focus
+# bindsym $mod+q [con_mark="q"] focus
+# bindsym $mod+o [con_mark="o"] focus
+# bindsym $mod+p [con_mark="p"] focus
+# bindsym $mod+m [con_mark="m"] focus
+bindsym $mod+semicolon [con_mark=";"] focus
+bindsym $mod+apostrophe [con_mark="'"] focus
+bindsym $mod+comma [con_mark=","] focus
+
+
+##############
+# i3 gaps area
+##############
+
+set $gap 10
+gaps inner $gap
+gaps outer -$gap
+smart_gaps on
+
 # vim:filetype=i3
