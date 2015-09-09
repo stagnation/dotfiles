@@ -512,4 +512,9 @@ nmap <leader>jo  <Plug>(exjumplist-go-first)
 " nmap <M-(>  <Plug>(exjumplist-previous-buffer)
 "
 " vim-rsi overloads some keys I need
-iunmap ä
+silent! iunmap ä
+silent! iunmap ö
+
+nnoremap <leader>hi :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
+
+autocmd FileType make setlocal noexpandtab
