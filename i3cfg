@@ -21,7 +21,7 @@ set $quickswitch  /home/spill/bin/gits/quickswitch-for-i3/quickswitch.py --dmenu
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
 # chose a FreeType font, such as:
-font pango:DejaVu Sans Mono 10
+font pango:DejaVu Sans Mono 9
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -59,10 +59,11 @@ bindsym $mod+a [urgent=latest] focus
 exec --no-startup-id nm-applet
 
 # at startup use keyboard script
-exec --no-startup-id ~/bin/swekb
+exec --no-startup-id ~/bin/uskb
 
 # at startup run redshift
-exec gtk-redshift -l 59.33:18.07
+# exec gtk-redshift -l 59.33:18.07
+exec --no-startup-id redshift -l 59.33:18.07
 
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
@@ -226,24 +227,40 @@ bindsym $mod+r mode "resize"
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
+# bar {
+#         status_command i3status
+#         workspace_buttons yes
+#         bindsym button5  nop
+#         # wheel_up_cmd nop
+#         # wheel_down_cmd nop
+#         bindsym button4  nop
+#         # status_command i3bar.sh
+
+#         colors {
+#             background #000000
+#             statusline #999999
+#             separator #000000
+
+#             focused_workspace  #ffffff #285577
+#             active_workspace   #ffffff #333333
+#             inactive_workspace #888888 #222222
+#             urgent_workspace   #ffffff #900000
+#     }
+# }
+
 bar {
-        status_command i3status
-        workspace_buttons yes
-        bindsym button5  nop
-        # wheel_up_cmd nop
-        # wheel_down_cmd nop
-        bindsym button4  nop
-        # status_command i3bar.sh
+    separator_symbol :
+    strip_workspace_numbers yes
+    status_command python3 ~/dotfiles/py3status.py
+    workspace_buttons yes
+    colors {
+        background #000000
+        statusline #7890a0
 
-        colors {
-            background #000000
-            statusline #999999
-            separator #000000
-
-            focused_workspace  #ffffff #285577
-            active_workspace   #ffffff #333333
-            inactive_workspace #888888 #222222
-            urgent_workspace   #ffffff #900000
+        focused_workspace  #000000 #e17800 #000000
+        active_workspace   #ffffff #333333
+        inactive_workspace #444444 #111111
+        urgent_workspace   #ffffff #900000
     }
 }
 
