@@ -36,5 +36,15 @@ bind för att toggla tabbar
 
 weechat:
 responsive layout small, ta bort nick align för bättre visning
+mass highlight: oformatera pontus: hka $
+till
+1 pontus:
+2 pontus, hka:
+
 
 vim: bind för att stänga preview fönster
+
+desktop / bild:
+generera en stor analog klocka att smäcka in på bakgrundsbilden, upplösning 5 min eller så.
+cronjob som kör feh kommandodt som sätter denna bakgrund.
+syns fint när man byer till tom workspace
