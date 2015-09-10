@@ -107,6 +107,8 @@ set splitbelow
 set splitright
 " Disable Ex mode
 map Q <Nop>
+" disable annyoing window
+noremap q: <Nop>
 
 "warning when file is chenged
 autocmd FileChangedShell * echo "Warning: File changed on disk"
@@ -390,10 +392,12 @@ nnoremap <leader>st :call SpillToggleLongLineDisplay()<cr>
 
 nnoremap <C-n> :call NumberToggle()<cr>
 
-highlight LineNr term=underline cterm=NONE ctermbg=232 ctermfg=243 gui=italic guibg=#0e0e0e guifg=#727272
-highlight SignColumn term=NONE cterm=NONE ctermbg=232 ctermfg=255 gui=NONE guibg=#0e0e0e guifg=#f0f0f0
-" area below text in doc, including tildes
-highlight NonText term=bold cterm=bold ctermbg=bg ctermfg=125 gui=bold guibg=bg guifg=#808080
+if ! has("gui_running")
+    highlight LineNr term=underline cterm=NONE ctermbg=232 ctermfg=243 gui=italic guibg=#0e0e0e guifg=#727272
+    highlight SignColumn term=NONE cterm=NONE ctermbg=232 ctermfg=255 gui=NONE guibg=#0e0e0e guifg=#f0f0f0
+    " area below text in doc, including tildes
+    highlight NonText term=bold cterm=bold ctermbg=bg ctermfg=125 gui=bold guibg=bg guifg=#808080
+endif
 
 highlight GitGutterAdd          ctermbg=232 ctermfg=22
 highlight GitGutterChange       ctermbg=232 ctermfg=yellow
