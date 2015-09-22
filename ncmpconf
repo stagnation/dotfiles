@@ -34,7 +34,7 @@
 #
 #mpd_connection_timeout = "5"
 #
-#mpd_crossfade_time = "5"
+mpd_crossfade_time = "3"
 #
 #mpd_communication_mode = "notifications" (polling/notifications)
 #
@@ -171,6 +171,9 @@
 ##
 #
 #song_list_format = "{%a - }{%t}|{$8%f$9}$R{$3(%l)$9}"
+# song_list_format = "$3%n$9$1&#9621; $1$4%a$9$1 - $1$6%t$1     $R$2%b$9"
+
+song_list_format = "{$8%n▕ $9}{$2%a $9}{$4%t$9}|{$5%f$9}$R{$5 %b$9}{$8 %l$9}"
 #
 #song_status_format = "{{%a{ \"%b\"{ (%y)}} - }{%t}}|{%f}"
 #
@@ -204,9 +207,9 @@
 ## text attributes listed above.
 ##
 #
-#now_playing_prefix = "$b"
+now_playing_prefix = "$b> "
 #
-#now_playing_suffix = "$/b"
+now_playing_suffix = " <$/b"
 #
 #browser_playlist_prefix = "$2playlist$9 "
 #
@@ -255,6 +258,7 @@
 ##
 #
 #song_columns_list_format = "(7f)[green]{l} (25)[cyan]{a} (40)[]{t|f} (30)[red]{b}"
+song_columns_list_format = "(5f)[green]{n} (22)[white]{a} (34)[white]{t} (25)[white]{b} (7f)[green]{lr}"
 #
 ##### various settings #####
 #
@@ -287,7 +291,7 @@
 #
 #seek_time = "1"
 #
-#autocenter_mode = "no"
+autocenter_mode = "yes"
 #
 #centered_cursor = "no"
 #
