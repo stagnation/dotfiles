@@ -1,4 +1,7 @@
-let leader="§"
+let leader="\"
+
+colorscheme dorkness
+
 "close / reopen tab
 nnoremap x D
 nnoremap X u
@@ -55,14 +58,22 @@ inoremap <C-a> <C-Home><C-S-End>
 :set hintchars=hjklasdfgyuopqwertnmzxcvb
 
 "format for link hints
-:highlight Hint font-size:150%;color:white;background-color:red;padding:2px;
+" :highlight Hint font-size:150%;color:white;background-color:red;padding:2px;
 "to rever: :highlight clear Hint
   highlight Hint z-index:5000;font:normal 8pt sans-serif;font-size:150%;color:white;background:rgba(192,0,0,0.7); padding:0px 1px 0px 1px;position:absolute
 
+  highlight HintElem background-color: #444444
+
 nnoremap yf ;y
 nnoremap af ;F
+nnoremap ]t <C-^>
+nnoremap [t <C-^>
+nnoremap <C-l> :open 
+nnoremap <C-t> :tabopen 
+cnoremap <C-n> <Tab>
+cnoremap <C-p> <Up>
+"nnoreamp \ss :source
 
-colorscheme dorkness
 
 map <Leader>t :set gui=invmenu,invnavigation<cr>
 map <C-k> :set gui=invmenu,invnavigation<cr>
