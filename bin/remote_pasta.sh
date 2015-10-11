@@ -15,7 +15,7 @@ fi
 chmod -rwx $FILE
 chmod 644 $FILE
 scp $FILE spill@aelv.se:~/public_html/pasta.txt
-if [ $# -ge 2 ] ; then
+if [ $# -le 2 ] ; then
     echo http://aelv.se/spill/pasta.txt | xclip -i -selection clipboard
     echo http://aelv.se/spill/pasta.txt | xclip -i -selection primary
     echo "http://aelv.se/spill/pasta.txt copied to clipboard"
