@@ -42,7 +42,7 @@ status.register("clock",
 # Discharging 6h:51m
 status.register("battery",
     format="{status} {remaining:%E%hh:%Mm}",
-    alert=True,
+    # alert=True,
     alert_percentage=5,
     charging_color="#6aa66a",
     status={
@@ -76,7 +76,10 @@ status.register("network",
     # hints = {"separator": False, "separator_block_width": 0},
     interface="wlan0",
     color_up="#6aa66a",
-    format_up="{essid} {quality:03.0f}%",)
+    color_down="#720480",
+    format_up="{essid} {quality:03.0f}%",
+    format_down="no wifi",
+    )
 
 # Shows disk usage of /
 # Format:
@@ -95,9 +98,15 @@ status.register("pulseaudio",
 # Shows mpd status
 # Format:
 # Cloud connected▶Reroute to Remain
+# ^ looks like in flames?
 status.register("mpd",
-    format="{artist} : {album}",
+    format="{artist} : {title}",
     host=("192.168.1.8"),
+    # color_error="#720480",
+    color="#6aa66a",
+    max_field_len=0,
+    hide_inactive=True,
+    # msg_error="no mpd",
     status={
         "pause": "▷",
         "play": "▶",
