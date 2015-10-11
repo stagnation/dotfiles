@@ -29,4 +29,5 @@ function pstime
     ps -eo "%p %y %t %c"
 end
 
+set PATH /home/spill/.local/bin $PATH
 xmodmap ~/.xmodmap
