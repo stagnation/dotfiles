@@ -72,9 +72,9 @@ key_next_column = 261 'l'
 #
 #key_tag_editor = '7' 271
 #
-#key_outputs = '8' 272
+key_outputs = '7' 271
 #
-#key_music_visualizer = '9' 273
+key_music_visualizer = '8' 272
 #
 #key_clock = '0' 274
 #
@@ -120,9 +120,9 @@ key_next_column = 261 'l'
 #
 #key_find_backward = '?'
 #
-#key_next_found_position = '.'
+key_next_found_position = 'n'
 #
-#key_prev_found_position = ','
+key_prev_found_position = 'N'
 #
 #key_toggle_find_mode = 'w'
 #

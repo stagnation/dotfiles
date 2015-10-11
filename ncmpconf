@@ -26,7 +26,7 @@
 #
 #  set it in order to make tag editor and renaming files work properly
 #
-#mpd_host = "localhost"
+mpd_host = "192.168.1.8"
 #
 #mpd_port = "6600"
 #
@@ -58,9 +58,9 @@ mpd_crossfade_time = "3"
 #  If you set format to 44100:16:2, make it 'yes'.
 #
 #
-#visualizer_in_stereo = "no"
+#visualizer_in_stereo = "yes"
 #
-#visualizer_fifo_path = ""
+visualizer_fifo_path = "192.168.1.8:/tmp/mpd.fifo"
 #
 #
 #  Note: Below parameter is needed for ncmpcpp
@@ -70,7 +70,7 @@ mpd_crossfade_time = "3"
 #  are some problems with it.
 #
 #
-#visualizer_output_name = ""
+visualizer_output_name = "My FIFO"
 #
 #
 #  Note: Below parameter defines how often ncmpcpp
@@ -275,7 +275,7 @@ song_columns_list_format = "(5f)[green]{n} (22)[white]{a} (34)[white]{t} (25)[wh
 #
 #playlist_shorten_total_times = "no"
 #
-#playlist_separate_albums = "yes"
+playlist_separate_albums = "no"
 #
 #playlist_display_mode = "classic" (classic/columns)
 #
@@ -315,13 +315,13 @@ autocenter_mode = "yes"
 #
 #default_tag_editor_pattern = "%n - %t"
 #
-#header_visibility = "yes"
+header_visibility = "no"
 #
-#statusbar_visibility = "yes"
+statusbar_visibility = "yes"
 #
 #titles_visibility = "yes"
 #
-#header_text_scrolling = "yes"
+header_text_scrolling = "no"
 #
 #fancy_scrolling = "yes"
 #
@@ -388,9 +388,9 @@ autocenter_mode = "yes"
 #  Note: You can define startup screen for ncmpcpp
 #  by choosing screen number from the list above.
 #
-#startup_screen = "2"
+startup_screen = "2"
 #
-#jump_to_now_playing_song_at_start = "yes"
+jump_to_now_playing_song_at_start = "yes"
 #
 #ask_before_clearing_main_playlist = "no"
 #
