@@ -6,6 +6,12 @@ nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 
+" " TODO
+" cyclic f, F, if wrong was used, cycle from begining of line
+" silent ]l in location list, no message that requires enter
+" cyclic ]l, if any exist don't show "no more" warning
+
+
 "rebind common typos
 command! Q q
 command! Qall qall
@@ -133,7 +139,7 @@ nnoremap <leader>fp [s
 "go to next or previous instance (usually error)
 nnoremap <leader>en :lne<CR>
 nnoremap <leader>ep :lp<CR>
-nnoremap ]l :try<bar>lnext<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>lfirst<bar>endtry<cr>
+nnoremap <silent> ]l :try<bar>lnext<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>lfirst<bar>endtry<cr>
 
 "git gutter go to next, prev git chunk
 "populate quicklist with commited version of current file - fugitive
@@ -221,7 +227,12 @@ highlight ExtraWhitespace ctermbg=52
 
 " select last pasted or changed text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+" Pull word under cursor into LHS of a substitute
+nnoremap <leader>z :%s#\<<c-r>=expand("<cword>")<cr>\>##gc<left><left><left>
+nnoremap <leader>Z :bufdo %s#\<<c-r>=expand("<cword>")<cr>\>##gce<space><bar><space>update<left><left><left><left><left><left><left><left><left><left><left><left><left>
 
+" shebang generator
+nnoremap <leader>sb :r ! shebang.sh <c-r>=expand("<cword>")<CR><CR>kdd
 
 "cursorcolumn only in active window
 autocmd WinEnter * setlocal cursorcolumn
@@ -254,7 +265,8 @@ noremap <ScrollWheelDown> <Nop>
 inoremap <ScrollWheelUp> <Nop>
 inoremap <ScrollWheelDown> <Nop>
 
-set tags=tags;/
+set tags=tags,TAGS;/
+let g:gutentags_ctags_executable_haskell = 'haskell-ctags'
 
 noremap <leader>gt <c-w>} " go tag
 noremap <leader>tp <c-w>} " tag preview
@@ -373,6 +385,8 @@ function! NumberToggle()
   endif
 endfunc
 
+vnoremap <leader>ul "+y :!rmtpasta<cr>
+
 "toggle slimed down display to handle files with very long lines
 function! SpillToggleLongLineDisplay()
   if(&cursorline == 1)
@@ -390,7 +404,7 @@ function! SpillToggleLongLineDisplay()
 endfunc
 nnoremap <leader>st :call SpillToggleLongLineDisplay()<cr>
 
-nnoremap <C-n> :call NumberToggle()<cr>
+nnoremap <silent><C-n> :call NumberToggle()<cr>
 
 if ! has("gui_running")
     highlight LineNr term=underline cterm=NONE ctermbg=232 ctermfg=243 gui=italic guibg=#0e0e0e guifg=#727272
@@ -522,3 +536,5 @@ silent! iunmap ö
 nnoremap <leader>hi :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
 
 autocmd FileType make setlocal noexpandtab
+
+noremap <leader>my :!python3 %<cr>
