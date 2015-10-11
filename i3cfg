@@ -29,9 +29,11 @@ floating_modifier $mod
 # use 1 pixel borders by default
 new_window 1pixel
 
+set $focus "#5f005f"
+set $orang "$E17800"
 # colors colours
 # class                 border  backgr. text    indicator
-client.focused          #E17800 #E17800 #000000 #beaa10
+client.focused          $orang $orang #000000 #beaa10
 client.focused_inactive #000000 #000000 #dddddd #181e20
 client.unfocused        #000000 #000000 #666666 #191d1e
 client.urgent           #2f343a #900000 #ffffff #900000
@@ -42,7 +44,7 @@ bindsym $mod+Return exec /usr/bin/urxvt
 bindsym $mod+Shift+Return exec ~/bin/newterm.sh
 bindsym $mod+Control+Return exec ~/bin/newranger.sh
 
-# move window to new terminal
+# move window to new empty workspace
 bindsym $mod+Shift+m exec "/home/spill/bin/gits/quickswitch-for-i3/quickswitch.py -je"
 
 # move to new workspace and open terminal
@@ -163,6 +165,7 @@ bindsym $mod+0xb4 workspace back_and_forth
 
 # quickswitch binds
 bindsym $mod+m exec  $quickswitch -e
+bindsym $mod+Control+m exec $quickswitch -et
 # bindsym $mod+Shift+M exec $quickswitch -e; exec /usr/bin/urxvt
 # bindsym $mod+Shift+M exec /home/spill/bin/i3newterm.sh
 # bindsym $mod+Shift+M exec /home/spill/bin/spillswitch.py
@@ -173,7 +176,7 @@ bindsym $mod+Tab exec /home/spill/bin/gits/quickswitch-for-i3/quickswitch.py
 # bindsym $mod+§ exec /home/spill/bin/quickswitch.py
 
 bindsym $mod+i exec /home/spill/bin/streampy
-bindsym $mod+o exec /home/spill/bin/playclip
+# bindsym $mod+o exec /home/spill/bin/playclip
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -225,6 +228,23 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+
+mode "media" {
+    bindsym l exec nextsong.sh ; mode "default"
+    bindsym space exec toggleplay.sh ; mode "default"
+    bindsym h exec prevsong.sh ; mode "default"
+    bindsym w exec logsong.sh ; mode "default"
+    bindsym s exec selectsong.sh ; mode "default"
+    bindsym i exec playclip.sh ; mode "default"
+    bindsym q exec insertclip.sh ; mode "defualt"  # queue
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+o mode "media"
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 # bar {
@@ -248,18 +268,20 @@ bindsym $mod+r mode "resize"
 #     }
 # }
 
+set $back "#080808"
+set $focus "#5f005f"
 bar {
     separator_symbol :
     strip_workspace_numbers yes
     status_command python3 ~/dotfiles/py3status.py
     workspace_buttons yes
     colors {
-        background #000000
+        background $back
         statusline #7890a0
 
-        focused_workspace  #000000 #e17800 #000000
+        focused_workspace  $focus $focus #000000
         active_workspace   #ffffff #333333
-        inactive_workspace #444444 #111111
+        inactive_workspace $back $back #7890a0
         urgent_workspace   #ffffff #900000
     }
 }
