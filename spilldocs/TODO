@@ -48,3 +48,7 @@ desktop / bild:
 generera en stor analog klocka att smäcka in på bakgrundsbilden, upplösning 5 min eller så.
 cronjob som kör feh kommandodt som sätter denna bakgrund.
 syns fint när man byer till tom workspace
+
+hasktags wrapper som ignorerar --option
+
+tmux: undertryck urgent

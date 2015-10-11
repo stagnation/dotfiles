@@ -37,8 +37,14 @@
 #keystate_capslock = enable
 #keystate_scrolllock= enable
 
-"/home/spill/bin/toggledisplay.sh
-    m:0x40 + c:9
+"/home/spill/bin/toggledisplay.sh"
+    m:0x40 + c:110
+    # Mod4 + Home
+
+"/home/spill/bin/toggledisplay.sh"
+    Mod4 + Home
+    # m:0x40 + c:110
+
 
 # Examples of commands:
 
