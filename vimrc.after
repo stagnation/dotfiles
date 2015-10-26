@@ -657,3 +657,11 @@ if version >= 700
     endif
 endif
 " }}}
+"
+inoremap ^] ^X^]
+inoremap ^F ^X^F
+inoremap ^D ^X^D
+inoremap ^L ^X^L
+
+" gi inserts text from last insertion position.
+inoremap ^} <Esc>b5<C-}>ea
