@@ -15,8 +15,11 @@ nnoremap l 4l
 "vimfx like - swapped new tab - movement
 "up down in accordance with tree-style tabbar
 
-nnoremap J <c-n>
-nnoremap K <c-p>
+nnoremap <c-j> <c-n>
+nnoremap <c-k> <c-p>
+nnoremap J 10j
+nnoremap K 10k
+
 "-
 nnoremap <a-j> :tabnext<CR>
 nnoremap <a-k> :tabprevious<CR>
@@ -68,15 +71,15 @@ nnoremap yf ;y
 nnoremap af ;F
 nnoremap ]t <C-^>
 nnoremap [t <C-^>
-nnoremap <C-l> :open 
-nnoremap <C-t> :tabopen 
+" nnoremap <C-l> :open
+nnoremap <C-t> :tabopen
 cnoremap <C-n> <Tab>
 cnoremap <C-p> <Up>
 "nnoreamp \ss :source
 
 
 map <Leader>t :set gui=invmenu,invnavigation<cr>
-map <C-k> :set gui=invmenu,invnavigation<cr>
+map <leader>k :set gui=invmenu,invnavigation<cr>
 map <leader>l :lowlight<CR>
 
 " vim: set ft=vimperator:
