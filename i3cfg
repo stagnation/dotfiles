@@ -29,14 +29,18 @@ floating_modifier $mod
 # use 1 pixel borders by default
 new_window 1pixel
 
-set $focus "#5f005f"
-set $orang "$E17800"
+# set $orang "#4F4445"
+set $c_unfocus #4F4445
+# set $c_focus #936480
+set $c_focus #ad7094
+
 # colors colours
-# class                 border  backgr. text    indicator
-client.focused          $orang $orang #000000 #beaa10
-client.focused_inactive #000000 #000000 #dddddd #181e20
-client.unfocused        #000000 #000000 #666666 #191d1e
-client.urgent           #2f343a #900000 #ffffff #900000
+# class                 border     backgr. text    indicator
+client.focused          $c_focus   $c_focus $c_unfocus #beaa10
+client.focused_inactive $c_unfocus   $c_unfocus  #dddddd #181e20
+client.unfocused        $c_unfocus   $c_unfocus  #666666 #191d1e
+client.urgent           #2f343a    #900000  #ffffff #900000
+# client.background       #123456
 
 # start a terminal
 bindsym $mod+Return exec /usr/bin/urxvt
@@ -56,6 +60,9 @@ bindsym $mod+Shift+q kill
 
 # move to urgent window
 bindsym $mod+a [urgent=latest] focus
+
+# open man page menu and read in vim
+ bindsym $mod+Control+d exec dmenu_path | dmenu -i -u 'robotomono:medium' -sb '#E17800' -sf '#000000' -h 23 | xargs van
 
 # at startup run network-manager applet
 exec --no-startup-id nm-applet
