@@ -9,7 +9,7 @@
 
 dir=~/dotfiles # dotfiles directory
 olddir=~/bak_dotfiles# old dotfiles backup directory
-files="Xdefaults Xmodmap bash_profile vimrc.after tmux.conf vimrc.before gvimrc vimperatorrc"
+files="gitconfig Xdefaults Xmodmap bash_profile vimrc tmux.conf gvimrc vimperatorrc"
 # list of files/folders to symlink in homedir
 
 ##########
@@ -47,5 +47,38 @@ if [[ -s ~/.config/fish ]] ; then
 else
     ln -s $dir/fish ~/.config/fish
 fi;
+
+echo "Creating symlink for vimperator"
+if [[ -s ~/.vimperator ]] ; then
+    echo "directory exist, remove first to overwrite."
+else
+    ln -s $dir/vimperatorrc ~/.vimperatorrc
+    mkdir ~/.vimperator/colors -p
+    ln -s $dir/dorkness.vimp ~/.vimperator/colors/dorkness.vimp
+fi;
+
+echo "Creating symlink for i3pystatus from git to shadow pip ver"
+if [[ -s ~/dotfiles/i3pystatus ]] ; then
+    echo "directory exist, remove first to overwrite."
+else
+    ln -s /home/spill/bin/i3pystatus/i3pystatus $dir/i3pystatus
+fi;
+
+
+echo "Creating symlink for urxvt perls"
+if [[ -s ~/.urxvt/ext/ ]] ; then
+    echo "directory exist, remove first to overwrite."
+else
+    mkdir ~/.urxvt/ext -p
+    ln -s ~/bin/gits/urxvt-perls ~/.urxvt/ext
+fi;
+
+echo "Creating vim directory structure"
+mkdir ~/.vim/backup -p
+mkdir ~/.vim/colors -p
+
+echo "installing vim colorscheme"
+ln -s $dir/vimcols/lakris.vim ~/.vim/colors/lakris.vim
+ln -s $dir/vimcols/lakris256.vim ~/.vim/colors/lakris256.vim
 
 done
