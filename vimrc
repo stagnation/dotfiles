@@ -1,3 +1,32 @@
+" vim plug plugin manager
+"
+call plug#begin('~/.vim/plugged')
+Plug 'junegunn/vim-easy-align'
+Plug 'whatyouhide/vim-lengthmatters'
+Plug 'vim-scripts/Indent-Guides'
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/vim-peekaboo'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'eparreno/vim-matchit'
+Plug 'michaeljsmith/vim-indent-object'
+Plug 'scrooloose/syntastic/'
+Plug 'majutsushi/tagbar'
+Plug 'bronson/vim-trailing-whitespace'
+Plug 'vim-scripts/camelcasemotion'
+Plug 'Osse/double-tap'
+Plug 'wellle/targets.vim'
+Plug 'mbbill/undotree'
+Plug 'airblade/vim-gitgutter'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'mhinz/vim-startify'
+Plug 'pelodelfuego/vim-swoop'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'kshenoy/vim-signature'
+Plug 'kien/ctrlp.vim'
+Plug 'tpope/vim-commentary'
+call plug#end()
+
 " "tmux vim conavigation
 let g:tmux_navigator_no_mappings = 1
 
@@ -92,7 +121,7 @@ noremap <leader>Y "+y$
 noremap <leader>p "+p
 noremap <leader>P "+P
 
-noremap <leader>ss :source ~/.vimrc.after<CR> :echo "sourced vimrc"<CR>
+noremap <leader>ss :source ~/.vimrc<CR> :echo "sourced vimrc"<CR>
 
 " Y consistent with D
 nnoremap Y y$
@@ -315,7 +344,7 @@ let g:indent_guides_auto_colors = 0
 autocmd VimEnter,Colorscheme * :highlight IndentGuidesOdd  ctermbg=235
 autocmd VimEnter,Colorscheme * :highlight IndentGuidesEven ctermbg=234
 let g:indent_guides_enable_on_vim_startup = 1
-:IndentGuidesEnable
+" IndentGuidesEnable
 
 "showmark settings
 "let g:showmarks_include="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyx"
