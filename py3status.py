@@ -93,7 +93,10 @@ status.register("network",
 # Note: requires libpulseaudio from PyPI
 status.register("pulseaudio",
 # status.register("alsa",
-    format="♪ {volume}",)
+    format="♪ {volume}",
+    color_muted="#555555",
+    color_unmuted="#6aa66a",
+    )
 
 # Shows mpd status
 # Format:
