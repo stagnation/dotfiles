@@ -3,3 +3,5 @@
 	name = Nils Wireklint
 [core]
 	editor = vim
+[push]
+	default = simple
