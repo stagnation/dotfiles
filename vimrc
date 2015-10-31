@@ -48,7 +48,9 @@ command! E e
 command! W w
 
 "basic settings
+
 syntax enable             "enables syntax highlighting
+set background=dark       "required for colorschemes
 filetype plugin indent on "react on filetyps with plugins and syntax
 set scrolloff=4           "minimum number of lines to display around cursor
 set hlsearch              "highlight search results
@@ -360,7 +362,7 @@ vnoremap <Leader>7 :call SwoopSelection()<CR>
 
 "startify, session management
 let g:startify_session_persistence = 1 "autosave sessions
-let g:startify_bookmarks = [ '~/dotfiles/vimrc.after' ]
+let g:startify_bookmarks = [ '~/dotfiles/vimrc' ]
 
 let g:startify_list_order = [
         \ ['   These are my bookmarks:'],
