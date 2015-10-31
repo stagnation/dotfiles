@@ -81,4 +81,15 @@ echo "installing vim colorscheme"
 ln -s $dir/vimcols/lakris.vim ~/.vim/colors/lakris.vim
 ln -s $dir/vimcols/lakris256.vim ~/.vim/colors/lakris256.vim
 
+echo "Creating symlinks for ncmpcpp"
+if [[ -s ~/.ncmpcpp ]] ; then
+    echo "directory exist, remove first to overwrite."
+else
+    mkdir ~/.ncmpcpp
+    ln -s $dir/ncmpconf ~/.ncmpcpp/config
+    ln -s $dir/ncmpkeys ~/.ncmpcpp/keys
+fi;
+
+
+
 done
