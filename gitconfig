@@ -1,0 +1,5 @@
+[user]
+	email = nils@wireklint.se
+	name = Nils Wireklint
+[core]
+	editor = vim
