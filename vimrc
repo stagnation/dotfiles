@@ -1,5 +1,9 @@
 " vim: foldmethod=marker foldlevel=0 foldcolumn=3
 " Initialization, plug manager {{{ "
+" Fix for my shell, otherwise some scripts break
+if $SHELL =~ 'bin/fish'
+    set shell=/bin/sh
+endif
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/vim-easy-align'
 Plug 'whatyouhide/vim-lengthmatters'
@@ -151,18 +155,10 @@ if ! has("gui_running")
     " area below text in doc, including tildes
     highlight NonText term=bold cterm=bold ctermbg=bg ctermfg=125 gui=bold guibg=bg guifg=#808080
 endif
+
 "showmark settings
 "let g:showmarks_include="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyx"
 
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set number
-  else
-    set relativenumber
-  endif
-endfunc
-
-nnoremap <C-n> :call NumberToggle()<cr>
 nnoremap <silent><C-n> :call NumberToggle()<cr>
 
 "toggle relative number for lines
@@ -174,6 +170,7 @@ function! NumberToggle()
     set relativenumber
   endif
 endfunc
+
 highlight CursorLine term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f
 " highlight CursorColumn term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f
 
@@ -218,6 +215,110 @@ highlight GitGutterChange       ctermbg=232 ctermfg=yellow
 highlight GitGutterDelete       ctermbg=232 ctermfg=red
 highlight GitGutterChangeDelete ctermbg=232 ctermfg=yellow
 " }}} GitGutter Sign colors "
+" {{{ Graphics of cursor
+set gcr=a:block
+" mode aware cursors
+set gcr+=o:hor50-Cursor
+set gcr+=n:Cursor
+set gcr+=i-ci-sm:InsertCursor
+set gcr+=r-cr:ReplaceCursor-hor20
+set gcr+=c:CommandCursor
+set gcr+=v-ve:VisualCursor
+
+set gcr+=a:blinkon0
+
+hi InsertCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=37  guibg=#2aa198
+hi VisualCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=125 guibg=#d33682
+hi ReplaceCursor ctermfg=15 guifg=#fdf6e3 ctermbg=65  guibg=#dc322f
+hi CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#cb4b16
+" }}} Graphics of cursor
+" Status Function: {{{2
+function! Status(winnr)
+  let stat = ''
+  let active = winnr() == a:winnr
+  let buffer = winbufnr(a:winnr)
+
+  let modified = getbufvar(buffer, '&modified')
+  let readonly = getbufvar(buffer, '&ro')
+  let fname = bufname(buffer)
+
+  function! Color(active, num, content)
+    if a:active
+      return '%' . a:num . '*' . a:content . '%*'
+    else
+      return a:content
+    endif
+  endfunction
+
+  " column
+  let stat .= '%1*' . (col(".") / 100 >= 1 ? '%v ' : ' %2v ') . '%*'
+
+  " file
+  let stat .= Color(active, 5, active ? ' »' : ' «')
+  let stat .= ' %<'
+
+  if fname == '__Gundo__'
+    let stat .= 'Gundo'
+  elseif fname == '__Gundo_Preview__'
+    let stat .= 'Gundo Preview'
+  elseif fname == '__Tagbar__'
+    let stat .= 'Tagbar'
+  else
+    let stat .= '%f'
+  endif
+
+  let stat .= ' ' . Color(active, 3, active ? '«' : '»')
+
+  " file modified
+  let stat .= Color(active, 4, modified ? ' +' : '')
+
+  " read only
+  "
+  let stat .= Color(active, 4, readonly ? ' readonly' : '')
+
+  " paste
+  if active && &paste
+    let stat .= ' %2*' . 'P' . '%*'
+  endif
+
+  " right side
+  let stat .= '%='
+
+  " git branch
+  if exists('*fugitive#head')
+    let head = fugitive#head()
+
+    if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
+      call fugitive#detect(getcwd())
+      let head = fugitive#head()
+    endif
+  endif
+
+  if !empty(head)
+    let stat .= Color(active, 3, ' ← ') . head . ' '
+  endif
+
+  return stat
+endfunction
+" }}}
+" Status AutoCMD: {{{
+function! SetStatus()
+  for nr in range(1, winnr('$'))
+    call setwinvar(nr, '&statusline', '%!Status('.nr.')')
+  endfor
+endfunction
+
+augroup status
+  autocmd!
+  autocmd VimEnter,WinEnter,BufWinEnter,BufUnload * call SetStatus()
+augroup END
+" }}}
+" Status Colors: {{{
+hi User1 ctermfg=33  guifg=#268bd2  ctermbg=233 guibg=#fdf6e3 gui=bold
+hi User2 ctermfg=125 guifg=#d33682  ctermbg=7  guibg=#eee8d5 gui=bold
+hi User3 ctermfg=253  guifg=#719e07  ctermbg=53  guibg=#eee8d5 gui=bold
+hi User4 ctermfg=33  guifg=#2aa198  ctermbg=53  guibg=#eee8d5 gui=bold
+" }}}
 " }}} Colors "
 " {{{ Syntastic "
 let g:syntastic_disabled_filetypes=['tex']
@@ -556,116 +657,6 @@ autocmd FileType make setlocal noexpandtab
 
 noremap <leader>my :!python3 %<cr>
 " }}} Filetype specific mappings "
-" {{{ Graphics of cursor
-set gcr=a:block
-" mode aware cursors
-set gcr+=o:hor50-Cursor
-set gcr+=n:Cursor
-set gcr+=i-ci-sm:InsertCursor
-set gcr+=r-cr:ReplaceCursor-hor20
-set gcr+=c:CommandCursor
-set gcr+=v-ve:VisualCursor
-
-set gcr+=a:blinkon0
-
-hi InsertCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=37  guibg=#2aa198
-hi VisualCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=125 guibg=#d33682
-hi ReplaceCursor ctermfg=15 guifg=#fdf6e3 ctermbg=65  guibg=#dc322f
-hi CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#cb4b16
-" }}} Graphics of cursor
-" Status Line: {{{
-
-" Status Function: {{{2
-function! Status(winnr)
-  let stat = ''
-  let active = winnr() == a:winnr
-  let buffer = winbufnr(a:winnr)
-
-  let modified = getbufvar(buffer, '&modified')
-  let readonly = getbufvar(buffer, '&ro')
-  let fname = bufname(buffer)
-
-  function! Color(active, num, content)
-    if a:active
-      return '%' . a:num . '*' . a:content . '%*'
-    else
-      return a:content
-    endif
-  endfunction
-
-  " column
-  let stat .= '%1*' . (col(".") / 100 >= 1 ? '%v ' : ' %2v ') . '%*'
-
-  " file
-  let stat .= Color(active, 5, active ? ' »' : ' «')
-  let stat .= ' %<'
-
-  if fname == '__Gundo__'
-    let stat .= 'Gundo'
-  elseif fname == '__Gundo_Preview__'
-    let stat .= 'Gundo Preview'
-  elseif fname == '__Tagbar__'
-    let stat .= 'Tagbar'
-  else
-    let stat .= '%f'
-  endif
-
-  let stat .= ' ' . Color(active, 3, active ? '«' : '»')
-
-  " file modified
-  let stat .= Color(active, 4, modified ? ' +' : '')
-
-  " read only
-  "
-  let stat .= Color(active, 4, readonly ? ' ‼' : '')
-
-  " paste
-  if active && &paste
-    let stat .= ' %2*' . 'P' . '%*'
-  endif
-
-  " right side
-  let stat .= '%='
-
-  " git branch
-  if exists('*fugitive#head')
-    let head = fugitive#head()
-
-    if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
-      call fugitive#detect(getcwd())
-      let head = fugitive#head()
-    endif
-  endif
-
-  if !empty(head)
-    let stat .= Color(active, 3, ' ← ') . head . ' '
-  endif
-
-  return stat
-endfunction
-" }}}
-
-" Status AutoCMD: {{{
-function! SetStatus()
-  for nr in range(1, winnr('$'))
-    call setwinvar(nr, '&statusline', '%!Status('.nr.')')
-  endfor
-endfunction
-
-augroup status
-  autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter,BufUnload * call SetStatus()
-augroup END
-" }}}
-
-" Status Colors: {{{
-hi User1 ctermfg=33  guifg=#268bd2  ctermbg=233 guibg=#fdf6e3 gui=bold
-hi User2 ctermfg=125 guifg=#d33682  ctermbg=7  guibg=#eee8d5 gui=bold
-hi User3 ctermfg=253  guifg=#719e07  ctermbg=53  guibg=#eee8d5 gui=bold
-hi User4 ctermfg=33  guifg=#2aa198  ctermbg=53  guibg=#eee8d5 gui=bold
-" }}}
-
-" }}}
 " change status line colour if it is in insert mode {{{
 if version >= 700
     if has("autocmd")
