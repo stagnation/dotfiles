@@ -657,6 +657,8 @@ silent! iunmap ö
 autocmd FileType make setlocal noexpandtab
 
 noremap <leader>my :!python3 %<cr>
+
+autocmd FileType vimperator setlocal commentstring=\"\ %s
 " }}} Filetype specific mappings "
 " change status line colour if it is in insert mode {{{
 if version >= 700
