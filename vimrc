@@ -5,6 +5,7 @@ if $SHELL =~ 'bin/fish'
     set shell=/bin/sh
 endif
 call plug#begin('~/.vim/plugged')
+Plug 'spiiph/vim-space'
 Plug 'junegunn/vim-easy-align'
 Plug 'whatyouhide/vim-lengthmatters'
 Plug 'vim-scripts/Indent-Guides'
