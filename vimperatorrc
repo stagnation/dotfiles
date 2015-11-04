@@ -37,6 +37,10 @@ noremap <a-S-g> :tablast<CR>
 inoremap <C-a> <Home>
 " textarea remap <C-a> to <Home><shift><End> ?
 
+" disables annoying history popup
+nnoremap <C-h> <Nop>
+" disable firefox close tab in normal mode
+nnoremap <C-w> <Nop>
 
 :set hintchars=hjklasdfgyuopqwertnmzxcvb
 
