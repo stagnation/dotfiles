@@ -5,7 +5,9 @@ if $SHELL =~ 'bin/fish'
     set shell=/bin/sh
 endif
 call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-rsi', { 'on': [] }
 Plug 'spiiph/vim-space'
+Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/vim-easy-align'
 Plug 'whatyouhide/vim-lengthmatters'
 Plug 'vim-scripts/Indent-Guides'
@@ -30,7 +32,16 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'kshenoy/vim-signature'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-commentary'
+if has ('nvim')
+    Plug 'critiqjo/lldb.nvim'
+    Plug 'kassio/neoterm'
+    Plug 'benekastah/neomake'
+endif
+
+" explicitly load rsi so ä can be unmapped
+call plug#load('vim-rsi')
 call plug#end()
+silent! iunmap ä
 
 " }}} Initialization "
 " " TODO
@@ -45,6 +56,13 @@ nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
 nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
 nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+
+if has ('nvim')
+    tnoremap <silent> <c-h> <C-\><C-n>:TmuxNavigateLeft<cr>
+    tnoremap <silent> <c-j> <C-\><C-n>:TmuxNavigateDown<cr>
+    tnoremap <silent> <c-k> <C-\><C-n>:TmuxNavigateUp<cr>
+    tnoremap <silent> <c-l> <C-\><C-n>:TmuxNavigateRight<cr>
+endif
 
 " }}} Tmux navigation "
 " {{{ Utility rebinds "
@@ -122,7 +140,9 @@ set modeline              "use modelines ??????
 set ttimeoutlen=150        "faster twitching for everything
 set virtualedit=block     "allow cursor to be moved into empty space in visual
 set laststatus=2          "always show status line
-set encoding=utf-8        "utf-8 encoding
+if !has('nvim')
+    set encoding=utf-8        "utf-8 encoding
+endif
 set backupdir=~/.vim/backup "centralized backup
 set backspace=indent,eol,start "backspace everywhere
 set noswapfile            "no swap files
@@ -207,8 +227,6 @@ autocmd WinLeave * setlocal norelativenumber
 autocmd WinEnter * :set winfixheight
 autocmd WinEnter * :wincmd =
 
-" echo which property of highlight govenrs word under cursor
-nnoremap <leader>hi :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
 
 " {{{ GitGutter Sign colors '
 highlight GitGutterAdd          ctermbg=232 ctermfg=22
@@ -232,6 +250,8 @@ hi InsertCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=37  guibg=#2aa198
 hi VisualCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=125 guibg=#d33682
 hi ReplaceCursor ctermfg=15 guifg=#fdf6e3 ctermbg=65  guibg=#dc322f
 hi CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#cb4b16
+
+
 " }}} Graphics of cursor
 " Status Function: {{{2
 function! Status(winnr)
@@ -532,6 +552,10 @@ nnoremap <leader>sb :r ! shebang.sh <c-r>=expand("<cword>")<CR><CR>kdd
 " move stuff sideways
 nnoremap <leader>sl :SidewaysRight<CR>
 nnoremap <leader>sh :SidewaysLeft<CR>
+
+" echo which property of highlight govenrs word under cursor
+nnoremap <leader>hi :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
+
 " }}} small function mappings
 " {{{ Spill functions, heuristic solutions "
 "toggle slimed down display to handle files with very long lines
@@ -648,11 +672,6 @@ nmap <leader>jo  <Plug>(exjumplist-go-first)
 " nmap <M-(>  <Plug>(exjumplist-previous-buffer)
 "
 " }}} exjumplist mappings "
-" {{{ Vim rsi, readline "
-" vim-rsi overloads some keys I need
-silent! iunmap ä
-silent! iunmap ö
-" }}} vim rsi, readline "
 " {{{ Filetype specific mappings "
 autocmd FileType make setlocal noexpandtab
 
