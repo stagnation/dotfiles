@@ -583,82 +583,114 @@ noremap ]f <Esc>mao<Esc>`a:delmarks a<CR>:SignatureRefresh<CR>
 noremap [f <Esc>maO<Esc>`a:delmarks a<CR>:SignatureRefresh<CR>
 " }}} Unimpaired "
 " {{{ VIMUX "
-" VIMUX Settings for tmux integration as repl
-"size settings
-"
-noremap <Leader>vh :let g:VimuxOrientation='h'<CR> :let g:VimuxHeight=50<CR>
-noremap <Leader>vv :let g:VimuxOrientation='v'<CR> :let g:VimuxHeight=50<CR>
+if !has ('nvim')
+    " VIMUX Settings for tmux integration as repl
+    "size settings
+    "
+    noremap <Leader>vh :let g:VimuxOrientation='h'<CR> :let g:VimuxHeight=50<CR>
+    noremap <Leader>vv :let g:VimuxOrientation='v'<CR> :let g:VimuxHeight=50<CR>
 
-" Run the current file with rspec
-map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
+    " Run the current file with rspec
+    map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
 
-" Run command without sending a return
-map <Leader>rq :call VimuxRunCommand("clear; rspec " . bufname("%"), 0)<CR>
+    " Run command without sending a return
+    map <Leader>rq :call VimuxRunCommand("clear; rspec " . bufname("%"), 0)<CR>
 
-" Prompt for a command to run map
-map <Leader>vp :VimuxPromptCommand<CR>
+    " Prompt for a command to run map
+    map <Leader>vp :VimuxPromptCommand<CR>
 
-map <Leader>vm :VimuxPromptCommand("make ")<CR>
-"
+    map <Leader>vm :VimuxPromptCommand("make ")<CR>
+    "
     " Run last command executed by VimuxRunCommand
-map <Leader>vl :VimuxRunLastCommand<CR>
+    map <Leader>vl :VimuxRunLastCommand<CR>
 
-" Inspect runner pane map
-map <Leader>vi :VimuxInspectRunner<CR>
+    " Inspect runner pane map
+    map <Leader>vi :VimuxInspectRunner<CR>
 
-" Close vim tmux runner opened by VimuxRunCommand
-map <Leader>vq :VimuxCloseRunner<CR>
+    " Close vim tmux runner opened by VimuxRunCommand
+    map <Leader>vq :VimuxCloseRunner<CR>
 
 
-" Clear the tmux history of the runner pane
-map <Leader>vc :VimuxClearRunnerHistory<CR>
+    " Clear the tmux history of the runner pane
+    map <Leader>vc :VimuxClearRunnerHistory<CR>
 
-" Zoom the tmux runner page
-map <Leader>vz :VimuxZoomRunner<CR>
+    " Zoom the tmux runner page
+    map <Leader>vz :VimuxZoomRunner<CR>
 
-" Compile currently opened latex file to pdf
-autocmd Filetype tex nnoremap <buffer> <Leader>rr :update<Bar>:call VimuxRunCommandInDir('latexmk -pdf', 1)<CR>
+    " Compile currently opened latex file to pdf
+    autocmd Filetype tex nnoremap <buffer> <Leader>rr :update<Bar>:call VimuxRunCommandInDir('latexmk -pdf', 1)<CR>
 
-" Push the repository of the currently opened file
-nnoremap <leader>gp :call VimuxRunCommandInDir("git push", 0)<CR>
+    " Push the repository of the currently opened file
+    nnoremap <leader>gp :call VimuxRunCommandInDir("git push", 0)<CR>
 
-" Run the current file with rspec
-map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
+    " Run the current file with rspec
+    map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
 
-" Prompt for a command to run
-map <Leader>vp :VimuxPromptCommand<CR>
+    " Prompt for a command to run
+    map <Leader>vp :VimuxPromptCommand<CR>
 
-" Run last command executed by VimuxRunCommand
-map <Leader>vl :VimuxRunLastCommand<CR>
+    " Run last command executed by VimuxRunCommand
+    map <Leader>vl :VimuxRunLastCommand<CR>
 
-" Inspect runner pane
-map <Leader>vi :VimuxInspectRunner<CR>
+    " Inspect runner pane
+    map <Leader>vi :VimuxInspectRunner<CR>
 
-" Close vim tmux runner opened by VimuxRunCommand
-map <Leader>vq :VimuxCloseRunner<CR>
+    " Close vim tmux runner opened by VimuxRunCommand
+    map <Leader>vq :VimuxCloseRunner<CR>
 
-" Interrupt any command running in the runner pane
-map <Leader>vx :VimuxInterruptRunner<CR>
+    " Interrupt any command running in the runner pane
+    map <Leader>vx :VimuxInterruptRunner<CR>
 
-" Zoom the runner pane (use <bind-key> z to restore runner pane)
-map <Leader>vz :call VimuxZoomRunner()<CR>
+    " Zoom the runner pane (use <bind-key> z to restore runner pane)
+    map <Leader>vz :call VimuxZoomRunner()<CR>
 
-function! VimuxSlime()
-    call VimuxSendText(@v)
-    call VimuxSendKeys("Enter")
-endfunction
+    function! VimuxSlime()
+        call VimuxSendText(@v)
+        call VimuxSendKeys("Enter")
+    endfunction
 
-" If text is selected, save it in the v buffer and send that buffer it to tmux
-vnoremap <LocalLeader>vs "vy :call VimuxSlime()<CR>
-nnoremap <leader>vs 0"vy$ :call VimuxSlime()<CR>
-nnoremap <leader>vs V"vy :call VimuxSlime()<CR>
+    " If text is selected, save it in the v buffer and send that buffer it to tmux
+    vnoremap <LocalLeader>vs "vy :call VimuxSlime()<CR>
+    nnoremap <leader>vs 0"vy$ :call VimuxSlime()<CR>
+    nnoremap <leader>vs V"vy :call VimuxSlime()<CR>
 
-" Select current paragraph and send it to tmux
-" nmap <LocalLeader>vs vip<LocalLeader>vs<CR>
+    " Select current paragraph and send it to tmux
+    " nmap <LocalLeader>vs vip<LocalLeader>vs<CR>
 
-let g:VimuxHeight = "30"
-let g:VimuxOrientation = "v"
+    let g:VimuxHeight = "30"
+    let g:VimuxOrientation = "v"
+endif
 " }}} VIMUX "
+" {{{ Neoterm, quasi-repl
+" if has('nvim')
+"     noremap <Leader>vh :let g:VimuxOrientation='h'<CR> :let g:VimuxHeight=50<CR>
+"     noremap <Leader>vv :let g:VimuxOrientation='v'<CR> :let g:VimuxHeight=50<CR>
+
+"     " Prompt for a command to run map
+"     map <Leader>vp :VimuxPromptCommand<CR>
+
+"     " Run last command executed by VimuxRunCommand
+"     map <Leader>vl :VimuxRunLastCommand<CR>
+
+"     " Zoom the tmux runner page
+"     map <Leader>vz :VimuxZoomRunner<CR>
+
+"     " Prompt for a command to run
+"     map <Leader>vp :VimuxPromptCommand<CR>
+
+"     " Run last command executed by VimuxRunCommand
+"     map <Leader>vl :VimuxRunLastCommand<CR>
+
+
+"     " If text is selected, save it in the v buffer and send that buffer it to tmux
+"     vnoremap <LocalLeader>vs "vy :call VimuxSlime()<CR>
+"     nnoremap <leader>vs :TREPLSend<CR>
+
+"     " Select current paragraph and send it to tmux
+"     " nmap <LocalLeader>vs vip<LocalLeader>vs<CR>
+
+" endif
+" }}}} Neoterm
 " {{{ exjumplist mappings "
 " nmap <C-I>  <Plug>(exjumplist-go-last)
 " nmap <C-O>  <Plug>(exjumplist-go-first)
@@ -682,25 +714,64 @@ autocmd FileType vimperator setlocal commentstring=\"\ %s
 " change status line colour if it is in insert mode {{{
 if version >= 700
     if has("autocmd")
-    augroup StatuslineColorGroup
-        " Clear autocmds for this group
-        autocmd!
-        " au InsertEnter * highlight StatusLine gui=NONE guifg=#FFFFFF guibg=#9D3569 ctermbg=127
-        au InsertEnter * highlight CursorLineNr guibg=#9D3569 ctermbg=235 ctermfg=33
+        augroup StatuslineColorGroup
+            " Clear autocmds for this group
+            autocmd!
+            " au InsertEnter * highlight StatusLine gui=NONE guifg=#FFFFFF guibg=#9D3569 ctermbg=127
+            au InsertEnter * highlight CursorLineNr guibg=#9D3569 ctermbg=235 ctermfg=33
 
 
-        au InsertLeave * highlight StatusLine gui=NONE guifg=#d6d6d6 guibg=#602040 ctermbg=53
-        au InsertLeave * highlight CursorLineNr guibg=#602040 ctermbg=53 ctermfg=232
+            au InsertLeave * highlight StatusLine gui=NONE guifg=#d6d6d6 guibg=#602040 ctermbg=53
+            au InsertLeave * highlight CursorLineNr guibg=#602040 ctermbg=53 ctermfg=232
 
 
 
 
-    augroup end
-    endif
+            augroup end
+            endif
+        endif
+        " }}}
+" {{{ neovim terminal settings
+if has ('nvim')
+    highlight TermCursor ctermfg=red guifg=red
+
+    " Window split settings
+    highlight TermCursor ctermfg=red guifg=red
+    set splitbelow
+    set splitright
+
+    " Terminal escape
+    tnoremap <Leader><ESC> <C-\><C-n>
+
+    autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
+
+endif " has('nvim')
+" {{{ neovim homegrown repl
+" http://vi.stackexchange.com/questions/2764/send-text-from-one-split-window-to-another/3390#3390
+if has('nvim')
+    augroup Terminal
+        au!
+        au TermOpen * let g:last_terminal_job_id = b:terminal_job_id
+    augroup END
+
+    function! REPLSend(lines)
+        call jobsend(g:last_terminal_job_id, add(a:lines, ''))
+    endfunction
+
+    command! REPLSendLine call REPLSend([getline('.')])
+
+    command! RE call REPLSend([@s])
+    nnoremap <silent> <leader>vs :REPLSendLine<cr>
+    vnoremap <silent> <leader>vs "sy:RE<cr>
+endif
+
+" }}}
+" }}} neovim terminal settings
+" {{{ neovim neomake
+if has('nvim')
+    autocmd! BufWritePost * Neomake
 endif
 " }}}
-
 noremap <BS> <Nop>
 
 let g:peekaboo_delay = 500
-
