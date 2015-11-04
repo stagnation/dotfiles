@@ -31,4 +31,5 @@ end
 
 set PATH /home/spill/.local/bin $PATH
 set PATH /home/spill/bin $PATH
+set fish_greeting
 xmodmap ~/.xmodmap

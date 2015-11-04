@@ -77,6 +77,9 @@ exec --no-startup-id redshift -l 59.33:18.07
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
 
+# faster key repeat
+exec --no-startup-id xset r rate 250 25
+
 # demnu2 required https://bitbucket.org/melek/dmenu2
 
 bindsym $mod+space exec dmenu_run -i -y 18 -o 0.8 -l 100 -w 300 -p "\$"
@@ -182,7 +185,7 @@ bindsym $mod+p exec $quickswitch -p
 bindsym $mod+Tab exec /home/spill/bin/gits/quickswitch-for-i3/quickswitch.py
 # bindsym $mod+§ exec /home/spill/bin/quickswitch.py
 
-bindsym $mod+i exec /home/spill/bin/streampy
+bindsym $mod+i exec "mpv $(xclip -o) --ytdl-format=best"
 # bindsym $mod+o exec /home/spill/bin/playclip
 
 # move focused container to workspace
