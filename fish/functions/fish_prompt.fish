@@ -37,5 +37,5 @@ function fish_prompt
     set git_status " $git_status"
   end
 
-  echo -n (_remote_hostname) $cwd$cyan$git_status$normal :   
+  echo -n (_remote_hostname) $cwd$cyan$git_status$normal" "
 end
