@@ -128,7 +128,7 @@ set shiftwidth=4          "amount of spaces for tab to insert
 set autoindent            "automatically set the indent when creatig lines
 set ruler                 "show cursor position information in statusline
 set number                "show line numbers
-set wrap                  "wrap text
+set nowrap                  "do not wrap text
 set linebreak             "preserves word when wrapping
 set ttyfast               "'smooth' scrolling
 set mouse=a               "enable mouse in terminals that support it
@@ -710,6 +710,11 @@ autocmd FileType make setlocal noexpandtab
 noremap <leader>my :!python3 %<cr>
 
 autocmd FileType vimperator setlocal commentstring=\"\ %s
+
+autocmd FileType c setlocal commentstring=\/\/\ %s
+autocmd FileType c++ setlocal commentstring=\/\/\ %s
+
+autocmd FileType c++ setlocal foldmethod=syntax
 " }}} Filetype specific mappings "
 " change status line colour if it is in insert mode {{{
 if version >= 700

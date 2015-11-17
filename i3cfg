@@ -185,7 +185,7 @@ bindsym $mod+p exec $quickswitch -p
 bindsym $mod+Tab exec /home/spill/bin/gits/quickswitch-for-i3/quickswitch.py
 # bindsym $mod+§ exec /home/spill/bin/quickswitch.py
 
-bindsym $mod+i exec "mpv $(xclip -o) --ytdl-format=best"
+bindsym $mod+i exec mpvclip
 # bindsym $mod+o exec /home/spill/bin/playclip
 
 # move focused container to workspace
@@ -327,9 +327,9 @@ for_window [title="^ioquake3$"] fullscreen
 
 
 #larger firefox/vimperator border
-for_window [class="Firefox"] border pixel 2
+for_window [class="Firefox"] border pixel 3
 
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 3
 
 # vim-like marks
 # bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
