@@ -32,8 +32,9 @@ echo "Moving any existing dotfiles from ~ to $olddir"
 mv ~/.$file ~/$bakdir/
 echo "Creating symlink to $file in home directory."
 ln -s $dir/$file ~/.$file
+done
 
-echo "Moving any existing dotfiles from ~ to $olddir"
+echo "Moving existing i3 config from ~/.i3/config to $olddir"
 mv ~/.i3/config ~/$bakdir/
 echo "Creating symlink to i3/config in home directory."
 ln -s $dir/i3cfg ~/.i3/config
@@ -73,6 +74,10 @@ else
     ln -s ~/bin/gits/urxvt-perls ~/.urxvt/ext
 fi;
 
+echo "installing vim-plug"
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 echo "Creating vim directory structure"
 mkdir ~/.vim/backup -p
 mkdir ~/.vim/colors -p
@@ -80,10 +85,10 @@ mkdir ~/.config/backup -p
 mkdir ~/.config/colors -p
 
 echo "installing vim colorscheme"
-ln -s $dir/vimcols/lakris.vim ~/.vim/colors/lakris.vim
-ln -s $dir/vimcols/lakris256.vim ~/.vim/colors/lakris256.vim
-ln -s $dir/vimcols/lakris.vim ~/.config/colors/lakris.vim
-ln -s $dir/vimcols/lakris256.vim ~/.config/colors/lakris256.vim
+cp $dir/vimcols/lakris.vim ~/.vim/colors/lakris.vim
+cp $dir/vimcols/lakris256.vim ~/.vim/colors/lakris256.vim
+cp $dir/vimcols/lakris.vim ~/.config/colors/lakris.vim
+cp $dir/vimcols/lakris256.vim ~/.config/colors/lakris256.vim
 echo "source ~/.vimrc" >> ~/.config/nvim/init.vim
 
 echo "Creating symlinks for ncmpcpp"
@@ -97,4 +102,3 @@ fi;
 
 
 
-done
