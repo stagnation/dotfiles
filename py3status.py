@@ -15,14 +15,14 @@ status.register("clock",
 
 # Shows your CPU temperature, if you have a Intel CPU
 # status.register("temp",
-#     format="{temp:.0f}°C",)
+#     format="{temp:.0f}C",)
 
 # The battery monitor has many formatting options, see README for details
 
 # This would look like this, when discharging (or charging)
-# ↓14.22W 56.15% [77.81%] 2h:41m
+# 14.22W 56.15% [77.81%] 2h:41m
 # And like this if full:
-# =14.22W 100.0% [91.21%]
+# 14.22W 100.0% [91.21%]
 #
 # This would also display a desktop notification (via D-Bus) if the percentage
 # goes below 5 percent while discharging. The block will also color RED.
@@ -33,8 +33,8 @@ status.register("clock",
 #     alert=True,
 #     alert_percentage=10,
 #     status={
-#         "DIS": "↓",
-#         "CHR": "↑",
+#         "DIS": "",
+#         "CHR": "",
 #         "FULL": "=",
 #     },)
 
@@ -93,14 +93,14 @@ status.register("network",
 # Note: requires libpulseaudio from PyPI
 status.register("pulseaudio",
 # status.register("alsa",
-    format="♪ {volume}",
+    format="local {volume}%",
     color_muted="#555555",
     color_unmuted="#6aa66a",
     )
 
 # Shows mpd status
 # Format:
-# Cloud connected▶Reroute to Remain
+# Cloud connectedReroute to Remain
 # ^ looks like in flames?
 status.register("mpd",
     format="{artist} : {title}",
@@ -111,9 +111,20 @@ status.register("mpd",
     hide_inactive=True,
     # msg_error="no mpd",
     status={
-        "pause": "▷",
-        "play": "▶",
-        "stop": "◾",
+        "pause": "",
+        "play": "",
+        "stop": "",
     },)
+
+status.register("shell",
+        command="/home/spill/dotfiles/bin/mpdvol.sh",
+        color="#6aa66a",
+        interval=1,
+        on_upscroll="mpc -h 192.168.1.8 volume +2",
+        on_downscroll="mpc -h 192.168.1.8 volume -2",
+        on_rightclick="mpc -h 192.168.1.8 pause",
+        on_leftclick="mpc -h 192.168.1.8 play",
+        )
+
 
 status.run()
