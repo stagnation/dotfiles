@@ -3,5 +3,6 @@
 	name = Nils Wireklint
 [core]
 	editor = vim
+	autocrlf = input
 [push]
 	default = simple

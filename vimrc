@@ -120,6 +120,7 @@ nnoremap g$ $
 " {{{ Settings
 syntax enable             "enables syntax highlighting
 set background=dark       "required for colorschemes
+set fileformat=unix       "proper unix linebreaks
 filetype plugin indent on "react on filetyps with plugins and syntax
 set scrolloff=4           "minimum number of lines to display around cursor
 set hlsearch              "highlight search results
