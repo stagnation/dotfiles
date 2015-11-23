@@ -39,9 +39,11 @@ if has ('nvim')
 endif
 
 " explicitly load rsi so ä can be unmapped
+
 call plug#load('vim-rsi')
-call plug#end()
 silent! iunmap ä
+
+call plug#end()
 
 " }}} Initialization "
 " " TODO
@@ -137,7 +139,7 @@ set incsearch             "incremental searching as soon as typing begins
 set ignorecase            "ignore case when searching
 set smartcase             "will override ignore case if searching w/ diff cases
 set modeline              "use modelines ??????
-set ttimeoutlen=150        "faster twitching for everything
+set ttimeoutlen=5        "faster twitching for everything
 set virtualedit=block     "allow cursor to be moved into empty space in visual
 set laststatus=2          "always show status line
 if !has('nvim')
