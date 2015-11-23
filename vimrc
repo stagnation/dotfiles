@@ -414,8 +414,10 @@ nnoremap ]g :GitGutterNextHunk<CR>
 nnoremap [g :GitGutterPrevHunk<CR>
 
 "quicklist shortcut
-noremap <leader>qn :cn<CR>
-noremap <leader>qp :cp<CR>
+nnoremap <leader>qn :cn<CR>
+nnoremap <leader>qp :cp<CR>
+nnoremap ]q :cn<CR>
+nnoremap [q :cp<CR>
 " }}} Jump binds "
 " {{{ Fugitive "
 "populate quicklist with commited version of current file - fugitive
