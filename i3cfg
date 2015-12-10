@@ -43,9 +43,9 @@ client.urgent           #2f343a    #900000  #ffffff #900000
 # client.background       #123456
 
 # start a terminal
-bindsym $mod+Return exec /usr/bin/urxvt
+bindsym $mod+Shift+Return exec /usr/bin/urxvt
 # start a terminal with same working dir, using https://github.com/schischi-a/xcwd
-bindsym $mod+Shift+Return exec ~/bin/newterm.sh
+bindsym $mod+Return exec ~/bin/newterm.sh
 bindsym $mod+Control+Return exec ~/bin/newranger.sh
 
 # move window to new empty workspace
