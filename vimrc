@@ -1,6 +1,8 @@
 " vim: foldmethod=marker foldlevel=0 foldcolumn=3
 " Initialization, plug manager {{{ "
 " Fix for my shell, otherwise some scripts break
+
+" :s#github.com/#Plug '#<cr>:s#$#'#<cr>:nohlsearch<cr>
 if $SHELL =~ 'bin/fish'
     set shell=/bin/sh
 endif
@@ -30,6 +32,7 @@ Plug 'mhinz/vim-startify'
 Plug 'pelodelfuego/vim-swoop'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kshenoy/vim-signature'
+Plug 'idbrii/vim-hiinterestingword'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-commentary'
 if has ('nvim')
@@ -372,6 +375,8 @@ inoremap ^L ^X^L
 
 " gi inserts text from last insertion position.
 inoremap ^} <Esc>b5<C-}>ea
+
+inoremap <c-]> <esc>mzb<c-w>}`za
 " }}} Insert Mode maps "
 " {{{ file and shell stuff
 "warning when file is chenged
@@ -666,6 +671,54 @@ if !has ('nvim')
     let g:VimuxOrientation = "v"
 endif
 " }}} VIMUX "
+" {{{ exjumplist mappings "
+" nmap <C-I>  <Plug>(exjumplist-go-last)
+" nmap <C-O>  <Plug>(exjumplist-go-first)
+
+nmap <leader>ji  <Plug>(exjumplist-go-last)
+nmap <leader>jo  <Plug>(exjumplist-go-first)
+
+" nmap <C-M-i>  <Plug>(exjumplist-go-last)
+" nmap <C-M-o>  <Plug>(exjumplist-go-first)
+" nmap <M-)>  <Plug>(exjumplist-next-buffer)
+" nmap <M-(>  <Plug>(exjumplist-previous-buffer)
+"
+" }}} exjumplist mappings "
+" {{{ Filetype specific mappings "
+if has("autocmd")
+    autocmd FileType make setlocal noexpandtab
+
+    autocmd FileType python nnoremap <leader>my :!python3 %<cr>
+
+    autocmd FileType vimperator setlocal commentstring=\"\ %s
+    autocmd FileType vim setlocal foldmethod=marker
+
+    autocmd FileType c setlocal commentstring=\/\/\ %s
+    autocmd FileType cpp setlocal commentstring=\/\/\ %s
+    autocmd FileType cpp setlocal foldmethod=syntax
+endif
+
+" }}} Filetype specific mappings "
+" change status line colour if it is in insert mode {{{
+if version >= 700
+    if has("autocmd")
+        augroup StatuslineColorGroup
+            " Clear autocmds for this group
+            autocmd!
+            " au InsertEnter * highlight StatusLine gui=NONE guifg=#FFFFFF guibg=#9D3569 ctermbg=127
+            au InsertEnter * highlight CursorLineNr guibg=#9D3569 ctermbg=235 ctermfg=33
+
+
+            au InsertLeave * highlight StatusLine gui=NONE guifg=#d6d6d6 guibg=#602040 ctermbg=53
+            au InsertLeave * highlight CursorLineNr guibg=#602040 ctermbg=53 ctermfg=232
+
+
+
+
+            augroup end
+            endif
+        endif
+        " }}}
 " {{{ Neoterm, quasi-repl
 " if has('nvim')
 "     noremap <Leader>vh :let g:VimuxOrientation='h'<CR> :let g:VimuxHeight=50<CR>
@@ -694,53 +747,11 @@ endif
 "     " Select current paragraph and send it to tmux
 "     " nmap <LocalLeader>vs vip<LocalLeader>vs<CR>
 
+    nnoremap <silent> <leader>vs :TREPLSend<cr>
+    vnoremap <silent> <leader>vs :TREPLSend<cr>
+    let g:neoterm_size=45
 " endif
 " }}}} Neoterm
-" {{{ exjumplist mappings "
-" nmap <C-I>  <Plug>(exjumplist-go-last)
-" nmap <C-O>  <Plug>(exjumplist-go-first)
-
-nmap <leader>ji  <Plug>(exjumplist-go-last)
-nmap <leader>jo  <Plug>(exjumplist-go-first)
-
-" nmap <C-M-i>  <Plug>(exjumplist-go-last)
-" nmap <C-M-o>  <Plug>(exjumplist-go-first)
-" nmap <M-)>  <Plug>(exjumplist-next-buffer)
-" nmap <M-(>  <Plug>(exjumplist-previous-buffer)
-"
-" }}} exjumplist mappings "
-" {{{ Filetype specific mappings "
-autocmd FileType make setlocal noexpandtab
-
-noremap <leader>my :!python3 %<cr>
-
-autocmd FileType vimperator setlocal commentstring=\"\ %s
-
-autocmd FileType c setlocal commentstring=\/\/\ %s
-autocmd FileType c++ setlocal commentstring=\/\/\ %s
-
-autocmd FileType c++ setlocal foldmethod=syntax
-" }}} Filetype specific mappings "
-" change status line colour if it is in insert mode {{{
-if version >= 700
-    if has("autocmd")
-        augroup StatuslineColorGroup
-            " Clear autocmds for this group
-            autocmd!
-            " au InsertEnter * highlight StatusLine gui=NONE guifg=#FFFFFF guibg=#9D3569 ctermbg=127
-            au InsertEnter * highlight CursorLineNr guibg=#9D3569 ctermbg=235 ctermfg=33
-
-
-            au InsertLeave * highlight StatusLine gui=NONE guifg=#d6d6d6 guibg=#602040 ctermbg=53
-            au InsertLeave * highlight CursorLineNr guibg=#602040 ctermbg=53 ctermfg=232
-
-
-
-
-            augroup end
-            endif
-        endif
-        " }}}
 " {{{ neovim terminal settings
 if has ('nvim')
     highlight TermCursor ctermfg=red guifg=red
@@ -771,8 +782,8 @@ if has('nvim')
     command! REPLSendLine call REPLSend([getline('.')])
 
     command! RE call REPLSend([@s])
-    nnoremap <silent> <leader>vs :REPLSendLine<cr>
-    vnoremap <silent> <leader>vs "sy:RE<cr>
+    " nnoremap <silent> <leader>vs :REPLSendLine<cr>
+    " vnoremap <silent> <leader>vs "sy:RE<cr>
 endif
 
 " }}}
@@ -782,6 +793,8 @@ if has('nvim')
     autocmd! BufWritePost * Neomake
 endif
 " }}}
-noremap <BS> <Nop>
+nnoremap <BS> <Nop>
+" something sets / to ' ' in my rc
+let @/=''
 
 let g:peekaboo_delay = 500
