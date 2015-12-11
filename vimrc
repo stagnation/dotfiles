@@ -36,8 +36,8 @@ Plug 'idbrii/vim-hiinterestingword'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-commentary'
 if has ('nvim')
-    Plug 'critiqjo/lldb.nvim'
     Plug 'kassio/neoterm'
+    Plug 'critiqjo/lldb.nvim'
     Plug 'benekastah/neomake'
 endif
 
@@ -721,32 +721,6 @@ if version >= 700
         " }}}
 " {{{ Neoterm, quasi-repl
 " if has('nvim')
-"     noremap <Leader>vh :let g:VimuxOrientation='h'<CR> :let g:VimuxHeight=50<CR>
-"     noremap <Leader>vv :let g:VimuxOrientation='v'<CR> :let g:VimuxHeight=50<CR>
-
-"     " Prompt for a command to run map
-"     map <Leader>vp :VimuxPromptCommand<CR>
-
-"     " Run last command executed by VimuxRunCommand
-"     map <Leader>vl :VimuxRunLastCommand<CR>
-
-"     " Zoom the tmux runner page
-"     map <Leader>vz :VimuxZoomRunner<CR>
-
-"     " Prompt for a command to run
-"     map <Leader>vp :VimuxPromptCommand<CR>
-
-"     " Run last command executed by VimuxRunCommand
-"     map <Leader>vl :VimuxRunLastCommand<CR>
-
-
-"     " If text is selected, save it in the v buffer and send that buffer it to tmux
-"     vnoremap <LocalLeader>vs "vy :call VimuxSlime()<CR>
-"     nnoremap <leader>vs :TREPLSend<CR>
-
-"     " Select current paragraph and send it to tmux
-"     " nmap <LocalLeader>vs vip<LocalLeader>vs<CR>
-
     nnoremap <silent> <leader>vs :TREPLSend<cr>
     vnoremap <silent> <leader>vs :TREPLSend<cr>
     let g:neoterm_size=45
