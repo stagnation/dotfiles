@@ -76,15 +76,18 @@ fi;
 echo "Creating vim directory structure"
 mkdir ~/.vim/backup -p
 mkdir ~/.vim/colors -p
-mkdir ~/.config/backup -p
-mkdir ~/.config/colors -p
+mkdir ~/.config/nvim/backup -p
+mkdir ~/.config/nvim/colors -p
 
 echo "installing vim colorscheme"
+# TODO these might have to be copied to work
 ln -s $dir/vimcols/lakris.vim ~/.vim/colors/lakris.vim
 ln -s $dir/vimcols/lakris256.vim ~/.vim/colors/lakris256.vim
-ln -s $dir/vimcols/lakris.vim ~/.config/colors/lakris.vim
-ln -s $dir/vimcols/lakris256.vim ~/.config/colors/lakris256.vim
-echo "source ~/.vimrc" >> ~/.config/nvim/init.vim
+ln -s $dir/vimcols/lakris.vim ~/.config/nvim/colors/lakris.vim
+ln -s $dir/vimcols/lakris256.vim ~/.config/nvim/colors/lakris256.vim
+
+ln -s $dir/vimrc ~/.config/nvim/init.vim
+
 
 echo "Creating symlinks for ncmpcpp"
 if [[ -s ~/.ncmpcpp ]] ; then
