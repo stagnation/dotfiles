@@ -8,7 +8,7 @@
 ########## Variables
 
 dir=~/dotfiles # dotfiles directory
-olddir=~/bak_dotfiles# old dotfiles backup directory
+olddir=~/bak_dotfiles # old dotfiles backup directory
 files="gitconfig Xdefaults Xmodmap bash_profile vimrc tmux.conf gvimrc vimperatorrc ctags"
 # list of files/folders to symlink in homedir
 
@@ -32,6 +32,7 @@ echo "Moving any existing dotfiles from ~ to $olddir"
 mv ~/.$file ~/$bakdir/
 echo "Creating symlink to $file in home directory."
 ln -s $dir/$file ~/.$file
+done
 
 echo "Moving any existing dotfiles from ~ to $olddir"
 mv ~/.i3/config ~/$bakdir/
@@ -98,6 +99,5 @@ else
     ln -s $dir/ncmpkeys ~/.ncmpcpp/keys
 fi;
 
-
-
-done
+ln -s $dir/mpv.conf ~/.config/mpv/mpv.conf
+ln -s $dir/input.conf ~/.config/mpv/input.conf
