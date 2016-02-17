@@ -21,7 +21,8 @@ Plug 'eparreno/vim-matchit'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'scrooloose/syntastic/'
 Plug 'majutsushi/tagbar'
-Plug 'bronson/vim-trailing-whitespace'
+Plug 'milkypostman/vim-togglelist'
+" Plug 'bronson/vim-trailing-whitespace'
 Plug 'vim-scripts/camelcasemotion'
 Plug 'Osse/double-tap'
 Plug 'wellle/targets.vim'
@@ -35,10 +36,14 @@ Plug 'kshenoy/vim-signature'
 Plug 'idbrii/vim-hiinterestingword'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-commentary'
+Plug 'wellle/visual-split.vim'
+Plug 'kana/vim-operator-user'
+Plug 'haya14busa/vim-operator-flashy'
 if has ('nvim')
     Plug 'kassio/neoterm'
     Plug 'critiqjo/lldb.nvim'
     Plug 'benekastah/neomake'
+    Plug 'brettanomyces/nvim-editcommand'
 endif
 
 " explicitly load rsi so ä can be unmapped
@@ -91,9 +96,15 @@ noremap <leader>y "+y
 noremap <leader>Y "+y$
 noremap <leader>p "+p
 noremap <leader>P "+P
+noremap <leader>d "+d
+noremap <leader>D "+D
 
 " Y consistent with D
 nnoremap Y y$
+
+" operator flashy
+map y <Plug>(operator-flashy)
+nmap Y <Plug>(operator-flashy)$
 
 "center window after jumping forward
 nnoremap n nzz
@@ -111,14 +122,9 @@ command! WQ wq
 "move by row rather than line
 nnoremap j gj
 nnoremap k gk
-nnoremap 0 g0
-"with better line break handling these sohuldn't matter anyhow...
-nnoremap $ g$
 "reverse swap
 nnoremap gj j
 nnoremap gk k
-nnoremap g0 0
-nnoremap g$ $
 " }}} Utility rebinds "
 " {{{ Settings
 syntax enable             "enables syntax highlighting
@@ -377,6 +383,35 @@ inoremap ^L ^X^L
 inoremap ^} <Esc>b5<C-}>ea
 
 inoremap <c-]> <esc>mzb<c-w>}`za
+" {{{ align on last character
+function! CharsNeeded(char)
+  let s:cur_line = line(".")
+  let s:cur_col  =  col(".")
+  let s:i   =  0
+  let s:pos = -1
+  while s:pos == -1
+    let s:i += 1
+    let s:line = getline(s:cur_line - s:i)
+    let s:pos  = stridx(s:line, a:char, s:cur_col)
+    if s:i == s:cur_line
+      return -1
+    endif
+  endwhile
+  return s:pos - s:cur_col + 1
+endfunction
+
+function! InsertSpaces()
+  let s:char = getline(".")[-1:]
+  let s:nspace = CharsNeeded(s:char)
+  if s:nspace > -1
+    call setline(".", getline(".")[:-2] . repeat(" ", s:nspace) . s:char)
+  else
+    echom "No `" . s:char . "' found in the previous lines."
+  endif
+endfunction
+
+inoremap <silent> <C-g> <C-[>:call InsertSpaces()<CR>A
+" }}}
 " }}} Insert Mode maps "
 " {{{ file and shell stuff
 "warning when file is chenged
@@ -417,6 +452,9 @@ nnoremap <leader>gn :GitGutterNextHunk<CR>
 nnoremap <leader>gp :GitGutterPrevHunk<CR>
 nnoremap ]g :GitGutterNextHunk<CR>
 nnoremap [g :GitGutterPrevHunk<CR>
+
+"git conflic marker search
+nnoremap <leader>gc /^.*\(<<<\\|====\\|>>>>\).*$<cr>
 
 "quicklist shortcut
 nnoremap <leader>qn :cn<CR>
@@ -740,6 +778,8 @@ if has ('nvim')
 
     autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
+    tmap <c-x> <Plug>EditCommand
+
 endif " has('nvim')
 " {{{ neovim homegrown repl
 " http://vi.stackexchange.com/questions/2764/send-text-from-one-split-window-to-another/3390#3390
@@ -772,3 +812,5 @@ nnoremap <BS> <Nop>
 let @/=''
 
 let g:peekaboo_delay = 500
+
+" ]P eller något för paste nästa rad från "*
