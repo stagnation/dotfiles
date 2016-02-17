@@ -80,6 +80,9 @@ bindsym $mod+d exec dmenu_run
 # faster key repeat
 exec --no-startup-id xset r rate 250 25
 
+# set background
+exec --no-startup-id feh --bg-center /home/spill/Pictures/pixelsort.jpg
+
 # demnu2 required https://bitbucket.org/melek/dmenu2
 
 bindsym $mod+space exec dmenu_run -i -y 18 -o 0.8 -l 100 -w 300 -p "\$"

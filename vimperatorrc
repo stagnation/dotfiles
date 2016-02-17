@@ -69,4 +69,8 @@ map <Leader>t :set gui=invmenu,invnavigation<cr>
 map <leader>k :set gui=invmenu,invnavigation<cr>
 map <leader>l :lowlight<CR>
 
+" set! extensions.kb.findKey=""
+" set! extensions.kb.historyShowKey=""
+
+" :help nextpattern
 " vim: ft=vimperator

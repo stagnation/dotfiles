@@ -52,3 +52,5 @@ syns fint när man byer till tom workspace
 hasktags wrapper som ignorerar --option
 
 tmux: undertryck urgent
+
+vim: tagbar fattar inte julia ctags

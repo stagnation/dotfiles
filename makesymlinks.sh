@@ -101,3 +101,8 @@ fi;
 
 ln -s $dir/mpv.conf ~/.config/mpv/mpv.conf
 ln -s $dir/input.conf ~/.config/mpv/input.conf
+
+echo "Cloning vimperator plugins to $dir"
+cd $dir
+git clone https://github.com/ervandew/vimperator-plugins
+
