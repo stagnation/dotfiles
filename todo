@@ -1,0 +1,5 @@
+alarm/klocka i i3, som pizzatiemr, gärna med scroll setting i baren.
+alarm/timer i terminal $alarm -x 20 $alarm -t 20:00
+vim - quickscope
+vim - reddit saves
+vimperator - ;t genererar en prompt med länk frwn hint, kan den skrivas om till program X?

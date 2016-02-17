@@ -1,0 +1,37 @@
+firefox
+	-vimperator
+	-treestyletabbar
+
+mosh
+automake
+vim
+fish-shell
+i3
+tmux
+
+apt-file
+apt-file search Xlib.h
+
+dmenu2:
+libx11-dev
+libxinerama-dev
+libxft-dev
+
+i3pystatus:
+python3-pip
+pip3 install i3pystatus
+pip3 install netifaces
+pip3 install colour
+pip3 install basiciw
+	apt-get install libiw-dev
+
+urxvt-perls:
+mkdir ~/.urxvt/ext/ -p
+
+redshift
+redshift-gtk
+
+xbacklight
+
+compile vim from source, mainly to get +clipboard
+https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
