@@ -106,3 +106,6 @@ echo "Cloning vimperator plugins to $dir"
 cd $dir
 git clone https://github.com/ervandew/vimperator-plugins
 
+
+echo "Creating symlinks for mopidy"
+ln -s $dir/mopidy.conf ~/.config/mopidy/
