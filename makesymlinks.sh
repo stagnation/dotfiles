@@ -8,8 +8,8 @@
 ########## Variables
 
 dir=~/dotfiles # dotfiles directory
-olddir=~/bak_dotfiles# old dotfiles backup directory
-files="gitconfig Xdefaults Xmodmap bash_profile vimrc tmux.conf gvimrc vimperatorrc"
+olddir=~/bak_dotfiles # old dotfiles backup directory
+files="gitconfig Xdefaults Xmodmap bash_profile vimrc tmux.conf gvimrc vimperatorrc ctags"
 # list of files/folders to symlink in homedir
 
 ##########
@@ -81,8 +81,8 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 echo "Creating vim directory structure"
 mkdir ~/.vim/backup -p
 mkdir ~/.vim/colors -p
-mkdir ~/.config/backup -p
-mkdir ~/.config/colors -p
+mkdir ~/.config/nvim/backup -p
+mkdir ~/.config/nvim/colors -p
 
 echo "installing vim colorscheme"
 cp $dir/vimcols/lakris.vim ~/.vim/colors/lakris.vim
@@ -100,5 +100,10 @@ else
     ln -s $dir/ncmpkeys ~/.ncmpcpp/keys
 fi;
 
+ln -s $dir/mpv.conf ~/.config/mpv/mpv.conf
+ln -s $dir/input.conf ~/.config/mpv/input.conf
 
+echo "Cloning vimperator plugins to $dir"
+cd $dir
+git clone https://github.com/ervandew/vimperator-plugins
 

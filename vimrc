@@ -1,13 +1,15 @@
 " vim: foldmethod=marker foldlevel=0 foldcolumn=3
 " Initialization, plug manager {{{ "
 " Fix for my shell, otherwise some scripts break
+
+" :s#github.com/#Plug '#<cr>:s#$#'#<cr>:nohlsearch<cr>
 if $SHELL =~ 'bin/fish'
     set shell=/bin/sh
 endif
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-rsi', { 'on': [] }
 Plug 'spiiph/vim-space'
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/vim-easy-align'
 Plug 'whatyouhide/vim-lengthmatters'
 Plug 'vim-scripts/Indent-Guides'
@@ -19,7 +21,8 @@ Plug 'eparreno/vim-matchit'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'scrooloose/syntastic/'
 Plug 'majutsushi/tagbar'
-Plug 'bronson/vim-trailing-whitespace'
+Plug 'milkypostman/vim-togglelist'
+" Plug 'bronson/vim-trailing-whitespace'
 Plug 'vim-scripts/camelcasemotion'
 Plug 'Osse/double-tap'
 Plug 'wellle/targets.vim'
@@ -30,18 +33,25 @@ Plug 'mhinz/vim-startify'
 Plug 'pelodelfuego/vim-swoop'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kshenoy/vim-signature'
+Plug 'idbrii/vim-hiinterestingword'
 Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-commentary'
+Plug 'wellle/visual-split.vim'
+Plug 'kana/vim-operator-user'
+Plug 'haya14busa/vim-operator-flashy'
 if has ('nvim')
-    Plug 'critiqjo/lldb.nvim'
     Plug 'kassio/neoterm'
+    Plug 'critiqjo/lldb.nvim'
     Plug 'benekastah/neomake'
+    Plug 'brettanomyces/nvim-editcommand'
 endif
 
 " explicitly load rsi so ä can be unmapped
+
 call plug#load('vim-rsi')
-call plug#end()
 silent! iunmap ä
+
+call plug#end()
 
 " }}} Initialization "
 " " TODO
@@ -86,9 +96,15 @@ noremap <leader>y "+y
 noremap <leader>Y "+y$
 noremap <leader>p "+p
 noremap <leader>P "+P
+noremap <leader>d "+d
+noremap <leader>D "+D
 
 " Y consistent with D
 nnoremap Y y$
+
+" operator flashy
+map y <Plug>(operator-flashy)
+nmap Y <Plug>(operator-flashy)$
 
 "center window after jumping forward
 nnoremap n nzz
@@ -106,18 +122,14 @@ command! WQ wq
 "move by row rather than line
 nnoremap j gj
 nnoremap k gk
-nnoremap 0 g0
-"with better line break handling these sohuldn't matter anyhow...
-nnoremap $ g$
 "reverse swap
 nnoremap gj j
 nnoremap gk k
-nnoremap g0 0
-nnoremap g$ $
 " }}} Utility rebinds "
 " {{{ Settings
 syntax enable             "enables syntax highlighting
 set background=dark       "required for colorschemes
+set fileformat=unix       "proper unix linebreaks
 filetype plugin indent on "react on filetyps with plugins and syntax
 set scrolloff=4           "minimum number of lines to display around cursor
 set hlsearch              "highlight search results
@@ -137,7 +149,7 @@ set incsearch             "incremental searching as soon as typing begins
 set ignorecase            "ignore case when searching
 set smartcase             "will override ignore case if searching w/ diff cases
 set modeline              "use modelines ??????
-set ttimeoutlen=150        "faster twitching for everything
+set ttimeoutlen=5        "faster twitching for everything
 set virtualedit=block     "allow cursor to be moved into empty space in visual
 set laststatus=2          "always show status line
 if !has('nvim')
@@ -369,6 +381,37 @@ inoremap ^L ^X^L
 
 " gi inserts text from last insertion position.
 inoremap ^} <Esc>b5<C-}>ea
+
+inoremap <c-]> <esc>mzb<c-w>}`za
+" {{{ align on last character
+function! CharsNeeded(char)
+  let s:cur_line = line(".")
+  let s:cur_col  =  col(".")
+  let s:i   =  0
+  let s:pos = -1
+  while s:pos == -1
+    let s:i += 1
+    let s:line = getline(s:cur_line - s:i)
+    let s:pos  = stridx(s:line, a:char, s:cur_col)
+    if s:i == s:cur_line
+      return -1
+    endif
+  endwhile
+  return s:pos - s:cur_col + 1
+endfunction
+
+function! InsertSpaces()
+  let s:char = getline(".")[-1:]
+  let s:nspace = CharsNeeded(s:char)
+  if s:nspace > -1
+    call setline(".", getline(".")[:-2] . repeat(" ", s:nspace) . s:char)
+  else
+    echom "No `" . s:char . "' found in the previous lines."
+  endif
+endfunction
+
+inoremap <silent> <C-g> <C-[>:call InsertSpaces()<CR>A
+" }}}
 " }}} Insert Mode maps "
 " {{{ file and shell stuff
 "warning when file is chenged
@@ -410,9 +453,14 @@ nnoremap <leader>gp :GitGutterPrevHunk<CR>
 nnoremap ]g :GitGutterNextHunk<CR>
 nnoremap [g :GitGutterPrevHunk<CR>
 
+"git conflic marker search
+nnoremap <leader>gc /^.*\(<<<\\|====\\|>>>>\).*$<cr>
+
 "quicklist shortcut
-noremap <leader>qn :cn<CR>
-noremap <leader>qp :cp<CR>
+nnoremap <leader>qn :cn<CR>
+nnoremap <leader>qp :cp<CR>
+nnoremap ]q :cn<CR>
+nnoremap [q :cp<CR>
 " }}} Jump binds "
 " {{{ Fugitive "
 "populate quicklist with commited version of current file - fugitive
@@ -661,36 +709,6 @@ if !has ('nvim')
     let g:VimuxOrientation = "v"
 endif
 " }}} VIMUX "
-" {{{ Neoterm, quasi-repl
-" if has('nvim')
-"     noremap <Leader>vh :let g:VimuxOrientation='h'<CR> :let g:VimuxHeight=50<CR>
-"     noremap <Leader>vv :let g:VimuxOrientation='v'<CR> :let g:VimuxHeight=50<CR>
-
-"     " Prompt for a command to run map
-"     map <Leader>vp :VimuxPromptCommand<CR>
-
-"     " Run last command executed by VimuxRunCommand
-"     map <Leader>vl :VimuxRunLastCommand<CR>
-
-"     " Zoom the tmux runner page
-"     map <Leader>vz :VimuxZoomRunner<CR>
-
-"     " Prompt for a command to run
-"     map <Leader>vp :VimuxPromptCommand<CR>
-
-"     " Run last command executed by VimuxRunCommand
-"     map <Leader>vl :VimuxRunLastCommand<CR>
-
-
-"     " If text is selected, save it in the v buffer and send that buffer it to tmux
-"     vnoremap <LocalLeader>vs "vy :call VimuxSlime()<CR>
-"     nnoremap <leader>vs :TREPLSend<CR>
-
-"     " Select current paragraph and send it to tmux
-"     " nmap <LocalLeader>vs vip<LocalLeader>vs<CR>
-
-" endif
-" }}}} Neoterm
 " {{{ exjumplist mappings "
 " nmap <C-I>  <Plug>(exjumplist-go-last)
 " nmap <C-O>  <Plug>(exjumplist-go-first)
@@ -705,16 +723,19 @@ nmap <leader>jo  <Plug>(exjumplist-go-first)
 "
 " }}} exjumplist mappings "
 " {{{ Filetype specific mappings "
-autocmd FileType make setlocal noexpandtab
+if has("autocmd")
+    autocmd FileType make setlocal noexpandtab
 
-noremap <leader>my :!python3 %<cr>
+    autocmd FileType python nnoremap <leader>my :!python3 %<cr>
 
-autocmd FileType vimperator setlocal commentstring=\"\ %s
+    autocmd FileType vimperator setlocal commentstring=\"\ %s
+    autocmd FileType vim setlocal foldmethod=marker
 
-autocmd FileType c setlocal commentstring=\/\/\ %s
-autocmd FileType c++ setlocal commentstring=\/\/\ %s
+    autocmd FileType c setlocal commentstring=\/\/\ %s
+    autocmd FileType cpp setlocal commentstring=\/\/\ %s
+    autocmd FileType cpp setlocal foldmethod=syntax
+endif
 
-autocmd FileType c++ setlocal foldmethod=syntax
 " }}} Filetype specific mappings "
 " change status line colour if it is in insert mode {{{
 if version >= 700
@@ -736,6 +757,13 @@ if version >= 700
             endif
         endif
         " }}}
+" {{{ Neoterm, quasi-repl
+" if has('nvim')
+    nnoremap <silent> <leader>vs :TREPLSend<cr>
+    vnoremap <silent> <leader>vs :TREPLSend<cr>
+    let g:neoterm_size=45
+" endif
+" }}}} Neoterm
 " {{{ neovim terminal settings
 if has ('nvim')
     highlight TermCursor ctermfg=red guifg=red
@@ -749,6 +777,8 @@ if has ('nvim')
     tnoremap <Leader><ESC> <C-\><C-n>
 
     autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
+
+    tmap <c-x> <Plug>EditCommand
 
 endif " has('nvim')
 " {{{ neovim homegrown repl
@@ -766,8 +796,8 @@ if has('nvim')
     command! REPLSendLine call REPLSend([getline('.')])
 
     command! RE call REPLSend([@s])
-    nnoremap <silent> <leader>vs :REPLSendLine<cr>
-    vnoremap <silent> <leader>vs "sy:RE<cr>
+    " nnoremap <silent> <leader>vs :REPLSendLine<cr>
+    " vnoremap <silent> <leader>vs "sy:RE<cr>
 endif
 
 " }}}
@@ -777,6 +807,10 @@ if has('nvim')
     autocmd! BufWritePost * Neomake
 endif
 " }}}
-noremap <BS> <Nop>
+nnoremap <BS> <Nop>
+" something sets / to ' ' in my rc
+let @/=''
 
 let g:peekaboo_delay = 500
+
+" ]P eller något för paste nästa rad från "*

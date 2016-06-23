@@ -43,9 +43,9 @@ client.urgent           #2f343a    #900000  #ffffff #900000
 # client.background       #123456
 
 # start a terminal
-bindsym $mod+Return exec /usr/bin/urxvt
+bindsym $mod+Shift+Return exec /usr/bin/urxvt
 # start a terminal with same working dir, using https://github.com/schischi-a/xcwd
-bindsym $mod+Shift+Return exec ~/bin/newterm.sh
+bindsym $mod+Return exec ~/bin/newterm.sh
 bindsym $mod+Control+Return exec ~/bin/newranger.sh
 
 # move window to new empty workspace
@@ -79,6 +79,9 @@ bindsym $mod+d exec dmenu_run
 
 # faster key repeat
 exec --no-startup-id xset r rate 250 25
+
+# set background
+exec --no-startup-id feh --bg-center /home/spill/Pictures/pixelsort.jpg
 
 # demnu2 required https://bitbucket.org/melek/dmenu2
 
@@ -169,7 +172,7 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 bindsym $mod-` workspace 9
 # section key, paragraph, keycode 49
-bindsym $mod+0xa7 workspace 9
+bindsym $mod+0x60 workspace 9
 # toggle between last workspaces, acute ´ keycode 21
 bindsym $mod+0xb4 workspace back_and_forth
 

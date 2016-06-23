@@ -1,3 +1,5 @@
+" disable new tab button by going to customize and dragging it away
+
 let leader="\"
 
 colorscheme dorkness
@@ -60,10 +62,15 @@ nnoremap <C-t> :tabopen
 cnoremap <C-n> <Tab>
 cnoremap <C-p> <Up>
 "nnoreamp \ss :source
+nnoremap d :bdelete<Space>-select<Space>lastactive<CR>
 
 
 map <Leader>t :set gui=invmenu,invnavigation<cr>
 map <leader>k :set gui=invmenu,invnavigation<cr>
 map <leader>l :lowlight<CR>
 
+" set! extensions.kb.findKey=""
+" set! extensions.kb.historyShowKey=""
+
+" :help nextpattern
 " vim: ft=vimperator
