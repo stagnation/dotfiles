@@ -2,4 +2,15 @@ alarm/klocka i i3, som pizzatiemr, gärna med scroll setting i baren.
 alarm/timer i terminal $alarm -x 20 $alarm -t 20:00
 vim - quickscope
 vim - reddit saves
-vimperator - ;t genererar en prompt med länk frwn hint, kan den skrivas om till program X?
+vim - fortsätt kommentarer på ny rad, dubbel tap
+vim - fortsätt NB, TODO på ny rad med {\w*} intact
+vim - folds för latex
+vim - hoppa mellan kapitel för latex
+vim - map <c-p> :<c-p>
+vim - lära sig :make
+vim - highlgihta filnamenet i path i statusbar som airblader
+vim - ~ över (,[,{ för att få motsvarande stängare
+vim - :e föreslå tex med högre prio än skitfilerna
+vim - latex; match $ till $ med %
+vim - plugin/mapping för att flytta ord höger vänster som xp för bokstäver
+firefox/vimperator - zathura som embedded pdfvisare
