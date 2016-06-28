@@ -1,5 +1,13 @@
-#!/bin/bash
+#!/bin/sh
 
-tmux start-server
-tmux new-session -d -s remote
-tmux new-window -n "media" -t remote:2
+session="remote"
+
+tmux has-session -t $session > /dev/null
+returncode=$?
+if [ $returncode != 0 ]; then
+    tmux start-server
+    tmux new-session -d -s $session
+    tmux new-window -n "media" -t $session:2
+fi
+tmux attach-session -t $session
+
