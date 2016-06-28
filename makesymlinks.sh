@@ -97,7 +97,9 @@ if [[ -s ~/.ncmpcpp ]] ; then
 else
     mkdir ~/.ncmpcpp
     ln -s $dir/ncmpconf ~/.ncmpcpp/config
-    ln -s $dir/ncmpkeys ~/.ncmpcpp/keys
+    # ln -s $dir/ncmpkeys ~/.ncmpcpp/keys
+    ln -s $dir/ncmpbinds ~/.ncmpcpp/bindings
+
 fi;
 
 ln -s $dir/mpv.conf ~/.config/mpv/mpv.conf
@@ -107,3 +109,6 @@ echo "Cloning vimperator plugins to $dir"
 cd $dir
 git clone https://github.com/ervandew/vimperator-plugins
 
+
+echo "Creating symlinks for mopidy"
+ln -s $dir/mopidy.conf ~/.config/mopidy/

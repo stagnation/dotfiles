@@ -26,7 +26,7 @@
 #
 #  set it in order to make tag editor and renaming files work properly
 #
-mpd_host = "192.168.1.8"
+mpd_host = "10.0.0.8"
 #
 #mpd_port = "6600"
 #
@@ -60,7 +60,7 @@ mpd_crossfade_time = "3"
 #
 #visualizer_in_stereo = "yes"
 #
-visualizer_fifo_path = "192.168.1.8:/tmp/mpd.fifo"
+visualizer_fifo_path = "10.0.0.8:/tmp/mpd.fifo"
 #
 #
 #  Note: Below parameter is needed for ncmpcpp
@@ -116,7 +116,7 @@ visualizer_output_name = "My FIFO"
 #
 #  defines how long various messages are supposed to be visible
 #
-#message_delay_time = "4"
+message_delay_time = "2"
 #
 # ### song format #####
 #
@@ -170,14 +170,17 @@ visualizer_output_name = "My FIFO"
 #  Note: colors can be nested.
 #
 #
-#song_list_format = "{%a - }{%t}|{$8%f$9}$R{$3(%l)$9}"
+# song_list_format = "{%a - }{%t}|{$8%f$9}$R{$3(%l)$9}"
 # song_list_format = "$3%n$9$1&#9621; $1$4%a$9$1 - $1$6%t$1     $R$2%b$9"
-
-song_list_format = "{$8%n▕ $9}{$2%a $9}{$4%t$9}|{$5%f$9}$R{$5 %b$9}{$8 %l$9}"
+# song_list_format = "{$8%n▕ $9}{$2%a $9}{$4%t$9}|{$5%f$9}$R{$5 %b$9}{$8 %l$9}"
 #
 #song_status_format = "{{%a{ \"%b\"{ (%y)}} - }{%t}}|{%f}"
 #
 #song_library_format = "{%n - }{%t}|{%f}"
+#
+song_list_format = "{$5%a} $8»$5» {$8%t}|{$8%f}$R{$2%b}"
+song_status_format = "{$8%a} $8»$5» $b{$1%t}|{$1%f}$/b"
+song_library_format = "{%n - }{%t}|{%f}"
 #
 #tag_editor_album_format = "{(%y) }%b"
 #
@@ -201,15 +204,19 @@ song_list_format = "{$8%n▕ $9}{$2%a $9}{$4%t$9}|{$5%f$9}$R{$5 %b$9}{$8 %l$9}"
 #alternative_header_first_line_format = "$b$1$aqqu$/a$9 {%t}|{%f} $1$atqq$/a$9$/b"
 #
 #alternative_header_second_line_format = "{{$4$b%a$/b$9}{ - $7%b$9}{ ($4%y$9)}}|{%D}"
+
+alternative_header_first_line_format = "{$b$1%t$9$/b}"
+alternative_header_second_line_format ="$0{%a} $b$8-$9$/b {%b}$9"
+
 #
 #
 #  Note: Below variables also supports
 #  text attributes listed above.
 #
 #
-now_playing_prefix = "$b> "
+now_playing_prefix = "$5>>$b "
 #
-now_playing_suffix = " <$/b"
+# now_playing_suffix = "$\b"
 #
 #browser_playlist_prefix = "$2playlist$9 "
 #
@@ -258,7 +265,8 @@ now_playing_suffix = " <$/b"
 #
 #
 #song_columns_list_format = "(7f)[green]{l} (25)[cyan]{a} (40)[]{t|f} (30)[red]{b}"
-song_columns_list_format = "(5f)[green]{n} (22)[white]{a} (34)[white]{t} (25)[white]{b} (7f)[green]{lr}"
+# song_columns_list_format = "(5f)[green]{n} (22)[white]{a} (34)[white]{t} (25)[white]{b} (7f)[green]{lr}"
+song_columns_list_format = "(2)[black]{n} (30)[blue]{a} (33)[magenta]{t|f} (30)[white]{br} (5)[black]{l}"
 #
 # ### various settings #####
 #
@@ -277,7 +285,7 @@ song_columns_list_format = "(5f)[green]{n} (22)[white]{a} (34)[white]{t} (25)[wh
 #
 playlist_separate_albums = "no"
 #
-#playlist_display_mode = "classic" (classic/columns)
+playlist_display_mode = "columns" (classic/columns)
 #
 #browser_display_mode = "classic" (classic/columns)
 #
@@ -300,6 +308,9 @@ autocenter_mode = "yes"
 #  be used to build 'empty' part of progressbar.
 #
 #progressbar_look = "=>"
+progressbar_look = "███"
+
+progressbar_boldness = "no"
 #
 #default_place_to_search_in = "database" (database/playlist)
 #
@@ -319,7 +330,7 @@ header_visibility = "no"
 #
 statusbar_visibility = "yes"
 #
-#titles_visibility = "yes"
+titles_visibility = "no"
 #
 header_text_scrolling = "no"
 #
@@ -388,7 +399,7 @@ header_text_scrolling = "no"
 #  Note: You can define startup screen for ncmpcpp
 #  by choosing screen number from the list above.
 #
-startup_screen = "2"
+# startup_screen = "2"
 #
 jump_to_now_playing_song_at_start = "yes"
 #
@@ -417,7 +428,7 @@ jump_to_now_playing_song_at_start = "yes"
 #
 #mouse_list_scroll_whole_page = "yes"
 #
-#empty_tag_marker = "<empty>"
+empty_tag_marker = ""
 #
 #tag_editor_extended_numeration = "no"
 #
@@ -479,7 +490,8 @@ jump_to_now_playing_song_at_start = "yes"
 #
 #main_window_highlight_color = "yellow"
 #
-#progressbar_color = "default"
+progressbar_color = "black"
+progressbar_elapsed_color = "blue"
 #
 #statusbar_color = "default"
 #
