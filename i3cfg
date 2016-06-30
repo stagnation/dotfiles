@@ -70,6 +70,9 @@ exec --no-startup-id nm-applet
 # at startup use keyboard script
 exec --no-startup-id ~/bin/uskb
 
+# at startup create terminal for scratchpad
+exec --no-startup-id urxvt -depth 32 -bg rgba:0a00/1000/1500/dddd -name "float_term"
+
 # at startup run redshift
 # exec gtk-redshift -l 59.33:18.07
 exec --no-startup-id redshift -l 59.33:18.07
@@ -328,11 +331,14 @@ for_window [title="^ioquake3$"] fullscreen
 # second item in the 'class string' or something, wrt xprop
 # for_window [title=".*\* - Wolfram.*" ] border normal
 
-
-#larger firefox/vimperator border
 for_window [class="Firefox"] border pixel 3
 
 for_window [class="^.*"] border pixel 3
+
+for_window [class = "URxvt" instance = "float_term$"] floating enable
+for_window [class = "URxvt" instance = "float_term$"] border pixel 3
+for_window [class = "URxvt" instance = "float_term$"] move scratchpad
+for_window [class = "URxvt" instance = "float_term$"] show
 
 # vim-like marks
 # bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
