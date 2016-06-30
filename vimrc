@@ -814,6 +814,29 @@ if has('nvim')
     autocmd! BufWritePost * Neomake
 endif
 " }}}
+" {{{ TODO and FIXME comments
+if has("autocmd")
+    autocmd filetype cpp setlocal comments-=://
+    autocmd filetype cpp setlocal comments+=://\ todo(nils):
+    autocmd filetype cpp setlocal comments+=://\ fixme(nils):
+    autocmd filetype cpp setlocal comments+=://
+
+    autocmd FileType c setlocal comments-=://
+    autocmd FileType c setlocal comments+=://\ TODO(nils):
+    autocmd FileType c setlocal comments+=://\ FIXME(nils):
+    autocmd FIleType c setlocal comments+=://
+
+    " TODO(nils): what do fb and b mean? any number of spaces before/after?
+    autocmd FileType python setlocal formatoptions=croql
+    autocmd FileType python setlocal comments-=:#
+    autocmd FileType python setlocal comments-=b:#
+    autocmd FileType python setlocal comments+=:#\ TODO(nils):
+    autocmd FileType python setlocal comments+=:#\ FIXME(nils):
+    autocmd FileType python setlocal comments+=b:#
+    autocmd FileType python setlocal comments+=:#
+
+endif
+" }}}
 nnoremap <BS> <Nop>
 " something sets / to ' ' in my rc
 let @/=''
