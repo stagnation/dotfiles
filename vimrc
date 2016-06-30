@@ -302,7 +302,9 @@ function! Status(winnr)
   elseif fname == '__Tagbar__'
     let stat .= 'Tagbar'
   else
-    let stat .= '%f'
+    let path = expand('%:h')
+    let stat .= Color(active, 5, path != "." ? path . '/' : '')
+    let stat .= Color(active, 4, '%t')
   endif
 
   let stat .= ' ' . Color(active, 3, active ? '«' : '»')
@@ -356,6 +358,7 @@ hi User1 ctermfg=33  guifg=#268bd2  ctermbg=233 guibg=#fdf6e3 gui=bold
 hi User2 ctermfg=125 guifg=#d33682  ctermbg=7  guibg=#eee8d5 gui=bold
 hi User3 ctermfg=253  guifg=#719e07  ctermbg=53  guibg=#eee8d5 gui=bold
 hi User4 ctermfg=33  guifg=#2aa198  ctermbg=53  guibg=#eee8d5 gui=bold
+hi User5 ctermfg=247, ctermbg=53
 " }}}
 " }}} Colors "
 " {{{ Syntastic "
