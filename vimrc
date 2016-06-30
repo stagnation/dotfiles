@@ -55,7 +55,7 @@ silent! iunmap ä
 call plug#end()
 
 " }}} Initialization "
-" " TODO
+" TODO
 " cyclic f, F, if wrong was used, cycle from begining of line
 " silent ]l in location list, no message that requires enter
 " cyclic ]l, if any exist don't show "no more" warning
@@ -126,6 +126,10 @@ nnoremap k gk
 "reverse swap
 nnoremap gj j
 nnoremap gk k
+
+"Insert and Append on wrapped lines
+nnoremap gI g0i
+nnoremap gA g$i
 " }}} Utility rebinds "
 " {{{ Settings
 syntax enable             "enables syntax highlighting
@@ -430,22 +434,18 @@ endif
 " fe sets checking to english and fs sets checking to swedish.
 nnoremap <silent> <leader>ff :setlocal spell!<cr>
 nnoremap <silent> <leader>fs :setlocal spelllang=sv<cr>
-nnoremap <silent> <leader>fe :setlocal spelllang=en<cr>
+nnoremap <silent> <leader>fe :setlocal spelllang=en_us<cr>
 
 "SPELLING
 "suggestions
 nnoremap <leader>fh z=
-"go to next error
-nnoremap <leader>fn ]s
-"go to previous error
-nnoremap <leader>fp [s
-
 " }}} Spell checking mappings "
 " {{{ Jump binds "
 "location list
 "go to next or previous instance (usually error)
 nnoremap <leader>en :lne<CR>
 nnoremap <leader>ep :lp<CR>
+"go to next item in location list, loop around if end is reached
 nnoremap <silent> ]l :try<bar>lnext<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>lfirst<bar>endtry<cr>
 
 "git gutter go to next, prev git chunk
@@ -476,6 +476,7 @@ autocmd InsertEnter * :setlocal nohlsearch
 autocmd InsertLeave * :setlocal hlsearch
 
 " Pull word under cursor into LHS of a substitute
+" Courtesy of Ohm
 nnoremap <leader>z :%s#\<<c-r>=expand("<cword>")<cr>\>##gc<left><left><left>
 nnoremap <leader>Z :bufdo %s#\<<c-r>=expand("<cword>")<cr>\>##gce<space><bar><space>update<left><left><left><left><left><left><left><left><left><left><left><left><left>
 
@@ -735,6 +736,11 @@ if has("autocmd")
     autocmd FileType c setlocal commentstring=\/\/\ %s
     autocmd FileType cpp setlocal commentstring=\/\/\ %s
     autocmd FileType cpp setlocal foldmethod=syntax
+
+    autocmd FileType tex setlocal wrap
+    autocmd Filetype tex nnoremap <buffer> <leader>k :w<cr>:!rubber --pdf -f %<cr><cr>
+    autocmd FileType tex LengthmattersDisable
+    autocmd FileType tex nnoremap gJ gJi <esc>
 endif
 
 " }}} Filetype specific mappings "
