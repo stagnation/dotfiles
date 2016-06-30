@@ -1,3 +1,4 @@
+" vim: ft=vimperator
 " disable new tab button by going to customize and dragging it away
 
 let leader="\"
@@ -64,6 +65,9 @@ cnoremap <C-p> <Up>
 "nnoreamp \ss :source
 nnoremap d :bdelete<Space>-select<Space>lastactive<CR>
 
+map -urls=lolsnaps.com [[ /Prev<cr><cr>
+" not sure whichever I like best
+map -urls=lolsnaps.com ]] /Prev<cr><cr>
 
 map <Leader>t :set gui=invmenu,invnavigation<cr>
 map <leader>k :set gui=invmenu,invnavigation<cr>
@@ -73,4 +77,11 @@ map <leader>l :lowlight<CR>
 " set! extensions.kb.historyShowKey=""
 
 " :help nextpattern
-" vim: ft=vimperator
+
+javascript <<EOS
+hints.addMode("P", "Open with mpv (1080p):", (elem, loc) => liberator.execute("silent !mpv --fs --ytdl --ytdl-format='(mp4)[height>=720][height<=?1080][fps>=30]+bestaudio' '" + loc + "' &", null, true));
+EOS
+
+javascript <<EOS
+hints.addMode("M", "Open with mpv :", (elem, loc) => liberator.execute("silent !mpvplay '" + loc + "' &", null, true));
+EOS
