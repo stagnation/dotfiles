@@ -629,8 +629,8 @@ nnoremap <leader>st :call SpillToggleLongLineDisplay()<cr>
 runtime! plugin/unimpaired.vim
 " experimental insert row above/below,
 " marks -> signature side effects!
-noremap ]f <Esc>mao<Esc>`a:delmarks a<CR>:SignatureRefresh<CR>
-noremap [f <Esc>maO<Esc>`a:delmarks a<CR>:SignatureRefresh<CR>
+noremap <leader>o <Esc>mao<Esc>`a:delmarks a<CR>:SignatureRefresh<CR>
+noremap <leader>O <Esc>maO<Esc>`a:delmarks a<CR>:SignatureRefresh<CR>
 " }}} Unimpaired "
 " {{{ VIMUX "
 if !has ('nvim')
