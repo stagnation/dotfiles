@@ -17,7 +17,7 @@ files="gitconfig Xdefaults Xmodmap bash_profile vimrc tmux.conf gvimrc vimperato
 
 echo -n "  Creating $bakdir for backup of any existing dotfiles in ~ ..."
 mkdir -p $bakdir
-echo "  done"  
+echo "  done"
 
 # change to the dotfiles directory
 
@@ -110,7 +110,6 @@ fi;
 mpvdir=~/.config/mpv
 if [ -d $mpvdir ] ; then
     echo "  Creating symlinks for mpv"
-    ln -s $dir/mpv.conf $mpvdir/mpv.conf
     ln -s $dir/input.conf $mpvdir/input.conf
 fi;
 
