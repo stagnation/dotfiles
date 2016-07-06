@@ -153,7 +153,7 @@ set showmatch             "breifly show matching bracekt when inserting such
 set incsearch             "incremental searching as soon as typing begins
 set ignorecase            "ignore case when searching
 set smartcase             "will override ignore case if searching w/ diff cases
-set modeline              "use modelines ??????
+set modeline              "use modelines
 set ttimeoutlen=5        "faster twitching for everything
 set virtualedit=block     "allow cursor to be moved into empty space in visual
 set laststatus=2          "always show status line
@@ -740,6 +740,8 @@ if has("autocmd")
     autocmd FileType cpp setlocal commentstring=\/\/\ %s
     autocmd FileType cpp setlocal foldmethod=syntax
 
+    autocmd FileType cpp vmap <leader>ac <CR><c-g><c-x>\/\/<CR>
+
     autocmd FileType tex setlocal wrap
     autocmd Filetype tex nnoremap <buffer> <leader>k :w<cr>:!rubber --pdf -f %<cr><cr>
     autocmd FileType tex LengthmattersDisable
@@ -817,16 +819,18 @@ if has('nvim')
     autocmd! BufWritePost * Neomake
 endif
 " }}}
-" {{{ TODO and FIXME comments
+" {{{ TODO, NB and FIXME comments
 if has("autocmd")
     autocmd filetype cpp setlocal comments-=://
-    autocmd filetype cpp setlocal comments+=://\ todo(nils):
-    autocmd filetype cpp setlocal comments+=://\ fixme(nils):
+    autocmd filetype cpp setlocal comments+=://\ TODO(nils):
+    autocmd filetype cpp setlocal comments+=://\ FIXME(nils):
+    autocmd filetype cpp setlocal comments+=://\ NB(nils):
     autocmd filetype cpp setlocal comments+=://
 
     autocmd FileType c setlocal comments-=://
     autocmd FileType c setlocal comments+=://\ TODO(nils):
     autocmd FileType c setlocal comments+=://\ FIXME(nils):
+    autocmd FileType c setlocal comments+=://\ NB(nils):
     autocmd FIleType c setlocal comments+=://
 
     " TODO(nils): what do fb and b mean? any number of spaces before/after?
@@ -835,6 +839,7 @@ if has("autocmd")
     autocmd FileType python setlocal comments-=b:#
     autocmd FileType python setlocal comments+=:#\ TODO(nils):
     autocmd FileType python setlocal comments+=:#\ FIXME(nils):
+    autocmd FileType python setlocal comments+=:#\ NB(nils):
     autocmd FileType python setlocal comments+=b:#
     autocmd FileType python setlocal comments+=:#
 
