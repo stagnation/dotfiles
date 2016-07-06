@@ -850,5 +850,10 @@ nnoremap <BS> <Nop>
 let @/=''
 
 let g:peekaboo_delay = 500
+" disable commentary deprecated binds
+nnoremap <leader><leader> NOP
+nnoremap <leader><leader><leader> NOP
+nnoremap <leader><leader>u NOP
 
-" ]P eller något för paste nästa rad från "*
+" TODO(nils): ]P eller något för paste nästa rad från "*
+" NB(nils): modeline is the name for # v i m: setting=value -- no 'set' required
