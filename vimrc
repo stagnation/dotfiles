@@ -827,11 +827,15 @@ if has("autocmd")
     autocmd filetype cpp setlocal comments+=://\ NB(nils):
     autocmd filetype cpp setlocal comments+=://
 
+    autocmd filetype cpp syntax keyword cTodo contained NB
+
     autocmd FileType c setlocal comments-=://
     autocmd FileType c setlocal comments+=://\ TODO(nils):
     autocmd FileType c setlocal comments+=://\ FIXME(nils):
     autocmd FileType c setlocal comments+=://\ NB(nils):
-    autocmd FIleType c setlocal comments+=://
+    autocmd FileType c setlocal comments+=://
+
+    autocmd Filetype c syntax keyword cTodo contained NB
 
     " TODO(nils): what do fb and b mean? any number of spaces before/after?
     autocmd FileType python setlocal formatoptions=croql
@@ -842,6 +846,8 @@ if has("autocmd")
     autocmd FileType python setlocal comments+=:#\ NB(nils):
     autocmd FileType python setlocal comments+=b:#
     autocmd FileType python setlocal comments+=:#
+
+    autocmd Filetype python syntax keyword pythonTodo contained NB
 
 endif
 " }}}
