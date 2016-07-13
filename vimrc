@@ -132,42 +132,43 @@ nnoremap gI g0i
 nnoremap gA g$i
 " }}} Utility rebinds "
 " {{{ Settings
-syntax enable             "enables syntax highlighting
-set background=dark       "required for colorschemes
-set fileformat=unix       "proper unix linebreaks
-filetype plugin indent on "react on filetyps with plugins and syntax
-set scrolloff=4           "minimum number of lines to display around cursor
-set hlsearch              "highlight search results
-set smarttab              "<TAB> inserts 'shiftwidth' spaces
-set tabstop=4             "tab spacing
-set expandtab             "use spaces instead of tab
-set shiftwidth=4          "amount of spaces for tab to insert
-set autoindent            "automatically set the indent when creatig lines
-set ruler                 "show cursor position information in statusline
-set number                "show line numbers
-set nowrap                  "do not wrap text
-set linebreak             "preserves word when wrapping
-set ttyfast               "'smooth' scrolling
-set mouse=a               "enable mouse in terminals that support it
-set showmatch             "breifly show matching bracekt when inserting such
-set incsearch             "incremental searching as soon as typing begins
-set ignorecase            "ignore case when searching
-set smartcase             "will override ignore case if searching w/ diff cases
-set modeline              "use modelines
-set ttimeoutlen=5        "faster twitching for everything
-set virtualedit=block     "allow cursor to be moved into empty space in visual
-set laststatus=2          "always show status line
+syntax enable                  "enables syntax highlighting
+set background=dark            "required for colorschemes
+set fileformat=unix            "proper unix linebreaks
+filetype plugin indent on      "react on filetyps with plugins and syntax
+set scrolloff=4                "minimum number of lines to display around cursor
+set hlsearch                   "highlight search results
+set smarttab                   "<TAB> inserts 'shiftwidth' spaces
+set tabstop=4                  "tab spacing
+set expandtab                  "use spaces instead of tab
+set shiftwidth=4               "amount of spaces for tab to insert
+set autoindent                 "automatically set the indent when creatig lines
+set ruler                      "show cursor position information in statusline
+set number                     "show line numbers
+set nowrap                     "do not wrap text
+set linebreak                  "preserves word when wrapping
+set ttyfast                    "'smooth' scrolling
+set mouse=a                    "enable mouse in terminals that support it
+set showmatch                  "breifly show matching bracekt when inserting such
+set incsearch                  "incremental searching as soon as typing begins
+set ignorecase                 "ignore case when searching
+set smartcase                  "will override ignore case if searching w/ diff cases
+set modeline                   "use modelines
+set ttimeoutlen=5              "faster twitching for everything
+set virtualedit=block          "allow cursor to be moved into empty space in visual
+set laststatus=2               "always show status line
 if !has('nvim')
-    set encoding=utf-8        "utf-8 encoding
+    set encoding=utf-8         "utf-8 encoding
 endif
-set backupdir=~/.vim/backup "centralized backup
+set backupdir=~/.vim/backup    "centralized backup
 set backspace=indent,eol,start "backspace everywhere
-set noswapfile            "no swap files
-set foldmethod=indent     "creates fold based on indentation levels
-set foldlevel=20          "by defualt open folds to level 20
-set cursorline            "highlights the line cursor is at
+set noswapfile                 "no swap files
+set foldmethod=indent          "creates fold based on indentation levels
+set foldlevel=20               "by defualt open folds to level 20
+set cursorline                 "highlights the line cursor is at
 set cursorcolumn
 set showcmd
+set wildmenu                    "menu line with autocomplete options
 
 " intuitive split placement
 set splitbelow
