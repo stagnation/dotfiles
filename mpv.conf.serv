@@ -49,7 +49,8 @@ vo=null
 ##################
 
 # Specify default audio driver (see --ao=help for a list).
-ao=pulse/alsa_output.pci-0000_00_1b.0.analog-stereo
+# NB(nils): in pamixerwant to have S/PDIF on (green) S/PDIF default off
+audio-device='alsa/plughw:CARD=PCH,DEV=0'
 
 # Disable softvol usage, and always use the system mixer if available.
 #softvol=no
