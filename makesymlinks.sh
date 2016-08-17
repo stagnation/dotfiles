@@ -107,9 +107,14 @@ else
 
 fi;
 
+echo "Cloning vimperator plugins to $dir"
+cd $dir
+git clone https://github.com/ervandew/vimperator-plugins
+
 mpvdir=~/.config/mpv
 if [ -d $mpvdir ] ; then
     echo "  Creating symlinks for mpv"
+    echo ">>copy mpv.conf manually!<<"
     ln -s $dir/input.conf $mpvdir/input.conf
 fi;
 
@@ -118,3 +123,6 @@ if [ -d $mopdir ] ; then
     echo "  Creating symlinks for mopidy"
     ln -s $dir/mopidy.conf $mopdir/mopidy.conf
 fi ;
+
+echo "  Global git ignore"
+ln -s $dir/gitconfigignore ~/.config/git/ignore

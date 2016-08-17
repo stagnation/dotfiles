@@ -2,11 +2,29 @@ from i3pystatus import Status
 
 status = Status(standalone=True)
 
+color0 = "#303030"
+color8 = "#5F5F5F"
+color1 = "#c03000"
+color9 = "#FF3A78"
+color2 = "#8AB22C"
+color10 = "#A6CD07"
+color3 = "#B5C865"
+color11 = "#fecf35"
+color4 = "#426870"
+color12 = "#4A7781"
+color5 = "#6D506D"
+color13 = "#FF3B77"
+color6 = "#4bb5c1"
+color14 = "#4bb5c1"
+color7 = "#b2b2b5"
+color15 = "#c2c2c5"
+
 # Displays clock like this:
 # Tue 30 Jul 11:59:46 PM KW31
 #                          ^-- calendar week
 status.register("clock",
     # format="%a %-d %b %X KW%V",)
+    color=color4,
     format="%a %-d %b %X",)
 
 # Shows the average load of the last minute and the last 5 minutes
@@ -44,7 +62,8 @@ status.register("battery",
     format="{status} {remaining:%E%hh:%Mm}",
     # alert=True,
     alert_percentage=5,
-    charging_color="#6aa66a",
+    charging_color=color1,
+    full_color=color5,
     status={
         "DIS":  "Discharging",
         "CHR":  "Charging",
@@ -67,7 +86,7 @@ status.register("network",
     interface="eth0",
     format_up="{interface}",
     # format_up="{v4cidr}",
-    color_up="#6aa66a",
+    color_up=color5,
     format_down="",)
 
 
@@ -75,8 +94,8 @@ status.register("network",
 status.register("network",
     # hints = {"separator": False, "separator_block_width": 0},
     interface="wlan0",
-    color_up="#6aa66a",
-    color_down="#720480",
+    color_up=color5,
+    color_down=color2,
     format_up="{essid} {quality:03.0f}%",
     format_down="no wifi",
     )
@@ -94,19 +113,20 @@ status.register("network",
 status.register("pulseaudio",
 # status.register("alsa",
     format="local {volume}%",
-    color_muted="#555555",
-    color_unmuted="#6aa66a",
+    color_muted=color1,
+    color_unmuted=color5,
     )
 
 # Shows mpd status
 # Format:
 # Cloud connectedReroute to Remain
 # ^ looks like in flames?
+mpdserver = "10.0.0.8"
 status.register("mpd",
     format="{artist} : {title}",
-    host=("192.168.1.8"),
+    host=(mpdserver),
     # color_error="#720480",
-    color="#6aa66a",
+    color=color5,
     max_field_len=0,
     hide_inactive=True,
     # msg_error="no mpd",
@@ -118,12 +138,12 @@ status.register("mpd",
 
 status.register("shell",
         command="/home/spill/dotfiles/bin/mpdvol.sh",
-        color="#6aa66a",
+        color=color4,
         interval=1,
-        on_upscroll="mpc -h 192.168.1.8 volume +2",
-        on_downscroll="mpc -h 192.168.1.8 volume -2",
-        on_rightclick="mpc -h 192.168.1.8 pause",
-        on_leftclick="mpc -h 192.168.1.8 play",
+        on_upscroll   = "mpc -h " + mpdserver + " volume +2",
+        on_downscroll = "mpc -h " + mpdserver + " volume -2",
+        on_rightclick = "mpc -h " + mpdserver + " pause",
+        on_leftclick  = "mpc -h " + mpdserver + " play",
         )
 
 

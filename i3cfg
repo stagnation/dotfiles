@@ -70,6 +70,9 @@ exec --no-startup-id nm-applet
 # at startup use keyboard script
 exec --no-startup-id ~/bin/uskb
 
+# at startup create terminal for scratchpad
+exec --no-startup-id urxvt -depth 32 -bg rgba:0a00/1000/1500/dddd -name "float_term"
+
 # at startup run redshift
 # exec gtk-redshift -l 59.33:18.07
 exec --no-startup-id redshift -l 59.33:18.07
@@ -302,6 +305,8 @@ bar {
 # Scratchpad
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
+bindsym $mod+equal [title="ncmpcpp"] scratchpad show
+bindsym $mod+shift+plus [title="mosh"] scratchpad shoW
 
 # toggle focus (for floating or non-floating)
 bindsym $mod+Control+space focus mode_toggle
@@ -328,11 +333,11 @@ for_window [title="^ioquake3$"] fullscreen
 # second item in the 'class string' or something, wrt xprop
 # for_window [title=".*\* - Wolfram.*" ] border normal
 
-
-#larger firefox/vimperator border
 for_window [class="Firefox"] border pixel 3
 
 for_window [class="^.*"] border pixel 3
+
+for_window [class = "URxvt" instance = "float_term$"] floating enable ; border 1 pixel ; move scratchpad
 
 # vim-like marks
 # bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
@@ -356,6 +361,9 @@ bindsym $mod+semicolon [con_mark=";"] focus
 bindsym $mod+apostrophe [con_mark="'"] focus
 bindsym $mod+comma [con_mark=","] focus
 
+# force workspace 2 to internal monitor
+# used for IRC
+workspace 2 output eDP1
 
 ##############
 # i3 gaps area

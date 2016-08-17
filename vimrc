@@ -24,7 +24,7 @@ Plug 'majutsushi/tagbar'
 Plug 'milkypostman/vim-togglelist'
 " Plug 'bronson/vim-trailing-whitespace'
 Plug 'vim-scripts/camelcasemotion'
-Plug 'Osse/double-tap'
+" Plug 'Osse/double-tap'
 Plug 'wellle/targets.vim'
 Plug 'mbbill/undotree'
 Plug 'airblade/vim-gitgutter'
@@ -38,6 +38,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/visual-split.vim'
 Plug 'kana/vim-operator-user'
+Plug 'unblevable/quick-scope'
 Plug 'haya14busa/vim-operator-flashy'
 if has ('nvim')
     Plug 'kassio/neoterm'
@@ -54,7 +55,7 @@ silent! iunmap ä
 call plug#end()
 
 " }}} Initialization "
-" " TODO
+" TODO
 " cyclic f, F, if wrong was used, cycle from begining of line
 " silent ]l in location list, no message that requires enter
 " cyclic ]l, if any exist don't show "no more" warning
@@ -125,6 +126,10 @@ nnoremap k gk
 "reverse swap
 nnoremap gj j
 nnoremap gk k
+
+"Insert and Append on wrapped lines
+nnoremap gI g0i
+nnoremap gA g$i
 " }}} Utility rebinds "
 " {{{ Settings
 syntax enable             "enables syntax highlighting
@@ -148,7 +153,7 @@ set showmatch             "breifly show matching bracekt when inserting such
 set incsearch             "incremental searching as soon as typing begins
 set ignorecase            "ignore case when searching
 set smartcase             "will override ignore case if searching w/ diff cases
-set modeline              "use modelines ??????
+set modeline              "use modelines
 set ttimeoutlen=5        "faster twitching for everything
 set virtualedit=block     "allow cursor to be moved into empty space in visual
 set laststatus=2          "always show status line
@@ -297,7 +302,9 @@ function! Status(winnr)
   elseif fname == '__Tagbar__'
     let stat .= 'Tagbar'
   else
-    let stat .= '%f'
+    let path = expand('%:h')
+    let stat .= Color(active, 5, path != "." ? path . '/' : '')
+    let stat .= Color(active, 4, '%t')
   endif
 
   let stat .= ' ' . Color(active, 3, active ? '«' : '»')
@@ -351,6 +358,7 @@ hi User1 ctermfg=33  guifg=#268bd2  ctermbg=233 guibg=#fdf6e3 gui=bold
 hi User2 ctermfg=125 guifg=#d33682  ctermbg=7  guibg=#eee8d5 gui=bold
 hi User3 ctermfg=253  guifg=#719e07  ctermbg=53  guibg=#eee8d5 gui=bold
 hi User4 ctermfg=33  guifg=#2aa198  ctermbg=53  guibg=#eee8d5 gui=bold
+hi User5 ctermfg=247, ctermbg=53
 " }}}
 " }}} Colors "
 " {{{ Syntastic "
@@ -429,22 +437,18 @@ endif
 " fe sets checking to english and fs sets checking to swedish.
 nnoremap <silent> <leader>ff :setlocal spell!<cr>
 nnoremap <silent> <leader>fs :setlocal spelllang=sv<cr>
-nnoremap <silent> <leader>fe :setlocal spelllang=en<cr>
+nnoremap <silent> <leader>fe :setlocal spelllang=en_us<cr>
 
 "SPELLING
 "suggestions
 nnoremap <leader>fh z=
-"go to next error
-nnoremap <leader>fn ]s
-"go to previous error
-nnoremap <leader>fp [s
-
 " }}} Spell checking mappings "
 " {{{ Jump binds "
 "location list
 "go to next or previous instance (usually error)
 nnoremap <leader>en :lne<CR>
 nnoremap <leader>ep :lp<CR>
+"go to next item in location list, loop around if end is reached
 nnoremap <silent> ]l :try<bar>lnext<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>lfirst<bar>endtry<cr>
 
 "git gutter go to next, prev git chunk
@@ -475,6 +479,7 @@ autocmd InsertEnter * :setlocal nohlsearch
 autocmd InsertLeave * :setlocal hlsearch
 
 " Pull word under cursor into LHS of a substitute
+" Courtesy of Ohm
 nnoremap <leader>z :%s#\<<c-r>=expand("<cword>")<cr>\>##gc<left><left><left>
 nnoremap <leader>Z :bufdo %s#\<<c-r>=expand("<cword>")<cr>\>##gce<space><bar><space>update<left><left><left><left><left><left><left><left><left><left><left><left><left>
 
@@ -627,8 +632,8 @@ nnoremap <leader>st :call SpillToggleLongLineDisplay()<cr>
 runtime! plugin/unimpaired.vim
 " experimental insert row above/below,
 " marks -> signature side effects!
-noremap ]f <Esc>mao<Esc>`a:delmarks a<CR>:SignatureRefresh<CR>
-noremap [f <Esc>maO<Esc>`a:delmarks a<CR>:SignatureRefresh<CR>
+noremap <leader>o <Esc>mao<Esc>`a:delmarks a<CR>:SignatureRefresh<CR>
+noremap <leader>O <Esc>maO<Esc>`a:delmarks a<CR>:SignatureRefresh<CR>
 " }}} Unimpaired "
 " {{{ VIMUX "
 if !has ('nvim')
@@ -734,6 +739,13 @@ if has("autocmd")
     autocmd FileType c setlocal commentstring=\/\/\ %s
     autocmd FileType cpp setlocal commentstring=\/\/\ %s
     autocmd FileType cpp setlocal foldmethod=syntax
+
+    autocmd FileType cpp vmap <leader>ac <CR><c-g><c-x>\/\/<CR>
+
+    autocmd FileType tex setlocal wrap
+    autocmd Filetype tex nnoremap <buffer> <leader>k :w<cr>:!rubber --pdf -f %<cr><cr>
+    autocmd FileType tex LengthmattersDisable
+    autocmd FileType tex nnoremap gJ gJi <esc>
 endif
 
 " }}} Filetype specific mappings "
@@ -807,10 +819,41 @@ if has('nvim')
     autocmd! BufWritePost * Neomake
 endif
 " }}}
+" {{{ TODO, NB and FIXME comments
+if has("autocmd")
+    autocmd filetype cpp setlocal comments-=://
+    autocmd filetype cpp setlocal comments+=://\ TODO(nils):
+    autocmd filetype cpp setlocal comments+=://\ FIXME(nils):
+    autocmd filetype cpp setlocal comments+=://\ NB(nils):
+    autocmd filetype cpp setlocal comments+=://
+
+    autocmd FileType c setlocal comments-=://
+    autocmd FileType c setlocal comments+=://\ TODO(nils):
+    autocmd FileType c setlocal comments+=://\ FIXME(nils):
+    autocmd FileType c setlocal comments+=://\ NB(nils):
+    autocmd FIleType c setlocal comments+=://
+
+    " TODO(nils): what do fb and b mean? any number of spaces before/after?
+    autocmd FileType python setlocal formatoptions=croql
+    autocmd FileType python setlocal comments-=:#
+    autocmd FileType python setlocal comments-=b:#
+    autocmd FileType python setlocal comments+=:#\ TODO(nils):
+    autocmd FileType python setlocal comments+=:#\ FIXME(nils):
+    autocmd FileType python setlocal comments+=:#\ NB(nils):
+    autocmd FileType python setlocal comments+=b:#
+    autocmd FileType python setlocal comments+=:#
+
+endif
+" }}}
 nnoremap <BS> <Nop>
 " something sets / to ' ' in my rc
 let @/=''
 
 let g:peekaboo_delay = 500
+" disable commentary deprecated binds
+nnoremap <leader><leader> NOP
+nnoremap <leader><leader><leader> NOP
+nnoremap <leader><leader>u NOP
 
-" ]P eller något för paste nästa rad från "*
+" TODO(nils): ]P eller något för paste nästa rad från "*
+" NB(nils): modeline is the name for # v i m: setting=value -- no 'set' required
