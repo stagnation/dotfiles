@@ -15,5 +15,9 @@ function xclipin
 end
 
 function gitclone
-    git clone $(xclip -o)
+    git clone (xclip -o)
+end
+
+function rubber
+    rubber --pdf --force
 end

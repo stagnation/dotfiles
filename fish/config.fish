@@ -1,7 +1,3 @@
-function naelv
-    urxvt -e sh -c "mosh aelv -- screen -dr" &
-end
-
 function xclipin
     xclip -i -selection clipboard
 end
