@@ -73,6 +73,8 @@ map <Leader>t :set gui=invmenu,invnavigation<cr>
 map <leader>k :set gui=invmenu,invnavigation<cr>
 map <leader>l :lowlight<CR>
 
+nnoremap gf <NOP>
+
 " set! extensions.kb.findKey=""
 " set! extensions.kb.historyShowKey=""
 
@@ -85,3 +87,5 @@ EOS
 javascript <<EOS
 hints.addMode("M", "Open with mpv :", (elem, loc) => liberator.execute("silent !mpvplay '" + loc + "' &", null, true));
 EOS
+
+" NB(nils): <space> kan användas i RHS av maps
