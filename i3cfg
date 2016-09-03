@@ -71,7 +71,6 @@ exec --no-startup-id nm-applet
 exec --no-startup-id ~/bin/uskb
 
 # at startup create terminal for scratchpad
-exec --no-startup-id urxvt -depth 32 -bg rgba:0a00/1000/1500/dddd -name "float_term"
 
 # at startup run redshift
 # exec gtk-redshift -l 59.33:18.07
@@ -84,7 +83,7 @@ bindsym $mod+d exec dmenu_run
 exec --no-startup-id xset r rate 250 25
 
 # set background
-exec --no-startup-id feh --bg-center /home/spill/Pictures/pixelsort.jpg
+exec --no-startup-id feh --bg-center /home/spill/Pictures/withhearstowardnone.jpeg
 
 # demnu2 required https://bitbucket.org/melek/dmenu2
 
@@ -306,7 +305,7 @@ bar {
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 bindsym $mod+equal [title="ncmpcpp"] scratchpad show
-bindsym $mod+shift+plus [title="mosh"] scratchpad shoW
+bindsym $mod+shift+plus [title="mosh"] scratchpad show
 
 # toggle focus (for floating or non-floating)
 bindsym $mod+Control+space focus mode_toggle
@@ -337,7 +336,8 @@ for_window [class="Firefox"] border pixel 3
 
 for_window [class="^.*"] border pixel 3
 
-for_window [class = "URxvt" instance = "float_term$"] floating enable ; border 1 pixel ; move scratchpad
+for_window [class = "URxvt" instance = "float_term$"] border 1 pixel ; move scratchpad
+for_window [class = "URxvt" instance = "aelv$"] title_format ">> ssh aelv" ; border normal
 
 # vim-like marks
 # bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
