@@ -6,10 +6,11 @@
 if $SHELL =~ 'bin/fish'
     set shell=/bin/sh
 endif
+" :s#.*github.com/#Plug '#<cr>:s#$#'#<cr>:nohlsearch<cr>
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-rsi', { 'on': [] }
 Plug 'spiiph/vim-space'
-" Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/vim-easy-align'
 Plug 'whatyouhide/vim-lengthmatters'
 Plug 'vim-scripts/Indent-Guides'
@@ -24,22 +25,23 @@ Plug 'majutsushi/tagbar'
 Plug 'milkypostman/vim-togglelist'
 " Plug 'bronson/vim-trailing-whitespace'
 Plug 'vim-scripts/camelcasemotion'
-" Plug 'Osse/double-tap'
 Plug 'wellle/targets.vim'
 Plug 'mbbill/undotree'
 Plug 'airblade/vim-gitgutter'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'mhinz/vim-startify'
-Plug 'pelodelfuego/vim-swoop'
+" Plug 'pelodelfuego/vim-swoop'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kshenoy/vim-signature'
 Plug 'idbrii/vim-hiinterestingword'
-Plug 'kien/ctrlp.vim'
+" Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/visual-split.vim'
 Plug 'kana/vim-operator-user'
+Plug 'ferranpm/vim-isolate'
 Plug 'unblevable/quick-scope'
 Plug 'haya14busa/vim-operator-flashy'
+Plug 'tpope/vim-surround'
 if has ('nvim')
     Plug 'kassio/neoterm'
     Plug 'critiqjo/lldb.nvim'
@@ -388,10 +390,10 @@ inoremap ^F ^X^F
 inoremap ^D ^X^D
 inoremap ^L ^X^L
 
-" gi inserts text from last insertion position.
+" open tag preview from insert mode
 inoremap ^} <Esc>b5<C-}>ea
-
 inoremap <c-]> <esc>mzb<c-w>}`za
+
 " {{{ align on last character
 function! CharsNeeded(char)
   let s:cur_line = line(".")
@@ -467,9 +469,11 @@ nnoremap <leader>qp :cp<CR>
 nnoremap ]q :cn<CR>
 nnoremap [q :cp<CR>
 " }}} Jump binds "
-" {{{ Fugitive "
+" {{{ Fugitive GitGutter and Git "
 "populate quicklist with commited version of current file - fugitive
 nnoremap <leader>gl :silent Glog<CR>
+nnoremap <leader>gr :GitGutterRevertHunk<CR>
+nnoremap <leader>ga :GitGutterStageHunk<CR>
 " }}} Fugitive "
 " {{{ Search mappings "
 
@@ -610,6 +614,8 @@ nnoremap <leader>sh :SidewaysLeft<CR>
 " echo which property of highlight govenrs word under cursor
 nnoremap <leader>hi :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
 
+nnoremap <leader>m :make<cr><cr>
+
 " }}} small function mappings
 " {{{ Spill functions, heuristic solutions "
 "toggle slimed down display to handle files with very long lines
@@ -728,7 +734,7 @@ nmap <leader>jo  <Plug>(exjumplist-go-first)
 " nmap <M-(>  <Plug>(exjumplist-previous-buffer)
 "
 " }}} exjumplist mappings "
-" {{{ Filetype specific mappings "
+" {{{ Filetype specific settings, mappings "
 if has("autocmd")
     autocmd FileType make setlocal noexpandtab
 
@@ -747,6 +753,14 @@ if has("autocmd")
     autocmd Filetype tex nnoremap <buffer> <leader>k :w<cr>:!rubber --pdf -f %<cr><cr>
     autocmd FileType tex LengthmattersDisable
     autocmd FileType tex nnoremap gJ gJi <esc>
+
+    autocmd FileType tex setlocal makeprg=rubber\ --pdf\ -f\ %\ >/dev/null
+
+    function! SilentMake()
+        silent make
+        redraw!
+    endfunction
+    command! Silentmake call SilentMake()
 endif
 
 " }}} Filetype specific mappings "
@@ -864,3 +878,4 @@ nnoremap <leader><leader>u NOP
 
 " TODO(nils): ]P eller något för paste nästa rad från "*
 " NB(nils): modeline is the name for # v i m: setting=value -- no 'set' required
+" gi inserts text from last insertion position.
