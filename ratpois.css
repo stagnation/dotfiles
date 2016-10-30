@@ -33,7 +33,9 @@ menubar, toolbox, toolbar, .tabbrowser-tabs {
 #tabbrowser-tabs ~ #alltabs-button {display:none!important}
 
 #main-window[sizemode="normal"]:not([inFullscreen]) #TabsToolbar {
-    background: transparent !important;
+    border: 0px solid !important;
+    background: #131619 !important;
+    /* background: transparent !important; */
 }
 #main-window[sizemode="maximized"] #TabsToolbar {
     background: transparent !important;
