@@ -777,6 +777,9 @@ endif
 " }}}
 " {{{ TODO, NB and FIXME comments
 if has("autocmd")
+    " remove default comment and add the desired strings
+    " to get higher priority
+    " then read default
     autocmd filetype cpp setlocal comments-=://
     autocmd filetype cpp setlocal comments+=://\ TODO(nils):
     autocmd filetype cpp setlocal comments+=://\ FIXME(nils):
@@ -804,6 +807,15 @@ if has("autocmd")
     autocmd FileType python setlocal comments+=:#
 
     autocmd Filetype python syntax keyword pythonTodo contained NB
+
+    autocmd FileType vim setlocal comments-=:\"
+    autocmd FileType vim setlocal comments+=:\"\ TODO(nils):
+    autocmd FileType vim setlocal comments+=:\"\ FIXME(nils):
+    autocmd FileType vim setlocal comments+=:\"\ NB(nils):
+    autocmd Filetype vim setlocal comments+=:\"
+
+    autocmd FileType vim syntax keyword vimTodo contained NB
+    hi link vimTodo Todo
 
 endif
 " }}}
