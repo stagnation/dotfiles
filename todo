@@ -1,6 +1,5 @@
 alarm/klocka i i3, som pizzatiemr, gärna med scroll setting i baren.
 alarm/timer i terminal $alarm -x 20 $alarm -t 20:00
-vim - quickscope
 vim - reddit saves
 vim - fortsätt kommentarer på ny rad, dubbel tap
 vim - fortsätt NB, TODO på ny rad med {\w*} intact
@@ -14,3 +13,15 @@ vim - :e föreslå tex med högre prio än skitfilerna
 vim - latex; match $ till $ med %
 vim - plugin/mapping för att flytta ord höger vänster som xp för bokstäver
 firefox/vimperator - zathura som embedded pdfvisare
+vim - markera start o stop av öppnade fold med bakgrund eller så.
+    kanske kan göra på samma sätt som med TODO/NB/myTodo
+
+    :syntax keyword myTodo NB contained
+    :hi link myTodo Todo
+    :syntax match myComment "^//.*" contains=myTodo
+    :hi link myComment Comment
+
+    :: keyword: {{{, }}}
+    :: matcha /* .* {{{ */ eller något. kanske tom kan higlhighta foldnamnet som NB blir också.
+ -
+
