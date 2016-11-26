@@ -123,6 +123,9 @@ nnoremap gk k
 "Insert and Append on wrapped lines
 nnoremap gI g0i
 nnoremap gA g$i
+
+"Reuse last command
+nnoremap <c-p> :<c-p>
 " }}} Utility rebinds "
 " {{{ Settings
 syntax enable                  "enables syntax highlighting
