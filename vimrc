@@ -406,6 +406,8 @@ endif
 nnoremap <silent> <leader>ff :setlocal spell!<cr>
 nnoremap <silent> <leader>fs :setlocal spelllang=sv<cr>
 nnoremap <silent> <leader>fe :setlocal spelllang=en_us<cr>
+" automatically correct word to first suggestion even if spell is off
+nnoremap <silent> <leader>f= :setlocal spell<cr>1z=:setlocal spell!<cr>
 
 "SPELLING
 "suggestions
