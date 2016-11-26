@@ -114,7 +114,7 @@ git clone https://github.com/ervandew/vimperator-plugins
 mpvdir=~/.config/mpv
 if [ -d $mpvdir ] ; then
     echo "  Creating symlinks for mpv"
-    echo "copy mpv.conf manually!"
+    echo ">>copy mpv.conf manually!<<"
     ln -s $dir/input.conf $mpvdir/input.conf
 fi;
 
