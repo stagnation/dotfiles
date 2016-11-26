@@ -422,7 +422,7 @@ nnoremap ]g :GitGutterNextHunk<CR>
 nnoremap [g :GitGutterPrevHunk<CR>
 
 "git conflic marker search
-nnoremap <leader>gc /^.*\(<<<\\|====\\|>>>>\).*$<cr>
+nnoremap <leader>gC /^.*\(<<<\\|====\\|>>>>\).*$<cr>
 
 "quicklist shortcut
 nnoremap ]q :cn<CR>
@@ -431,8 +431,11 @@ nnoremap [q :cp<CR>
 " {{{ Fugitive GitGutter and Git "
 "populate quicklist with commited version of current file - fugitive
 nnoremap <leader>gl :silent Glog<CR>
+nnoremap <leader>gc :Gcommit<CR>
+
 nnoremap <leader>gr :GitGutterRevertHunk<CR>
 nnoremap <leader>ga :GitGutterStageHunk<CR>
+nnoremap <leader>gp :GitGutterPreviewHunk<cr>
 " }}} Fugitive "
 " {{{ Search mappings "
 
@@ -640,9 +643,6 @@ if !has ('nvim')
 
     " Compile currently opened latex file to pdf
     autocmd Filetype tex nnoremap <buffer> <Leader>rr :update<Bar>:call VimuxRunCommandInDir('latexmk -pdf', 1)<CR>
-
-    " Push the repository of the currently opened file
-    nnoremap <leader>gp :call VimuxRunCommandInDir("git push", 0)<CR>
 
     " Run the current file with rspec
     map <Leader>rb :call VimuxRunCommand("clear; rspec " . bufname("%"))<CR>
