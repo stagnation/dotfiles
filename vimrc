@@ -1,8 +1,6 @@
 " vim: foldmethod=marker foldlevel=0 foldcolumn=3
 " Initialization, plug manager {{{ "
 " Fix for my shell, otherwise some scripts break
-
-" :s#github.com/#Plug '#<cr>:s#$#'#<cr>:nohlsearch<cr>
 if $SHELL =~ 'bin/fish'
     set shell=/bin/sh
 endif
@@ -77,14 +75,6 @@ if has ('nvim')
     tnoremap <silent> <c-k> <C-\><C-n>:TmuxNavigateUp<cr>
     tnoremap <silent> <c-l> <C-\><C-n>:TmuxNavigateRight<cr>
 endif
-
-" }}} Tmux navigation "
-" {{{ Utility rebinds "
-"rebind common typos
-command! Q q
-command! Qall qall
-command! E e
-command! W w
 
 " convenient start/end of line
 nnoremap 0 ^
@@ -395,35 +385,6 @@ inoremap ^L ^X^L
 inoremap ^} <Esc>b5<C-}>ea
 inoremap <c-]> <esc>mzb<c-w>}`za
 
-" {{{ align on last character
-function! CharsNeeded(char)
-  let s:cur_line = line(".")
-  let s:cur_col  =  col(".")
-  let s:i   =  0
-  let s:pos = -1
-  while s:pos == -1
-    let s:i += 1
-    let s:line = getline(s:cur_line - s:i)
-    let s:pos  = stridx(s:line, a:char, s:cur_col)
-    if s:i == s:cur_line
-      return -1
-    endif
-  endwhile
-  return s:pos - s:cur_col + 1
-endfunction
-
-function! InsertSpaces()
-  let s:char = getline(".")[-1:]
-  let s:nspace = CharsNeeded(s:char)
-  if s:nspace > -1
-    call setline(".", getline(".")[:-2] . repeat(" ", s:nspace) . s:char)
-  else
-    echom "No `" . s:char . "' found in the previous lines."
-  endif
-endfunction
-
-inoremap <silent> <C-g> <C-[>:call InsertSpaces()<CR>A
-" }}}
 " }}} Insert Mode maps "
 " {{{ file and shell stuff
 "warning when file is chenged
@@ -448,16 +409,10 @@ nnoremap <silent> <leader>fe :setlocal spelllang=en_us<cr>
 nnoremap <leader>fh z=
 " }}} Spell checking mappings "
 " {{{ Jump binds "
-"location list
-"go to next or previous instance (usually error)
-nnoremap <leader>en :lne<CR>
-nnoremap <leader>ep :lp<CR>
 "go to next item in location list, loop around if end is reached
 nnoremap <silent> ]l :try<bar>lnext<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>lfirst<bar>endtry<cr>
 
 "git gutter go to next, prev git chunk
-nnoremap <leader>gn :GitGutterNextHunk<CR>
-nnoremap <leader>gp :GitGutterPrevHunk<CR>
 nnoremap ]g :GitGutterNextHunk<CR>
 nnoremap [g :GitGutterPrevHunk<CR>
 
@@ -465,8 +420,6 @@ nnoremap [g :GitGutterPrevHunk<CR>
 nnoremap <leader>gc /^.*\(<<<\\|====\\|>>>>\).*$<cr>
 
 "quicklist shortcut
-nnoremap <leader>qn :cn<CR>
-nnoremap <leader>qp :cp<CR>
 nnoremap ]q :cn<CR>
 nnoremap [q :cp<CR>
 " }}} Jump binds "
@@ -496,17 +449,19 @@ nnoremap <Leader>7 :call Swoop()<CR>
 vnoremap <Leader>7 :call SwoopSelection()<CR>
 " }}} Search Mappings "
 " CtrlP {{{
-"ignore settings for ctrlP
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|a|o|so|dll|aux|pdf|out)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
-nnoremap <c-p> :CtrlPClearCache<CR> :CtrlP<CR>
-let g:ctrlp_user_command = [
-    \ '.git', 'cd %s && git ls-files . -co --exclude-standard',
-    \ 'find %s -type f'
-    \ ]
+if exists(':CtrlPClearCache')
+    "ignore settings for ctrlP
+    let g:ctrlp_custom_ignore = {
+                \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+                \ 'file': '\v\.(exe|a|o|so|dll|aux|pdf|out)$',
+                \ 'link': 'some_bad_symbolic_links',
+                \ }
+    nnoremap <c-p> :CtrlPClearCache<CR> :CtrlP<CR>
+    let g:ctrlp_user_command = [
+                \ '.git', 'cd %s && git ls-files . -co --exclude-standard',
+                \ 'find %s -type f'
+                \ ]
+endif
 " }}} CtrlP "
 " {{{ word motions inside camel/snake case"
 map <silent> w <Plug>CamelCaseMotion_w
@@ -636,7 +591,7 @@ function! SpillToggleLongLineDisplay()
 endfunc
 nnoremap <leader>st :call SpillToggleLongLineDisplay()<cr>
 " }}} spill functions
-" {{{ Unimpaired, jump mappings "
+" {{{ Unimpaired "
 runtime! plugin/unimpaired.vim
 " experimental insert row above/below,
 " marks -> signature side effects!
@@ -765,26 +720,6 @@ if has("autocmd")
 endif
 
 " }}} Filetype specific mappings "
-" change status line colour if it is in insert mode {{{
-if version >= 700
-    if has("autocmd")
-        augroup StatuslineColorGroup
-            " Clear autocmds for this group
-            autocmd!
-            " au InsertEnter * highlight StatusLine gui=NONE guifg=#FFFFFF guibg=#9D3569 ctermbg=127
-            au InsertEnter * highlight CursorLineNr guibg=#9D3569 ctermbg=235 ctermfg=33
-
-
-            au InsertLeave * highlight StatusLine gui=NONE guifg=#d6d6d6 guibg=#602040 ctermbg=53
-            au InsertLeave * highlight CursorLineNr guibg=#602040 ctermbg=53 ctermfg=232
-
-
-
-
-            augroup end
-            endif
-        endif
-        " }}}
 " {{{ Neoterm, quasi-repl
 " if has('nvim')
     nnoremap <silent> <leader>vs :TREPLSend<cr>
