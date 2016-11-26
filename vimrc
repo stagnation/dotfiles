@@ -583,6 +583,7 @@ nnoremap <leader>m :make<cr><cr>
 " }}} small function mappings
 " {{{ Spill functions, heuristic solutions "
 "toggle slimed down display to handle files with very long lines
+" NB(nils): resetting funtionality does not work
 function! SpillToggleLongLineDisplay()
   if(&cursorline == 1)
     set filetype=
@@ -829,7 +830,13 @@ nnoremap <leader><leader> NOP
 nnoremap <leader><leader><leader> NOP
 nnoremap <leader><leader>u NOP
 
+function! SyntaxRule()
+    echo synIDattr(synID(line("."), col("."), 1), "name")
+endfunction
+
+
 " TODO(nils): flip quickscope colors so first match is more pronounced
 " TODO(nils): ]P eller något för paste nästa rad från "*
 " NB(nils): modeline is the name for # v i m: setting=value -- no 'set' required
-" gi inserts text from last insertion position.
+" NB(nils): gi inserts text from last insertion position.
+" NB(nils): :b# öppna senaste buffern
