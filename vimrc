@@ -42,6 +42,7 @@ Plug 'ferranpm/vim-isolate'
 Plug 'unblevable/quick-scope'
 Plug 'haya14busa/vim-operator-flashy'
 Plug 'tpope/vim-surround'
+Plug 'vim-scripts/CSApprox'
 if has ('nvim')
     Plug 'kassio/neoterm'
     Plug 'critiqjo/lldb.nvim'
@@ -183,9 +184,9 @@ nnoremap q: <Nop>
 let g:mapleader ='\'
 " }}} Settings "
 " {{{ Colors, Look and feel "
-color lakris256
+color liquorice-approx
 if has("gui_running")
-    color lakris
+    color liquorice
 endif
 
 set number
@@ -295,7 +296,7 @@ function! Status(winnr)
   let stat .= '%1*' . (col(".") / 100 >= 1 ? '%v ' : ' %2v ') . '%*'
 
   " file
-  let stat .= Color(active, 5, active ? ' »' : ' «')
+  let stat .= Color(active, 3, active ? ' »' : ' «')
   let stat .= ' %<'
 
   if fname == '__Gundo__'
@@ -876,6 +877,7 @@ nnoremap <leader><leader> NOP
 nnoremap <leader><leader><leader> NOP
 nnoremap <leader><leader>u NOP
 
+" TODO(nils): flip quickscope colors so first match is more pronounced
 " TODO(nils): ]P eller något för paste nästa rad från "*
 " NB(nils): modeline is the name for # v i m: setting=value -- no 'set' required
 " gi inserts text from last insertion position.

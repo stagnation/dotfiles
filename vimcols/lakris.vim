@@ -98,8 +98,8 @@ hi Cursor       gui=BOLD guifg=#ffffff guibg=#99004c
 hi MatchParen   gui=NONE guifg=#ffffff guibg=#146666
 hi lCursor      gui=NONE guifg=#ffffff guibg=#8800ff
 hi CursorIM     gui=NONE guifg=#ffffff guibg=#8800ff
-hi CursorLine   gui=NONE guifg=NONE    guibg=#0f0f0f
-hi CursorColumn gui=NONE guifg=NONE    guibg=#0f0f0f
+hi CursorLine   gui=NONE guifg=NONE    guibg=#0d0d0d
+hi CursorColumn gui=NONE guifg=NONE    guibg=#0d0d0d
 
 " Fold
 hi Folded       gui=NONE guifg=#c8c8c8 guibg=#0c0c0c
@@ -125,15 +125,14 @@ hi Directory    gui=NONE guifg=#c8c8ff guibg=NONE
 hi LineNr       gui=ITALIC guifg=#727272 guibg=#0e0e0e
 hi CursorLineNr gui=ITALIC,BOLD guifg=#0e0e0e guibg=#99004c
 "hi NonText      gui=BOLD guifg=#d84070 guibg=#0b0b0b
-"hi SpecialKey   gui=BOLD guifg=#8888ff guibg=NONE
 hi NonText      gui=BOLD guifg=#808080 guibg=NONE
-hi SpecialKey   gui=BOLD guifg=#808080 guibg=NONE
+hi SpecialKey   gui=BOLD guifg=#8888ff guibg=NONE
+" hi SpecialKey   gui=BOLD guifg=#808080 guibg=NONE
 hi Title        gui=NONE guifg=#d0d0d0 guibg=NONE
 hi Visual       gui=NONE guifg=NONE guibg=#7C2B7C
 hi VisualNOS    gui=NONE guifg=NONE guibg=#7C2B7C
 
 " Syntax group
-hi Comment      gui=NONE guifg=#8a8a8a guibg=NONE
 hi Error        gui=BOLD guifg=#f2ca03 guibg=#000000
 hi Identifier   gui=NONE guifg=#40f8f8 guibg=NONE
 hi Ignore       gui=NONE guifg=bg      guibg=NONE
@@ -145,13 +144,14 @@ hi Repeat       gui=BOLD guifg=#6699cc guibg=NONE
 hi Todo         gui=UNDERLINE,ITALIC guifg=#ff80d0 guibg=NONE
 hi Type         gui=NONE guifg=#60f0a8 guibg=NONE
 hi Underlined   gui=UNDERLINE guifg=fg guibg=NONE
-hi String       gui=NONE guifg=#bccf72 guibg=#0f0f0f
+hi String       gui=NONE guifg=#baa798 guibg=#0f0f0f
 hi Number       gui=NONE guifg=#acdd82 guibg=NONE
 hi Conditional  gui=BOLD guifg=#86bbee guibg=NONE
 hi Boolean      gui=NONE guifg=#86bbee guibg=NONE
-hi Function     gui=NONE guifg=#CCA670 guibg=NONE
+hi Function     gui=NONE guifg=#cea662 guibg=NONE
 hi Delimiter    gui=NONE guifg=#00a0a0 guibg=NONE
 hi Operator     gui=NONE guifg=#86bbee guibg=NONE
+hi Comment      gui=NONE guifg=#8a8a8a guibg=NONE
 
 " TagHighlight plugin colors ( https://github.com/abudden/taghighlight-automirror )
 " hi link to from
@@ -213,7 +213,7 @@ hi link htmlH4          htmlH1
 
 " Special for CSS
 hi cssTagName guifg=#70a8dd gui=BOLD
-hi cssBoxProp guifg=#d0af76 gui=NONE
+hi cssBoxProp guifg=#d0af76  gui=NONE
 hi link cssColorProp cssBoxProp
 hi link cssFontProp cssBoxProp
 hi link cssTextProp cssBoxProp

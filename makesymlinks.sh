@@ -91,8 +91,8 @@ mkdir ~/.config/nvim/colors -p
 echo "  installing vim colorscheme"
 schemes="lakris.vim lakris256.vim"
 for scheme in $schemes; do
-    cp $dir/vimcols/$scheme ~/.vim/colors/$scheme
-    cp $dir/vimcols/$scheme ~/.config/nvim/colors/$scheme
+    ln -s $dir/vimcols/$scheme ~/.vim/colors/$scheme
+    ln -s $dir/vimcols/$scheme ~/.config/nvim/colors/$scheme
 done ;
 echo "source ~/.vimrc" > ~/.config/nvim/init.vim
 
