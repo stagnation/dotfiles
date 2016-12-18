@@ -6,12 +6,13 @@ else
 fi
 
 ping $ip -c 1 -q -w 0.01 &>/dev/null
-if [ $? -ne 1 ] ; then
+if [ $? -eq 0 ] ; then
     output=$(mpc -h $ip volume 2> /dev/null || echo "")
     output=${output:7:12}
     echo $output
+    exit 0
 else
     echo "mpd down"
+    exit 1
 fi
-exit 0
 
