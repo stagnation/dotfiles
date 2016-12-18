@@ -52,8 +52,9 @@ URxvt.url-launcher: firefox
 ! perls selection
 ! Copy stuff into /usr/lib/urxvt/perl/ or $HOME/.urxvt/ext/ instead.
 !URxvt.perl-lib: /home/oliver/Configuration-files/urxvt-perls/
-urxvt*perl-lib: /home/spill/.urxvt/ext/
-URxvt.perl-ext-common: default,matcher,url-select,clipboard,keyboard-select,vim-scrollback
+urxvt*perl-lib: /home/spill/dotfiles/gits/urxvt-perls/
+URxvt.perl-ext-common: default,matcher,url-select,clipboard,keyboard-select
+! ,vim-scrollback
 !
 !
 ! configure the background and foreground colors used for the status bar while
