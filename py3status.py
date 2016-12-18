@@ -64,6 +64,7 @@ status.register("battery",
     alert_percentage=5,
     charging_color=color1,
     full_color=color5,
+    not_present_text="",
     status={
         "DIS":  "Discharging",
         "CHR":  "Charging",
