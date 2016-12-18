@@ -1,0 +1,3 @@
+#!/bin/bash
+notify-send "mpv open \n $1" && mpv $1 --ytdl-format=best
+
