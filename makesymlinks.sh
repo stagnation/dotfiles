@@ -37,7 +37,7 @@ done
 i3dir=~/.i3
 if [ -d $i3dir ] ; then
     echo "  Moving existing i3 config from $i3dir/config to $bakdir"
-    mv $i3dir/config ~/$bakdir/
+    mv $i3dir/config $bakdir/
     echo "  Creating symlink to i3/config in home directory."
     ln -s $dir/i3cfg $i3dir/config
 fi
@@ -126,3 +126,8 @@ fi ;
 
 echo "  Global git ignore"
 ln -s $dir/gitconfigignore ~/.config/git/ignore
+
+echo " ----------"
+echo "consider installing"
+echo "ctags"
+echo "curl"
