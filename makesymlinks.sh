@@ -42,6 +42,11 @@ if [ -d $i3dir ] ; then
     ln -s $dir/i3cfg $i3dir/config
 fi
 
+sshdir=~/.ssh
+if [ -d $i3dir ] ; then
+    ln -s $dir/ssh_config $sshdir/config
+fi
+
 echo "  Creating symlink for fish functions in .config."
 if [[ -s ~/.config/fish ]] ; then
     echo "directory exist, remove first to overwrite."
@@ -131,3 +136,4 @@ echo " ----------"
 echo "consider installing"
 echo "ctags"
 echo "curl"
+echo "python{,3}-pip"
