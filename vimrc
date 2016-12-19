@@ -172,12 +172,13 @@ endif
 set backupdir=~/.vim/backup    "centralized backup
 set backspace=indent,eol,start "backspace everywhere
 set noswapfile                 "no swap files
-set foldmethod=indent          "creates fold based on indentation levels
+set foldmethod=syntax
 set foldlevel=20               "by defualt open folds to level 20
 set cursorline                 "highlights the line cursor is at
-set cursorcolumn
+set cursorcolumn               "highlights the column cursor is at
 set showcmd
 set wildmenu                    "menu line with autocomplete options
+set textwidth=80
 
 " intuitive split placement
 set splitbelow
@@ -298,8 +299,9 @@ function! Status(winnr)
     endif
   endfunction
 
-  " column
-  let stat .= '%1*' . (col(".") / 100 >= 1 ? '%v ' : ' %2v ') . '%*'
+  " special color in maximum columnwidth column
+  let max_columnwidth = 80
+  let stat .= '%1*' . (col(".") / max_columnwidth >= 1 ? '%v ' : ' %2v ') . '%*'
 
   " file
   let stat .= Color(active, 3, active ? ' »' : ' «')
