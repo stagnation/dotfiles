@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 ############################
 # .make.sh
 # This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
@@ -27,9 +27,11 @@ echo "  done"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks from the homedir to any files in the ~/dotfiles directory specified in $files
 
+echo "  Moving any existing dotfiles from ~ to $bakdir"
 for file in $files; do
-    echo "  Moving any existing dotfiles from ~ to $bakdir"
-    mv ~/.$file $bakdir/
+    if [ -f $file ] ; then
+        mv ~/.$file $bakdir/
+    fi
     echo "  Creating symlink to $file in home directory."
     ln -s $dir/$file ~/.$file
 done
@@ -37,20 +39,21 @@ done
 i3dir=~/.i3
 if [ -d $i3dir ] ; then
     echo "  Moving existing i3 config from $i3dir/config to $bakdir"
-    mv $i3dir/config ~/$bakdir/
+    mv $i3dir/config $bakdir/
     echo "  Creating symlink to i3/config in home directory."
     ln -s $dir/i3cfg $i3dir/config
 fi
 
+fishdir=~/.config/fish
 echo "  Creating symlink for fish functions in .config."
-if [[ -s ~/.config/fish ]] ; then
+if [ -d ~/.config/fish ] ; then
     echo "directory exist, remove first to overwrite."
 else
     ln -s $dir/fish ~/.config/fish
 fi;
 
 echo "  Creating symlink for vimperator"
-if [[ -s ~/.vimperator ]] ; then
+if [ -d ~/.vimperator ] ; then
     echo "directory exist, remove first to overwrite."
 else
     ln -s $dir/vimperatorrc ~/.vimperatorrc
@@ -62,14 +65,14 @@ fi;
 # git clone https://github.com/ervandew/vimperator-plugins
 
 echo "  Creating symlink for i3pystatus from git to shadow pip ver"
-if [[ -s ~/dotfiles/i3pystatus ]] ; then
+if [ -d ~/dotfiles/i3pystatus ] ; then
     echo "directory exist, remove first to overwrite."
 else
     ln -s /home/spill/bin/i3pystatus/i3pystatus $dir/i3pystatus
 fi;
 
 echo "  Creating symlink for urxvt perls"
-if [[ -s ~/.urxvt/ext/ ]] ; then
+if [ -d ~/.urxvt/ext/ ] ; then
     echo "directory exist, remove first to overwrite."
 else
     mkdir ~/.urxvt/ext -p
@@ -97,7 +100,7 @@ done ;
 echo "source ~/.vimrc" > ~/.config/nvim/init.vim
 
 echo "  Creating symlinks for ncmpcpp"
-if [[ -s ~/.ncmpcpp ]] ; then
+if [ -f ~/.ncmpcpp ] ; then
     echo "directory exist, remove first to overwrite."
 else
     mkdir ~/.ncmpcpp
