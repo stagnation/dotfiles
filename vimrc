@@ -24,6 +24,7 @@ Plug 'majutsushi/tagbar'
 Plug 'milkypostman/vim-togglelist'
 " Plug 'bronson/vim-trailing-whitespace'
 Plug 'vim-scripts/camelcasemotion'
+Plug 'rust-lang/rust.vim'
 Plug 'wellle/targets.vim'
 Plug 'mbbill/undotree'
 Plug 'airblade/vim-gitgutter'
@@ -47,7 +48,10 @@ if has ('nvim')
     Plug 'critiqjo/lldb.nvim'
     Plug 'benekastah/neomake'
     Plug 'brettanomyces/nvim-editcommand'
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
+    Plug 'sebastianmarkow/deoplete-rust'
 endif
+
 
 " explicitly load rsi so ä can be unmapped
 
@@ -61,6 +65,14 @@ call plug#end()
 " cyclic f, F, if wrong was used, cycle from begining of line
 " silent ]l in location list, no message that requires enter
 " cyclic ]l, if any exist don't show "no more" warning
+" Deoplete Options {{{
+if has ('nvim')
+    let g:deoplete#enable_at_startup = 1
+	let g:deoplete#sources#rust#racer_binary='/home/nils/.cargo/bin/racer'
+  	let g:deoplete#sources#rust#rust_source_path='/home/nils/rust/rust_source/rust/src'
+
+endif
+" }}}
 " {{{ Tmux navigation "
 " "tmux vim conavigation
 let g:tmux_navigator_no_mappings = 1
