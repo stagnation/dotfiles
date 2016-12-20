@@ -4,7 +4,7 @@ URxvt*saveLines: 12000
 !old
 !URxvt*font: xft:Liberation Mono:pixelsize=13:antialias=true:hinting=true
 !URxvt*boldFont: xft:Liberation Mono:bold:pixelsize=13:antialias=true:hinting=true
-URxvt*font: xft:Inconsolata:style=Medium:pixelsize=14:antialias=true:hinting=true:hintstyle=hintfull
+URxvt*font: xft:Inconsolata:style=Medium:pixelsize=17:antialias=true:hinting=true:hintstyle=hintfull
 URxvt*boldFont: xft:Inconsolata:style=Medium:bold:pixelsize=14:antialias=true:hinting=true:hintstyle=hintfull
 URxvt.lineSpace: 1
 ! Colors
