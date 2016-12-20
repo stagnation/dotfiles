@@ -19,4 +19,8 @@ set PATH /home/spill/.cargo/bin $PATH
 set MPD_HOST 192.168.1.8
 set fish_greeting
 
+set -x LC_ALL "en_US.UTF-8"
+set -x LANGUAGE "en_US.UTF-8"
+set -x LC_TIME "sv_SE.UTF-8"
+
 source ~/dotfiles/fish/(uname -n).fish
