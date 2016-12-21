@@ -64,13 +64,6 @@ fi;
 # cd $dir
 # git clone https://github.com/ervandew/vimperator-plugins
 
-echo "  Creating symlink for i3pystatus from git to shadow pip ver"
-if [ -d ~/dotfiles/i3pystatus ] ; then
-    echo "directory exist, remove first to overwrite."
-else
-    ln -s /home/spill/bin/i3pystatus/i3pystatus $dir/i3pystatus
-fi;
-
 echo "  Creating symlink for urxvt perls"
 if [ -d ~/.urxvt/ext/ ] ; then
     echo "directory exist, remove first to overwrite."
