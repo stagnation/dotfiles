@@ -1,5 +1,5 @@
 " vim: foldmethod=marker foldlevel=0 foldcolumn=3
-" Initialization, plug manager {{{ "
+" Initialization, plugin manager {{{
 " Fix for my shell, otherwise some scripts break
 if $SHELL =~ 'bin/fish'
     set shell=/bin/sh
@@ -44,6 +44,7 @@ Plug 'haya14busa/vim-operator-flashy'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/CSApprox'
 Plug 'Konfekt/FastFold'
+Plug 'rust-lang/rust.vim'
 if has ('nvim')
     Plug 'kassio/neoterm'
     Plug 'critiqjo/lldb.nvim'
@@ -55,13 +56,15 @@ endif
 
 
 " explicitly load rsi so ä can be unmapped
+" " if has("vim-rsi")
+" "     call plug#load('vim-rsi')
+" "     silent! iunmap ä
+" " endif
 
-if has("vim-rsi")
-    call plug#load('vim-rsi')
-    silent! iunmap ä
-endif
-
-call plug#end()
+" call plug#load('vim-rsi')
+"     silent! iunmap ä
+"     silent! imap <c-u> <esc>d0xi
+" call plug#end()
 
 " }}} Initialization "
 " TODO
@@ -529,6 +532,15 @@ nnoremap <leader>tp :CtrlPTag<CR>
 
 set tags=tags,TAGS;/
 let g:gutentags_ctags_executable_haskell = 'haskell-ctags'
+let g:gutentags_define_advanced_commands = '1'
+let g:gutentags_ctags_executable_rust = "rust-gutentags-wrapper.sh"
+
+" " add rust project info to gutentags
+" let g:gutentags_project_info = []
+" call add(g:gutentags_project_info, {'type': 'python', 'file': 'setup.py'})
+" call add(g:gutentags_project_info, {'type': 'ruby', 'file': 'Gemfile'})
+" call add(g:gutentags_project_info, {'type': 'rust', 'file': 'Cargo.toml'})
+" let g:gutentags_ctags_executable_rust = 'rust-ctags'
 
 noremap <leader>gt <c-w>} " go tag
 noremap <leader>tp <c-w>} " tag preview
@@ -852,7 +864,7 @@ if has("autocmd")
 endif
 " }}}
 nnoremap <BS> <Nop>
-" something sets / to ' ' in my rc
+" something sets the / register to ' ' in my rc
 let @/=''
 
 let g:peekaboo_delay = 500
@@ -864,7 +876,6 @@ nnoremap <leader><leader>u NOP
 function! SyntaxRule()
     echo synIDattr(synID(line("."), col("."), 1), "name")
 endfunction
-
 
 " TODO(nils): improve this
 " TODO(nils): does not work well with nested functions / macros
@@ -965,7 +976,6 @@ endfunction
 
 " }}}
 "
-
 " TODO(nils): flip quickscope colors so first match is more pronounced
 " TODO(nils): ]P eller något för paste nästa rad från "*
 " NB(nils): modeline is the name for # v i m: setting=value -- no 'set' required
