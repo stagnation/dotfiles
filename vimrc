@@ -43,6 +43,7 @@ Plug 'unblevable/quick-scope'
 Plug 'haya14busa/vim-operator-flashy'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/CSApprox'
+Plug 'Konfekt/FastFold'
 if has ('nvim')
     Plug 'kassio/neoterm'
     Plug 'critiqjo/lldb.nvim'
