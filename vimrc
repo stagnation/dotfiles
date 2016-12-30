@@ -812,6 +812,14 @@ if has("autocmd")
 
     autocmd Filetype c syntax keyword cTodo contained NB
 
+    autocmd FileType rust setlocal comments-=://
+    autocmd FileType rust setlocal comments+=://\ TODO(nils):
+    autocmd FileType rust setlocal comments+=://\ FIXME(nils):
+    autocmd FileType rust setlocal comments+=://\ NB(nils):
+    autocmd FileType rust setlocal comments+=://
+
+    autocmd Filetype rust syntax keyword cTodo contained NB
+
     " TODO(nils): what do fb and b mean? any number of spaces before/after?
     autocmd FileType python setlocal formatoptions=croql
     autocmd FileType python setlocal comments-=:#
@@ -852,6 +860,7 @@ endfunction
 
 " TODO(nils): improve this
 " TODO(nils): does not work well with nested functions / macros
+" TODO(nils): incorrect fold and foldtext when using fn...\n where{
 " {{{ Rust custom fold
 autocmd FileType rust setlocal foldmethod=expr
 autocmd FileType rust setlocal foldexpr=Nilsfold(v:lnum)
@@ -885,10 +894,12 @@ function! IsDoc(lnum)
 endfunction
 
 function! Nilsfold(lnum)
+    " split at empty lines
     if getline(a:lnum) =~? '\v^\s*$'
         return '-1'
     endif
 
+    " block closer
     if getline(a:lnum) =~? '}'
         return '='
     endif
@@ -897,7 +908,7 @@ function! Nilsfold(lnum)
     let next_indent = IndentLevel(NextNonBlankLine(a:lnum)) > 0
 
     if IsDoc(a:lnum) || IsAnnotation(a:lnum)
-        if IsDoc(a:lnum -1)
+        if IsDoc(a:lnum -1) || IsAnnotation(a:lnum -1)
             return '1'
         else
             return '>1'
@@ -907,10 +918,10 @@ function! Nilsfold(lnum)
     " body
     if next_indent == this_indent
         return this_indent
-    " end
+        " end
     elseif next_indent < this_indent
         return this_indent
-    " start
+        " start
     elseif next_indent > this_indent
         if IsAnnotation(a:lnum - 1) || IsDoc(a:lnum - 1)
             return next_indent
