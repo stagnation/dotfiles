@@ -8,7 +8,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-rsi', { 'on': [] }
 Plug 'spiiph/vim-space'
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/vim-easy-align'
 Plug 'whatyouhide/vim-lengthmatters'
 Plug 'vim-scripts/Indent-Guides'
@@ -34,7 +34,7 @@ Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kshenoy/vim-signature'
 Plug 'idbrii/vim-hiinterestingword'
-" Plug 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/visual-split.vim'
 Plug 'kana/vim-operator-user'
@@ -137,8 +137,6 @@ nnoremap gk k
 nnoremap gI g0i
 nnoremap gA g$i
 
-"Reuse last command
-nnoremap <c-p> :<c-p>
 " }}} Utility rebinds "
 " {{{ Settings
 syntax enable                  "enables syntax highlighting
@@ -451,6 +449,9 @@ nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gr :GitGutterRevertHunk<CR>
 nnoremap <leader>ga :GitGutterStageHunk<CR>
 nnoremap <leader>gp :GitGutterPreviewHunk<cr>
+
+autocmd FileType gitcommit setlocal textwidth=72
+
 " }}} Fugitive "
 " {{{ Search mappings "
 
@@ -963,3 +964,4 @@ endfunction
 " NB(nils): modeline is the name for # v i m: setting=value -- no 'set' required
 " NB(nils): gi inserts text from last insertion position.
 " NB(nils): :b# öppna senaste buffern
+" NB(nils): g, g; jumps between previous insertion positions
