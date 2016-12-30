@@ -68,8 +68,8 @@ call plug#end()
 " Deoplete Options {{{
 if has ('nvim')
     let g:deoplete#enable_at_startup = 1
-	let g:deoplete#sources#rust#racer_binary='/home/nils/.cargo/bin/racer'
-  	let g:deoplete#sources#rust#rust_source_path='/home/nils/rust/rust_source/rust/src'
+    let g:deoplete#sources#rust#racer_binary='/home/nils/.cargo/bin/racer'
+    let g:deoplete#sources#rust#rust_source_path='/home/nils/rust/rust_source/rust/src'
 
 endif
 " }}}
@@ -212,12 +212,12 @@ nnoremap <silent><C-n> :call NumberToggle()<cr>
 
 "toggle relative number for lines
 function! NumberToggle()
-  if(&relativenumber == 1)
-    set relativenumber!
-    set number
-  else
-    set relativenumber
-  endif
+    if(&relativenumber == 1)
+        set relativenumber!
+        set number
+    else
+        set relativenumber
+    endif
 endfunc
 
 highlight CursorLine term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f
@@ -283,86 +283,86 @@ hi CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#cb4b16
 " }}} Graphics of cursor
 " Status Function: {{{2
 function! Status(winnr)
-  let stat = ''
-  let active = winnr() == a:winnr
-  let buffer = winbufnr(a:winnr)
+    let stat = ''
+    let active = winnr() == a:winnr
+    let buffer = winbufnr(a:winnr)
 
-  let modified = getbufvar(buffer, '&modified')
-  let readonly = getbufvar(buffer, '&ro')
-  let fname = bufname(buffer)
+    let modified = getbufvar(buffer, '&modified')
+    let readonly = getbufvar(buffer, '&ro')
+    let fname = bufname(buffer)
 
-  function! Color(active, num, content)
-    if a:active
-      return '%' . a:num . '*' . a:content . '%*'
+    function! Color(active, num, content)
+        if a:active
+            return '%' . a:num . '*' . a:content . '%*'
+        else
+            return a:content
+        endif
+    endfunction
+
+    " special color in maximum columnwidth column
+    let max_columnwidth = 80
+    let stat .= '%1*' . (col(".") / max_columnwidth >= 1 ? '%v ' : ' %2v ') . '%*'
+
+    " file
+    let stat .= Color(active, 3, active ? ' »' : ' «')
+    let stat .= ' %<'
+
+    if fname == '__Gundo__'
+        let stat .= 'Gundo'
+    elseif fname == '__Gundo_Preview__'
+        let stat .= 'Gundo Preview'
+    elseif fname == '__Tagbar__'
+        let stat .= 'Tagbar'
     else
-      return a:content
+        let path = expand('%:h')
+        let stat .= Color(active, 5, path != "." ? path . '/' : '')
+        let stat .= Color(active, 4, '%t')
     endif
-  endfunction
 
-  " special color in maximum columnwidth column
-  let max_columnwidth = 80
-  let stat .= '%1*' . (col(".") / max_columnwidth >= 1 ? '%v ' : ' %2v ') . '%*'
+    let stat .= ' ' . Color(active, 3, active ? '«' : '»')
 
-  " file
-  let stat .= Color(active, 3, active ? ' »' : ' «')
-  let stat .= ' %<'
+    " file modified
+    let stat .= Color(active, 4, modified ? ' +' : '')
 
-  if fname == '__Gundo__'
-    let stat .= 'Gundo'
-  elseif fname == '__Gundo_Preview__'
-    let stat .= 'Gundo Preview'
-  elseif fname == '__Tagbar__'
-    let stat .= 'Tagbar'
-  else
-    let path = expand('%:h')
-    let stat .= Color(active, 5, path != "." ? path . '/' : '')
-    let stat .= Color(active, 4, '%t')
-  endif
+    " read only
+    "
+    let stat .= Color(active, 4, readonly ? ' readonly' : '')
 
-  let stat .= ' ' . Color(active, 3, active ? '«' : '»')
-
-  " file modified
-  let stat .= Color(active, 4, modified ? ' +' : '')
-
-  " read only
-  "
-  let stat .= Color(active, 4, readonly ? ' readonly' : '')
-
-  " paste
-  if active && &paste
-    let stat .= ' %2*' . 'P' . '%*'
-  endif
-
-  " right side
-  let stat .= '%='
-
-  " git branch
-  if exists('*fugitive#head')
-    let head = fugitive#head()
-
-    if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
-      call fugitive#detect(getcwd())
-      let head = fugitive#head()
+    " paste
+    if active && &paste
+        let stat .= ' %2*' . 'P' . '%*'
     endif
-  endif
 
-  if !empty(head)
-    let stat .= Color(active, 3, ' ← ') . head . ' '
-  endif
+    " right side
+    let stat .= '%='
 
-  return stat
+    " git branch
+    if exists('*fugitive#head')
+        let head = fugitive#head()
+
+        if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
+            call fugitive#detect(getcwd())
+            let head = fugitive#head()
+        endif
+    endif
+
+    if !empty(head)
+        let stat .= Color(active, 3, ' ← ') . head . ' '
+    endif
+
+    return stat
 endfunction
 " }}}
 " Status AutoCMD: {{{
 function! SetStatus()
-  for nr in range(1, winnr('$'))
-    call setwinvar(nr, '&statusline', '%!Status('.nr.')')
-  endfor
+    for nr in range(1, winnr('$'))
+        call setwinvar(nr, '&statusline', '%!Status('.nr.')')
+    endfor
 endfunction
 
 augroup status
-  autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter,BufUnload * call SetStatus()
+    autocmd!
+    autocmd VimEnter,WinEnter,BufWinEnter,BufUnload * call SetStatus()
 augroup END
 " }}}
 " Status Colors: {{{
@@ -411,7 +411,7 @@ autocmd Cursorhold * checktime "also check for file changes, more sublte
 
 "return to cursor location when reopenning file
 if has("autocmd")
-      autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
+    autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
 " }}} file and shell stuff
@@ -558,15 +558,15 @@ let g:startify_session_persistence = 1 "autosave sessions
 let g:startify_bookmarks = [ '~/dotfiles/vimrc' ]
 
 let g:startify_list_order = [
-        \ ['   These are my bookmarks:'],
-        \ 'bookmarks',
-        \ ['   These are my sessions:'],
-        \ 'sessions',
-        \ ['   My most recently', '   used files'],
-        \ 'files',
-        \ ['   My most recently used files in the current directory:'],
-        \ 'dir',
-        \ ]
+            \ ['   These are my bookmarks:'],
+            \ 'bookmarks',
+            \ ['   These are my sessions:'],
+            \ 'sessions',
+            \ ['   My most recently', '   used files'],
+            \ 'files',
+            \ ['   My most recently used files in the current directory:'],
+            \ 'dir',
+            \ ]
 " }}} startify
 " {{{ Location Quickfix
 " toggle location and quickfix lists
@@ -600,18 +600,18 @@ nnoremap <leader>m :make<cr><cr>
 "toggle slimed down display to handle files with very long lines
 " NB(nils): resetting funtionality does not work
 function! SpillToggleLongLineDisplay()
-  if(&cursorline == 1)
-    set filetype=
-    set nocursorline
-    set nocursorcolumn
-    LengthmattersDisable
-    set nowrap
-  else
-    set cursorline
-    set cursorcolumn
-    LengthmattersEnable
-    set wrap
-  endif
+    if(&cursorline == 1)
+        set filetype=
+        set nocursorline
+        set nocursorcolumn
+        LengthmattersDisable
+        set nowrap
+    else
+        set cursorline
+        set cursorcolumn
+        LengthmattersEnable
+        set wrap
+    endif
 endfunc
 nnoremap <leader>st :call SpillToggleLongLineDisplay()<cr>
 " }}} spill functions
