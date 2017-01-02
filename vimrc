@@ -8,7 +8,7 @@ endif
 call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-rsi', { 'on': [] }
 Plug 'spiiph/vim-space'
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/vim-easy-align'
 Plug 'whatyouhide/vim-lengthmatters'
 Plug 'vim-scripts/Indent-Guides'
@@ -34,7 +34,7 @@ Plug 'mhinz/vim-startify'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kshenoy/vim-signature'
 Plug 'idbrii/vim-hiinterestingword'
-" Plug 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/visual-split.vim'
 Plug 'kana/vim-operator-user'
@@ -71,8 +71,8 @@ call plug#end()
 " Deoplete Options {{{
 if has ('nvim')
     let g:deoplete#enable_at_startup = 1
-	let g:deoplete#sources#rust#racer_binary='/home/nils/.cargo/bin/racer'
-  	let g:deoplete#sources#rust#rust_source_path='/home/nils/rust/rust_source/rust/src'
+    let g:deoplete#sources#rust#racer_binary='/home/nils/.cargo/bin/racer'
+    let g:deoplete#sources#rust#rust_source_path='/home/nils/rust/rust_source/rust/src'
 
 endif
 " }}}
@@ -140,8 +140,6 @@ nnoremap gk k
 nnoremap gI g0i
 nnoremap gA g$i
 
-"Reuse last command
-nnoremap <c-p> :<c-p>
 " }}} Utility rebinds "
 " {{{ Settings
 syntax enable                  "enables syntax highlighting
@@ -215,12 +213,12 @@ nnoremap <silent><C-n> :call NumberToggle()<cr>
 
 "toggle relative number for lines
 function! NumberToggle()
-  if(&relativenumber == 1)
-    set relativenumber!
-    set number
-  else
-    set relativenumber
-  endif
+    if(&relativenumber == 1)
+        set relativenumber!
+        set number
+    else
+        set relativenumber
+    endif
 endfunc
 
 highlight CursorLine term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f
@@ -288,89 +286,88 @@ hi CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#cb4b16
 " }}} Graphics of cursor
 " Status Function: {{{2
 function! Status(winnr)
-  let stat = ''
-  let active = winnr() == a:winnr
-  let buffer = winbufnr(a:winnr)
+    let stat = ''
+    let active = winnr() == a:winnr
+    let buffer = winbufnr(a:winnr)
 
-  let modified = getbufvar(buffer, '&modified')
-  let readonly = getbufvar(buffer, '&ro')
-  let fname = bufname(buffer)
+    let modified = getbufvar(buffer, '&modified')
+    let readonly = getbufvar(buffer, '&ro')
+    let fname = bufname(buffer)
 
-  function! Color(active, num, content)
-    if a:active
-      return '%' . a:num . '*' . a:content . '%*'
+    function! Color(active, num, content)
+        if a:active
+            return '%' . a:num . '*' . a:content . '%*'
+        else
+            return a:content
+        endif
+    endfunction
+
+    " special color in maximum columnwidth column
+    let max_columnwidth = 80
+    let stat .= '%1*' . (col(".") / max_columnwidth >= 1 ? '%v ' : ' %2v ') . '%*'
+
+    " file
+    let stat .= Color(active, 3, active ? ' »' : ' «')
+    let stat .= ' %<'
+
+    if fname == '__Gundo__'
+        let stat .= 'Gundo'
+    elseif fname == '__Gundo_Preview__'
+        let stat .= 'Gundo Preview'
+    elseif fname == '__Tagbar__'
+        let stat .= 'Tagbar'
     else
-      return a:content
+        let path = expand('%:h')
+        let stat .= Color(active, 5, path != "." ? path . '/' : '')
+        let stat .= Color(active, 4, '%t')
     endif
-  endfunction
 
-  " special color in maximum columnwidth column
-  let max_columnwidth = 80
-  let stat .= '%1*' . (col(".") / max_columnwidth >= 1 ? '%v ' : ' %2v ') . '%*'
+    let stat .= ' ' . Color(active, 3, active ? '«' : '»')
 
-  " file
-  let stat .= Color(active, 3, active ? ' »' : ' «')
-  let stat .= ' %<'
+    " file modified
+    let stat .= Color(active, 4, modified ? ' +' : '')
 
-  if fname == '__Gundo__'
-    let stat .= 'Gundo'
-  elseif fname == '__Gundo_Preview__'
-    let stat .= 'Gundo Preview'
-  elseif fname == '__Tagbar__'
-    let stat .= 'Tagbar'
-  else
-    let path = expand('%:h')
-    let stat .= Color(active, 5, path != "." ? path . '/' : '')
-    let stat .= Color(active, 4, '%t')
-  endif
+    " read only
+    "
+    let stat .= Color(active, 4, readonly ? ' readonly' : '')
 
-  let stat .= ' ' . Color(active, 3, active ? '«' : '»')
+    " paste
+    if active && &paste
+        let stat .= ' %2*' . 'P' . '%*'
+    endif
 
-  " file modified
-  let stat .= Color(active, 4, modified ? ' +' : '')
+    " right side
+    let stat .= '%='
 
-  " read only
-  "
-  let stat .= Color(active, 4, readonly ? ' readonly' : '')
+    if has("fugitive")
+        " git branch
+        if exists('*fugitive#head')
+            let head = fugitive#head()
 
-  " paste
-  if active && &paste
-    let stat .= ' %2*' . 'P' . '%*'
-  endif
+            if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
+                call fugitive#detect(getcwd())
+                let head = fugitive#head()
+            endif
+        endif
 
-  " right side
-  let stat .= '%='
+        if !empty(head)
+            let stat .= Color(active, 3, ' ← ') . head . ' '
+        endif
+    endif
 
-  " git status - requires fugitive
-  if has("fugitive")
-      " git branch
-      if exists('*fugitive#head')
-          let head = fugitive#head()
-
-          if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
-              call fugitive#detect(getcwd())
-              let head = fugitive#head()
-          endif
-      endif
-
-      if !empty(head)
-          let stat .= Color(active, 3, ' ← ') . head . ' '
-      endif
-  endif
-
-  return stat
+    return stat
 endfunction
 " }}}
 " Status AutoCMD: {{{
 function! SetStatus()
-  for nr in range(1, winnr('$'))
-    call setwinvar(nr, '&statusline', '%!Status('.nr.')')
-  endfor
+    for nr in range(1, winnr('$'))
+        call setwinvar(nr, '&statusline', '%!Status('.nr.')')
+    endfor
 endfunction
 
 augroup status
-  autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter,BufUnload * call SetStatus()
+    autocmd!
+    autocmd VimEnter,WinEnter,BufWinEnter,BufUnload * call SetStatus()
 augroup END
 " }}}
 " Status Colors: {{{
@@ -419,7 +416,7 @@ autocmd Cursorhold * checktime "also check for file changes, more sublte
 
 "return to cursor location when reopenning file
 if has("autocmd")
-      autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
+    autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
 " }}} file and shell stuff
@@ -459,6 +456,9 @@ nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gr :GitGutterRevertHunk<CR>
 nnoremap <leader>ga :GitGutterStageHunk<CR>
 nnoremap <leader>gp :GitGutterPreviewHunk<cr>
+
+autocmd FileType gitcommit setlocal textwidth=72
+
 " }}} Fugitive "
 " {{{ Search mappings "
 
@@ -566,15 +566,15 @@ let g:startify_session_persistence = 1 "autosave sessions
 let g:startify_bookmarks = [ '~/dotfiles/vimrc' ]
 
 let g:startify_list_order = [
-        \ ['   These are my bookmarks:'],
-        \ 'bookmarks',
-        \ ['   These are my sessions:'],
-        \ 'sessions',
-        \ ['   My most recently', '   used files'],
-        \ 'files',
-        \ ['   My most recently used files in the current directory:'],
-        \ 'dir',
-        \ ]
+            \ ['   These are my bookmarks:'],
+            \ 'bookmarks',
+            \ ['   These are my sessions:'],
+            \ 'sessions',
+            \ ['   My most recently', '   used files'],
+            \ 'files',
+            \ ['   My most recently used files in the current directory:'],
+            \ 'dir',
+            \ ]
 " }}} startify
 " {{{ Location Quickfix
 " toggle location and quickfix lists
@@ -608,18 +608,18 @@ nnoremap <leader>m :make<cr><cr>
 "toggle slimed down display to handle files with very long lines
 " NB(nils): resetting funtionality does not work
 function! SpillToggleLongLineDisplay()
-  if(&cursorline == 1)
-    set filetype=
-    set nocursorline
-    set nocursorcolumn
-    LengthmattersDisable
-    set nowrap
-  else
-    set cursorline
-    set cursorcolumn
-    LengthmattersEnable
-    set wrap
-  endif
+    if(&cursorline == 1)
+        set filetype=
+        set nocursorline
+        set nocursorcolumn
+        LengthmattersDisable
+        set nowrap
+    else
+        set cursorline
+        set cursorcolumn
+        LengthmattersEnable
+        set wrap
+    endif
 endfunc
 nnoremap <leader>st :call SpillToggleLongLineDisplay()<cr>
 " }}} spill functions
@@ -820,6 +820,14 @@ if has("autocmd")
 
     autocmd Filetype c syntax keyword cTodo contained NB
 
+    autocmd FileType rust setlocal comments-=://
+    autocmd FileType rust setlocal comments+=://\ TODO(nils):
+    autocmd FileType rust setlocal comments+=://\ FIXME(nils):
+    autocmd FileType rust setlocal comments+=://\ NB(nils):
+    autocmd FileType rust setlocal comments+=://
+
+    autocmd Filetype rust syntax keyword cTodo contained NB
+
     " TODO(nils): what do fb and b mean? any number of spaces before/after?
     autocmd FileType python setlocal formatoptions=croql
     autocmd FileType python setlocal comments-=:#
@@ -860,6 +868,7 @@ endfunction
 
 " TODO(nils): improve this
 " TODO(nils): does not work well with nested functions / macros
+" TODO(nils): incorrect fold and foldtext when using fn...\n where{
 " {{{ Rust custom fold
 autocmd FileType rust setlocal foldmethod=expr
 autocmd FileType rust setlocal foldexpr=Nilsfold(v:lnum)
@@ -893,10 +902,12 @@ function! IsDoc(lnum)
 endfunction
 
 function! Nilsfold(lnum)
+    " split at empty lines
     if getline(a:lnum) =~? '\v^\s*$'
         return '-1'
     endif
 
+    " block closer
     if getline(a:lnum) =~? '}'
         return '='
     endif
@@ -905,7 +916,7 @@ function! Nilsfold(lnum)
     let next_indent = IndentLevel(NextNonBlankLine(a:lnum)) > 0
 
     if IsDoc(a:lnum) || IsAnnotation(a:lnum)
-        if IsDoc(a:lnum -1)
+        if IsDoc(a:lnum -1) || IsAnnotation(a:lnum -1)
             return '1'
         else
             return '>1'
@@ -915,10 +926,10 @@ function! Nilsfold(lnum)
     " body
     if next_indent == this_indent
         return this_indent
-    " end
+        " end
     elseif next_indent < this_indent
         return this_indent
-    " start
+        " start
     elseif next_indent > this_indent
         if IsAnnotation(a:lnum - 1) || IsDoc(a:lnum - 1)
             return next_indent
@@ -960,3 +971,4 @@ endfunction
 " NB(nils): modeline is the name for # v i m: setting=value -- no 'set' required
 " NB(nils): gi inserts text from last insertion position.
 " NB(nils): :b# öppna senaste buffern
+" NB(nils): g, g; jumps between previous insertion positions
