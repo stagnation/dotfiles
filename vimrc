@@ -56,8 +56,10 @@ endif
 
 " explicitly load rsi so ä can be unmapped
 
-call plug#load('vim-rsi')
-silent! iunmap ä
+if has("vim-rsi")
+    call plug#load('vim-rsi')
+    silent! iunmap ä
+endif
 
 call plug#end()
 
@@ -224,7 +226,9 @@ endfunc
 highlight CursorLine term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f
 " highlight CursorColumn term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f
 
-call lengthmatters#highlight('ctermbg=235')
+if has("lengthmatters")
+    call lengthmatters#highlight('ctermbg=235')
+endif
 
 " {{{ Syntastic Signs "
 highlight WarningMsg ctermbg=232
@@ -337,18 +341,21 @@ function! Status(winnr)
   " right side
   let stat .= '%='
 
-  " git branch
-  if exists('*fugitive#head')
-    let head = fugitive#head()
+  " git status - requires fugitive
+  if has("fugitive")
+      " git branch
+      if exists('*fugitive#head')
+          let head = fugitive#head()
 
-    if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
-      call fugitive#detect(getcwd())
-      let head = fugitive#head()
-    endif
-  endif
+          if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
+              call fugitive#detect(getcwd())
+              let head = fugitive#head()
+          endif
+      endif
 
-  if !empty(head)
-    let stat .= Color(active, 3, ' ← ') . head . ' '
+      if !empty(head)
+          let stat .= Color(active, 3, ' ← ') . head . ' '
+      endif
   endif
 
   return stat
