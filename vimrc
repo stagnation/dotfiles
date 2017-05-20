@@ -543,16 +543,14 @@ set tags=tags,TAGS;/
 let g:gutentags_ctags_executable_haskell = 'haskell-ctags'
 let g:gutentags_define_advanced_commands = '1'
 let g:gutentags_ctags_executable_rust = "rust-gutentags-wrapper.sh"
+let g:gutentags_ctags_exclude = ["*.html"]
 
 " " add rust project info to gutentags
-" let g:gutentags_project_info = []
-" call add(g:gutentags_project_info, {'type': 'python', 'file': 'setup.py'})
-" call add(g:gutentags_project_info, {'type': 'ruby', 'file': 'Gemfile'})
-" call add(g:gutentags_project_info, {'type': 'rust', 'file': 'Cargo.toml'})
+let g:gutentags_project_info = []
+call add(g:gutentags_project_info, {'type': 'python', 'file': 'setup.py'})
+call add(g:gutentags_project_info, {'type': 'ruby', 'file': 'Gemfile'})
+call add(g:gutentags_project_info, {'type': 'rust', 'file': 'Cargo.toml'})
 " let g:gutentags_ctags_executable_rust = 'rust-ctags'
-
-noremap <leader>gt <c-w>} " go tag
-noremap <leader>tp <c-w>} " tag preview
 
 " }}} Tag Plugins "
 " {{{ disable mouse scroll
