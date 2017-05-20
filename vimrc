@@ -989,3 +989,4 @@ endfunction
 " NB(nils): gi inserts text from last insertion position.
 " NB(nils): :b# öppna senaste buffern
 " NB(nils): g, g; jumps between previous insertion positions
+" NB(nils): :let ... <c-a> shows all settings, enter give all their values
