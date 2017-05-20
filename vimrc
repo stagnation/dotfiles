@@ -400,6 +400,8 @@ vmap <Enter> <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+let g:easy_align_left_margin = 0
+let g:easy_align_right_margin = 0
 " }}} EasyAlign "
 " {{{ Insert Mode maps "
 inoremap JJ <Esc>o
