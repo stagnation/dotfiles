@@ -4,20 +4,24 @@
 if $SHELL =~ 'bin/fish'
     set shell=/bin/sh
 endif
+
+let plug_location = '~/.vim/plugged'
+if has ('nvim')
+    let plug_location = '~/.local/share/nvim/plugged'
+endif
 " :s#.*github.com/#Plug '#<cr>:s#$#'#<cr>:nohlsearch<cr>
-call plug#begin('~/.vim/plugged')
+call plug#begin(plug_location)
 Plug 'tpope/vim-rsi', { 'on': [] }
 Plug 'spiiph/vim-space'
 " Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/vim-easy-align'
 Plug 'whatyouhide/vim-lengthmatters'
-Plug 'vim-scripts/Indent-Guides'
 Plug 'ferranpm/vim-isolate'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/vim-peekaboo'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'eparreno/vim-matchit'
+" Plug 'eparreno/vim-matchit'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'scrooloose/syntastic/'
 Plug 'majutsushi/tagbar'
@@ -33,8 +37,7 @@ Plug 'mhinz/vim-startify'
 " Plug 'pelodelfuego/vim-swoop'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kshenoy/vim-signature'
-Plug 'idbrii/vim-hiinterestingword'
-Plug 'kien/ctrlp.vim'
+Plug 'lfv89/vim-interestingwords'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/visual-split.vim'
 Plug 'kana/vim-operator-user'
@@ -52,6 +55,10 @@ if has ('nvim')
     Plug 'brettanomyces/nvim-editcommand'
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
     Plug 'sebastianmarkow/deoplete-rust'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+    Plug 'junegunn/fzf.vim'
+else
+    Plug 'kien/ctrlP.vim'
 endif
 
 
@@ -64,7 +71,7 @@ endif
 " call plug#load('vim-rsi')
 "     silent! iunmap ä
 "     silent! imap <c-u> <esc>d0xi
-" call plug#end()
+call plug#end()
 
 " }}} Initialization "
 " TODO
