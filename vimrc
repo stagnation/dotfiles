@@ -893,6 +893,8 @@ nnoremap $ L
 " readline-like keys for the command line
 cnoremap <C-a>	<Home>
 
+" disable automatic linebreak at textwidth
+set formatoptions-=t
 " TODO(nils): improve this
 " TODO(nils): does not work well with nested functions / macros
 " TODO(nils): incorrect fold and foldtext when using fn...\n where{

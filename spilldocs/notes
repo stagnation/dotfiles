@@ -1,3 +1,5 @@
+# vim: ft=md
+
 clang and gcc have address sanitizer.
 mypy: static-typing linter
 function prolouge: inserted by compiler, inserted on the stack to have space for variables
@@ -5,25 +7,27 @@ tiered allocators: use a bump allocator for simplicity in setting up state for a
 least recently used page: clockhand algorithm: set a use bit to 1 each time a page is used. clockhand looks for next use=0 and clears any 1's found along the way
 server tools: logrotate, fail2ban
 
+awk:  conditional print has no if. $ awk '<condition> { command }' $awk '$5>0 { print $5 }'
 c/++: ? has low priority be explicit with parentheses
-c/++: use const when there are output arguments with same type as input arguments
-c/++: printf: pops values from stack if more %d, statements are given than arguments. Vulnerable to attack by user provided strings.
 c/++: have default case in switches over enums: and assert false to catch if the enum definition has been changed. and/or have a marker comment on each such switch
-gdb:  set <var> = value
-gdb:  rwatch break when a variable is read
+c/++: printf: pops values from stack if more %d, statements are given than arguments. Vulnerable to attack by user provided strings.
+c/++: use const when there are output arguments with same type as input arguments
+deb:  $ apt-cache policy <package> - shows available versions of package in all available sources
+deb:  $ aptitude install -t testing <package> - installs a package from testing
 gdb:  finish continue until function return
-git:  stash show -p: show patch information from stash
+gdb:  rwatch break when a variable is read
+gdb:  set <var> = value
 git:  make a subdirectory into a separate repo: $ git filter-branch -- ...
+git:  stash show -p: show patch information from stash
 rust: iterator::partition
 sed:  sed '=' <fil> prints file with line numbers
-sort: sort --debug to help write a correct query on multiple fields
-sort: -k6 -t' ' sort on 6th key with ' ' as separator
-sql:  ' is used for string literals
-awk:  conditional print has no if. $ awk '<condition> { command }' $awk '$5>0 { print $5 }'
-tee:  write input to file and stdout
 sh:   ${$1 + "$@"} "$@" if $1 exists
-sh:   backticks are not literal inside ""'s - can execute subcommands
 sh:   1>&2 redirect stdout to stderr
+sh:   backticks are not literal inside ""'s - can execute subcommands
+sort: -k6 -t' ' sort on 6th key with ' ' as separator
+sort: sort --debug to help write a correct query on multiple fields
+sql:  ' is used for string literals
+tee:  write input to file and stdout
 
 * streaming random selection:
 pick a random element from a streaming array with no
