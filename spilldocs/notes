@@ -1,0 +1,74 @@
+clang and gcc have address sanitizer.
+mypy: static-typing linter
+function prolouge: inserted by compiler, inserted on the stack to have space for variables
+tiered allocators: use a bump allocator for simplicity in setting up state for a more advanced allocator
+least recently used page: clockhand algorithm: set a use bit to 1 each time a page is used. clockhand looks for next use=0 and clears any 1's found along the way
+server tools: logrotate, fail2ban
+
+c/++: ? has low priority be explicit with parentheses
+c/++: use const when there are output arguments with same type as input arguments
+c/++: printf: pops values from stack if more %d, statements are given than arguments. Vulnerable to attack by user provided strings.
+c/++: have default case in switches over enums: and assert false to catch if the enum definition has been changed. and/or have a marker comment on each such switch
+gdb:  set <var> = value
+gdb:  rwatch break when a variable is read
+gdb:  finish continue until function return
+git:  stash show -p: show patch information from stash
+git:  make a subdirectory into a separate repo: $ git filter-branch -- ...
+rust: iterator::partition
+sed:  sed '=' <fil> prints file with line numbers
+sort: sort --debug to help write a correct query on multiple fields
+sort: -k6 -t' ' sort on 6th key with ' ' as separator
+sql:  ' is used for string literals
+awk:  conditional print has no if. $ awk '<condition> { command }' $awk '$5>0 { print $5 }'
+tee:  write input to file and stdout
+sh:   ${$1 + "$@"} "$@" if $1 exists
+sh:   backticks are not literal inside ""'s - can execute subcommands
+sh:   1>&2 redirect stdout to stderr
+
+* streaming random selection:
+pick a random element from a streaming array with no
+information about total count. Pick the first element then for each (nth)
+element select it with probability 1/n
+
+* binary search short implementation (can be unrolled)
+while lower != upper && step != 1:
+    step /= 2
+    if x[position + step] < target
+    position += step
+
+* conflict free hash
+return (v + FACTOR) >> (32 - NBITS);
+NBITS - number of bits in hashtable
+FACTOR - a suitable number, this is found through brute force until no collision
+
+* simple hash for telephone numbers: 10x10 matrix with last two digits as indices
+perform exhaustive search among all results
+
+* problematic null pointer case study
+0: function(type * ptr)
+1: type a = ... *ptr;
+2: if (!ptr) {
+    ... a ...
+}
+the compiler can take 1 as a guarantee that ptr is not null and optimize away
+the check in 2. Leading to broken code. So the guard in 2 does not protect us
+
+* Reproducible builds: (code -> binary is reproducible)
+    - allows verification that binary is indeed built with the alleged code
+    - allows caching and incremental builds
+
+* Concurrent counter: sloppy counter
+Each cpu has a local counter and a sloppiness/tolerance parameter S.
+When the local counter reaches S a lock is acquired on the global counter and the local is 'flushed'
+
+* Fisher Yates-shuffle
+Index from the end of array, for each index randomize another position and swap the two.
+Iterate until index reaches 0
+
+* Swap/page daemon
+Runs when fewer than LW - low water mark - pages are free.
+Evicts until HW - high water mark - pages are free.
+The batch eviction enables some optimizations.
+
+Böker:
+Richard W Stevens: Unix networking

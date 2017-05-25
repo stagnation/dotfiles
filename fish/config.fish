@@ -18,6 +18,7 @@ set PATH /home/spill/bin $PATH
 set PATH /home/spill/.cargo/bin $PATH
 set MPD_HOST 192.168.1.8
 set fish_greeting
+set RUST_SRC_PATH (rustc --print sysroot)/lib/rustlib/src/rust/src
 
 set -x LC_ALL "en_US.UTF-8"
 set -x LANGUAGE "en_US.UTF-8"

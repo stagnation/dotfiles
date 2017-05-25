@@ -1,28 +1,34 @@
 " vim: foldmethod=marker foldlevel=0 foldcolumn=3
-" Initialization, plug manager {{{ "
+" Initialization, plugin manager {{{
 " Fix for my shell, otherwise some scripts break
 if $SHELL =~ 'bin/fish'
     set shell=/bin/sh
 endif
+
+let plug_location = '~/.vim/plugged'
+if has ('nvim')
+    let plug_location = '~/.local/share/nvim/plugged'
+endif
 " :s#.*github.com/#Plug '#<cr>:s#$#'#<cr>:nohlsearch<cr>
-call plug#begin('~/.vim/plugged')
+call plug#begin(plug_location)
 Plug 'tpope/vim-rsi', { 'on': [] }
 Plug 'spiiph/vim-space'
-Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/vim-easy-align'
-Plug 'whatyouhide/vim-lengthmatters'
-Plug 'vim-scripts/Indent-Guides'
+" Plug 'whatyouhide/vim-lengthmatters'
+Plug 'ferranpm/vim-isolate'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/vim-peekaboo'
-Plug 'ntpeters/vim-better-whitespace'
+" Plug 'ntpeters/vim-better-whitespace'
+Plug 'romainl/vim-qf'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'eparreno/vim-matchit'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'scrooloose/syntastic/'
+" Plug 'scrooloose/syntastic/'
 Plug 'majutsushi/tagbar'
 Plug 'milkypostman/vim-togglelist'
 " Plug 'bronson/vim-trailing-whitespace'
 Plug 'vim-scripts/camelcasemotion'
+Plug 'rust-lang/rust.vim'
 Plug 'wellle/targets.vim'
 Plug 'mbbill/undotree'
 Plug 'airblade/vim-gitgutter'
@@ -31,28 +37,40 @@ Plug 'mhinz/vim-startify'
 " Plug 'pelodelfuego/vim-swoop'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'kshenoy/vim-signature'
-Plug 'idbrii/vim-hiinterestingword'
-" Plug 'kien/ctrlp.vim'
+Plug 'lfv89/vim-interestingwords'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/visual-split.vim'
 Plug 'kana/vim-operator-user'
-Plug 'ferranpm/vim-isolate'
 Plug 'unblevable/quick-scope'
 Plug 'haya14busa/vim-operator-flashy'
 Plug 'tpope/vim-surround'
 Plug 'vim-scripts/CSApprox'
+Plug 'Konfekt/FastFold'
+Plug 'rust-lang/rust.vim'
 if has ('nvim')
     Plug 'kassio/neoterm'
     Plug 'critiqjo/lldb.nvim'
     Plug 'benekastah/neomake'
     Plug 'brettanomyces/nvim-editcommand'
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
+    Plug 'sebastianmarkow/deoplete-rust'
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+    Plug 'junegunn/fzf.vim'
+else
+    " Plug 'Valloric/YouCompleteMe'
+    Plug 'kien/ctrlP.vim'
 endif
 
+
 " explicitly load rsi so ä can be unmapped
+" " if has("vim-rsi")
+" "     call plug#load('vim-rsi')
+" "     silent! iunmap ä
+" " endif
 
-call plug#load('vim-rsi')
-silent! iunmap ä
-
+" call plug#load('vim-rsi')
+"     silent! iunmap ä
+"     silent! imap <c-u> <esc>d0xi
 call plug#end()
 
 " }}} Initialization "
@@ -60,6 +78,14 @@ call plug#end()
 " cyclic f, F, if wrong was used, cycle from begining of line
 " silent ]l in location list, no message that requires enter
 " cyclic ]l, if any exist don't show "no more" warning
+" Deoplete Options {{{
+if has ('nvim')
+    let g:deoplete#enable_at_startup = 1
+    let g:deoplete#sources#rust#racer_binary='/home/nils/.cargo/bin/racer'
+    let g:deoplete#sources#rust#rust_source_path='/home/nils/rust/rust_source/rust/src'
+
+endif
+" }}}
 " {{{ Tmux navigation "
 " "tmux vim conavigation
 let g:tmux_navigator_no_mappings = 1
@@ -124,8 +150,6 @@ nnoremap gk k
 nnoremap gI g0i
 nnoremap gA g$i
 
-"Reuse last command
-nnoremap <c-p> :<c-p>
 " }}} Utility rebinds "
 " {{{ Settings
 syntax enable                  "enables syntax highlighting
@@ -159,12 +183,13 @@ endif
 set backupdir=~/.vim/backup    "centralized backup
 set backspace=indent,eol,start "backspace everywhere
 set noswapfile                 "no swap files
-set foldmethod=indent          "creates fold based on indentation levels
+set foldmethod=syntax
 set foldlevel=20               "by defualt open folds to level 20
 set cursorline                 "highlights the line cursor is at
-set cursorcolumn
+set cursorcolumn               "highlights the column cursor is at
 set showcmd
 set wildmenu                    "menu line with autocomplete options
+set textwidth=80
 
 " intuitive split placement
 set splitbelow
@@ -198,18 +223,20 @@ nnoremap <silent><C-n> :call NumberToggle()<cr>
 
 "toggle relative number for lines
 function! NumberToggle()
-  if(&relativenumber == 1)
-    set relativenumber!
-    set number
-  else
-    set relativenumber
-  endif
+    if(&relativenumber == 1)
+        set relativenumber!
+        set number
+    else
+        set relativenumber
+    endif
 endfunc
 
 highlight CursorLine term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f
 " highlight CursorColumn term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f
 
-call lengthmatters#highlight('ctermbg=235')
+if has("lengthmatters")
+    call lengthmatters#highlight('ctermbg=235')
+endif
 
 " {{{ Syntastic Signs "
 highlight WarningMsg ctermbg=232
@@ -269,85 +296,88 @@ hi CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#cb4b16
 " }}} Graphics of cursor
 " Status Function: {{{2
 function! Status(winnr)
-  let stat = ''
-  let active = winnr() == a:winnr
-  let buffer = winbufnr(a:winnr)
+    let stat = ''
+    let active = winnr() == a:winnr
+    let buffer = winbufnr(a:winnr)
 
-  let modified = getbufvar(buffer, '&modified')
-  let readonly = getbufvar(buffer, '&ro')
-  let fname = bufname(buffer)
+    let modified = getbufvar(buffer, '&modified')
+    let readonly = getbufvar(buffer, '&ro')
+    let fname = bufname(buffer)
 
-  function! Color(active, num, content)
-    if a:active
-      return '%' . a:num . '*' . a:content . '%*'
+    function! Color(active, num, content)
+        if a:active
+            return '%' . a:num . '*' . a:content . '%*'
+        else
+            return a:content
+        endif
+    endfunction
+
+    " special color in maximum columnwidth column
+    let max_columnwidth = 80
+    let stat .= '%1*' . (col(".") / max_columnwidth >= 1 ? '%v ' : ' %2v ') . '%*'
+
+    " file
+    let stat .= Color(active, 3, active ? ' »' : ' «')
+    let stat .= ' %<'
+
+    if fname == '__Gundo__'
+        let stat .= 'Gundo'
+    elseif fname == '__Gundo_Preview__'
+        let stat .= 'Gundo Preview'
+    elseif fname == '__Tagbar__'
+        let stat .= 'Tagbar'
     else
-      return a:content
+        let path = expand('%:h')
+        let stat .= Color(active, 5, path != "." ? path . '/' : '')
+        let stat .= Color(active, 4, '%t')
     endif
-  endfunction
 
-  " column
-  let stat .= '%1*' . (col(".") / 100 >= 1 ? '%v ' : ' %2v ') . '%*'
+    let stat .= ' ' . Color(active, 3, active ? '«' : '»')
 
-  " file
-  let stat .= Color(active, 3, active ? ' »' : ' «')
-  let stat .= ' %<'
+    " file modified
+    let stat .= Color(active, 4, modified ? ' +' : '')
 
-  if fname == '__Gundo__'
-    let stat .= 'Gundo'
-  elseif fname == '__Gundo_Preview__'
-    let stat .= 'Gundo Preview'
-  elseif fname == '__Tagbar__'
-    let stat .= 'Tagbar'
-  else
-    let path = expand('%:h')
-    let stat .= Color(active, 5, path != "." ? path . '/' : '')
-    let stat .= Color(active, 4, '%t')
-  endif
+    " read only
+    "
+    let stat .= Color(active, 4, readonly ? ' readonly' : '')
 
-  let stat .= ' ' . Color(active, 3, active ? '«' : '»')
-
-  " file modified
-  let stat .= Color(active, 4, modified ? ' +' : '')
-
-  " read only
-  "
-  let stat .= Color(active, 4, readonly ? ' readonly' : '')
-
-  " paste
-  if active && &paste
-    let stat .= ' %2*' . 'P' . '%*'
-  endif
-
-  " right side
-  let stat .= '%='
-
-  " git branch
-  if exists('*fugitive#head')
-    let head = fugitive#head()
-
-    if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
-      call fugitive#detect(getcwd())
-      let head = fugitive#head()
+    " paste
+    if active && &paste
+        let stat .= ' %2*' . 'P' . '%*'
     endif
-  endif
 
-  if !empty(head)
-    let stat .= Color(active, 3, ' ← ') . head . ' '
-  endif
+    " right side
+    let stat .= '%='
 
-  return stat
+    if has("fugitive")
+        " git branch
+        if exists('*fugitive#head')
+            let head = fugitive#head()
+
+            if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
+                call fugitive#detect(getcwd())
+                let head = fugitive#head()
+            endif
+        endif
+
+        if !empty(head)
+            let stat .= Color(active, 3, ' ← ') . head . ' '
+        endif
+    endif
+
+    return stat
 endfunction
 " }}}
 " Status AutoCMD: {{{
 function! SetStatus()
-  for nr in range(1, winnr('$'))
-    call setwinvar(nr, '&statusline', '%!Status('.nr.')')
-  endfor
+    for nr in range(1, winnr('$'))
+        call setwinvar(nr, '&statusline', '%!Status('.nr.')')
+    endfor
 endfunction
 
 augroup status
-  autocmd!
-  autocmd VimEnter,WinEnter,BufWinEnter,BufUnload * call SetStatus()
+    autocmd!
+    autocmd VimEnter,WinEnter,BufWinEnter,BufUnload * call SetStatus()
 augroup END
 " }}}
 " Status Colors: {{{
@@ -359,7 +389,7 @@ hi User5 ctermfg=247, ctermbg=53
 " }}}
 " }}} Colors "
 " {{{ Syntastic "
-let g:syntastic_disabled_filetypes=['tex']
+let g:syntastic_disabled_filetypes=['tex', 'html']
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_python_python_exec = '/usr/bin/python3'
 let g:syntastic_python_checkers = ['python']
@@ -370,6 +400,8 @@ vmap <Enter> <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+let g:easy_align_left_margin = 0
+let g:easy_align_right_margin = 0
 " }}} EasyAlign "
 " {{{ Insert Mode maps "
 inoremap JJ <Esc>o
@@ -396,7 +428,7 @@ autocmd Cursorhold * checktime "also check for file changes, more sublte
 
 "return to cursor location when reopenning file
 if has("autocmd")
-      autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
+    autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
 " }}} file and shell stuff
@@ -436,6 +468,9 @@ nnoremap <leader>gc :Gcommit<CR>
 nnoremap <leader>gr :GitGutterRevertHunk<CR>
 nnoremap <leader>ga :GitGutterStageHunk<CR>
 nnoremap <leader>gp :GitGutterPreviewHunk<cr>
+
+autocmd FileType gitcommit setlocal textwidth=72
+
 " }}} Fugitive "
 " {{{ Search mappings "
 
@@ -506,9 +541,16 @@ nnoremap <leader>tp :CtrlPTag<CR>
 
 set tags=tags,TAGS;/
 let g:gutentags_ctags_executable_haskell = 'haskell-ctags'
+let g:gutentags_define_advanced_commands = '1'
+let g:gutentags_ctags_executable_rust = "rust-gutentags-wrapper.sh"
+let g:gutentags_ctags_exclude = ["*.html"]
 
-noremap <leader>gt <c-w>} " go tag
-noremap <leader>tp <c-w>} " tag preview
+" " add rust project info to gutentags
+let g:gutentags_project_info = []
+call add(g:gutentags_project_info, {'type': 'python', 'file': 'setup.py'})
+call add(g:gutentags_project_info, {'type': 'ruby', 'file': 'Gemfile'})
+call add(g:gutentags_project_info, {'type': 'rust', 'file': 'Cargo.toml'})
+" let g:gutentags_ctags_executable_rust = 'rust-ctags'
 
 " }}} Tag Plugins "
 " {{{ disable mouse scroll
@@ -543,15 +585,15 @@ let g:startify_session_persistence = 1 "autosave sessions
 let g:startify_bookmarks = [ '~/dotfiles/vimrc' ]
 
 let g:startify_list_order = [
-        \ ['   These are my bookmarks:'],
-        \ 'bookmarks',
-        \ ['   These are my sessions:'],
-        \ 'sessions',
-        \ ['   My most recently', '   used files'],
-        \ 'files',
-        \ ['   My most recently used files in the current directory:'],
-        \ 'dir',
-        \ ]
+            \ ['   These are my bookmarks:'],
+            \ 'bookmarks',
+            \ ['   These are my sessions:'],
+            \ 'sessions',
+            \ ['   My most recently', '   used files'],
+            \ 'files',
+            \ ['   My most recently used files in the current directory:'],
+            \ 'dir',
+            \ ]
 " }}} startify
 " {{{ Location Quickfix
 " toggle location and quickfix lists
@@ -585,18 +627,18 @@ nnoremap <leader>m :make<cr><cr>
 "toggle slimed down display to handle files with very long lines
 " NB(nils): resetting funtionality does not work
 function! SpillToggleLongLineDisplay()
-  if(&cursorline == 1)
-    set filetype=
-    set nocursorline
-    set nocursorcolumn
-    LengthmattersDisable
-    set nowrap
-  else
-    set cursorline
-    set cursorcolumn
-    LengthmattersEnable
-    set wrap
-  endif
+    if(&cursorline == 1)
+        set filetype=
+        set nocursorline
+        set nocursorcolumn
+        LengthmattersDisable
+        set nowrap
+    else
+        set cursorline
+        set cursorcolumn
+        LengthmattersEnable
+        set wrap
+    endif
 endfunc
 nnoremap <leader>st :call SpillToggleLongLineDisplay()<cr>
 " }}} spill functions
@@ -797,6 +839,14 @@ if has("autocmd")
 
     autocmd Filetype c syntax keyword cTodo contained NB
 
+    autocmd FileType rust setlocal comments-=://
+    autocmd FileType rust setlocal comments+=://\ TODO(nils):
+    autocmd FileType rust setlocal comments+=://\ FIXME(nils):
+    autocmd FileType rust setlocal comments+=://\ NB(nils):
+    autocmd FileType rust setlocal comments+=://
+
+    autocmd Filetype rust syntax keyword cTodo contained NB
+
     " TODO(nils): what do fb and b mean? any number of spaces before/after?
     autocmd FileType python setlocal formatoptions=croql
     autocmd FileType python setlocal comments-=:#
@@ -821,7 +871,7 @@ if has("autocmd")
 endif
 " }}}
 nnoremap <BS> <Nop>
-" something sets / to ' ' in my rc
+" something sets the / register to ' ' in my rc
 let @/=''
 
 let g:peekaboo_delay = 500
@@ -834,9 +884,118 @@ function! SyntaxRule()
     echo synIDattr(synID(line("."), col("."), 1), "name")
 endfunction
 
+" swap ^$ with HL (move to fourth row from top/bottom)
+nnoremap H ^
+nnoremap ^ H
+nnoremap L $
+nnoremap $ L
 
+" readline-like keys for the command line
+cnoremap <C-a>	<Home>
+
+" TODO(nils): improve this
+" TODO(nils): does not work well with nested functions / macros
+" TODO(nils): incorrect fold and foldtext when using fn...\n where{
+" {{{ Rust custom fold
+autocmd FileType rust setlocal foldmethod=expr
+autocmd FileType rust setlocal foldexpr=Nilsfold(v:lnum)
+autocmd FileType rust setlocal foldtext=Nilstext()
+
+function! NextNonBlankLine(lnum)
+    let numlines = line('$')
+    let current = a:lnum + 1
+
+    while current <= numlines
+        if getline(current) =~? '\v\S'
+            return current
+        endif
+
+        let current += 1
+    endwhile
+
+    return -2
+endfunction
+
+function! IndentLevel(lnum)
+    return indent(a:lnum) / &shiftwidth
+endfunction
+
+function! IsAnnotation(lnum)
+    return getline(a:lnum) =~? '#\[.*\]'
+endfunction
+
+function! IsDoc(lnum)
+    return getline(a:lnum) =~? '///'
+endfunction
+
+function! Nilsfold(lnum)
+    " split at empty lines
+    if getline(a:lnum) =~? '\v^\s*$'
+        return '-1'
+    endif
+
+    " block closer
+    if getline(a:lnum) =~? '}'
+        return '='
+    endif
+
+    let this_indent = IndentLevel(a:lnum) > 0
+    let next_indent = IndentLevel(NextNonBlankLine(a:lnum)) > 0
+
+    if IsDoc(a:lnum) || IsAnnotation(a:lnum)
+        if IsDoc(a:lnum -1) || IsAnnotation(a:lnum -1)
+            return '1'
+        else
+            return '>1'
+        endif
+    endif
+
+    " body
+    if next_indent == this_indent
+        return this_indent
+        " end
+    elseif next_indent < this_indent
+        return this_indent
+        " start
+    elseif next_indent > this_indent
+        if IsAnnotation(a:lnum - 1) || IsDoc(a:lnum - 1)
+            return next_indent
+        else
+            return '>' . next_indent
+        endif
+    endif
+endfunction
+
+function! Nilstext()
+    let title_line = v:foldstart
+    let loop_guard = 5000
+    while (loop_guard > 0 && (IsDoc(title_line) || IsAnnotation(title_line)))
+        let title_line = (title_line + 1)
+        let loop_guard = loop_guard - 1
+    endwhile
+
+    let title = getline(title_line)
+
+    " multiline function header
+    "
+    let title = substitute(title, "(.*)", "(...)", '')
+    let title = substitute(title, "->.*", "", '')
+    let title = substitute(title, "([^)]*$", "", '')
+    let title = substitute(title, "{", "", '')
+    let title = substitute(title, "\ *$", "", '')
+
+    let fold_size = (v:foldend - v:foldstart)
+    let linecount = '[' . fold_size . ']'
+    let prefix = '+-- '
+    return prefix . title . ' ' .  linecount
+endfunction
+
+" }}}
+"
 " TODO(nils): flip quickscope colors so first match is more pronounced
 " TODO(nils): ]P eller något för paste nästa rad från "*
 " NB(nils): modeline is the name for # v i m: setting=value -- no 'set' required
 " NB(nils): gi inserts text from last insertion position.
 " NB(nils): :b# öppna senaste buffern
+" NB(nils): g, g; jumps between previous insertion positions
+" NB(nils): :let ... <c-a> shows all settings, enter give all their values
