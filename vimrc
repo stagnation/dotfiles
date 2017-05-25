@@ -13,17 +13,17 @@ endif
 call plug#begin(plug_location)
 Plug 'tpope/vim-rsi', { 'on': [] }
 Plug 'spiiph/vim-space'
-" Plug 'Valloric/YouCompleteMe'
 Plug 'junegunn/vim-easy-align'
-Plug 'whatyouhide/vim-lengthmatters'
+" Plug 'whatyouhide/vim-lengthmatters'
 Plug 'ferranpm/vim-isolate'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/vim-peekaboo'
-Plug 'ntpeters/vim-better-whitespace'
+" Plug 'ntpeters/vim-better-whitespace'
+Plug 'romainl/vim-qf'
 Plug 'ludovicchabant/vim-gutentags'
-" Plug 'eparreno/vim-matchit'
+Plug 'eparreno/vim-matchit'
 Plug 'michaeljsmith/vim-indent-object'
-Plug 'scrooloose/syntastic/'
+" Plug 'scrooloose/syntastic/'
 Plug 'majutsushi/tagbar'
 Plug 'milkypostman/vim-togglelist'
 " Plug 'bronson/vim-trailing-whitespace'
@@ -41,7 +41,6 @@ Plug 'lfv89/vim-interestingwords'
 Plug 'tpope/vim-commentary'
 Plug 'wellle/visual-split.vim'
 Plug 'kana/vim-operator-user'
-Plug 'ferranpm/vim-isolate'
 Plug 'unblevable/quick-scope'
 Plug 'haya14busa/vim-operator-flashy'
 Plug 'tpope/vim-surround'
@@ -58,6 +57,7 @@ if has ('nvim')
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
     Plug 'junegunn/fzf.vim'
 else
+    " Plug 'Valloric/YouCompleteMe'
     Plug 'kien/ctrlP.vim'
 endif
 
@@ -389,7 +389,7 @@ hi User5 ctermfg=247, ctermbg=53
 " }}}
 " }}} Colors "
 " {{{ Syntastic "
-let g:syntastic_disabled_filetypes=['tex']
+let g:syntastic_disabled_filetypes=['tex', 'html']
 let g:syntastic_always_populate_loc_list=1
 let g:syntastic_python_python_exec = '/usr/bin/python3'
 let g:syntastic_python_checkers = ['python']
@@ -883,6 +883,15 @@ nnoremap <leader><leader>u NOP
 function! SyntaxRule()
     echo synIDattr(synID(line("."), col("."), 1), "name")
 endfunction
+
+" swap ^$ with HL (move to fourth row from top/bottom)
+nnoremap H ^
+nnoremap ^ H
+nnoremap L $
+nnoremap $ L
+
+" readline-like keys for the command line
+cnoremap <C-a>	<Home>
 
 " TODO(nils): improve this
 " TODO(nils): does not work well with nested functions / macros
