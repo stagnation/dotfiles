@@ -28,6 +28,7 @@ Default applications
 - py3
 * ranger
 * redshift
+* taskwarrior
 * tmux (1.9+)
 * tree
 * urxvt
