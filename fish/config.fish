@@ -19,7 +19,7 @@ set PATH /home/spill/.cargo/bin $PATH
 set MPD_HOST 192.168.1.8
 set fish_greeting
 
-if which rustc
+if which rustc >/dev/null
     set RUST_SRC_PATH (rustc --print sysroot)/lib/rustlib/src/rust/src
 end
 

@@ -78,10 +78,10 @@ if [ ! -f ~/.vim/autoload/plug.vim ] ; then
 fi;
 
 echo "  Creating vim directory structure"
-mkdir ~/.vim/backup -p
-mkdir ~/.vim/colors -p
-mkdir ~/.config/nvim/backup -p
-mkdir ~/.config/nvim/colors -p
+mkdir -p ~/.vim/backup
+mkdir -p ~/.vim/colors
+mkdir -p ~/.config/nvim/backup
+mkdir -p ~/.config/nvim/colors
 
 echo "  installing vim colorscheme"
 schemes="lakris.vim lakris256.vim"
