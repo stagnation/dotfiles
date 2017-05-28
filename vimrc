@@ -326,7 +326,7 @@ function! Status(winnr)
     elseif fname == '__Tagbar__'
         let stat .= 'Tagbar'
     else
-        let path = expand('%:h')
+        let path = fnamemodify(fname, ":h")
         let stat .= Color(active, 5, path != "." ? path . '/' : '')
         let stat .= Color(active, 4, '%t')
     endif
