@@ -13,6 +13,7 @@ endif
 call plug#begin(plug_location)
 Plug 'tpope/vim-rsi', { 'on': [] }
 Plug 'spiiph/vim-space'
+Plug 'cespare/vim-toml'
 Plug 'junegunn/vim-easy-align'
 " Plug 'whatyouhide/vim-lengthmatters'
 Plug 'ferranpm/vim-isolate'
@@ -758,6 +759,9 @@ if has("autocmd")
     autocmd FileType tex nnoremap gJ gJi <esc>
 
     autocmd FileType tex setlocal makeprg=rubber\ --pdf\ -f\ %\ >/dev/null
+
+    " rust.vim sets textwidth to 99
+    autocmd FileType rust setlocal textwidth=80
 
     function! SilentMake()
         silent make
