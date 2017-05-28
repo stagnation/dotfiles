@@ -49,7 +49,6 @@ Plug 'Konfekt/FastFold'
 Plug 'rust-lang/rust.vim'
 if has ('nvim')
     Plug 'kassio/neoterm'
-    Plug 'critiqjo/lldb.nvim'
     Plug 'benekastah/neomake'
     Plug 'brettanomyces/nvim-editcommand'
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
