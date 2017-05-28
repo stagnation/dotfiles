@@ -74,5 +74,13 @@ Runs when fewer than LW - low water mark - pages are free.
 Evicts until HW - high water mark - pages are free.
 The batch eviction enables some optimizations.
 
+* Binary search / heap:
+store in heap, then  the middle point division can be replaced by index doubling
+smaller than heap[i] at heap[2i], larger at heap[2i+1]
+
+* pointer data structures: allocate all nodes at the same time to reduce padding
+
+* rust: mutate vector
+let vec = vec.into_iter().map(|mut x| { x+1; x }).collect();
 Böker:
 Richard W Stevens: Unix networking
