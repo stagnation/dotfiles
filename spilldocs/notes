@@ -28,6 +28,9 @@ sort: -k6 -t' ' sort on 6th key with ' ' as separator
 sort: sort --debug to help write a correct query on multiple fields
 sql:  ' is used for string literals
 tee:  write input to file and stdout
+vim:  :Gdiff, opens three way split of merge conflict. :diffget //2 //3 can be used to fetch changes from left or right
+vim:  :Gdiff, :diffput, (map)dp can be used from either left or right to put into the middle
+vim:  :Gdiff :Gwrite to mark conflicts as resolved and stage, close splits. :Gwrite! in either split stages that fully
 
 * streaming random selection:
 pick a random element from a streaming array with no
