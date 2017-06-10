@@ -1,15 +1,9 @@
 #!/bin/sh
-############################
-# .make.sh
-# This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
-#from https://github.com/michaeljsmalley/dotfiles/blob/master/makesymlinks.sh
-############################
-
 ########## Variables
 
 dir=~/dotfiles # dotfiles directory
 bakdir=~/bak_dotfiles # old dotfiles backup directory
-files="gitconfig Xdefaults Xmodmap bash_profile vimrc tmux.conf gvimrc vimperatorrc ctags i3status.conf"
+files="gitconfig Xdefaults Xmodmap bash_profile vimrc tmux.conf gvimrc vimperatorrc ctags i3status.conf taskrc"
 # list of files/folders to symlink in homedir
 
 ##########
@@ -84,10 +78,10 @@ if [ ! -f ~/.vim/autoload/plug.vim ] ; then
 fi;
 
 echo "  Creating vim directory structure"
-mkdir ~/.vim/backup -p
-mkdir ~/.vim/colors -p
-mkdir ~/.config/nvim/backup -p
-mkdir ~/.config/nvim/colors -p
+mkdir -p ~/.vim/backup
+mkdir -p ~/.vim/colors
+mkdir -p ~/.config/nvim/backup
+mkdir -p ~/.config/nvim/colors
 
 echo "  installing vim colorscheme"
 schemes="lakris.vim lakris256.vim"

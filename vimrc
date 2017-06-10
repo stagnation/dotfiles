@@ -18,7 +18,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'ferranpm/vim-isolate'
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/vim-peekaboo'
-" Plug 'ntpeters/vim-better-whitespace'
+Plug 'ntpeters/vim-better-whitespace'
 Plug 'romainl/vim-qf'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'eparreno/vim-matchit'
@@ -49,7 +49,6 @@ Plug 'Konfekt/FastFold'
 Plug 'rust-lang/rust.vim'
 if has ('nvim')
     Plug 'kassio/neoterm'
-    Plug 'critiqjo/lldb.nvim'
     Plug 'benekastah/neomake'
     Plug 'brettanomyces/nvim-editcommand'
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
@@ -327,7 +326,7 @@ function! Status(winnr)
     elseif fname == '__Tagbar__'
         let stat .= 'Tagbar'
     else
-        let path = expand('%:h')
+        let path = fnamemodify(fname, ":h")
         let stat .= Color(active, 5, path != "." ? path . '/' : '')
         let stat .= Color(active, 4, '%t')
     endif
@@ -893,6 +892,8 @@ nnoremap $ L
 " readline-like keys for the command line
 cnoremap <C-a>	<Home>
 
+" disable automatic linebreak at textwidth
+set formatoptions-=t
 " TODO(nils): improve this
 " TODO(nils): does not work well with nested functions / macros
 " TODO(nils): incorrect fold and foldtext when using fn...\n where{
