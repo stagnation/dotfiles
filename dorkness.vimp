@@ -50,4 +50,3 @@ hi URL:hover            text-decoration: underline; cursor: pointer;
 hi LineNr               color: #afafaf; background: #1C2126;
 
 " don't show the alltabs button
-#tabbrowser-tabs ~ #alltabs-button {display:none!important}
