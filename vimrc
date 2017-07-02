@@ -744,7 +744,7 @@ if has("autocmd")
 
 endif
 " }}}
-" {{{ Commentary 
+" {{{ Commentary
 " disable commentary deprecated binds
 nnoremap <leader><leader> NOP
 nnoremap <leader><leader><leader> NOP
@@ -755,7 +755,7 @@ let @/=''
 
 let g:peekaboo_delay = 500
 
-source rust_fold.vim
+source ~/dotfiles/rust_fold.vim
 
 " TODO(nils): flip quickscope colors so first match is more pronounced
 " TODO(nils): ]P eller något för paste nästa rad från "*
