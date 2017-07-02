@@ -1,6 +1,6 @@
 #!/bin/bash
 FILENAME="$1"
-TMPFILE="/home/spill/scratch/tmp_aelvul"
+TMPFILE="/tmp/tmp_aelvul"
 
 if [ -f $FILENAME ] ; then
     cp $FILENAME $TMPFILE
