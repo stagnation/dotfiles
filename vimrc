@@ -225,7 +225,9 @@ if ! has("gui_running")
     highlight SignColumn term=NONE cterm=NONE ctermbg=232 ctermfg=255 gui=NONE guibg=#0e0e0e guifg=#f0f0f0
     " area below text in doc, including tildes
     " TODO(nils): make it cool like in the vimcasts
-    highlight NonText term=bold cterm=bold ctermbg=bg ctermfg=125 gui=bold guibg=bg guifg=#808080
+    highlight NonText term=bold cterm=bold ctermbg=232 ctermfg=125 gui=bold guibg=bg guifg=#808080
+    let &colorcolumn="80,".join(range(120,999),",")
+    highlight ColorColumn ctermbg=232
 endif
 
 highlight CursorLine term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f
