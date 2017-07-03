@@ -56,6 +56,7 @@ schemes="lakris.vim lakris256.vim"
 for scheme in $schemes; do
     ln -s $dotfilesdir/vimcols/$scheme ~/.vim/colors/$scheme
     ln -s $dotfilesdir/vimcols/$scheme ~/.config/nvim/colors/$scheme
+    wget ftp://ftp.vim.org/pub/vim/runtime/spell/sv.utf-8.spl -O ~/.local/share/nvim/site/spell/sv.utf-8.spl
 done ;
 
 echo "source ~/.vimrc" > ~/.config/nvim/init.vim

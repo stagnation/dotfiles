@@ -24,7 +24,7 @@ Plug 'eparreno/vim-matchit'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'majutsushi/tagbar'
 Plug 'milkypostman/vim-togglelist'
-Plug 'vim-scripts/camelcasemotion'
+Plug 'vim-scripts/camelcasemotion'           " make w,b,e respect word boundaries inside camelCase and snake_case
 Plug 'rust-lang/rust.vim'
 Plug 'wellle/targets.vim'
 Plug 'mbbill/undotree'
