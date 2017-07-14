@@ -1,7 +1,7 @@
 " TODO(nils): improve this
 " TODO(nils): does not work well with nested functions / macros
 " TODO(nils): incorrect fold and foldtext when using fn...\n where{
-" {{{ Rust custom fold
+
 autocmd FileType rust setlocal foldmethod=expr
 autocmd FileType rust setlocal foldexpr=Nilsfold(v:lnum)
 autocmd FileType rust setlocal foldtext=Nilstext()
@@ -33,6 +33,18 @@ function! IsDoc(lnum)
     return getline(a:lnum) =~? '///'
 endfunction
 
+function! IsWhereClause(lnum)
+    return getline(a:lnum) =~? '\s*where'
+endfunction
+
+function! IsStandaloneFunctionStart(lnum)
+    return getline(a:lnum) =~? '\s*fn\ .*{'
+endfunction
+
+function! IsFunctionStart(lnum)
+    return getline(a:lnum) =~? '\s*fn'
+endfunction
+
 function! Nilsfold(lnum)
     " split at empty lines
     if getline(a:lnum) =~? '\v^\s*$'
@@ -44,31 +56,48 @@ function! Nilsfold(lnum)
         return '='
     endif
 
-    let this_indent = IndentLevel(a:lnum) > 0
+    let previous_indent = IndentLevel(a:lnum -1)            > 0
+    let this_indent = IndentLevel(a:lnum)                   > 0
     let next_indent = IndentLevel(NextNonBlankLine(a:lnum)) > 0
+    let value = 0
 
     if IsDoc(a:lnum) || IsAnnotation(a:lnum)
         if IsDoc(a:lnum -1) || IsAnnotation(a:lnum -1)
-            return '1'
+            return '1' " this is inside a fold with level 1
         else
-            return '>1'
+            return '>1' " this starts a fold with level 1
         endif
     endif
 
-    " body
-    if next_indent == this_indent
+    " where is always a part of a fold
+    if IsWhereClause(a:lnum)
+        return 1
+
+    " a function start followed by a where clause starts a fold
+    elseif IsFunctionStart(a:lnum) && IsWhereClause(a:lnum + 1)
+        return 1
+
+        " a free standing { is part of the previous foldlevel
+    elseif getline(a:lnum) =~? '^\s*{\s*$'
+        return previous_indent
+
+        " same indentation should be part of the same fold
+    elseif next_indent == this_indent
         return this_indent
+
         " end
     elseif next_indent < this_indent
         return this_indent
+
         " start
-    elseif next_indent > this_indent
+    elseif (next_indent > this_indent)
         if IsAnnotation(a:lnum - 1) || IsDoc(a:lnum - 1)
             return next_indent
         else
             return '>' . next_indent
         endif
     endif
+
 endfunction
 
 function! Nilstext()
@@ -82,7 +111,6 @@ function! Nilstext()
     let title = getline(title_line)
 
     " multiline function header
-    "
     let title = substitute(title, "(.*)", "(...)", '')
     let title = substitute(title, "->.*", "", '')
     let title = substitute(title, "([^)]*$", "", '')
@@ -94,5 +122,3 @@ function! Nilstext()
     let prefix = '+-- '
     return prefix . title . ' ' .  linecount
 endfunction
-
-" }}}
