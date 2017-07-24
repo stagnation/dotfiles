@@ -128,10 +128,10 @@ nnoremap } }zz
 nnoremap { {zz
 
 " swap ^$ with HL (move to fourth row from top/bottom)
-nnoremap H ^
-nnoremap ^ H
-nnoremap L $
-nnoremap $ L
+noremap H ^
+noremap ^ H
+noremap L $
+noremap $ L
 
 " readline-like keys for the command line
 cnoremap <C-a>	<Home>
