@@ -233,13 +233,35 @@ function! OverrideLiqouriceColors() abort
     highlight GitGutterDelete       ctermbg=232 ctermfg=red
     highlight GitGutterChangeDelete ctermbg=232 ctermfg=yellow
 
-    " highlight NonText term=bold cterm=bold ctermbg=232 ctermfg=125 gui=bold guibg=bg guifg=#808080
-    " highlight CursorLine term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f
+    highlight NonText term=bold cterm=bold ctermbg=232 ctermfg=125 gui=bold guibg=bg guifg=#808080
+    highlight CursorLine term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f
+
+    autocmd VimEnter,Colorscheme * :highlight IndentGuidesOdd  ctermbg=235
+    autocmd VimEnter,Colorscheme * :highlight IndentGuidesEven ctermbg=234
+
+    " User colors for status line
+    hi User1 ctermfg=33  guifg=#268bd2  ctermbg=233 guibg=#fdf6e3 gui=bold
+    hi User2 ctermfg=142 guifg=#d33682  ctermbg=233  guibg=#eee8d5 gui=bold
+    hi User3 ctermfg=253  guifg=#719e07  ctermbg=53  guibg=#eee8d5 gui=bold
+    hi User4 ctermfg=33  guifg=#2aa198  ctermbg=53  guibg=#eee8d5 gui=bold
+    hi User5 ctermfg=247, ctermbg=53
+    hi User6 ctermfg=245, ctermbg=236
+endfunction
+
+function! OverrideProtonColors () abort
+    hi link User1 IncSearch
+    hi link User2 SpecialKey
+    hi link User3 TabNumber
+    hi link User5 NonText
+    hi link User4 Todo
+
+    hi ColorColumn ctermbg=8
 endfunction
 
 augroup MyColors
     autocmd!
     autocmd ColorScheme liquorice-approx call OverrideLiqouriceColors()
+    autocmd ColorScheme proton-approx call OverrideProtonColors()
 augroup END
 
 if has('vim_starting')
@@ -288,7 +310,7 @@ hi VisualCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=125 guibg=#d33682
 hi ReplaceCursor ctermfg=15 guifg=#fdf6e3 ctermbg=65  guibg=#dc322f
 hi CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#cb4b16
 " }}} Graphics of cursor
-" Status line: {{{
+" Status line {{{
 function! Status(winnr)
     let stat = ''
     let active = winnr() == a:winnr
@@ -297,22 +319,23 @@ function! Status(winnr)
     let modified = getbufvar(buffer, '&modified')
     let readonly = getbufvar(buffer, '&ro')
     let fname = bufname(buffer)
+    let separator = '%3* '
 
     function! Color(active, num, content)
         if a:active
             return '%' . a:num . '*' . a:content . '%*'
         else
-            return a:content
+            return '%6*' . a:content . '%*'
         endif
     endfunction
 
     " special color in maximum columnwidth column
-    let max_columnwidth = 80
-    let stat .= '%1*' . (col(".") / max_columnwidth >= 1 ? '%v ' : ' %2v ') . '%*'
+    let max_columnwidth = 81                                                   " ColorColumn[0]
+                                                                               " column number
+    let stat .= '%1*' . (col(".") / max_columnwidth >= 1 ? '%2*-%v ' : ' %2v ') . '%*'
 
-    " file
-    let stat .= Color(active, 3, active ? ' »' : ' «')
-    let stat .= ' %<'
+    let stat .= Color(active, 3, active ? ' | ' : ' « ')                       " left active buffer marker
+    let stat .= '%<'
 
     if fname == '__Gundo__'
         let stat .= 'Gundo'
@@ -325,11 +348,11 @@ function! Status(winnr)
 
     else
         let path = fnamemodify(fname, ":h")
-        let stat .= Color(active, 5, path != "." ? path . '/' : '')
-        let stat .= Color(active, 4, '%t')
+        let stat .= Color(active, 5, path != "." ? path . '/' : '')            " base path
+        let stat .= Color(active, 4, '%t')                                     " filename
     endif
 
-    let stat .= ' ' . Color(active, 3, active ? '«' : '»')
+    let stat .= Color(active, 3, active ? ' | ' : ' » ')                       " right active buffer marker
 
     " file modified
     let stat .= Color(active, 4, modified ? ' +' : '')
@@ -337,29 +360,8 @@ function! Status(winnr)
     " read only
     let stat .= Color(active, 4, readonly ? ' readonly' : '')
 
-    " paste
-    if active && &paste
-        let stat .= ' %2*' . 'P' . '%*'
-    endif
-
     " right side
-    let stat .= '%='
-
-    " git branch
-    if has("fugitive")
-        if exists('*fugitive#head')
-            let head = fugitive#head()
-
-            if empty(head) && exists('*fugitive#detect') && !exists('b:git_dir')
-                call fugitive#detect(getcwd())
-                let head = fugitive#head()
-            endif
-        endif
-
-        if !empty(head)
-            let stat .= Color(active, 3, ' ← ') . head . ' '
-        endif
-    endif
+    let stat .= '%6*%='
 
     return stat
 endfunction
@@ -374,13 +376,7 @@ augroup status
     autocmd!
     autocmd VimEnter,WinEnter,BufWinEnter,BufUnload * call SetStatus()
 augroup END
-"
-" Status Colors
-hi User1 ctermfg=33  guifg=#268bd2  ctermbg=233 guibg=#fdf6e3 gui=bold
-hi User2 ctermfg=125 guifg=#d33682  ctermbg=7  guibg=#eee8d5 gui=bold
-hi User3 ctermfg=253  guifg=#719e07  ctermbg=53  guibg=#eee8d5 gui=bold
-hi User4 ctermfg=33  guifg=#2aa198  ctermbg=53  guibg=#eee8d5 gui=bold
-hi User5 ctermfg=247, ctermbg=53
+
 " }}}
 " }}} Colors "
 " {{{ EasyAlign "
