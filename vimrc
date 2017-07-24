@@ -164,7 +164,6 @@ nnoremap <BS> <Nop>
 " }}} Utility rebinds "
 " {{{ Settings
 syntax enable                  " enables syntax highlighting
-set background=dark            " required for colorschemes
 set fileformat=unix            " proper unix linebreaks
 filetype plugin indent on      " react on filetyps with plugins and syntax
 set scrolloff=4                " minimum number of lines to display around cursor
@@ -215,41 +214,46 @@ let g:mapleader ='\'
 " }}} Settings "
 " {{{ Colors, Look and feel "
 " {{{ General
-color liquorice-approx
-if has("gui_running")
-    color liquorice
-endif
 
-" overwrite some color scheme settings so the color scheme can be pulled from
-" upstream
-if ! has("gui_running")
-    highlight LineNr term=underline cterm=NONE ctermbg=232 ctermfg=243 gui=italic guibg=#0e0e0e guifg=#727272
-    highlight SignColumn term=NONE cterm=NONE ctermbg=232 ctermfg=255 gui=NONE guibg=#0e0e0e guifg=#f0f0f0
-    " area below text in doc, including tildes
-    " TODO(nils): make it cool like in the vimcasts
-    highlight NonText term=bold cterm=bold ctermbg=232 ctermfg=125 gui=bold guibg=bg guifg=#808080
-    let &colorcolumn="80,".join(range(120,999),",")
+let &colorcolumn="80,".join(range(120,999),",")
+
+" TODO(nils): fix visual bg for proton
+
+" " overwrite some color scheme settings so the color scheme can be pulled from
+" " upstream
+function! OverrideLiqouriceColors() abort
+    highlight LineNr term=underline cterm=NONE ctermbg=232 ctermfg=243
+    highlight SignColumn term=NONE cterm=NONE ctermbg=232 ctermfg=255
     highlight ColorColumn ctermbg=232
-endif
 
-highlight CursorLine term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f
+    highlight YcmErrorSign ctermbg=232
+
+    highlight GitGutterAdd          ctermbg=232 ctermfg=22
+    highlight GitGutterChange       ctermbg=232 ctermfg=yellow
+    highlight GitGutterDelete       ctermbg=232 ctermfg=red
+    highlight GitGutterChangeDelete ctermbg=232 ctermfg=yellow
+
+    " highlight NonText term=bold cterm=bold ctermbg=232 ctermfg=125 gui=bold guibg=bg guifg=#808080
+    " highlight CursorLine term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f
+endfunction
+
+augroup MyColors
+    autocmd!
+    autocmd ColorScheme liquorice-approx call OverrideLiqouriceColors()
+augroup END
+
+if has('vim_starting')
+    " don't change colorscheme if vim is already running
+    color liquorice-approx
+    if has("gui_running")
+        colorscheme liquorice
+    endif
+endif
 
 " showmark settings
 " let g:showmarks_include="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyx"
 
 nnoremap <silent><C-n> :call ToggleRelativeNumber()<cr>
-
-" toggle relative number for lines
-function! ToggleRelativeNumber()
-    if(&relativenumber == 1)
-        set relativenumber!
-        set number
-    else
-        set relativenumber
-    endif
-endfunc
-
-highlight YcmErrorSign ctermbg=232
 
 " cursorcolumn only in active window
 autocmd WinEnter * setlocal cursorcolumn
@@ -266,14 +270,9 @@ autocmd WinEnter * :wincmd =
 autocmd VimResized * execute "normal! \<c-w>="
 
 " }}}
-" {{{ GitGutter Sign colors '
-highlight GitGutterAdd          ctermbg=232 ctermfg=22
-highlight GitGutterChange       ctermbg=232 ctermfg=yellow
-highlight GitGutterDelete       ctermbg=232 ctermfg=red
-highlight GitGutterChangeDelete ctermbg=232 ctermfg=yellow
-" }}} GitGutter Sign colors "
 " {{{ Graphics of cursor
 set gcr=a:block
+
 " mode aware cursors
 set gcr+=o:hor50-Cursor
 set gcr+=n:Cursor
@@ -531,9 +530,7 @@ let g:ycm_always_populate_location_list = 1
 " {{{ IndentGuide "
 " indentGuide settings
 let g:indent_guides_auto_colors = 0
-" TODO: why is the aucmd?
-autocmd VimEnter,Colorscheme * :highlight IndentGuidesOdd  ctermbg=235
-autocmd VimEnter,Colorscheme * :highlight IndentGuidesEven ctermbg=234
+
 let g:indent_guides_enable_on_vim_startup = 1
 " }}} IndentGuide "
 " {{{ startify, session management
@@ -582,6 +579,15 @@ endif
 nnoremap <leader>hi :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<cr>
 
 nnoremap <leader>m :make<cr><cr>
+
+function! ToggleRelativeNumber()
+    if(&relativenumber == 1)
+        set relativenumber!
+        set number
+    else
+        set relativenumber
+    endif
+endfunc
 
 function! SilentMake()
     silent make
@@ -744,8 +750,7 @@ if has("autocmd")
     autocmd Filetype vim setlocal comments+=:\"
 
     autocmd FileType vim syntax keyword vimTodo contained NB
-    hi link vimTodo Todo
-
+    highlight link vimTodo Todo
 endif
 " }}}
 " {{{ Commentary
