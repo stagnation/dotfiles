@@ -448,7 +448,7 @@ nnoremap <leader>gr :GitGutterRevertHunk<CR>
 nnoremap <leader>ga :GitGutterStageHunk<CR>
 nnoremap <leader>gp :GitGutterPreviewHunk<cr>
 
-autocmd FileType gitcommit setlocal textwidth=72
+autocmd FileType gitcommit setlocal textwidth=72 | setlocal spell
 
 " }}} Fugitive "
 " {{{ Search mappings "
