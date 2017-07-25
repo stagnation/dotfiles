@@ -662,11 +662,6 @@ endif
 if has ('nvim')
     highlight TermCursor ctermfg=red guifg=red
 
-    " Window split settings
-    highlight TermCursor ctermfg=red guifg=red
-    set splitbelow
-    set splitright
-
     " Terminal escape
     tnoremap <Leader><ESC> <C-\><C-n>
 
