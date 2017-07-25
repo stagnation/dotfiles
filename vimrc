@@ -190,8 +190,10 @@ set laststatus=2               " always show status line
 set backupdir=~/.vim/backup    " centralized backup
 set backspace=indent,eol,start " backspace everywhere
 set noswapfile                 " no swap files
-set foldmethod=syntax
-set foldlevel=20               " by defualt open folds to level 20
+if has('vim_starting')
+    set foldmethod=syntax
+    set foldlevel=20               " by defualt open folds to level 20
+endif
 set cursorline                 " highlights the line cursor is at
 set cursorcolumn               " highlights the column cursor is at
 set showcmd
