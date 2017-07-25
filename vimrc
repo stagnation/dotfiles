@@ -454,7 +454,8 @@ autocmd FileType gitcommit setlocal textwidth=72
 " {{{ Search mappings "
 
 " turn off search highlighting for current search
-nnoremap <silent> <leader>l :nohlsearch<CR>
+nnoremap <silent> <leader>nh :nohlsearch<CR>
+
 " turn off search highlighting for in insert mode
 autocmd InsertEnter * :setlocal nohlsearch
 autocmd InsertLeave * :setlocal hlsearch
