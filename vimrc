@@ -770,3 +770,7 @@ source ~/dotfiles/rust_fold.vim
 " NB(nils): :b# öppna senaste buffern
 " NB(nils): g, g; jumps between previous insertion positions
 " NB(nils): :let ... <c-a> shows all settings, enter give all their values
+
+if filereadable(glob("~/.vimrc.local"))
+    source ~/.vimrc.local
+endif
