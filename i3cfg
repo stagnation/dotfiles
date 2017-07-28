@@ -17,21 +17,12 @@ set $quickswitch quickswitch.py
 # chose a FreeType font, such as:
 font pango:DejaVu Sans Mono 9
 
-# Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-
-# disable focus following mouse
 focus_follows_mouse no
-
-# automatically return to last desktop by pressing current's number
 workspace_auto_back_and_forth yes
-
-# use 1 pixel borders by default
 new_window pixel 3
 
-# set $orang "#4F4445"
 set $c_unfocus #4F4445
-# set $c_focus #936480
 set $c_focus #ad7094
 set $bar_background "#080808"
 set $bar_focus "#5f005f"
@@ -44,23 +35,14 @@ client.unfocused          $c_unfocus          $c_unfocus   #666666      #191d1e
 client.urgent             #2f343a             #900000      #ffffff      #900000
 #                         client.background   #123456
 
-# start a terminal
 bindsym $mod+Shift+Return exec /usr/bin/urxvt
 # NB(nils): start a terminal with same working dir, using https://github.com/schischi-a/xcwd
 bindsym $mod+Return exec ~/bin/newterm.sh
 bindsym $mod+Control+Return exec ~/bin/newranger.sh
-
 # move window to new empty workspace
 bindsym $mod+Shift+m exec "$quickswitch -je"
-
-# kill focused window
 bindsym $mod+Shift+q kill
-
-# move to urgent window
 bindsym $mod+a [urgent=latest] focus
-
-# start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
 
 # startup items {{{
 exec --no-startup-id nm-applet
