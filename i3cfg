@@ -3,7 +3,10 @@
 
 set $mod Mod4
 
-set $quickswitch  quickswitch.py --dmenu "dmenu -i -l 20 -fn 'DejaVu Sans 10' -sb '#E17800' -sf '#000000' -h 23"
+# uses $bar_focus color
+set $dmenuflag --dmenu "dmenu     -i -y 18 -l 100 -w 300 -fn 'DejaVu Sans 10' -sb '#5f005f' -sf '#000000'            "
+set $dmenurun           dmenu_run -i -y 18 -l 100 -w 300 -fn 'DejaVu Sans 10' -sb '#5f005f' -sf '#000000' -p "\$"
+set $quickswitch quickswitch.py
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -30,6 +33,8 @@ new_window pixel 3
 set $c_unfocus #4F4445
 # set $c_focus #936480
 set $c_focus #ad7094
+set $bar_background "#080808"
+set $bar_focus "#5f005f"
 
 # colors colours
 #                         class               border       backgr.      text   indicator
@@ -74,7 +79,8 @@ exec --no-startup-id feh --bg-center /home/spill/Pictures/withhearstowardnone.jp
 # }}} startup
 
 # NB(nils): dmenu2 required https://bitbucket.org/melek/dmenu2
-bindsym $mod+space exec dmenu_run -i -y 18 -o 0.8 -l 100 -w 300 -p "\$"
+bindsym $mod+space exec $dmenurun
+
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -88,8 +94,7 @@ bindsym $mod+Control+m exec $quickswitch -et
 # bindsym $mod+Shift+M exec /home/spill/bin/spillswitch.py
 bindsym $mod+n exec $quickswitch -n
 bindsym $mod+p exec $quickswitch -p
-# bindsym $mod+Tab exec $quickswitch
-bindsym $mod+Tab exec /home/spill/bin/gits/quickswitch-for-i3/quickswitch.py
+bindsym $mod+Tab exec $quickswitch $dmenuflag
 # bindsym $mod+§ exec /home/spill/bin/quickswitch.py
 
 # movement {{{
@@ -269,20 +274,18 @@ bindsym $mod+o mode "media"
 #     }
 # }
 
-set $back "#080808"
-set $focus "#5f005f"
 bar {
     separator_symbol :
     strip_workspace_numbers yes
     status_command python3 ~/dotfiles/py3status.py
     workspace_buttons yes
     colors {
-        background $back
+        background $bar_background
         statusline #7890a0
 
-        focused_workspace  $focus $focus #000000
+        focused_workspace  $bar_focus $bar_focus #000000
         active_workspace   #ffffff #333333
-        inactive_workspace $back $back #7890a0
+        inactive_workspace $bar_background $bar_background #7890a0
         urgent_workspace   #ffffff #900000
     }
 }
