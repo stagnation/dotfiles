@@ -1,7 +1,6 @@
 # name: GitStatus
 # Find latest version from: https://github.com/godfat/fish_prompt-gitstatus
 
-
 function _git_branch_name
   echo (command git symbolic-ref HEAD ^/dev/null | sed -e 's|^refs/heads/||')
 end
@@ -27,6 +26,8 @@ function _remote_hostname
 end
 
 function fish_prompt
+  set stat $status
+  set date (date +%H:%M)
   set -l cyan (set_color cyan)
   set -l normal (set_color normal)
 
@@ -37,5 +38,9 @@ function fish_prompt
     set git_status " $git_status"
   end
 
-  echo -n (_remote_hostname) $cwd$cyan$git_status$normal" "
+  if test $stat -gt 0
+    set date (set_color red)$date(set_color normal)
+  end
+
+  echo -n (_remote_hostname) $cwd$cyan$git_status$normal $date" "
 end
