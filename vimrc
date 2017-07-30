@@ -234,27 +234,28 @@ function! OverrideLiqouriceColors() abort
     highlight GitGutterDelete       ctermbg=232 ctermfg=red
     highlight GitGutterChangeDelete ctermbg=232 ctermfg=yellow
 
-    highlight NonText term=bold cterm=bold ctermbg=232 ctermfg=125 gui=bold guibg=bg guifg=#808080
-    highlight CursorLine term=underline cterm=NONE ctermbg=234 gui=NONE guibg=#0f0f0f
+    highlight  NonText     term=bold       cterm=bold  ctermbg=232  ctermfg=125  gui=bold       guibg=bg  guifg=#808080
+    highlight  CursorLine  term=underline  cterm=NONE  ctermbg=234  gui=NONE     guibg=#0f0f0f
 
-    autocmd VimEnter,Colorscheme * :highlight IndentGuidesOdd  ctermbg=235
-    autocmd VimEnter,Colorscheme * :highlight IndentGuidesEven ctermbg=234
+    highlight IndentGuidesOdd  ctermbg=235
+    highlight IndentGuidesEven ctermbg=234
+
 
     " User colors for status line
-    hi User1 ctermfg=33  guifg=#268bd2  ctermbg=233 guibg=#fdf6e3 gui=bold
-    hi User2 ctermfg=142 guifg=#d33682  ctermbg=233  guibg=#eee8d5 gui=bold
-    hi User3 ctermfg=253  guifg=#719e07  ctermbg=53  guibg=#eee8d5 gui=bold
-    hi User4 ctermfg=33  guifg=#2aa198  ctermbg=53  guibg=#eee8d5 gui=bold
-    hi User5 ctermfg=247, ctermbg=53
-    hi User6 ctermfg=245, ctermbg=236
+    hi  User1  ctermfg=33   guifg=#268bd2  ctermbg=53   guibg=#fdf6e3  gui=bold
+    hi  User2  ctermfg=142  guifg=#d33682  ctermbg=53  guibg=#eee8d5  gui=bold
+    hi  User3  ctermfg=253  guifg=#719e07  ctermbg=53   guibg=#eee8d5  gui=bold
+    hi  User4  ctermfg=33   guifg=#2aa198  ctermbg=53   guibg=#eee8d5  gui=bold
+    hi  User5  ctermfg=247  ctermbg=53
+    hi  User6  ctermfg=245  ctermbg=233
 endfunction
 
 function! OverrideProtonColors () abort
-    hi link User1 IncSearch
+    hi link User1 TabNumber
     hi link User2 SpecialKey
     hi link User3 TabNumber
+    hi link User4 TabNumber
     hi link User5 NonText
-    hi link User4 Todo
 
     hi ColorColumn ctermbg=8
 endfunction
@@ -311,7 +312,7 @@ hi VisualCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=125 guibg=#d33682
 hi ReplaceCursor ctermfg=15 guifg=#fdf6e3 ctermbg=65  guibg=#dc322f
 hi CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#cb4b16
 " }}} Graphics of cursor
-" Status line {{{
+" Status line, statusline {{{
 function! Status(winnr)
     let stat = ''
     let active = winnr() == a:winnr
@@ -331,9 +332,11 @@ function! Status(winnr)
     endfunction
 
     " special color in maximum columnwidth column
-    let max_columnwidth = 81                                                   " ColorColumn[0]
-                                                                               " column number
-    let stat .= '%1*' . (col(".") / max_columnwidth >= 1 ? '%2*-%v ' : ' %2v ') . '%*'
+    " use color 2 for columns outside textwidth
+    let max_columnwidth = 81                                                   " TODO(nils): use ColorColumn[0]
+    let longline = (col(".") / max_columnwidth >= 1)
+
+    let stat .= Color(active, 1, longline ? '%2*%3v' : '%2v' )                " column number
 
     let stat .= Color(active, 3, active ? ' | ' : ' « ')                       " left active buffer marker
     let stat .= '%<'
@@ -356,10 +359,10 @@ function! Status(winnr)
     let stat .= Color(active, 3, active ? ' | ' : ' » ')                       " right active buffer marker
 
     " file modified
-    let stat .= Color(active, 4, modified ? ' +' : '')
+    let stat .= Color(active, 4, modified ? '+ ' : '')
 
     " read only
-    let stat .= Color(active, 4, readonly ? ' readonly' : '')
+    let stat .= Color(active, 4, readonly ? 'readonly' : '')
 
     " right side
     let stat .= '%6*%='
