@@ -21,6 +21,14 @@ function! NextNonBlankLine(lnum)
     return -2
 endfunction
 
+function! IsImplStart(lnum)
+    return getline(a:lnum) =~? 'impl \S* {'
+endfunction
+
+function! IsImplFor(lnum)
+    return getline(a:lnum) =~? 'impl \S* for \S* {'
+endfunction
+
 function! IndentLevel(lnum)
     return indent(a:lnum) / &shiftwidth
 endfunction
@@ -42,7 +50,7 @@ function! IsStandaloneFunctionStart(lnum)
 endfunction
 
 function! IsFunctionStart(lnum)
-    return getline(a:lnum) =~? '\s*fn'
+    return getline(a:lnum) =~? '^\s*fn'
 endfunction
 
 function! Nilsfold(lnum)
@@ -54,6 +62,10 @@ function! Nilsfold(lnum)
     " block closer
     if getline(a:lnum) =~? '}'
         return '='
+    endif
+
+    if IsImplStart(a:lnum)
+        return 0
     endif
 
     let previous_indent = IndentLevel(a:lnum -1)            > 0
@@ -74,8 +86,13 @@ function! Nilsfold(lnum)
         return 1
 
     " a function start followed by a where clause starts a fold
-    elseif IsFunctionStart(a:lnum) && IsWhereClause(a:lnum + 1)
-        return 1
+    elseif IsFunctionStart(a:lnum)
+        let indent = IsWhereClause(a:lnum + 1) ? (this_indent + 1) : next_indent
+        if IsAnnotation(a:lnum - 1) || IsDoc(a:lnum - 1) || IsImplFor(a:lnum -1)
+            return indent
+        else
+            return '>' . indent
+        endif
 
         " a free standing { is part of the previous foldlevel
     elseif getline(a:lnum) =~? '^\s*{\s*$'
@@ -89,7 +106,7 @@ function! Nilsfold(lnum)
     elseif next_indent < this_indent
         return this_indent
 
-        " start
+        " starts a new fold
     elseif (next_indent > this_indent)
         if IsAnnotation(a:lnum - 1) || IsDoc(a:lnum - 1)
             return next_indent
@@ -118,7 +135,7 @@ function! Nilstext()
     let title = substitute(title, "\ *$", "", '')
 
     let fold_size = (v:foldend - v:foldstart)
-    let linecount = '[' . fold_size . ']'
+    let linecount = '[' . fold_size . '] '
     let prefix = '+-- '
     return prefix . title . ' ' .  linecount
 endfunction
