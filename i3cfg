@@ -4,8 +4,8 @@
 set $mod Mod4
 
 # uses $bar_focus color
-set $dmenuflag --dmenu "dmenu     -i -y 18 -l 100 -w 300 -fn 'DejaVu Sans 10' -sb '#5f005f' -sf '#000000'            "
-set $dmenurun           dmenu_run -i -y 18 -l 100 -w 300 -fn 'DejaVu Sans 10' -sb '#5f005f' -sf '#000000' -p "\$"
+set $dmenuflag --dmenu "dmenu     -i -y 18 -l 100 -w 300 -fn 'DejaVu Sans 10' -sb '#080808' -sf '#ad7094'            "
+set $dmenurun           dmenu_run -i -y 18 -l 100 -w 300 -fn 'DejaVu Sans 10' -sb '#080808' -sf '#ad7094' -p "\$"
 set $quickswitch quickswitch.py
 
 # Font for window titles. Will also be used by the bar unless a different font
