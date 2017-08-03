@@ -30,3 +30,4 @@ set -x LC_TIME "sv_SE.UTF-8"
 set -x fish_prompt_pwd_dir_length 3
 
 source ~/dotfiles/fish/(uname -n).fish
+source ~/dotfiles/fish/alias.fish

@@ -1,5 +1,5 @@
 function grep
-    grep --exclude-dir=.git --color
+    command grep --exclude-dir=.git --color $argv
 end
 
 function naelv
@@ -20,4 +20,12 @@ end
 
 function rubber
     rubber --pdf --force
+end
+
+function vim
+    if which nvim >/dev/null
+        nvim $argv
+    else
+        vim $argv
+    end
 end
