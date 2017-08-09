@@ -72,7 +72,7 @@ runtime! plugin/unimpaired.vim
 "     silent! imap <c-u> <esc>d0xi
 call plug#end()
 
-" }}} Initialization "
+" }}} Initialization
 " Deoplete Options {{{
 if has ('nvim')
     let g:deoplete#enable_at_startup = 1
@@ -81,7 +81,7 @@ if has ('nvim')
 endif
 " }}}
 " {{{ Utility rebinds
-" {{{{ Tmux, split navigation "
+" {{{{ Tmux, split navigation
 " " tmux vim conavigation
 let g:tmux_navigator_no_mappings = 1
 
@@ -161,7 +161,7 @@ map Q <Nop>
 nnoremap q: <Nop>
 
 nnoremap <BS> <Nop>
-" }}} Utility rebinds "
+" }}} Utility rebinds
 " {{{ Settings
 syntax enable                  " enables syntax highlighting
 set fileformat=unix            " proper unix linebreaks
@@ -213,8 +213,8 @@ if !has('nvim')
 endif
 
 let g:mapleader ='\'
-" }}} Settings "
-" {{{ Colors, Look and feel "
+" }}} Settings
+" {{{ Colors, Look and feel
 " {{{ General
 
 let &colorcolumn="80,".join(range(120,999),",")
@@ -383,8 +383,8 @@ augroup status
 augroup END
 
 " }}}
-" }}} Colors "
-" {{{ EasyAlign "
+" }}} Colors
+" {{{ EasyAlign
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
 
@@ -394,8 +394,8 @@ nmap ga <Plug>(EasyAlign)
 " Don't add spaces around separator
 let g:easy_align_left_margin = 0
 let g:easy_align_right_margin = 0
-" }}} EasyAlign "
-" {{{ Insert Mode maps "
+" }}} EasyAlign
+" {{{ Insert Mode maps
 " Move up and down in autocomplete with <c-j> and <c-k>
 inoremap <expr> <c-j> ("\<C-n>")
 inoremap <expr> <c-k> ("\<C-p>")
@@ -404,7 +404,7 @@ inoremap <expr> <c-k> ("\<C-p>")
 " inoremap ^} <Esc>b5<C-}>ea
 " inoremap <c-]> <esc>mzb<c-w>}`za
 
-" }}} Insert Mode maps "
+" }}} Insert Mode maps
 " {{{ file and shell stuff
 " warning when file is chenged
 autocmd FileChangedShell * echo " Warning: File changed on disk"
@@ -416,7 +416,7 @@ if has("autocmd")
 endif
 
 " }}} file and shell stuff
-" Spell checking mappings {{{ "
+" Spell checking mappings {{{
 " Pressing <leader>ff will toggle and untoggle spell checking,
 " fe sets checking to english and fs sets checking to swedish.
 nnoremap <silent> <leader>ff :setlocal spell!<cr>
@@ -425,8 +425,8 @@ nnoremap <silent> <leader>fe :setlocal spelllang=en_us<cr>
 " automatically correct word to first suggestion even if spell is off
 nnoremap <silent> <leader>f= :setlocal spell<cr>1z=:setlocal spell!<cr>
 
-" }}} Spell checking mappings "
-" {{{ Jump binds "
+" }}} Spell checking mappings
+" {{{ Jump binds
 " go to next item in location list, loop around if end is reached
 nnoremap <silent> ]l :try<bar>lnext<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>lfirst<bar>endtry<cr>
 
@@ -441,8 +441,8 @@ nnoremap <leader>gC /^.*\(<<<\\|====\\|>>>>\).*$<cr>
 nnoremap ]q :cn<CR>
 nnoremap [q :cp<CR>
 
-" }}} Jump binds "
-" {{{ Fugitive GitGutter and Git "
+" }}} Jump binds
+" {{{ Fugitive GitGutter and Git
 " populate quicklist with commited version of current file - fugitive
 nnoremap <leader>gl :silent Glog<CR>
 nnoremap <leader>gc :Gcommit<CR>
@@ -453,8 +453,8 @@ nnoremap <leader>gp :GitGutterPreviewHunk<cr>
 
 autocmd FileType gitcommit setlocal textwidth=72 | setlocal spell
 
-" }}} Fugitive "
-" {{{ Search mappings "
+" }}} Fugitive
+" {{{ Search mappings
 
 " turn off search highlighting for current search
 nnoremap <silent> <leader>nh :nohlsearch<CR>
@@ -475,16 +475,16 @@ if has('Swoop')
     nnoremap <Leader>7 :call Swoop()<CR>
     vnoremap <Leader>7 :call SwoopSelection()<CR>
 endif
-" }}} Search Mappings "
-" {{{ word motions inside camel/snake case"
+" }}} Search Mappings
+" {{{ word motions inside camel/snake case
 map <silent> w <Plug>CamelCaseMotion_w
 map <silent> b <Plug>CamelCaseMotion_b
 map <silent> e <Plug>CamelCaseMotion_e
 sunmap w
 sunmap b
 sunmap e
-" }}} word motions inside camel/snake case"
-" {{{ Whistespace handling "
+" }}} word motions inside camel/snake case
+" {{{ Whistespace handling
 
 " betterfixwhitespace
 let g:strip_whitespace_on_save=1
@@ -496,15 +496,15 @@ highlight ExtraWhitespace ctermbg=52
 "   au FileType diff,gitcommit DisableWhitespace
 " augroup END
 
-" }}} Whistespace handling "
-" {{{ Undo history "
+" }}} Whistespace handling
+" {{{ Undo history
 if has("persistent_undo")
     set undodir=~/.vim/undodir
     set undofile
 endif
 nnoremap <leader>u :UndotreeToggle<cr>
-" }}} Undo history "
-" {{{ Tag plugins "
+" }}} Undo history
+" {{{ Tag plugins
 nnoremap <leader>tt :TagbarToggle<CR>
 nnoremap <leader>tp :Tags<CR>
 
@@ -519,8 +519,8 @@ let g:gutentags_project_info = []
 call add(g:gutentags_project_info, {'type': 'python', 'file': 'setup.py'})
 call add(g:gutentags_project_info, {'type': 'ruby', 'file': 'Gemfile'})
 call add(g:gutentags_project_info, {'type': 'rust', 'file': 'Cargo.toml'})
-" }}} Tag Plugins "
-" {{{ YouCompleteMe "
+" }}} Tag Plugins
+" {{{ YouCompleteMe
 " YCM don't ask for confirmation on loading ycm_extra_conf.py
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf ='~/dotfiles/ycm_extra_conf.py.DOT'
@@ -529,12 +529,12 @@ let g:ycm_goto_buffer_command = 'horizontal-split'
 " always fill location list with ycm errors/warnings
 let g:ycm_always_populate_location_list = 1
 " }}} YouCompleteMe
-" {{{ IndentGuide "
+" {{{ IndentGuide
 " indentGuide settings
 let g:indent_guides_auto_colors = 0
 
 let g:indent_guides_enable_on_vim_startup = 1
-" }}} IndentGuide "
+" }}} IndentGuide
 " {{{ startify, session management
 if has ('startify')
     let g:startify_session_persistence = 1 " autosave sessions
@@ -601,7 +601,7 @@ function! SyntaxRule()
     echo synIDattr(synID(line("."), col("."), 1), "name")
 endfunction
 " }}} small function mappings
-" {{{ Spill functions, heuristic solutions "
+" {{{ Spill functions, heuristic solutions
 " toggle slimmed down display to handle files with very long lines
 " NB(nils): resetting funtionality does not work
 function! SpillToggleLongLineDisplay()
@@ -620,14 +620,14 @@ function! SpillToggleLongLineDisplay()
 endfunc
 nnoremap <leader>st :call SpillToggleLongLineDisplay()<cr>
 " }}} spill functions
-" {{{ exjumplist mappings "
+" {{{ exjumplist mappings
 " nmap <C-I>  <Plug>(exjumplist-go-last)
 " nmap <C-O>  <Plug>(exjumplist-go-first)
 
 nmap <leader>ji  <Plug>(exjumplist-go-last)
 nmap <leader>jo  <Plug>(exjumplist-go-first)
-" }}} exjumplist mappings "
-" {{{ Filetype specific settings, mappings "
+" }}} exjumplist mappings
+" {{{ Filetype specific settings, mappings
 if has("autocmd")
     autocmd FileType make setlocal noexpandtab
 
@@ -653,7 +653,7 @@ if has("autocmd")
     autocmd FileType rust setlocal textwidth=80
 endif
 
-" }}} Filetype specific mappings "
+" }}} Filetype specific mappings
 " {{{ Neoterm, quasi-repl
 if has('nvim')
     nnoremap <silent> <leader>vs :TREPLSend<cr>
