@@ -235,20 +235,20 @@ function! OverrideLiqouriceColors() abort
     highlight GitGutterDelete       ctermbg=232 ctermfg=red
     highlight GitGutterChangeDelete ctermbg=232 ctermfg=yellow
 
-    highlight  NonText     term=bold       cterm=bold  ctermbg=232  ctermfg=125  gui=bold       guibg=bg  guifg=#808080
-    highlight  CursorLine  term=underline  cterm=NONE  ctermbg=234  gui=NONE     guibg=#0f0f0f
+    highlight NonText     term=bold       cterm=bold  ctermbg=232  ctermfg=125  gui=bold       guibg=bg  guifg=#808080
+    highlight CursorLine  term=underline  cterm=NONE  ctermbg=234  gui=NONE     guibg=#0f0f0f
 
     highlight IndentGuidesOdd  ctermbg=235
     highlight IndentGuidesEven ctermbg=234
 
 
     " User colors for status line
-    hi  User1  ctermfg=33   guifg=#268bd2  ctermbg=53   guibg=#fdf6e3  gui=bold
-    hi  User2  ctermfg=142  guifg=#d33682  ctermbg=53  guibg=#eee8d5  gui=bold
-    hi  User3  ctermfg=253  guifg=#719e07  ctermbg=53   guibg=#eee8d5  gui=bold
-    hi  User4  ctermfg=33   guifg=#2aa198  ctermbg=53   guibg=#eee8d5  gui=bold
-    hi  User5  ctermfg=247  ctermbg=53
-    hi  User6  ctermfg=245  ctermbg=233
+    hi User1  ctermfg=33   guifg=#268bd2  ctermbg=53   guibg=#fdf6e3  gui=bold
+    hi User2  ctermfg=142  guifg=#d33682  ctermbg=53   guibg=#eee8d5  gui=bold
+    hi User3  ctermfg=253  guifg=#719e07  ctermbg=53   guibg=#eee8d5  gui=bold
+    hi User4  ctermfg=33   guifg=#2aa198  ctermbg=53   guibg=#eee8d5  gui=bold
+    hi User5  ctermfg=247  ctermbg=53
+    hi User6  ctermfg=245  ctermbg=235
 endfunction
 
 function! OverrideProtonColors () abort
