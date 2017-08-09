@@ -1,6 +1,5 @@
 " TODO(nils): improve this
 " TODO(nils): does not work well with nested functions / macros
-" TODO(nils): incorrect fold and foldtext when using fn...\n where{
 
 autocmd FileType rust setlocal foldmethod=expr
 autocmd FileType rust setlocal foldexpr=Nilsfold(v:lnum)
@@ -128,14 +127,14 @@ function! Nilstext()
     let title = getline(title_line)
 
     " multiline function header
-    let title = substitute(title, "(.*)", "(...)", '')
-    let title = substitute(title, "->.*", "", '')
-    let title = substitute(title, "([^)]*$", "", '')
-    let title = substitute(title, "{", "", '')
-    let title = substitute(title, "\ *$", "", '')
+    let title = substitute(title, "->.*$", "", '')     " remove return type
+    let title = substitute(title, "(.*)", "(...)", '') " change arguments to '...'
+    let title = substitute(title, "[{\ ]*$", "", '')   " remove function block opener and extra spaces
+    let title = substitute(title, "\ \ \ ", "---", "g")     " change leading spaces to fold character
 
     let fold_size = (v:foldend - v:foldstart)
     let linecount = '[' . fold_size . '] '
     let prefix = '+-- '
-    return prefix . title . ' ' .  linecount
+    let title = prefix . title . ' ' .  linecount
+    return title
 endfunction
