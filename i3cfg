@@ -301,8 +301,11 @@ for_window [class="Firefox"] border pixel 3
 
 # for_window [class="^.*"] border pixel 3
 
-for_window [class = "URxvt" instance = "float_term$"] border 1 pixel ; move scratchpad
-for_window [class = "URxvt" instance = "aelv$"] title_format ">> ssh aelv" ; border normal
+# floating enable; move right 400; move down 400
+for_window [class = "URxvt" instance = "UrxvtFloat$"] floating enable
+
+# for_window [class = "URxvt" instance = "float_term$"] border 1 pixel ; move scratchpad
+# for_window [class = "URxvt" instance = "aelv$"] title_format ">> ssh aelv" ; border normal
 
 # }}} window rules
 # marks {{{
