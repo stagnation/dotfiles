@@ -63,7 +63,7 @@ endif
 runtime! plugin/unimpaired.vim
 
 " explicitly load rsi so ä can be unmapped
-" " if has("vim-rsi")
+" " if has('vim-rsi')
 " "     call plug#load('vim-rsi')
 " "     silent! iunmap ä
 " " endif
@@ -271,7 +271,7 @@ augroup END
 if has('vim_starting')
     " don't change colorscheme if vim is already running
     color liquorice-approx
-    if has("gui_running")
+    if has('gui_running')
         colorscheme liquorice
     endif
 endif
@@ -412,7 +412,7 @@ autocmd FileChangedShell * echo " Warning: File changed on disk"
 autocmd Cursorhold * checktime " also check for file changes, more sublte
 
 " return to cursor location when reopenning file
-if has("autocmd")
+if has('autocmd')
     autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
@@ -499,10 +499,17 @@ highlight ExtraWhitespace ctermbg=52
 
 " }}} Whistespace handling
 " {{{ Undo history
-if has("persistent_undo")
-    set undodir=~/.vim/undodir
+if has('nvim')
+    set undofile
+else
+    " Use persistent history.
+    if !isdirectory("~/.vim-undo-dir")
+        call mkdir("~/.vim-undo-dir", "p", 0700)
+    endif
+    set undodir=/tmp/.vim-undo-dir
     set undofile
 endif
+
 nnoremap <leader>u :UndotreeToggle<cr>
 " }}} Undo history
 " {{{ Tag plugins
@@ -629,7 +636,7 @@ nmap <leader>ji  <Plug>(exjumplist-go-last)
 nmap <leader>jo  <Plug>(exjumplist-go-first)
 " }}} exjumplist mappings
 " {{{ Filetype specific settings, mappings
-if has("autocmd")
+if has('autocmd')
     autocmd FileType make setlocal noexpandtab
 
     autocmd FileType python nnoremap <leader>my :!python3 %<cr>
@@ -673,7 +680,7 @@ if has ('nvim')
 
     tmap <c-x> <Plug>EditCommand
 
-endif " has('nvim')
+endif
 " {{{ neovim homegrown repl
 " http://vi.stackexchange.com/questions/2764/send-text-from-one-split-window-to-another/3390#3390
 if has('nvim')
@@ -701,7 +708,7 @@ if has('nvim') && has ('neomake')
 endif
 " }}}
 " {{{ TODO, NB and FIXME comments
-if has("autocmd")
+if has('autocmd')
     " remove default comment and add the desired strings
     " to get higher priority
     " then read default
