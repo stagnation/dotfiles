@@ -671,3 +671,22 @@ url("about:home") {
  overflow-x: hidden;
 }
 }
+
+.autocomplete-richlistbox {
+    background: var(--main-url-bg-color) !important;
+    color: var(--main-url-text-color) !important;
+    border: 1px solid var(--main-theme-border-color) !important;
+}
+
+#PopupAutoCompleteRichResult .autocomplete-richlistitem description
+{
+    background: var(--main-url=text-color) !important;
+}
+
+::-moz-selection,
+input::-moz-selection,
+textarea::-moz-selection
+{ -moz-appearance: none !important;
+    background: rgba(37,45,79, .6) !important;
+    border-color: black !important;
+color: #ccc !important; }
