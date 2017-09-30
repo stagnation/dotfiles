@@ -13,7 +13,6 @@ endif
 call plug#begin(plug_location)
 " Plug 'pelodelfuego/vim-swoop'
 " Plug 'wellle/visual-split.vim'
-Plug 'Konfekt/FastFold'
 Plug 'airblade/vim-gitgutter'
 Plug 'cespare/vim-toml'
 Plug 'christoomey/vim-tmux-navigator'
@@ -26,6 +25,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-peekaboo'
 Plug 'kana/vim-operator-user'
+" Plug 'Konfekt/FastFold'
 Plug 'kshenoy/vim-signature'
 Plug 'lfv89/vim-interestingwords'
 Plug 'ludovicchabant/vim-gutentags'
@@ -37,7 +37,6 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'romainl/vim-qf'
 Plug 'rust-lang/rust.vim'
-Plug 'rust-lang/rust.vim'
 Plug 'sirver/UltiSnips'
 Plug 'spiiph/vim-space'
 Plug 'ton/vim-bufsurf'
@@ -46,17 +45,19 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rsi', { 'on': [] }
 Plug 'tpope/vim-surround'
 Plug 'unblevable/quick-scope'
-Plug 'vim-scripts/CSApprox'
 Plug 'vim-scripts/camelcasemotion'           " make w,b,e respect word boundaries inside camelCase and snake_case
+Plug 'vim-scripts/CSApprox'
 Plug 'wellle/targets.vim'
+Plug 'w0rp/ale'                              " asynchronous lint engine
+Plug 'https://github.com/chrisjohnson/vim-foldfunctions'
 if has ('nvim')
     Plug 'kassio/neoterm'
-    Plug 'benekastah/neomake'
+    " Plug 'benekastah/neomake'
     Plug 'brettanomyces/nvim-editcommand'
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
     Plug 'sebastianmarkow/deoplete-rust'
 else
-    Plug 'Valloric/YouCompleteMe'
+    Plug '~/.vim/plugged/YouCompleteMe'
 endif
 
 runtime! plugin/unimpaired.vim
@@ -695,7 +696,7 @@ endif
 " }}}
 " }}} neovim terminal settings
 " {{{ neovim neomake
-if has('nvim')
+if has('nvim') && has ('neomake')
     autocmd! BufWritePost * Neomake
 endif
 " }}}
