@@ -28,6 +28,7 @@ set -x LANGUAGE "en_US.UTF-8"
 set -x LC_TIME "sv_SE.UTF-8"
 
 set -x fish_prompt_pwd_dir_length 3
+set -x EDITOR vim
 
 source ~/dotfiles/fish/(uname -n).fish
 source ~/dotfiles/fish/alias.fish

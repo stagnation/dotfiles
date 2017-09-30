@@ -1,3 +1,7 @@
 Host aelv
     HostName aelv.se
     User spill
+
+Host spilltop
+    HostName 10.0.0.2
+    User spill
