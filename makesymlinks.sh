@@ -76,3 +76,18 @@ mkdir -p mopdir
 ln -s $dotfilesdir/mopidy.conf $mopdir/mopidy.conf
 
 ln -s $dotfilesdir/gitconfigignore ~/.config/git/ignore
+
+########
+# Install scripts and programs
+# some assembly might be required
+
+# make in xcwd dir
+ln -s $dotfilesdir/bin/gits/xcwd/xcwd ~/bin/
+
+# install python modules for neovim
+pip  install neovim
+pip3 install neovim
+
+# install python modules for statusbar
+sudo pip3 install colour netifaces
+sudo pip3 install git+https://github.com/enkore/i3pystatus.git
