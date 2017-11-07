@@ -61,7 +61,8 @@ exec --no-startup-id feh --bg-center /home/spill/Pictures/withhearstowardnone.jp
 # }}} startup
 
 # NB(nils): dmenu2 required https://bitbucket.org/melek/dmenu2
-bindsym $mod+space exec $dmenurun
+# bindsym $mod+space exec $dmenurun
+bindsym $mod+space exec fzf_launcher
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
