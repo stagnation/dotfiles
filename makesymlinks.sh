@@ -91,3 +91,6 @@ pip3 install neovim
 # install python modules for statusbar
 sudo pip3 install colour netifaces
 sudo pip3 install git+https://github.com/enkore/i3pystatus.git
+
+# install dmenu2
+ln -s ~/bin/gits/dmenu2/bin/dmenu ~/bin/dmenu

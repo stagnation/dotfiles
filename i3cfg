@@ -4,9 +4,11 @@
 set $mod Mod4
 
 # uses $bar_focus color
-set $dmenuflag --dmenu "dmenu     -i -y 18 -l 100 -w 300 -fn 'DejaVu Sans 10' -sb '#080808' -sf '#ad7094'            "
-set $dmenurun           dmenu_run -i -y 18 -l 100 -w 300 -fn 'DejaVu Sans 10' -sb '#080808' -sf '#ad7094' -p "\$"
-set $quickswitch quickswitch.py
+# NB(nils): dmenu2 required https://bitbucket.org/melek/dmenu2
+set $dmenuflag --dmenu "dmenu     -i -y 18 -l 100 -w 300 -h 38 -fn 'DejaVu Sans 10' -sb '#080808' -sf '#ad7094'            "
+set $dmenurun           dmenu_run -i -y 18 -l 100 -w 300 -h 38 -fn 'DejaVu Sans 10' -sb '#080808' -sf '#ad7094' -p "\$"
+# quickswitch from https://github.com/OliverUv/quickswitch-for-i3
+set $quickswitch ~/bin/gits/quickswitch-for-i3/quickswitch.py
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -60,7 +62,6 @@ exec --no-startup-id xset r rate 250 25
 exec --no-startup-id feh --bg-center /home/spill/Pictures/withhearstowardnone.jpeg
 # }}} startup
 
-# NB(nils): dmenu2 required https://bitbucket.org/melek/dmenu2
 # bindsym $mod+space exec $dmenurun
 bindsym $mod+space exec fzf_launcher
 
