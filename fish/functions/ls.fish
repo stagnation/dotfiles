@@ -1,3 +1,3 @@
 function ls
-	command ls --human-readable --color --group-directories-first --classify $argv
+	command ls --human-readable --color --group-directories-first --classify -v $argv
 end
