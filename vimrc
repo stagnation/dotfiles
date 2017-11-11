@@ -11,10 +11,15 @@ if has ('nvim')
 endif
 " :s#.*github.com/#Plug '#<cr>:s#$#'#<cr>:nohlsearch<cr>
 call plug#begin(plug_location)
+
+" Plug 'Konfekt/FastFold'
 " Plug 'pelodelfuego/vim-swoop'
 " Plug 'wellle/visual-split.vim'
+" Plug 'wincent/scalpel'
+Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'airblade/vim-gitgutter'
 Plug 'cespare/vim-toml'
+Plug 'chrisjohnson/vim-foldfunctions'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dag/vim-fish'
 Plug 'eparreno/vim-matchit'
@@ -25,7 +30,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-peekaboo'
 Plug 'kana/vim-operator-user'
-" Plug 'Konfekt/FastFold'
 Plug 'kshenoy/vim-signature'
 Plug 'lfv89/vim-interestingwords'
 Plug 'ludovicchabant/vim-gutentags'
@@ -45,17 +49,20 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rsi', { 'on': [] }
 Plug 'tpope/vim-surround'
 Plug 'unblevable/quick-scope'
-Plug 'vim-scripts/camelcasemotion'           " make w,b,e respect word boundaries inside camelCase and snake_case
 Plug 'vim-scripts/CSApprox'
-Plug 'wellle/targets.vim'
+Plug 'vim-scripts/camelcasemotion'           " make w,b,e respect word boundaries inside camelCase and snake_case
 Plug 'w0rp/ale'                              " asynchronous lint engine
-Plug 'https://github.com/chrisjohnson/vim-foldfunctions'
+Plug 'wellle/targets.vim'
+
+Plug '/home/spill/dotfiles/spillplug'
+
 if has ('nvim')
     Plug 'kassio/neoterm'
     " Plug 'benekastah/neomake'
     Plug 'brettanomyces/nvim-editcommand'
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
     Plug 'sebastianmarkow/deoplete-rust'
+    Plug '/home/spill/dotfiles/spillfzf'
 else
     Plug '~/.vim/plugged/YouCompleteMe'
 endif
@@ -368,6 +375,11 @@ function! Status(winnr)
 
     " right side
     let stat .= '%6*%='
+
+    " extra notification markers
+    if exists("g:quickfix_pending")
+        let stat .= '[Q] '
+    endif
 
     return stat
 endfunction
@@ -778,9 +790,13 @@ source ~/dotfiles/rust_fold.vim
 " TODO(nils): cyclic ]l, if any exist don't show "no more" warning
 " NB(nils): modeline is the name for # v i m: setting=value -- no 'set' required
 " NB(nils): gi inserts text from last insertion position.
-" NB(nils): :b# öppna senaste buffern
+" NB(nils): :b# öppna senaste buffern - <c-6>, <c-^>
 " NB(nils): g, g; jumps between previous insertion positions
 " NB(nils): :let ... <c-a> shows all settings, enter give all their values
+" TODO(nils): make plugin that parses jumplist for next/previous new file
+"             and jump to that postion in jumplist, rather that bufsurf or many
+"             jumps
+" TODO(nils): don't reapply folds from modeline when sourcing vimrc
 
 if filereadable(glob("~/.vimrc.local"))
     source ~/.vimrc.local
