@@ -186,6 +186,7 @@ set number                     " show line numbers
 set nowrap                     " do not wrap text
 set linebreak                  " preserves word when wrapping
 set ttyfast                    " 'smooth' scrolling
+set synmaxcol=512              " do not use syntax highlighting for long lines
 set mouse=a                    " enable mouse in terminals that support it
 set showmatch                  " breifly show matching bracekt when inserting such
 set incsearch                  " incremental searching as soon as typing begins
@@ -225,7 +226,10 @@ let g:mapleader ='\'
 " {{{ Colors, Look and feel
 " {{{ General
 
-let &colorcolumn="80,".join(range(120,999),",")
+" Use the color column to mark textwidth and the active split
+" color column is relative to textwidth
+autocmd BufEnter,FocusGained,VimEnter,WinEnter * let &colorcolumn='+0,+' . join(range(40, 254), ',+')
+autocmd WinLeave,FocusLost * let &colorcolumn = join(range(0,255), ',')
 
 " TODO(nils): fix visual bg for proton
 
@@ -345,7 +349,7 @@ function! Status(winnr)
     let max_columnwidth = 81                                                   " TODO(nils): use ColorColumn[0]
     let longline = (col(".") / max_columnwidth >= 1)
 
-    let stat .= Color(active, 1, longline ? '%2*%3v' : '%2v' )                " column number
+    let stat .= Color(active, 1, longline ? '%2*%3v' : '%2v' )                 " column number
 
     let stat .= Color(active, 3, active ? ' | ' : ' « ')                       " left active buffer marker
     let stat .= '%<'
@@ -778,6 +782,9 @@ nnoremap <leader><leader>u NOP
 " }}}
 " something sets the / register to ' ' in my rc
 let @/=''
+
+" Disable "Pattern not found" messages
+if (has('nvim')) | set shortmess+=c | endif
 
 let g:peekaboo_delay = 500
 
