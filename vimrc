@@ -248,6 +248,12 @@ let g:mapleader ='\'
 " }}} Settings
 " {{{ Colors, Look and feel
 " {{{ General
+if (has ('folding') && has ('windows'))
+    set fillchars+=vert:┃ " Box drawings heavy vertical (U+2503)
+endif
+
+" Disable "Pattern not found" messages
+if (has('nvim')) | set shortmess+=c | endif
 
 " Use the color column to mark textwidth and the active split
 " color column is relative to textwidth
@@ -805,9 +811,6 @@ nnoremap <leader><leader>u NOP
 " }}}
 " something sets the / register to ' ' in my rc
 let @/=''
-
-" Disable "Pattern not found" messages
-if (has('nvim')) | set shortmess+=c | endif
 
 let g:peekaboo_delay = 500
 
