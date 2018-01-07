@@ -53,13 +53,15 @@ mkdir -p ~/.config/nvim/backup
 mkdir -p ~/.config/nvim/colors
 
 schemes="lakris.vim lakris256.vim"
+
 for scheme in $schemes; do
     ln -s $dotfilesdir/vimcols/$scheme ~/.vim/colors/$scheme
     ln -s $dotfilesdir/vimcols/$scheme ~/.config/nvim/colors/$scheme
-    wget ftp://ftp.vim.org/pub/vim/runtime/spell/sv.utf-8.spl -O ~/.local/share/nvim/site/spell/sv.utf-8.spl
 done ;
 
 echo "source ~/.vimrc" > ~/.config/nvim/init.vim
+# download swedish spelling file for neovim
+wget ftp://ftp.vim.org/pub/vim/runtime/spell/sv.utf-8.spl -O ~/.local/share/nvim/site/spell/sv.utf-8.spl
 
 mkdir ~/.ncmpcpp
 ln -s $dotfilesdir/ncmpconf ~/.ncmpcpp/config
@@ -67,15 +69,17 @@ ln -s $dotfilesdir/ncmpconf ~/.ncmpcpp/config
 ln -s $dotfilesdir/ncmpbinds ~/.ncmpcpp/bindings
 
 mpvdir=~/.config/mpv
-mkdir -p mpvdir
+mkdir -p $mpvdir
 echo ">>copy mpv.conf manually!<<"
 ln -s $dotfilesdir/input.conf $mpvdir/input.conf
 
 mopdir=~/.config/mopidy
-mkdir -p mopdir
+mkdir -p $mopdir
 ln -s $dotfilesdir/mopidy.conf $mopdir/mopidy.conf
 
-ln -s $dotfilesdir/gitconfigignore ~/.config/git/ignore
+gitdir=~/.config/git
+mkdir -p $gitdir
+ln -s $dotfilesdir/gitconfigignore $gitdir/ignore
 
 ########
 # Install scripts and programs
