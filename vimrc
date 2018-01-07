@@ -595,23 +595,6 @@ let g:indent_guides_auto_colors = 0
 
 let g:indent_guides_enable_on_vim_startup = 1
 " }}} IndentGuide
-" {{{ startify, session management
-if has ('startify')
-    let g:startify_session_persistence = 1 " autosave sessions
-    let g:startify_bookmarks = [ '~/dotfiles/vimrc' ]
-
-    let g:startify_list_order = [
-                \ ['   These are my bookmarks:'],
-                \ 'bookmarks',
-                \ ['   These are my sessions:'],
-                \ 'sessions',
-                \ ['   My most recently', '   used files'],
-                \ 'files',
-                \ ['   My most recently used files in the current directory:'],
-                \ 'dir',
-                \ ]
-endif
-" }}} startify
 " {{{ Location Quickfix
 " toggle location and quickfix lists
 " mnemonic: list/ ( quick | location )
