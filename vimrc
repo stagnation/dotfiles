@@ -513,8 +513,13 @@ autocmd InsertLeave * :setlocal hlsearch
 
 " Pull word under cursor into LHS of a substitute
 " Courtesy of Ohm
+" Similar to the scalpel plugin
 nnoremap <leader>z :%s#\<<c-r>=expand("<cword>")<cr>\>##gc<left><left><left>
 nnoremap <leader>Z :bufdo %s#\<<c-r>=expand("<cword>")<cr>\>##gce<space><bar><space>update<left><left><left><left><left><left><left><left><left><left><left><left><left>
+
+" Use very magic search to give most character their special use
+nnoremap / /\v
+vnoremap / /\v
 
 " vim-swoop selection
 if has('Swoop')
