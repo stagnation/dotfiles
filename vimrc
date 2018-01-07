@@ -558,7 +558,7 @@ else
     if !isdirectory("~/.vim-undo-dir")
         call mkdir("~/.vim-undo-dir", "p", 0700)
     endif
-    set undodir=/tmp/.vim-undo-dir
+    set undodir=~/.vim-undo-dir
     set undofile
 endif
 
@@ -837,6 +837,12 @@ source ~/dotfiles/rust_fold.vim
 "             and jump to that postion in jumplist, rather that bufsurf or many
 "             jumps
 " TODO(nils): don't reapply folds from modeline when sourcing vimrc
+" TODO(nils): make gutentags generate help tags for all ft=vim files
+" TODO(nils): map to close preview window and location/quickfix lists, <c-w>Z maybe
+" TODO(nils): vim-space does not allow nnoremap n nzz : to center cursor after
+"             searching
+
+" NB(nils): :g/a/,/b/ selects a region
 
 if filereadable(glob("~/.vimrc.local"))
     source ~/.vimrc.local
