@@ -19,9 +19,9 @@ color14 = "#4bb5c1"
 color7 = "#b2b2b5"
 color15 = "#c2c2c5"
 
-status.register("clock",
-    color=color4,
-    format="%a %-d %b %X",)
+# status.register("clock",
+#     color=color4,
+#     format="%a %-d %b %X",)
 
 status.register("battery",
     format="{status} {remaining:%E%hh:%Mm}",
