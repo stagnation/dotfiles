@@ -175,6 +175,10 @@ map Q <Nop>
 nnoremap q: <Nop>
 
 nnoremap <BS> <Nop>
+
+" easier macro repeat in normal buffers
+nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'
+
 " }}} Utility rebinds
 " {{{ Settings
 syntax enable                  " enables syntax highlighting
