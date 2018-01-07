@@ -19,6 +19,7 @@ call plug#begin(plug_location)
                                    " Plug 'w0rp/ale'                              " asynchronous lint engine
                                    " Plug 'wellle/visual-split.vim'
                                    " Plug 'wincent/scalpel'
+                                   " Plug 'guyzmo/EnhancedJumps'
 Plug 'airblade/vim-gitgutter'
 Plug 'cespare/vim-toml'
 Plug 'chrisjohnson/vim-foldfunctions'
