@@ -12,11 +12,13 @@ endif
 " :s#.*github.com/#Plug '#<cr>:s#$#'#<cr>:nohlsearch<cr>
 call plug#begin(plug_location)
 
-" Plug 'Konfekt/FastFold'
-" Plug 'pelodelfuego/vim-swoop'
-" Plug 'wellle/visual-split.vim'
-" Plug 'wincent/scalpel'
-Plug 'PotatoesMaster/i3-vim-syntax'
+                                   " Plug 'Konfekt/FastFold'
+                                   " Plug 'nathanaelkane/vim-indent-guides'
+                                   " Plug 'pelodelfuego/vim-swoop'
+                                   " Plug 'ton/vim-bufsurf'
+                                   " Plug 'w0rp/ale'                              " asynchronous lint engine
+                                   " Plug 'wellle/visual-split.vim'
+                                   " Plug 'wincent/scalpel'
 Plug 'airblade/vim-gitgutter'
 Plug 'cespare/vim-toml'
 Plug 'chrisjohnson/vim-foldfunctions'
@@ -37,21 +39,20 @@ Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'milkypostman/vim-togglelist'
-Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'romainl/vim-qf'
 Plug 'rust-lang/rust.vim'
 Plug 'sirver/UltiSnips'
 Plug 'spiiph/vim-space'
-Plug 'ton/vim-bufsurf'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rsi', { 'on': [] }
 Plug 'tpope/vim-surround'
 Plug 'unblevable/quick-scope'
+Plug 'vim-scripts/camelcasemotion' " make w,b,e respect word boundaries inside camelCase and snake_case
 Plug 'vim-scripts/CSApprox'
-Plug 'vim-scripts/camelcasemotion'           " make w,b,e respect word boundaries inside camelCase and snake_case
-Plug 'w0rp/ale'                              " asynchronous lint engine
+Plug 'vim-scripts/ingo-library'
 Plug 'wellle/targets.vim'
 
 Plug '/home/spill/dotfiles/spillplug'
@@ -64,7 +65,7 @@ if has ('nvim')
     Plug 'sebastianmarkow/deoplete-rust'
     Plug '/home/spill/dotfiles/spillfzf'
 else
-    Plug '~/.vim/plugged/YouCompleteMe'
+    Plug '~/.vim/plugged/YouCompleteMe' " use local path to manage updates manually
 endif
 
 runtime! plugin/unimpaired.vim
