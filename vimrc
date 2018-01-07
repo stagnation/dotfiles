@@ -391,6 +391,8 @@ function! Status(winnr)
         let stat .= 'Tagbar'
     elseif fname == '.git/index'
         let stat .= 'git'
+    elseif fname =~? 'term://.*fzf'                                            " replace the terminal's special filename based on the running process :help terminal
+        let stat .= 'fzf'
 
     else
         let path = fnamemodify(fname, ":h")
