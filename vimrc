@@ -102,8 +102,8 @@ nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
 
 if has ('nvim')
     tnoremap <silent> <c-h> <C-\><C-n>:TmuxNavigateLeft<cr>
-    tnoremap <silent> <c-j> <C-\><C-n>:TmuxNavigateDown<cr>
-    tnoremap <silent> <c-k> <C-\><C-n>:TmuxNavigateUp<cr>
+    " tnoremap <silent> <c-j> <C-\><C-n>:TmuxNavigateDown<cr>
+    " tnoremap <silent> <c-k> <C-\><C-n>:TmuxNavigateUp<cr>
     tnoremap <silent> <c-l> <C-\><C-n>:TmuxNavigateRight<cr>
 endif
 " }}}} end Tmux, split navigation
