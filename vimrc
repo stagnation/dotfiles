@@ -182,11 +182,13 @@ nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'
 " }}} Utility rebinds
 " {{{ Settings
 syntax enable                  " enables syntax highlighting
-set fileformat=unix            " proper unix linebreaks
 filetype plugin indent on      " react on filetyps with plugins and syntax
+set fileformat=unix            " proper unix linebreaks
 set scrolloff=4                " minimum number of lines to display around cursor
+set sidescrolloff=4            " minimum number of columnes to display around cursors
 set hlsearch                   " highlight search results
 set smarttab                   " <TAB> inserts 'shiftwidth' spaces
+set spellcapcheck=             " make spell check insensitive to the case of the first letter in a word
 set tabstop=4                  " tab spacing
 set expandtab                  " use spaces instead of tab
 set shiftwidth=4               " amount of spaces for tab to insert
@@ -196,6 +198,7 @@ set number                     " show line numbers
 set nowrap                     " do not wrap text
 set linebreak                  " preserves word when wrapping
 set ttyfast                    " 'smooth' scrolling
+set lazyredraw                 " do not update screen during macro playback
 set synmaxcol=512              " do not use syntax highlighting for long lines
 set mouse=a                    " enable mouse in terminals that support it
 set showmatch                  " breifly show matching bracekt when inserting such
@@ -206,13 +209,7 @@ set modeline                   " use modelines
 set ttimeoutlen=5              " faster twitching for everything
 set virtualedit=block          " allow cursor to be moved into empty space in visual
 set laststatus=2               " always show status line
-set backupdir=~/.vim/backup    " centralized backup
 set backspace=indent,eol,start " backspace everywhere
-set noswapfile                 " no swap files
-if has('vim_starting')
-    set foldmethod=syntax
-    set foldlevel=20               " by defualt open folds to level 20
-endif
 set cursorline                 " highlights the line cursor is at
 set cursorcolumn               " highlights the column cursor is at
 set showcmd
@@ -227,8 +224,24 @@ set formatoptions+=q
 set formatoptions+=o
 set formatoptions+=l
 
+set backupdir=~/.vim/backup    " centralized backup
+set noswapfile                 " no swap files
+
+if has('vim_starting')         "     vim_starting to not overwrite filetype specific settings
+    set foldmethod=syntax
+    set foldlevel=20               " by defualt open folds to level 20
+endif
+
 if !has('nvim')
     set encoding=utf-8         " utf-8 encoding
+endif
+
+" do not back up roots files
+if exists('$SUDO_USER')
+    set nobackup
+    set nowritebackup
+    set noswapfile
+    set noundofile
 endif
 
 let g:mapleader ='\'
