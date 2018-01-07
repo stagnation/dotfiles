@@ -309,7 +309,7 @@ augroup MyColors
 augroup END
 
 if has('vim_starting')
-    " don't change colorscheme if vim is already running
+    " do not change colorscheme if vim is already running
     color liquorice-approx
     if has('gui_running')
         colorscheme liquorice
@@ -437,7 +437,7 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-" Don't add spaces around separator
+" Do not add spaces around separator
 let g:easy_align_left_margin = 0
 let g:easy_align_right_margin = 0
 " }}} EasyAlign
@@ -574,7 +574,7 @@ call add(g:gutentags_project_info, {'type': 'ruby', 'file': 'Gemfile'})
 call add(g:gutentags_project_info, {'type': 'rust', 'file': 'Cargo.toml'})
 " }}} Tag Plugins
 " {{{ YouCompleteMe
-" YCM don't ask for confirmation on loading ycm_extra_conf.py
+" YCM do not ask for confirmation on loading ycm_extra_conf.py
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_global_ycm_extra_conf ='~/dotfiles/ycm_extra_conf.py.DOT'
 
