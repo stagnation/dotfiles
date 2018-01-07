@@ -161,6 +161,10 @@ nnoremap k gk
 nnoremap gj j
 nnoremap gk k
 
+" store relative line number jumps in the jump limit if the jump exceeds a threshold
+nnoremap <expr> k (v:count > 5 ? "m'" . v:count : '') . 'k'
+nnoremap <expr> j (v:count > 5 ? "m'" . v:count : '') . 'j'
+
 " Insert and Append on wrapped lines
 nnoremap gI g0i
 nnoremap gA g$i
