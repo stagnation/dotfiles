@@ -563,11 +563,11 @@ if has('nvim')
     set undofile
 else
     " Use persistent history.
-    if !isdirectory("~/.vim-undo-dir")
-        call mkdir("~/.vim-undo-dir", "p", 0700)
-    endif
-    set undodir=~/.vim-undo-dir
-    set undofile
+    " if !isdirectory("~/.vim-undo-dir")
+    "     call mkdir("~/.vim-undo-dir", "p", 0700)
+    " endif
+    " set undodir=~/.vim-undo-dir
+    " set undofile
 endif
 
 nnoremap <leader>u :UndotreeToggle<cr>
