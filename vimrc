@@ -45,7 +45,7 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'romainl/vim-qf'
 Plug 'rust-lang/rust.vim'
 Plug 'sirver/UltiSnips'
-Plug 'spiiph/vim-space'
+Plug 'spiiph/vim-space', { 'on': [] }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rsi', { 'on': [] }
@@ -71,6 +71,12 @@ endif
 
 runtime! plugin/unimpaired.vim
 
+" {{{ Initialize plugins and overwrite settings
+" load vim-space a head of time so that mappings can be overwritten
+call plug#load('vim-space')
+nnoremap : ;
+nnoremap ; :
+
 " explicitly load rsi so ä can be unmapped
 " " if has('vim-rsi')
 " "     call plug#load('vim-rsi')
@@ -80,8 +86,9 @@ runtime! plugin/unimpaired.vim
 " call plug#load('vim-rsi')
 "     silent! iunmap ä
 "     silent! imap <c-u> <esc>d0xi
-call plug#end()
 
+" }}} Post-plugin
+call plug#end()
 " }}} Initialization
 " Deoplete Options {{{
 if has ('nvim')
