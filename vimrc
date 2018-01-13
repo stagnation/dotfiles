@@ -21,9 +21,14 @@ call plug#begin(plug_location)
                                    " Plug 'wincent/scalpel'
                                    " Plug 'guyzmo/EnhancedJumps'
 Plug 'airblade/vim-gitgutter'
+
+" Filetype definitions
 Plug 'cespare/vim-toml'
-Plug 'chrisjohnson/vim-foldfunctions'
 Plug 'dag/vim-fish'
+Plug 'PotatoesMaster/i3-vim-syntax'
+Plug 'rust-lang/rust.vim'
+
+Plug 'chrisjohnson/vim-foldfunctions'
 Plug 'eparreno/vim-matchit'
 Plug 'haya14busa/vim-operator-flashy'
 Plug 'honza/vim-snippets'
@@ -39,9 +44,7 @@ Plug 'mbbill/undotree'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'milkypostman/vim-togglelist'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'romainl/vim-qf'
-Plug 'rust-lang/rust.vim'
 Plug 'sirver/UltiSnips'
 Plug 'spiiph/vim-space', { 'on': [] }
 Plug 'tpope/vim-commentary'
