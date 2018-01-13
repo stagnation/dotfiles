@@ -23,7 +23,6 @@ call plug#begin(plug_location)
 Plug 'airblade/vim-gitgutter'
 Plug 'cespare/vim-toml'
 Plug 'chrisjohnson/vim-foldfunctions'
-Plug 'christoomey/vim-tmux-navigator'
 Plug 'dag/vim-fish'
 Plug 'eparreno/vim-matchit'
 Plug 'haya14busa/vim-operator-flashy'
@@ -98,22 +97,20 @@ if has ('nvim')
 endif
 " }}}
 " {{{ Utility rebinds
-" {{{{ Tmux, split navigation
-" " tmux vim conavigation
-let g:tmux_navigator_no_mappings = 1
+" {{{{ Split navigation
 
-nnoremap <silent> <c-h> :TmuxNavigateLeft<cr>
-nnoremap <silent> <c-j> :TmuxNavigateDown<cr>
-nnoremap <silent> <c-k> :TmuxNavigateUp<cr>
-nnoremap <silent> <c-l> :TmuxNavigateRight<cr>
+nnoremap <silent> <c-h> <c-w>h
+nnoremap <silent> <c-j> <c-w>j
+nnoremap <silent> <c-k> <c-w>k
+nnoremap <silent> <c-l> <c-w>l
 
 if has ('nvim')
-    tnoremap <silent> <c-h> <C-\><C-n>:TmuxNavigateLeft<cr>
+    tnoremap <silent> <c-h> <C-\><C-n><c-w>h
     " tnoremap <silent> <c-j> <C-\><C-n>:TmuxNavigateDown<cr>
     " tnoremap <silent> <c-k> <C-\><C-n>:TmuxNavigateUp<cr>
-    tnoremap <silent> <c-l> <C-\><C-n>:TmuxNavigateRight<cr>
+    tnoremap <silent> <c-l> <C-\><C-n><c-w>j
 endif
-" }}}} end Tmux, split navigation
+" }}}} end Split navigation
 " convenient start/end of line
 nnoremap 0 ^
 " retain selection after visual indentation operations
