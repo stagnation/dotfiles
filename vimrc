@@ -56,7 +56,7 @@ Plug 'vim-scripts/CSApprox'
 Plug 'vim-scripts/ingo-library'
 Plug 'wellle/targets.vim'
 
-Plug '/home/spill/dotfiles/spillplug'
+Plug '~/repos/nilsvim_qmark'
 
 if has ('nvim')
     Plug 'kassio/neoterm'
@@ -64,7 +64,7 @@ if has ('nvim')
     Plug 'brettanomyces/nvim-editcommand'
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
     Plug 'sebastianmarkow/deoplete-rust'
-    Plug '/home/spill/dotfiles/spillfzf'
+    Plug '~/repos/nilsvim_fzf'
 else
     Plug '~/.vim/plugged/YouCompleteMe' " use local path to manage updates manually
 endif
