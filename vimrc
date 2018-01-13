@@ -35,7 +35,6 @@ Plug 'kana/vim-operator-user'
 Plug 'kshenoy/vim-signature'
 Plug 'lfv89/vim-interestingwords'
 Plug 'ludovicchabant/vim-gutentags'
-Plug 'majutsushi/tagbar'
 Plug 'mbbill/undotree'
 Plug 'michaeljsmith/vim-indent-object'
 Plug 'milkypostman/vim-togglelist'
@@ -397,8 +396,6 @@ function! Status(winnr)
         let stat .= 'Gundo'
     elseif fname == '__Gundo_Preview__'
         let stat .= 'Gundo Preview'
-    elseif fname == '__Tagbar__'
-        let stat .= 'Tagbar'
     elseif fname == '.git/index'
         let stat .= 'git'
     elseif fname =~? 'term://.*fzf'                                            " replace the terminal's special filename based on the running process :help terminal
@@ -575,19 +572,16 @@ endif
 nnoremap <leader>u :UndotreeToggle<cr>
 " }}} Undo history
 " {{{ Tag plugins
-nnoremap <leader>tt :TagbarToggle<CR>
-nnoremap <leader>tp :Tags<CR>
-
 set tags=tags,TAGS;/
 let g:gutentags_ctags_executable_haskell = 'haskell-ctags'
 let g:gutentags_define_advanced_commands = '1'
 let g:gutentags_ctags_executable_rust = "rust-gutentags-wrapper.sh"
 let g:gutentags_ctags_exclude = ["*.html"]
 
-" add rust project info to gutentags
+" add rust project info to gutentags, ruby and python readds the default value
 let g:gutentags_project_info = []
-call add(g:gutentags_project_info, {'type': 'python', 'file': 'setup.py'})
-call add(g:gutentags_project_info, {'type': 'ruby', 'file': 'Gemfile'})
+call add(g:gutentags_project_info, {'type': 'python', 'file': 'setup.py'}) " default
+call add(g:gutentags_project_info, {'type': 'ruby', 'file': 'Gemfile'}) " default
 call add(g:gutentags_project_info, {'type': 'rust', 'file': 'Cargo.toml'})
 " }}} Tag Plugins
 " {{{ YouCompleteMe
