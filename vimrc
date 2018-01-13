@@ -222,12 +222,17 @@ set wildmenu                   " menu line with autocomplete options
 set textwidth=80
 set splitbelow                 " intuitive split placement
 set splitright                 " intuitive split placement
+
 set formatoptions-=t           " disable automatic linebreak at textwidth for non-comments
 set formatoptions-=c           " disable automatic linebreak at textwidth for comments
 set formatoptions+=r
 set formatoptions+=q
 set formatoptions+=o
 set formatoptions+=l
+
+set shortmess=filnxtToOc       " TODO(nils): document these
+set shortmess+=m               " [+] instead of [MODIFIED]
+set shortmess+=F               " don't write what file/buffer I switch to " typicly "vimrc XYZ lines, ..."
 
 set backupdir=~/.vim/backup    " centralized backup
 set noswapfile                 " no swap files
