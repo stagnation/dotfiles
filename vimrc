@@ -195,6 +195,7 @@ set scrolloff=4                " minimum number of lines to display around curso
 set sidescrolloff=4            " minimum number of columnes to display around cursors
 set hlsearch                   " highlight search results
 set smarttab                   " <TAB> inserts 'shiftwidth' spaces
+set hidden                     " allow unsaved hidden buffers - crucial for bufdo, but don't forget to save
 set spellcapcheck=             " make spell check insensitive to the case of the first letter in a word
 set tabstop=4                  " tab spacing
 set expandtab                  " use spaces instead of tab
