@@ -1,4 +1,4 @@
-" vim: foldmethod=marker foldlevel=0 foldcolumn=3
+" vim: foldmethod=marker foldcolumn=3
 " Initialization, plugin manager {{{
 " Fix for my shell, otherwise some scripts break
 if $SHELL =~ 'bin/fish'
