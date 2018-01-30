@@ -78,6 +78,12 @@ call plug#load('vim-space')
 nnoremap : ;
 nnoremap ; :
 
+" Add all autocommands to a group and clear them when sourcing
+" https://gist.github.com/romainl/6e4c15dfc4885cb4bd64688a71aa7063
+augroup vimrcAu
+    autocmd!
+augroup END
+
 " explicitly load rsi so ä can be unmapped
 " " if has('vim-rsi')
 " "     call plug#load('vim-rsi')
@@ -269,8 +275,8 @@ if (has('nvim')) | set shortmess+=c | endif
 
 " Use the color column to mark textwidth and the active split
 " color column is relative to textwidth
-autocmd BufEnter,FocusGained,VimEnter,WinEnter * let &colorcolumn='+0,+' . join(range(40, 254), ',+')
-autocmd WinLeave,FocusLost * let &colorcolumn = join(range(0,255), ',')
+autocmd vimrcAu BufEnter,FocusGained,VimEnter,WinEnter * let &colorcolumn='+0,+' . join(range(40, 254), ',+')
+autocmd vimrcAu WinLeave,FocusLost * let &colorcolumn = join(range(0,255), ',')
 
 " TODO(nils): fix visual bg for proton
 
@@ -334,18 +340,18 @@ endif
 nnoremap <silent><C-n> :call ToggleRelativeNumber()<cr>
 
 " cursorcolumn only in active window
-autocmd WinEnter * setlocal cursorcolumn
-autocmd WinLeave * setlocal nocursorcolumn
+autocmd vimrcAu WinEnter * setlocal cursorcolumn
+autocmd vimrcAu WinLeave * setlocal nocursorcolumn
 
 " relative number only in active window
-autocmd WinEnter * setlocal relativenumber
-autocmd WinLeave * setlocal norelativenumber
+autocmd vimrcAu WinEnter * setlocal relativenumber
+autocmd vimrcAu WinLeave * setlocal norelativenumber
 
 " Automatically resize vertical splits.
-autocmd WinEnter * :set winfixheight
-autocmd WinEnter * :wincmd =
+autocmd vimrcAu WinEnter * :set winfixheight
+autocmd vimrcAu WinEnter * :wincmd =
 
-autocmd VimResized * execute "normal! \<c-w>="
+autocmd vimrcAu VimResized * execute "normal! \<c-w>="
 
 " }}}
 " {{{ Graphics of cursor
@@ -465,12 +471,12 @@ inoremap <expr> <c-k> ("\<C-p>")
 " }}} Insert Mode maps
 " {{{ file and shell stuff
 " warning when file is chenged
-autocmd FileChangedShell * echo " Warning: File changed on disk"
-autocmd Cursorhold * checktime " also check for file changes, more sublte
+autocmd vimrcAu FileChangedShell * echo " Warning: File changed on disk"
+autocmd vimrcAu Cursorhold * checktime " also check for file changes, more sublte
 
 " return to cursor location when reopenning file
 if has('autocmd')
-    autocmd BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
+    autocmd vimrcAu BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
 " }}} file and shell stuff
@@ -509,7 +515,7 @@ nnoremap <leader>gr :GitGutterRevertHunk<CR>
 nnoremap <leader>ga :GitGutterStageHunk<CR>
 nnoremap <leader>gp :GitGutterPreviewHunk<cr>
 
-autocmd FileType gitcommit setlocal textwidth=72 | setlocal spell
+autocmd vimrcAu FileType gitcommit setlocal textwidth=72 | setlocal spell
 
 " }}} Fugitive
 " {{{ Search mappings
@@ -518,8 +524,8 @@ autocmd FileType gitcommit setlocal textwidth=72 | setlocal spell
 nnoremap <silent> <leader>nh :nohlsearch<CR>
 
 " turn off search highlighting for in insert mode
-autocmd InsertEnter * :setlocal nohlsearch
-autocmd InsertLeave * :setlocal hlsearch
+autocmd vimrcAu InsertEnter * :setlocal nohlsearch
+autocmd vimrcAu InsertLeave * :setlocal hlsearch
 
 " Pull word under cursor into LHS of a substitute
 " Courtesy of Ohm
@@ -679,28 +685,31 @@ nmap <leader>jo  <Plug>(exjumplist-go-first)
 " }}} exjumplist mappings
 " {{{ Filetype specific settings, mappings
 if has('autocmd')
-    autocmd FileType make setlocal noexpandtab
+    autocmd vimrcAu FileType qf setlocal nolist
+    autocmd vimrcAu FileType qf setlocal nocursorline
 
-    autocmd FileType python nnoremap <leader>my :!python3 %<cr>
+    autocmd vimrcAu FileType make setlocal noexpandtab
 
-    autocmd FileType vimperator setlocal commentstring=\"\ %s
-    autocmd FileType vim setlocal foldmethod=marker
+    autocmd vimrcAu FileType python nnoremap <leader>my :!python3 %<cr>
 
-    autocmd FileType c setlocal commentstring=\/\/\ %s
-    autocmd FileType cpp setlocal commentstring=\/\/\ %s
-    autocmd FileType cpp setlocal foldmethod=syntax
+    autocmd vimrcAu FileType vimperator setlocal commentstring=\"\ %s
+    autocmd vimrcAu FileType vim setlocal foldmethod=marker
 
-    autocmd FileType cpp vmap <leader>ac <CR><c-g><c-x>\/\/<CR>
+    autocmd vimrcAu FileType c setlocal commentstring=\/\/\ %s
+    autocmd vimrcAu FileType cpp setlocal commentstring=\/\/\ %s
+    autocmd vimrcAu FileType cpp setlocal foldmethod=syntax
 
-    autocmd FileType tex setlocal wrap
-    autocmd Filetype tex nnoremap <buffer> <leader>k :w<cr>:!rubber --pdf -f %<cr><cr>
-    autocmd FileType tex LengthmattersDisable
-    autocmd FileType tex nnoremap gJ gJi <esc>
+    autocmd vimrcAu FileType cpp vmap <leader>ac <CR><c-g><c-x>\/\/<CR>
 
-    autocmd FileType tex setlocal makeprg=rubber\ --pdf\ -f\ %\ >/dev/null
+    autocmd vimrcAu FileType tex setlocal wrap
+    autocmd vimrcAu Filetype tex nnoremap <buffer> <leader>k :w<cr>:!rubber --pdf -f %<cr><cr>
+    autocmd vimrcAu FileType tex LengthmattersDisable
+    autocmd vimrcAu FileType tex nnoremap gJ gJi <esc>
+
+    autocmd vimrcAu FileType tex setlocal makeprg=rubber\ --pdf\ -f\ %\ >/dev/null
 
     " rust.vim sets textwidth to 99
-    autocmd FileType rust setlocal textwidth=80
+    autocmd vimrcAu FileType rust setlocal textwidth=80
 endif
 
 " }}} Filetype specific mappings
@@ -718,7 +727,7 @@ if has ('nvim')
     " Terminal escape
     tnoremap <Leader><ESC> <C-\><C-n>
 
-    autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
+    autocmd vimrcAu BufEnter * if &buftype == 'terminal' | :startinsert | endif
 
     tmap <c-x> <Plug>EditCommand
 
@@ -746,7 +755,7 @@ endif
 " }}} neovim terminal settings
 " {{{ neovim neomake
 if has('nvim') && has ('neomake')
-    autocmd! BufWritePost * Neomake
+    autocmd! vimrcAu BufWritePost * Neomake
 endif
 " }}}
 " {{{ TODO, NB and FIXME comments
@@ -754,49 +763,49 @@ if has('autocmd')
     " remove default comment and add the desired strings
     " to get higher priority
     " then read default
-    autocmd filetype cpp setlocal comments-=://
-    autocmd filetype cpp setlocal comments+=://\ TODO(nils):
-    autocmd filetype cpp setlocal comments+=://\ FIXME(nils):
-    autocmd filetype cpp setlocal comments+=://\ NB(nils):
-    autocmd filetype cpp setlocal comments+=://
+    autocmd vimrcAu filetype cpp setlocal comments-=://
+    autocmd vimrcAu filetype cpp setlocal comments+=://\ TODO(nils):
+    autocmd vimrcAu filetype cpp setlocal comments+=://\ FIXME(nils):
+    autocmd vimrcAu filetype cpp setlocal comments+=://\ NB(nils):
+    autocmd vimrcAu filetype cpp setlocal comments+=://
 
-    autocmd filetype cpp syntax keyword cTodo contained NB
+    autocmd vimrcAu filetype cpp syntax keyword cTodo contained NB
 
-    autocmd FileType c setlocal comments-=://
-    autocmd FileType c setlocal comments+=://\ TODO(nils):
-    autocmd FileType c setlocal comments+=://\ FIXME(nils):
-    autocmd FileType c setlocal comments+=://\ NB(nils):
-    autocmd FileType c setlocal comments+=://
+    autocmd vimrcAu FileType c setlocal comments-=://
+    autocmd vimrcAu FileType c setlocal comments+=://\ TODO(nils):
+    autocmd vimrcAu FileType c setlocal comments+=://\ FIXME(nils):
+    autocmd vimrcAu FileType c setlocal comments+=://\ NB(nils):
+    autocmd vimrcAu FileType c setlocal comments+=://
 
-    autocmd Filetype c syntax keyword cTodo contained NB
+    autocmd vimrcAu Filetype c syntax keyword cTodo contained NB
 
-    autocmd FileType rust setlocal comments-=://
-    autocmd FileType rust setlocal comments+=://\ TODO(nils):
-    autocmd FileType rust setlocal comments+=://\ FIXME(nils):
-    autocmd FileType rust setlocal comments+=://\ NB(nils):
-    autocmd FileType rust setlocal comments+=://
+    autocmd vimrcAu FileType rust setlocal comments-=://
+    autocmd vimrcAu FileType rust setlocal comments+=://\ TODO(nils):
+    autocmd vimrcAu FileType rust setlocal comments+=://\ FIXME(nils):
+    autocmd vimrcAu FileType rust setlocal comments+=://\ NB(nils):
+    autocmd vimrcAu FileType rust setlocal comments+=://
 
-    autocmd Filetype rust syntax keyword cTodo contained NB
+    autocmd vimrcAu Filetype rust syntax keyword cTodo contained NB
 
     " TODO(nils): what do fb and b mean? any number of spaces before/after?
-    autocmd FileType python setlocal formatoptions=croql
-    autocmd FileType python setlocal comments-=:#
-    autocmd FileType python setlocal comments-=b:#
-    autocmd FileType python setlocal comments+=:#\ TODO(nils):
-    autocmd FileType python setlocal comments+=:#\ FIXME(nils):
-    autocmd FileType python setlocal comments+=:#\ NB(nils):
-    autocmd FileType python setlocal comments+=b:#
-    autocmd FileType python setlocal comments+=:#
+    autocmd vimrcAu FileType python setlocal formatoptions=croql
+    autocmd vimrcAu FileType python setlocal comments-=:#
+    autocmd vimrcAu FileType python setlocal comments-=b:#
+    autocmd vimrcAu FileType python setlocal comments+=:#\ TODO(nils):
+    autocmd vimrcAu FileType python setlocal comments+=:#\ FIXME(nils):
+    autocmd vimrcAu FileType python setlocal comments+=:#\ NB(nils):
+    autocmd vimrcAu FileType python setlocal comments+=b:#
+    autocmd vimrcAu FileType python setlocal comments+=:#
 
-    autocmd Filetype python syntax keyword pythonTodo contained NB
+    autocmd vimrcAu Filetype python syntax keyword pythonTodo contained NB
 
-    autocmd FileType vim setlocal comments-=:\"
-    autocmd FileType vim setlocal comments+=:\"\ TODO(nils):
-    autocmd FileType vim setlocal comments+=:\"\ FIXME(nils):
-    autocmd FileType vim setlocal comments+=:\"\ NB(nils):
-    autocmd Filetype vim setlocal comments+=:\"
+    autocmd vimrcAu FileType vim setlocal comments-=:\"
+    autocmd vimrcAu FileType vim setlocal comments+=:\"\ TODO(nils):
+    autocmd vimrcAu FileType vim setlocal comments+=:\"\ FIXME(nils):
+    autocmd vimrcAu FileType vim setlocal comments+=:\"\ NB(nils):
+    autocmd vimrcAu Filetype vim setlocal comments+=:\"
 
-    autocmd FileType vim syntax keyword vimTodo contained NB
+    autocmd vimrcAu FileType vim syntax keyword vimTodo contained NB
     highlight link vimTodo Todo
 endif
 " }}}
