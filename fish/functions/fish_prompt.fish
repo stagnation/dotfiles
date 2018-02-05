@@ -25,6 +25,18 @@ function _remote_hostname
   end
 end
 
+function _job_count
+  set -l job_count (jobs | wc -l)
+
+  if test "$job_count" -eq 0
+      set job_count ""
+  else
+      set job_count $job_count" "
+  end
+
+  echo $job_count
+end
+
 function fish_prompt
   set stat $status
   set date (date +%H:%M)
@@ -38,9 +50,11 @@ function fish_prompt
     set git_status " $git_status"
   end
 
+  set -l job_count (_job_count)
+
   if test $stat -gt 0
     set date (set_color red)$date(set_color normal)
   end
 
-  echo -n (_remote_hostname) $cwd$cyan$git_status$normal $date" "
+  echo -n (_remote_hostname) $cwd$cyan$git_status$normal $job_count$date" "
 end
