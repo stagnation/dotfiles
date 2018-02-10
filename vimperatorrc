@@ -45,7 +45,8 @@ nnoremap <C-h> <Nop>
 " disable firefox close tab in normal mode
 nnoremap <C-w> <Nop>
 
-:set hintchars=hjklasdfgyuopqwertnmzxcvb
+set hintchars=hjklasdfgyuopqwertnmzxcvb
+set defsearch=duckduckgo
 
 "format for link hints
 " :highlight Hint font-size:150%;color:white;background-color:red;padding:2px;
