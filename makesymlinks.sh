@@ -30,7 +30,7 @@ ln -s $dotfilesdir/ssh_config $sshdir/config
 
 fishdir=~/.config/fish
 mv $fishdir $bakdir/
-ln -s $dotfilesdir/fish ~/.config/fish
+ln -s $dotfilesdir/fish $fishdir
 
 vimperatordir=~/.vimperator
 mkdir ~/.vimperator/colors -p
@@ -40,7 +40,7 @@ ln -s $dotfilesdir/dorkness.vimp $vimperatordir/colors/dorkness.vimp
 
 urxvtperldir=~/.urxvt/ext
 mkdir -p $urxvtperldir
-ln -s ~/bin/gits/urxvt-perls ~/.urxvt/ext
+ln -s ~/bin/gits/urxvt-perls $urxvtperdir
 
 if [ ! -f ~/.vim/autoload/plug.vim ] ; then
     curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
