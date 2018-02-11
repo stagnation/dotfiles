@@ -10,8 +10,8 @@ function pstime
     ps -eo "%p %y %t %c"
 end
 
-if status --is-login
-	sh ~/dotfiles/bin/createtmuxsession
+if set -q SSH_CONNECTION
+    sh ~/dotfiles/bin/createtmuxsession
 end
 
 set PATH /home/spill/bin $PATH
