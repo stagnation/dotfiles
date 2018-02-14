@@ -47,6 +47,10 @@ if [ ! -f ~/.vim/autoload/plug.vim ] ; then
             https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi;
 
+if test ! -f ~/.tmux/plugins/tpm ; then
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi;
+
 mkdir -p ~/.vim/backup
 mkdir -p ~/.vim/colors
 mkdir -p ~/.config/nvim/backup
@@ -95,6 +99,3 @@ pip3 install neovim
 # install python modules for statusbar
 sudo pip3 install colour netifaces
 sudo pip3 install git+https://github.com/enkore/i3pystatus.git
-
-# install dmenu2
-ln -s ~/bin/gits/dmenu2/bin/dmenu ~/bin/dmenu
