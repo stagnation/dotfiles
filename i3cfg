@@ -3,12 +3,9 @@
 
 set $mod Mod4
 
-# uses $bar_focus color
-# NB(nils): dmenu2 required https://bitbucket.org/melek/dmenu2
-set $dmenuflag --dmenu "dmenu     -i -y 18 -l 100 -w 300 -h 38 -fn 'DejaVu Sans 10' -sb '#080808' -sf '#ad7094'            "
-set $dmenurun           dmenu_run -i -y 18 -l 100 -w 300 -h 38 -fn 'DejaVu Sans 10' -sb '#080808' -sf '#ad7094' -p "\$"
-# quickswitch from https://github.com/OliverUv/quickswitch-for-i3
-set $quickswitch ~/bin/gits/quickswitch-for-i3/quickswitch.py
+# quickswitch from https://github.com/stagnation/quickswitch-for-i3 # fork for workspace numbering in the window names
+# fzf_selector from https://github.com/stagnation/floating_fzf
+set $quickswitch ~/bin/gits/quickswitch-for-i3/quickswitch.py --dmenu fzf_selector
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -78,8 +75,8 @@ bindsym $mod+Control+m exec $quickswitch -et
 # bindsym $mod+Shift+M exec /home/spill/bin/spillswitch.py
 bindsym $mod+n exec $quickswitch -n
 bindsym $mod+p exec $quickswitch -p
-bindsym $mod+Tab exec $quickswitch $dmenuflag
-# bindsym $mod+§ exec /home/spill/bin/quickswitch.py
+
+bindsym $mod+Tab exec $quickswitch
 
 # movement {{{
 # move focus
