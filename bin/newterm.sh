@@ -1,2 +1,3 @@
-#!/bin/bash
-urxvt -cd "`xcwd`" || urxvt
+#!/bin/sh
+
+urxvt -cd "`xcwd`" -e tmux || urxvt
