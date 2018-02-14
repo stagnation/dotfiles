@@ -91,4 +91,5 @@ javascript <<EOS
 hints.addMode("M", "Open with mpv :", (elem, loc) => liberator.execute("silent !mpv '" + loc + "' &", null, true));
 EOS
 
+source ~/dotfiles/vimperator-plugins/plugin/lowlight.js
 " NB(nils): <space> kan användas i RHS av maps
