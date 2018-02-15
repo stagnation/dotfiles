@@ -5,7 +5,7 @@ set $mod Mod4
 
 # quickswitch from https://github.com/stagnation/quickswitch-for-i3 # fork for workspace numbering in the window names
 # fzf_selector from https://github.com/stagnation/floating_fzf
-set $quickswitch ~/bin/gits/quickswitch-for-i3/quickswitch.py --dmenu fzf_selector
+set $quickswitch ~/bin/gits/quickswitch-for-i3/quickswitch.py --dmenu fzf_selector.sh
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
@@ -43,7 +43,7 @@ bindsym $mod+Shift+m exec "$quickswitch -je"
 bindsym $mod+Shift+q kill
 bindsym $mod+a [urgent=latest] focus
 
-bindsym $mod+space exec fzf_launcher
+bindsym $mod+space exec fzf_launcher.sh
 
 # quickswitch binds
 bindsym $mod+Tab exec $quickswitch
