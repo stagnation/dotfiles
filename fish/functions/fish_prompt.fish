@@ -28,17 +28,19 @@ end
 function _print_if_greater_than
     # print numerical argument 1,
     # if it is greater than the threshold, argument 2
+    # prepends a prefix message, arguemnt 3
     # adds a space after for convenience
     set -l arg "$argv[1]"
     set -l threshold "$argv[2]"
+    set -l prefix "$argv[3]"
     if test "$arg" -gt "$threshold"
-        echo "$arg "
+        echo "$prefix$arg "
     end
 end
 
 function _job_count
   set -l job_count (jobs | wc -l)
-  _print_if_greater_than $job_count 0
+  _print_if_greater_than "$job_count" 0 "jobs: "
 end
 
 function _tmux_window_count
@@ -48,39 +50,42 @@ function _tmux_window_count
     end
 
     set -l window_count (tmux list-windows | wc -l)
-    _print_if_greater_than $window_count 1
-
+    set -l active_window (tmux list-windows | awk -F':' '/active/ { print $1 }')
+    set -l prefix "tmux: $active_window/"
+    _print_if_greater_than "$window_count" 1 "$prefix"
 end
 
-function fish_prompt
-  set stat $status
-  set date (date +%H:%M)
-  set -l cyan (set_color cyan)
-  set -l normal (set_color normal)
-
-  set -l cwd (set_color $fish_color_cwd)(prompt_pwd)
-  set -l git_status (_git_status_symbol)(_git_branch_name)
-
-  if test -n "$git_status"
-    set git_status "$git_status"
-  end
-
+function fish_right_prompt
   set -l job_count (_job_count)
   set -l tmux_window_count (_tmux_window_count)
 
-  if test $stat -gt 0
-    set date (set_color red)$date(set_color normal)
+  echo -n "$job_count""$tmux_window_count"
+end
+
+function fish_prompt
+  set -l stat "$status"
+  set date " "(date +%H:%M)
+  set -l cyan (set_color cyan)
+  set -l normal (set_color normal)
+
+  set -l cwd (set_color "$fish_color_cwd")(prompt_pwd)
+  set -l git_status (_git_status_symbol)(_git_branch_name)
+
+  if test -n "$git_status"
+    set git_status " $git_status"
+  end
+
+
+  if test "$stat" -gt 0
+    set date (set_color red)"$date"(set_color normal)
   end
 
   # echo -n (_remote_hostname) $tmux_window_count$cwd$cyan$git_status$normal $job_count$date" "
-  printf "%s%s %s%s%s %s%s "  \
-  (_remote_hostname) \
-  # print number followed by space if valid
-  "$tmux_window_count" \
+  printf "%s%s%s%s%s " \
+  (_remote_hostname)   \
   "$cwd"               \
   "$cyan"              \
   "$git_status"        \
   "$normal"            \
-  "$job_count"         \
   "$date"
 end
