@@ -25,16 +25,31 @@ function _remote_hostname
   end
 end
 
+function _print_if_greater_than
+    # print numerical argument 1,
+    # if it is greater than the threshold, argument 2
+    # adds a space after for convenience
+    set -l arg "$argv[1]"
+    set -l threshold "$argv[2]"
+    if test "$arg" -gt "$threshold"
+        echo "$arg "
+    end
+end
+
 function _job_count
   set -l job_count (jobs | wc -l)
+  _print_if_greater_than $job_count 0
+end
 
-  if test "$job_count" -eq 0
-      set job_count ""
-  else
-      set job_count $job_count" "
-  end
+function _tmux_window_count
+    # early exit if we are not in tmux
+    if test -z "$TMUX";
+        return
+    end
 
-  echo $job_count
+    set -l window_count (tmux list-windows | wc -l)
+    _print_if_greater_than $window_count 1
+
 end
 
 function fish_prompt
@@ -47,14 +62,25 @@ function fish_prompt
   set -l git_status (_git_status_symbol)(_git_branch_name)
 
   if test -n "$git_status"
-    set git_status " $git_status"
+    set git_status "$git_status"
   end
 
   set -l job_count (_job_count)
+  set -l tmux_window_count (_tmux_window_count)
 
   if test $stat -gt 0
     set date (set_color red)$date(set_color normal)
   end
 
-  echo -n (_remote_hostname) $cwd$cyan$git_status$normal $job_count$date" "
+  # echo -n (_remote_hostname) $tmux_window_count$cwd$cyan$git_status$normal $job_count$date" "
+  printf "%s%s %s%s%s %s%s "  \
+  (_remote_hostname) \
+  # print number followed by space if valid
+  "$tmux_window_count" \
+  "$cwd"               \
+  "$cyan"              \
+  "$git_status"        \
+  "$normal"            \
+  "$job_count"         \
+  "$date"
 end
