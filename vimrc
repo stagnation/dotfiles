@@ -523,8 +523,8 @@ nnoremap <silent> <leader>f= :setlocal spell<cr>1z=:setlocal spell!<cr>
 nnoremap <silent> ]l :try<bar>lnext<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>lfirst<bar>endtry<cr>
 
 " git gutter go to next and previous git chunk
-nnoremap ]g :GitGutterNextHunk<CR>
-nnoremap [g :GitGutterPrevHunk<CR>
+nmap ]g <Plug>GitGutterNextHunk
+nmap [g <Plug>GitGutterPrevHunk
 
 " git conflic marker search
 nnoremap <leader>gC /^.*\(<<<\\|====\\|>>>>\).*$<cr>
@@ -539,9 +539,9 @@ nnoremap [q :cp<CR>
 nnoremap <leader>gl :silent Glog<CR>
 nnoremap <leader>gc :Gcommit<CR>
 
-nnoremap <leader>gr :GitGutterRevertHunk<CR>
-nnoremap <leader>ga :GitGutterStageHunk<CR>
-nnoremap <leader>gp :GitGutterPreviewHunk<cr>
+nmap <leader>gr <Plug>GitGutterUndoHunk
+nmap <leader>ga <Plug>GitGutterStageHunk
+nmap <leader>gp <Plug>GitGutterPreviewHunk
 
 autocmd vimrcAu FileType gitcommit setlocal textwidth=72 | setlocal spell
 
