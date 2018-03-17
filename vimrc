@@ -78,6 +78,12 @@ call plug#load('vim-space')
 nnoremap : ;
 nnoremap ; :
 
+xnoremap : ;
+xnoremap ; :
+
+vnoremap : ;
+vnoremap ; :
+
 " Add all autocommands to a group and clear them when sourcing
 " https://gist.github.com/romainl/6e4c15dfc4885cb4bd64688a71aa7063
 augroup vimrcAu
