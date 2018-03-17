@@ -197,6 +197,17 @@ nnoremap <BS> <Nop>
 " easier macro repeat in normal buffers
 nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'
 
+" open and close folds
+" NB(nils): zo and zO are largely synonymous in my use, I prefer to have only
+"           one fold level generally, two in this file but that's not very
+"           important. Since I often press zO by mistake before remebering zR
+"           and the other way around.
+"
+"           As such, zo for 'open a little' and zO for 'open a lot' still retain
+"           the original spirit of the maps, but are more suitable to my use.
+nnoremap zO zR
+nnoremap zC zM
+
 " }}} Utility rebinds
 " {{{ Settings
 syntax enable                  " enables syntax highlighting
