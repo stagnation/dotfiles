@@ -207,6 +207,7 @@ set sidescrolloff=4            " minimum number of columnes to display around cu
 set hlsearch                   " highlight search results
 set smarttab                   " <TAB> inserts 'shiftwidth' spaces
 set hidden                     " allow unsaved hidden buffers - crucial for bufdo, but don't forget to save
+set list                       " show funny characters, tabs and CRLF
 set spellcapcheck=             " make spell check insensitive to the case of the first letter in a word
 set tabstop=4                  " tab spacing
 set expandtab                  " use spaces instead of tab
@@ -244,9 +245,19 @@ set formatoptions+=q
 set formatoptions+=o
 set formatoptions+=l
 
-set shortmess=filnxtToOc       " TODO(nils): document these
+set shortmess=
+set shortmess+=f               " "(3 of 5)" instead of "(file 3 of 5)"
+set shortmess+=i               " "[noeol]" instead of "[Incomplete last line]"
+set shortmess+=l               " "999L, 888C" instead of "999 lines, 888 characters"
+set shortmess+=n               " "[New]" instead of "[New File]"
+set shortmess+=x               " write only short format messages for fileformat: unix, mac, dos
+set shortmess+=t               " t and T truncate messages if they are too long to fit the command line
+set shortmess+=T
+" set shortmess+=o             " NB(nils): slated for removal
+" set shortmess+=O
+set shortmess+=c               " no status message for insert mode completions
 set shortmess+=m               " [+] instead of [MODIFIED]
-set shortmess+=F               " don't write what file/buffer I switch to " typicly "vimrc XYZ lines, ..."
+set shortmess+=F               " don't write what file/buffer I switch to typically "vimrc XYZ lines, ..."
 
 set backupdir=~/.vim/backup    " centralized backup
 set noswapfile                 " no swap files
@@ -697,7 +708,9 @@ if has('autocmd')
     autocmd vimrcAu FileType python nnoremap <leader>my :!python3 %<cr>
 
     autocmd vimrcAu FileType vimperator setlocal commentstring=\"\ %s
+
     autocmd vimrcAu FileType vim setlocal foldmethod=marker
+    autocmd vimrcAu FileType vim setlocal nospell
 
     autocmd vimrcAu FileType c setlocal commentstring=\/\/\ %s
     autocmd vimrcAu FileType cpp setlocal commentstring=\/\/\ %s
@@ -713,6 +726,8 @@ if has('autocmd')
 
     " rust.vim sets textwidth to 99
     autocmd vimrcAu FileType rust setlocal textwidth=80
+
+    autocmd vimrcAu FileType gitcommit setlocal nolist
 endif
 
 " }}} Filetype specific mappings
