@@ -18,10 +18,6 @@ function gitclone
     git clone (xclip -o)
 end
 
-function rubber
-    rubber --pdf --force
-end
-
 function vim
     if which nvim >/dev/null
         nvim $argv
