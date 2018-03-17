@@ -665,12 +665,10 @@ function! SpillToggleLongLineDisplay()
         set filetype=
         set nocursorline
         set nocursorcolumn
-        LengthmattersDisable
         set nowrap
     else
         set cursorline
         set cursorcolumn
-        LengthmattersEnable
         set wrap
     endif
 endfunc
@@ -703,7 +701,6 @@ if has('autocmd')
 
     autocmd vimrcAu FileType tex setlocal wrap
     autocmd vimrcAu Filetype tex nnoremap <buffer> <leader>k :w<cr>:!rubber --pdf -f %<cr><cr>
-    autocmd vimrcAu FileType tex LengthmattersDisable
     autocmd vimrcAu FileType tex nnoremap gJ gJi <esc>
 
     autocmd vimrcAu FileType tex setlocal makeprg=rubber\ --pdf\ -f\ %\ >/dev/null
