@@ -15,14 +15,13 @@ call plug#begin(plug_location)
                                    " Plug 'Konfekt/FastFold'
                                    " Plug 'nathanaelkane/vim-indent-guides'
                                    " Plug 'pelodelfuego/vim-swoop'
-                                   " Plug 'ton/vim-bufsurf'
                                    " Plug 'w0rp/ale'                              " asynchronous lint engine
                                    " Plug 'wellle/visual-split.vim'
                                    " Plug 'wincent/scalpel'
-                                   " Plug 'guyzmo/EnhancedJumps'
-Plug 'airblade/vim-gitgutter'
 
-" Filetype definitions
+                                   Plug 'airblade/vim-gitgutter' " under investigation for incompatibilities with EnhanceJumps
+
+                                   " Filetype definitions
 Plug 'cespare/vim-toml'
 Plug 'dag/vim-fish'
 Plug 'PotatoesMaster/i3-vim-syntax'
@@ -30,6 +29,7 @@ Plug 'rust-lang/rust.vim'
 
 Plug 'chrisjohnson/vim-foldfunctions'
 Plug 'eparreno/vim-matchit'
+Plug 'guyzmo/EnhancedJumps'        " improves <c-i> <c-o> and company, by ingo karkat.
 Plug 'haya14busa/vim-operator-flashy'
 Plug 'honza/vim-snippets'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
@@ -90,6 +90,23 @@ augroup vimrcAu
     autocmd!
 augroup END
 
+call plug#load('vim-gitgutter') " NB(nils): EnhancedJumps triggers doautocommands inside gitgutter,
+                                "           And if the plugin is not loaded
+                                "           (seems self-contradictory) the
+                                "           autocommands were not matched,
+                                "           giving messages:
+                                "           "no matching autocommand"
+                                "           on each file switch through EnhancedJumps
+
+" gutentags sends messages that are printed through enhanced jumps
+"
+" undefined variable "signs" hit when enhanced jump to /tmp files, it seems.
+" often command line /tmp files generated through fish - that have since been
+" removed. enhanced jumps should not jump to non-existent files
+"
+" when jumping to some files it messages: 5L, 150C - that should not be so
+
+
 " explicitly load rsi so ä can be unmapped
 " " if has('vim-rsi')
 " "     call plug#load('vim-rsi')
@@ -123,6 +140,7 @@ if has ('nvim')
     " tnoremap <silent> <c-j> <C-\><C-n>:TmuxNavigateDown<cr>
     " tnoremap <silent> <c-k> <C-\><C-n>:TmuxNavigateUp<cr>
     tnoremap <silent> <c-l> <C-\><C-n><c-w>j
+
 endif
 " }}}} end Split navigation
 " convenient start/end of line
@@ -876,3 +894,5 @@ source ~/dotfiles/rust_fold.vim
 if filereadable(glob("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
+
+let g:EnhancedJumps_CaptureJumpMessages=0
