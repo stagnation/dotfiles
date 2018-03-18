@@ -308,8 +308,9 @@ autocmd vimrcAu WinLeave,FocusLost * let &colorcolumn = join(range(0,255), ',')
 
 " TODO(nils): fix visual bg for proton
 
-" " overwrite some color scheme settings so the color scheme can be pulled from
-" " upstream
+" Overwrite some color scheme settings so the color scheme can be pulled from
+" upstream. Use :source $VIMRUNTIME/**/hitest.vim to show all loaded highlight
+" groups and their color.
 function! OverrideLiqouriceColors() abort
     highlight LineNr term=underline cterm=NONE ctermbg=232 ctermfg=243
     highlight SignColumn term=NONE cterm=NONE ctermbg=232 ctermfg=255
@@ -330,22 +331,22 @@ function! OverrideLiqouriceColors() abort
 
 
     " User colors for status line
-    hi User1  ctermfg=33   guifg=#268bd2  ctermbg=53   guibg=#fdf6e3  gui=bold
-    hi User2  ctermfg=142  guifg=#d33682  ctermbg=53   guibg=#eee8d5  gui=bold
-    hi User3  ctermfg=253  guifg=#719e07  ctermbg=53   guibg=#eee8d5  gui=bold
-    hi User4  ctermfg=33   guifg=#2aa198  ctermbg=53   guibg=#eee8d5  gui=bold
-    hi User5  ctermfg=247  ctermbg=53
-    hi User6  ctermfg=245  ctermbg=235
+    highlight User1  ctermfg=33   guifg=#268bd2  ctermbg=53   guibg=#fdf6e3  gui=bold
+    highlight User2  ctermfg=142  guifg=#d33682  ctermbg=53   guibg=#eee8d5  gui=bold
+    highlight User3  ctermfg=253  guifg=#719e07  ctermbg=53   guibg=#eee8d5  gui=bold
+    highlight User4  ctermfg=33   guifg=#2aa198  ctermbg=53   guibg=#eee8d5  gui=bold
+    highlight User5  ctermfg=247  ctermbg=53
+    highlight User6  ctermfg=245  ctermbg=235
 endfunction
 
 function! OverrideProtonColors () abort
-    hi link User1 TabNumber
-    hi link User2 SpecialKey
-    hi link User3 TabNumber
-    hi link User4 TabNumber
-    hi link User5 NonText
+    highlight link User1 TabNumber
+    highlight link User2 SpecialKey
+    highlight link User3 TabNumber
+    highlight link User4 TabNumber
+    highlight link User5 NonText
 
-    hi ColorColumn ctermbg=8
+    highlight ColorColumn ctermbg=230
 endfunction
 
 augroup MyColors
@@ -395,10 +396,10 @@ set gcr+=v-ve:VisualCursor
 
 set gcr+=a:blinkon0
 
-hi InsertCursor  ctermfg=16 guifg=#fdf6e3 ctermbg=37  guibg=#2aa198
-hi VisualCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=125 guibg=#d33682
-hi ReplaceCursor ctermfg=15 guifg=#fdf6e3 ctermbg=65  guibg=#dc322f
-hi CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#cb4b16
+highlight InsertCursor  ctermfg=16 guifg=#fdf6e3 ctermbg=37  guibg=#2aa198
+highlight VisualCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=125 guibg=#d33682
+highlight ReplaceCursor ctermfg=15 guifg=#fdf6e3 ctermbg=65  guibg=#dc322f
+highlight CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#cb4b16
 " }}} Graphics of cursor
 " Status line, statusline {{{
 function! Status(winnr)
