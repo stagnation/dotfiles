@@ -49,7 +49,7 @@ Plug 'sirver/UltiSnips'
 Plug 'spiiph/vim-space', { 'on': [] }
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rsi', { 'on': [] }
+Plug 'tpope/vim-rsi'
 Plug 'tpope/vim-surround'
 Plug 'unblevable/quick-scope'
 Plug 'vim-scripts/camelcasemotion' " make w,b,e respect word boundaries inside camelCase and snake_case
@@ -89,16 +89,6 @@ vnoremap ; :
 augroup vimrcAu
     autocmd!
 augroup END
-
-" explicitly load rsi so ä can be unmapped
-" " if has('vim-rsi')
-" "     call plug#load('vim-rsi')
-" "     silent! iunmap ä
-" " endif
-
-" call plug#load('vim-rsi')
-"     silent! iunmap ä
-"     silent! imap <c-u> <esc>d0xi
 
 " }}} Post-plugin
 call plug#end()
