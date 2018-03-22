@@ -240,26 +240,29 @@ set textwidth=80
 set splitbelow                 " intuitive split placement
 set splitright                 " intuitive split placement
 
-set formatoptions-=t           " disable automatic linebreak at textwidth for non-comments
-set formatoptions-=c           " disable automatic linebreak at textwidth for comments
-set formatoptions+=r
-set formatoptions+=q
-set formatoptions+=o
-set formatoptions+=l
+" set formatoptions-=t           " disable automatic linebreak at textwidth for non-comments
+" set formatoptions-=c           " disable automatic linebreak at textwidth for comments
+set formatoptions=
+set formatoptions+=c           " auto-wrap coments using textwidth, inserting comment leader
+set formatoptions+=j           " remove comment leader when joining lines
+set formatoptions+=l           " long lines, longer than textwidth when insert mode is started, do no break automatically
+set formatoptions+=o           " insert comment leader with oO if run from a commented line
+set formatoptions+=q           " allow formatting of options with gq
+set formatoptions+=r           " insert comment leader with <cr>
 
 set shortmess=
+" set shortmess+=O
+" set shortmess+=o             " NB(nils): slated for removal
+set shortmess+=F               " don't write what file/buffer I switch to typically "vimrc XYZ lines, ..."
+set shortmess+=T
+set shortmess+=c               " no status message for insert mode completions
 set shortmess+=f               " "(3 of 5)" instead of "(file 3 of 5)"
 set shortmess+=i               " "[noeol]" instead of "[Incomplete last line]"
 set shortmess+=l               " "999L, 888C" instead of "999 lines, 888 characters"
-set shortmess+=n               " "[New]" instead of "[New File]"
-set shortmess+=x               " write only short format messages for fileformat: unix, mac, dos
-set shortmess+=t               " t and T truncate messages if they are too long to fit the command line
-set shortmess+=T
-" set shortmess+=o             " NB(nils): slated for removal
-" set shortmess+=O
-set shortmess+=c               " no status message for insert mode completions
 set shortmess+=m               " [+] instead of [MODIFIED]
-set shortmess+=F               " don't write what file/buffer I switch to typically "vimrc XYZ lines, ..."
+set shortmess+=n               " "[New]" instead of "[New File]"
+set shortmess+=t               " t and T truncate messages if they are too long to fit the command line
+set shortmess+=x               " write only short format messages for fileformat: unix, mac, dos
 
 set backupdir=~/.vim/backup    " centralized backup
 set noswapfile                 " no swap files
