@@ -27,7 +27,7 @@ Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'rust-lang/rust.vim'
 
 Plug 'airblade/vim-gitgutter'
-Plug 'chrisjohnson/vim-foldfunctions'
+" Plug 'chrisjohnson/vim-foldfunctions'
 Plug 'eparreno/vim-matchit'
 Plug 'guyzmo/EnhancedJumps'        " improves <c-i> <c-o> and company, by ingo karkat.
 Plug 'haya14busa/vim-operator-flashy'
