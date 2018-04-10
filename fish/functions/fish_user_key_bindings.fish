@@ -54,7 +54,7 @@ function __fish_man_page2
 end
 
 # bind to escape or meta h. <alt-h>
-bind \eh __fish_man_page2
+# bind \eh __fish_man_page2
 
 # bind alt {p,n} to back and forth in history words
 # these are bound to alt {up, down} by default
