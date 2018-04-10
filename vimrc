@@ -188,6 +188,9 @@ nnoremap <BS> <Nop>
 " easier macro repeat in normal buffers
 nnoremap <expr> <CR> empty(&buftype) ? '@@' : '<CR>'
 
+" close all other windows, like <c-w>z but bigger
+nnoremap <c-w>Z :only<cr>
+
 " open and close folds
 " NB(nils): zo and zO are largely synonymous in my use, I prefer to have only
 "           one fold level generally, two in this file but that's not very
