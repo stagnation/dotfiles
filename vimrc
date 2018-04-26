@@ -1,5 +1,6 @@
 " vim: foldmethod=marker foldcolumn=3
 " Initialization, plugin manager {{{
+
 " Fix for my shell, otherwise some scripts break
 if $SHELL =~ 'bin/fish'
     set shell=/bin/sh
@@ -203,6 +204,22 @@ nnoremap zO zR
 nnoremap zC zM
 
 " }}} Utility rebinds
+" {{{ Custom Operators
+function! SortOperator(...)
+    if a:0
+        " the operator is invoked from normal mode, the motion sets '[ and ']
+        let [first, last] = [line("'["), line("']")]
+    else
+        " the operator is invoked from visual mode, the visual range is '< to '>
+        let [first, last] = [line("'<"), line("'>")]
+    endif
+
+    exe first . "," .last . ":sort"
+endfunction
+
+vnoremap <silent> gs :set operatorfunc=SortOperator(visualmode(), 1)<CR>
+nnoremap <silent> gs :set operatorfunc=SortOperator<CR>g@
+" }}}
 " {{{ Settings
 syntax enable                  " enables syntax highlighting
 filetype plugin indent on      " react on filetyps with plugins and syntax
