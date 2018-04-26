@@ -91,9 +91,9 @@ augroup vimrcAu
     autocmd!
 augroup END
 
-" }}} Post-plugin
+" }}}
 call plug#end()
-" }}} Initialization
+" }}}
 " Deoplete Options {{{
 if has ('nvim')
     let g:deoplete#enable_at_startup = 1
@@ -116,7 +116,7 @@ if has ('nvim')
     tnoremap <silent> <c-l> <C-\><C-n><c-w>j
 
 endif
-" }}}} end Split navigation
+" }}}}
 " convenient start/end of line
 nnoremap 0 ^
 " retain selection after visual indentation operations
@@ -203,7 +203,7 @@ nnoremap <c-w>Z :only<cr>
 nnoremap zO zR
 nnoremap zC zM
 
-" }}} Utility rebinds
+" }}}
 " {{{ Custom Operators
 function! SortOperator(...)
     if a:0
@@ -305,7 +305,7 @@ if exists('$SUDO_USER')
 endif
 
 let g:mapleader ='\'
-" }}} Settings
+" }}}
 " {{{ Colors, Look and feel
 " {{{ General
 if (has ('folding') && has ('windows'))
@@ -414,7 +414,7 @@ highlight InsertCursor  ctermfg=16 guifg=#fdf6e3 ctermbg=37  guibg=#2aa198
 highlight VisualCursor  ctermfg=15 guifg=#fdf6e3 ctermbg=125 guibg=#d33682
 highlight ReplaceCursor ctermfg=15 guifg=#fdf6e3 ctermbg=65  guibg=#dc322f
 highlight CommandCursor ctermfg=15 guifg=#fdf6e3 ctermbg=166 guibg=#cb4b16
-" }}} Graphics of cursor
+" }}}
 " Status line, statusline {{{
 function! Status(winnr)
     let stat = ''
@@ -490,7 +490,7 @@ augroup status
 augroup END
 
 " }}}
-" }}} Colors
+" }}}
 " {{{ EasyAlign
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
@@ -501,7 +501,7 @@ nmap ga <Plug>(EasyAlign)
 " Do not add spaces around separator
 let g:easy_align_left_margin = 0
 let g:easy_align_right_margin = 0
-" }}} EasyAlign
+" }}}
 " {{{ Insert Mode maps
 " Move up and down in autocomplete with <c-j> and <c-k>
 inoremap <expr> <c-j> ("\<C-n>")
@@ -511,7 +511,7 @@ inoremap <expr> <c-k> ("\<C-p>")
 " inoremap ^} <Esc>b5<C-}>ea
 " inoremap <c-]> <esc>mzb<c-w>}`za
 
-" }}} Insert Mode maps
+" }}}
 " {{{ file and shell stuff
 " warning when file is chenged
 autocmd vimrcAu FileChangedShell * echo " Warning: File changed on disk"
@@ -522,7 +522,7 @@ if has('autocmd')
     autocmd vimrcAu BufReadPost * if line("'\"") > 0 && line ("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
-" }}} file and shell stuff
+" }}}
 " Spell checking mappings {{{
 " Pressing <leader>ff will toggle and untoggle spell checking,
 " fe sets checking to english and fs sets checking to swedish.
@@ -532,7 +532,7 @@ nnoremap <silent> <leader>fe :setlocal spelllang=en_us<cr>
 " automatically correct word to first suggestion even if spell is off
 nnoremap <silent> <leader>f= :setlocal spell<cr>1z=:setlocal spell!<cr>
 
-" }}} Spell checking mappings
+" }}}
 " {{{ Jump binds
 " go to next item in location list, loop around if end is reached
 nnoremap <silent> ]l :try<bar>lnext<bar>catch /^Vim\%((\a\+)\)\=:E\%(553\<bar>42\):/<bar>lfirst<bar>endtry<cr>
@@ -548,7 +548,7 @@ nnoremap <leader>gC /^.*\(<<<\\|====\\|>>>>\).*$<cr>
 nnoremap ]q :cn<CR>
 nnoremap [q :cp<CR>
 
-" }}} Jump binds
+" }}}
 " {{{ Fugitive GitGutter and Git
 " populate quicklist with commited version of current file - fugitive
 nnoremap <leader>gl :silent Glog<CR>
@@ -560,7 +560,7 @@ nmap <leader>gp <Plug>GitGutterPreviewHunk
 
 autocmd vimrcAu FileType gitcommit setlocal textwidth=72 | setlocal spell
 
-" }}} Fugitive
+" }}}
 " {{{ Search mappings
 
 " turn off search highlighting for current search
@@ -587,7 +587,7 @@ if has('Swoop')
     nnoremap <Leader>7 :call Swoop()<CR>
     vnoremap <Leader>7 :call SwoopSelection()<CR>
 endif
-" }}} Search Mappings
+" }}}
 " {{{ word motions inside camel/snake case
 map <silent> w <Plug>CamelCaseMotion_w
 map <silent> b <Plug>CamelCaseMotion_b
@@ -595,7 +595,7 @@ map <silent> e <Plug>CamelCaseMotion_e
 sunmap w
 sunmap b
 sunmap e
-" }}} word motions inside camel/snake case
+" }}}
 " {{{ Whistespace handling
 
 " betterfixwhitespace
@@ -608,7 +608,7 @@ highlight ExtraWhitespace ctermbg=52
 "   au FileType diff,gitcommit DisableWhitespace
 " augroup END
 
-" }}} Whistespace handling
+" }}}
 " {{{ Undo history
 if has('nvim')
     set undofile
@@ -622,7 +622,7 @@ else
 endif
 
 nnoremap <leader>u :UndotreeToggle<cr>
-" }}} Undo history
+" }}}
 " {{{ Tag plugins
 set tags=tags,TAGS;/
 let g:gutentags_ctags_executable_haskell = 'haskell-ctags'
@@ -635,7 +635,7 @@ let g:gutentags_project_info = []
 call add(g:gutentags_project_info, {'type': 'python', 'file': 'setup.py'}) " default
 call add(g:gutentags_project_info, {'type': 'ruby', 'file': 'Gemfile'}) " default
 call add(g:gutentags_project_info, {'type': 'rust', 'file': 'Cargo.toml'})
-" }}} Tag Plugins
+" }}}
 " {{{ YouCompleteMe
 " YCM do not ask for confirmation on loading ycm_extra_conf.py
 let g:ycm_confirm_extra_conf = 0
@@ -644,19 +644,19 @@ let g:ycm_global_ycm_extra_conf ='~/dotfiles/ycm_extra_conf.py.DOT'
 let g:ycm_goto_buffer_command = 'horizontal-split'
 " always fill location list with ycm errors/warnings
 let g:ycm_always_populate_location_list = 1
-" }}} YouCompleteMe
+" }}}
 " {{{ IndentGuide
 " indentGuide settings
 let g:indent_guides_auto_colors = 0
 
 let g:indent_guides_enable_on_vim_startup = 1
-" }}} IndentGuide
-" {{{ Location Quickfix
+" }}}
+" {{{ Location and Quickfix
 " toggle location and quickfix lists
 " mnemonic: list/ ( quick | location )
 nnoremap <leader>ll :call ToggleLocationList()<CR>
 nnoremap <leader>lq :call ToggleQuickfixList()<CR>
-" }}} Location Quickfix
+" }}}
 " {{{ small function mappings
 " open small split with top of document, to see /edit includes
 nnoremap <silent> <leader>nt :<c-u>split<cr><c-w>k:resize 10<cr>gg
@@ -699,7 +699,7 @@ command! Silentmake call SilentMake()
 function! SyntaxRule()
     echo synIDattr(synID(line("."), col("."), 1), "name")
 endfunction
-" }}} small function mappings
+" }}}
 " {{{ Spill functions, heuristic solutions
 " toggle slimmed down display to handle files with very long lines
 " NB(nils): resetting funtionality does not work
@@ -716,14 +716,7 @@ function! SpillToggleLongLineDisplay()
     endif
 endfunc
 nnoremap <leader>st :call SpillToggleLongLineDisplay()<cr>
-" }}} spill functions
-" {{{ exjumplist mappings
-" nmap <C-I>  <Plug>(exjumplist-go-last)
-" nmap <C-O>  <Plug>(exjumplist-go-first)
-
-nmap <leader>ji  <Plug>(exjumplist-go-last)
-nmap <leader>jo  <Plug>(exjumplist-go-first)
-" }}} exjumplist mappings
+" }}}
 " {{{ Filetype specific settings, mappings
 if has('autocmd')
     autocmd vimrcAu FileType qf setlocal nolist
@@ -756,14 +749,14 @@ if has('autocmd')
     autocmd vimrcAu FileType gitcommit setlocal nolist
 endif
 
-" }}} Filetype specific mappings
+" }}}
 " {{{ Neoterm, quasi-repl
 if has('nvim')
     nnoremap <silent> <leader>vs :TREPLSend<cr>
     vnoremap <silent> <leader>vs :TREPLSend<cr>
     let g:neoterm_size=45
 endif
-" }}}} Neoterm
+" }}}}
 " {{{ neovim terminal settings
 if has ('nvim')
     highlight TermCursor ctermfg=red guifg=red
@@ -796,7 +789,7 @@ if has('nvim')
 endif
 
 " }}}
-" }}} neovim terminal settings
+" }}}
 " {{{ neovim neomake
 if has('nvim') && has ('neomake')
     autocmd! vimrcAu BufWritePost * Neomake
