@@ -94,6 +94,92 @@ augroup END
 " }}}
 call plug#end()
 " }}}
+" {{{ Settings
+syntax enable                  " enables syntax highlighting
+filetype plugin indent on      " react on filetyps with plugins and syntax
+set fileformat=unix            " proper unix linebreaks
+set scrolloff=4                " minimum number of lines to display around cursor
+set sidescrolloff=4            " minimum number of columnes to display around cursors
+set hlsearch                   " highlight search results
+set smarttab                   " <TAB> inserts 'shiftwidth' spaces
+set hidden                     " allow unsaved hidden buffers - crucial for bufdo, but don't forget to save
+set list                       " show funny characters, tabs and CRLF
+set spellcapcheck=             " make spell check insensitive to the case of the first letter in a word
+set tabstop=4                  " tab spacing
+set expandtab                  " use spaces instead of tab
+set shiftwidth=4               " amount of spaces for tab to insert
+set autoindent                 " automatically set the indent when creatig lines
+set ruler                      " show cursor position information in statusline
+set number                     " show line numbers
+set nowrap                     " do not wrap text
+set linebreak                  " preserves word when wrapping
+set ttyfast                    " 'smooth' scrolling
+set lazyredraw                 " do not update screen during macro playback
+set synmaxcol=512              " do not use syntax highlighting for long lines
+set mouse=a                    " enable mouse in terminals that support it
+set showmatch                  " breifly show matching bracekt when inserting such
+set incsearch                  " incremental searching as soon as typing begins
+set ignorecase                 " ignore case when searching
+set smartcase                  " will override ignore case if searching w/ diff cases
+set modeline                   " use modelines
+set ttimeoutlen=5              " faster twitching for everything
+set virtualedit=block          " allow cursor to be moved into empty space in visual
+set laststatus=2               " always show status line
+set backspace=indent,eol,start " backspace everywhere
+set cursorline                 " highlights the line cursor is at
+set cursorcolumn               " highlights the column cursor is at
+set showcmd
+set wildmenu                   " menu line with autocomplete options
+set textwidth=80
+set splitbelow                 " intuitive split placement
+set splitright                 " intuitive split placement
+
+" set formatoptions-=t           " disable automatic linebreak at textwidth for non-comments
+" set formatoptions-=c           " disable automatic linebreak at textwidth for comments
+set formatoptions=
+set formatoptions+=c           " auto-wrap coments using textwidth, inserting comment leader
+set formatoptions+=j           " remove comment leader when joining lines
+set formatoptions+=l           " long lines, longer than textwidth when insert mode is started, do no break automatically
+set formatoptions+=o           " insert comment leader with oO if run from a commented line
+set formatoptions+=q           " allow formatting of options with gq
+set formatoptions+=r           " insert comment leader with <cr>
+
+set shortmess=
+" set shortmess+=O
+" set shortmess+=o             " NB(nils): slated for removal
+set shortmess+=F               " don't write what file/buffer I switch to typically "vimrc XYZ lines, ..."
+set shortmess+=T
+set shortmess+=c               " no status message for insert mode completions
+set shortmess+=f               " "(3 of 5)" instead of "(file 3 of 5)"
+set shortmess+=i               " "[noeol]" instead of "[Incomplete last line]"
+set shortmess+=l               " "999L, 888C" instead of "999 lines, 888 characters"
+set shortmess+=m               " [+] instead of [MODIFIED]
+set shortmess+=n               " "[New]" instead of "[New File]"
+set shortmess+=t               " t and T truncate messages if they are too long to fit the command line
+set shortmess+=x               " write only short format messages for fileformat: unix, mac, dos
+
+set backupdir=~/.vim/backup    " centralized backup
+set noswapfile                 " no swap files
+
+if has('vim_starting')         "     vim_starting to not overwrite filetype specific settings
+    set foldmethod=syntax
+    set foldlevel=20               " by defualt open folds to level 20
+endif
+
+if !has('nvim')
+    set encoding=utf-8         " utf-8 encoding
+endif
+
+" do not back up roots files
+if exists('$SUDO_USER')
+    set nobackup
+    set nowritebackup
+    set noswapfile
+    set noundofile
+endif
+
+let g:mapleader ='\'
+" }}}
 " Deoplete Options {{{
 if has ('nvim')
     let g:deoplete#enable_at_startup = 1
@@ -219,92 +305,6 @@ endfunction
 
 vnoremap <silent> gs :set operatorfunc=SortOperator(visualmode(), 1)<CR>
 nnoremap <silent> gs :set operatorfunc=SortOperator<CR>g@
-" }}}
-" {{{ Settings
-syntax enable                  " enables syntax highlighting
-filetype plugin indent on      " react on filetyps with plugins and syntax
-set fileformat=unix            " proper unix linebreaks
-set scrolloff=4                " minimum number of lines to display around cursor
-set sidescrolloff=4            " minimum number of columnes to display around cursors
-set hlsearch                   " highlight search results
-set smarttab                   " <TAB> inserts 'shiftwidth' spaces
-set hidden                     " allow unsaved hidden buffers - crucial for bufdo, but don't forget to save
-set list                       " show funny characters, tabs and CRLF
-set spellcapcheck=             " make spell check insensitive to the case of the first letter in a word
-set tabstop=4                  " tab spacing
-set expandtab                  " use spaces instead of tab
-set shiftwidth=4               " amount of spaces for tab to insert
-set autoindent                 " automatically set the indent when creatig lines
-set ruler                      " show cursor position information in statusline
-set number                     " show line numbers
-set nowrap                     " do not wrap text
-set linebreak                  " preserves word when wrapping
-set ttyfast                    " 'smooth' scrolling
-set lazyredraw                 " do not update screen during macro playback
-set synmaxcol=512              " do not use syntax highlighting for long lines
-set mouse=a                    " enable mouse in terminals that support it
-set showmatch                  " breifly show matching bracekt when inserting such
-set incsearch                  " incremental searching as soon as typing begins
-set ignorecase                 " ignore case when searching
-set smartcase                  " will override ignore case if searching w/ diff cases
-set modeline                   " use modelines
-set ttimeoutlen=5              " faster twitching for everything
-set virtualedit=block          " allow cursor to be moved into empty space in visual
-set laststatus=2               " always show status line
-set backspace=indent,eol,start " backspace everywhere
-set cursorline                 " highlights the line cursor is at
-set cursorcolumn               " highlights the column cursor is at
-set showcmd
-set wildmenu                   " menu line with autocomplete options
-set textwidth=80
-set splitbelow                 " intuitive split placement
-set splitright                 " intuitive split placement
-
-" set formatoptions-=t           " disable automatic linebreak at textwidth for non-comments
-" set formatoptions-=c           " disable automatic linebreak at textwidth for comments
-set formatoptions=
-set formatoptions+=c           " auto-wrap coments using textwidth, inserting comment leader
-set formatoptions+=j           " remove comment leader when joining lines
-set formatoptions+=l           " long lines, longer than textwidth when insert mode is started, do no break automatically
-set formatoptions+=o           " insert comment leader with oO if run from a commented line
-set formatoptions+=q           " allow formatting of options with gq
-set formatoptions+=r           " insert comment leader with <cr>
-
-set shortmess=
-" set shortmess+=O
-" set shortmess+=o             " NB(nils): slated for removal
-set shortmess+=F               " don't write what file/buffer I switch to typically "vimrc XYZ lines, ..."
-set shortmess+=T
-set shortmess+=c               " no status message for insert mode completions
-set shortmess+=f               " "(3 of 5)" instead of "(file 3 of 5)"
-set shortmess+=i               " "[noeol]" instead of "[Incomplete last line]"
-set shortmess+=l               " "999L, 888C" instead of "999 lines, 888 characters"
-set shortmess+=m               " [+] instead of [MODIFIED]
-set shortmess+=n               " "[New]" instead of "[New File]"
-set shortmess+=t               " t and T truncate messages if they are too long to fit the command line
-set shortmess+=x               " write only short format messages for fileformat: unix, mac, dos
-
-set backupdir=~/.vim/backup    " centralized backup
-set noswapfile                 " no swap files
-
-if has('vim_starting')         "     vim_starting to not overwrite filetype specific settings
-    set foldmethod=syntax
-    set foldlevel=20               " by defualt open folds to level 20
-endif
-
-if !has('nvim')
-    set encoding=utf-8         " utf-8 encoding
-endif
-
-" do not back up roots files
-if exists('$SUDO_USER')
-    set nobackup
-    set nowritebackup
-    set noswapfile
-    set noundofile
-endif
-
-let g:mapleader ='\'
 " }}}
 " {{{ Colors, Look and feel
 " {{{ General
