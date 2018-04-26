@@ -76,11 +76,13 @@ function fish_prompt
 
   set date " "(date +%H:%M)
   if test "$stat" -gt 0
-    set date (set_color red)"$date"(set_color normal)
+    set exit_color (set_color red)
   end
 
   # echo -n (_remote_hostname) $tmux_window_count$cwd$cyan$git_status$normal $job_count$date" "
-  printf " █%s %s%s%s%s " \
+  printf " %s█%s %s%s%s%s " \
+  # rely on exit color not being set if the status is ok
+  "$exit_color"        \
   "$date"              \
   (_remote_hostname)   \
   "$cwd"               \
