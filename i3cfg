@@ -130,6 +130,7 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # }}} movement
+
 # split, focus and layout binds {{{
 # split in horizontal orientation
 bindsym $mod+z split h
@@ -205,23 +206,26 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 # }}} resize
-# media mode {{{
-mode "media" {
-    bindsym l exec nextsong.sh ; mode "default"
-    bindsym space exec toggleplay.sh ; mode "default"
-    bindsym h exec prevsong.sh ; mode "default"
-    bindsym w exec logsong.sh ; mode "default"
-    bindsym s exec selectsong.sh ; mode "default"
-    bindsym i exec playclip.sh ; mode "default"
-    bindsym q exec insertclip.sh ; mode "defualt"  # queue
+
+# print screen mode {{{
+mode "print" {
+    # mnemonics:
+    #   * r: region
+    #   * f: full
+    #   * s: screen
+
+    bindsym r exec sh ~/dotfiles/bin/print-region.sh > /tmp/p.log 2>&1 ; mode "default"
+    bindsym f exec ~/dotfiles/bin/print-screen.sh ; mode "default"
+    bindsym s exec ~/dotfiles/bin/print-screen.sh ; mode "default"
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
 
-bindsym $mod+o mode "media"
-# }}} media mode
+bindsym $mod+o mode "print"
+# }}}
+
 # bar settings {{{
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
@@ -322,15 +326,16 @@ bindsym $mod+apostrophe [con_mark="'"] focus
 bindsym $mod+comma [con_mark=","] focus
 
 # }}}
+
 # force workspace 2 to internal monitor
 # used for IRC
 # workspace 2 output eDP1
 
-##############
-# i3 gaps area
-##############
+# i3 gaps {{{
 
 set $gap 10
 gaps inner $gap
 gaps outer -$gap
 smart_gaps on
+
+# }}}
