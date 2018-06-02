@@ -199,7 +199,8 @@ mode "resize" {
         bindsym 111 resize shrink height 3 px or 3 ppt
         bindsym 114 resize grow width 3 px or 3 ppt
 
-        # back to normal: Enter or Escape
+        # back to normal: Enter or Escape (control + leftbracket, keycode 34)
+        bindcode Control+34 mode "default"
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
@@ -209,16 +210,19 @@ bindsym $mod+r mode "resize"
 
 # print screen mode {{{
 mode "print" {
+    # --release executes after the key has been released, which should avoid
+    # errors of "resource is busy" in scrot
     # mnemonics:
     #   * r: region
     #   * f: full
     #   * s: screen
 
-    bindsym r exec sh ~/dotfiles/bin/print-region.sh > /tmp/p.log 2>&1 ; mode "default"
-    bindsym f exec ~/dotfiles/bin/print-screen.sh ; mode "default"
-    bindsym s exec ~/dotfiles/bin/print-screen.sh ; mode "default"
+    bindsym --release r exec sh ~/dotfiles/bin/print-region.sh > /tmp/p.log 2>&1 ; mode "default"
+    bindsym --release f exec ~/dotfiles/bin/print-screen.sh ; mode "default"
+    bindsym --release s exec ~/dotfiles/bin/print-screen.sh ; mode "default"
 
-    # back to normal: Enter or Escape
+    # back to normal: Enter or Escape (control + leftbracket, keycode 34)
+    bindcode Control+34 mode "default"
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
