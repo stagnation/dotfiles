@@ -41,7 +41,13 @@ bindsym $mod+Control+Return exec ~/bin/newranger.sh
 # move window to new empty workspace
 bindsym $mod+Shift+m exec "$quickswitch -je"
 bindsym $mod+Shift+q kill
-bindsym $mod+a [urgent=latest] focus
+
+# menmonic: u : urgent
+bindsym $mod+u [urgent=latest] focus
+
+# mod+a is the default bind for parrent
+bindsym $mod+a focus parent
+bindsym $mod+Shift+a focus child
 
 bindsym $mod+space exec fzf_launcher.sh
 
