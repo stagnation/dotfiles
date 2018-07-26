@@ -452,6 +452,8 @@ function! Status(winnr)
         let stat .= 'git'
     elseif fname =~? 'term://.*fzf'                                            " replace the terminal's special filename based on the running process :help terminal
         let stat .= 'fzf'
+    elseif fname =~? '/tmp/.*fish'
+        let stat .= 'Commandline'
 
     else
         let path = fnamemodify(fname, ":h")
