@@ -292,18 +292,20 @@ nnoremap zC zM
 " }}}
 " {{{ Custom Operators
 function! SortOperator(...)
-    if a:0
-        " the operator is invoked from normal mode, the motion sets '[ and ']
-        let [first, last] = [line("'["), line("']")]
-    else
-        " the operator is invoked from visual mode, the visual range is '< to '>
-        let [first, last] = [line("'<"), line("'>")]
-    endif
-
+    let [first, last] = [line("'["), line("']")]
     exe first . "," .last . ":sort"
 endfunction
 
-vnoremap <silent> gs :set operatorfunc=SortOperator(visualmode(), 1)<CR>
+function! VisualSortOperator(...)
+    " the operator is invoked from visual mode, restore the range from the
+    " previous visual selection, '< to '>. Store these and return to normal
+    silent exe "normal! gv"
+    let [first, last] = [line("'<"), line("'>")]
+    silent exe "normal! "
+    exe first . "," .last . ":sort"
+endfunction
+
+vnoremap <silent> gs :<c-u>call VisualSortOperator()<CR>
 nnoremap <silent> gs :set operatorfunc=SortOperator<CR>g@
 " }}}
 " {{{ Colors, Look and feel
