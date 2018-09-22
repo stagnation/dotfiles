@@ -175,11 +175,14 @@ if has('vim_starting')         "     vim_starting to not overwrite filetype spec
     set foldlevel=20               " by defualt open folds to level 20
 endif
 
+if has('nvim')
+    set inccommand=nosplit       " highlight all matches for :<range>s/pat/ interactively
+endif
 if !has('nvim')
     set encoding=utf-8         " utf-8 encoding
 endif
 
-" do not back up roots files
+" do not back up root's files
 if exists('$SUDO_USER')
     set nobackup
     set nowritebackup
@@ -906,8 +909,16 @@ source ~/dotfiles/rust_fold.vim
 
 " NB(nils): :g/a/,/b/ selects a region
 
+" NB(nils): vmap: g<c-a> increment numbers to a numbering sequences,
+"           1 1 1 -> 1 2 3
+"
+" NB(nils): nmap <c-t> jump to location of last <c-]> ignoring any other
+" NB(nils): movements while handling the tag.
+
 if filereadable(glob("~/.vimrc.local"))
     source ~/.vimrc.local
 endif
 
 let g:EnhancedJumps_CaptureJumpMessages=0
+
+" TODO(nils): if ~/dotfiles in %. add ~/dotfiles to path.
