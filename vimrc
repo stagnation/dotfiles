@@ -129,7 +129,7 @@ set showmatch                  " breifly show matching bracekt when inserting su
 set incsearch                  " incremental searching as soon as typing begins
 set ignorecase                 " ignore case when searching
 set smartcase                  " will override ignore case if searching w/ diff cases
-set modeline                   " use modelines
+set modeline | set modelines=1 " use modeline
 set ttimeoutlen=5              " faster twitching for everything
 set virtualedit=block          " allow cursor to be moved into empty space in visual
 set laststatus=2               " always show status line
