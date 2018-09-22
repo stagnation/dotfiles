@@ -56,6 +56,10 @@ mkdir -p ~/.vim/colors
 mkdir -p ~/.config/nvim/backup
 mkdir -p ~/.config/nvim/colors
 
+mkdir -p ~/.config/gtk-{2,3}.0
+ln -s $dotfilesdir/gtk-settings.ini ~/.config/gtk-2.0/settings.ini
+ln -s $dotfilesdir/gtk-settings.ini ~/.config/gtk-3.0/settings.ini
+
 schemes="lakris.vim lakris256.vim"
 
 for scheme in $schemes; do
