@@ -141,6 +141,7 @@ set wildmenu                   " menu line with autocomplete options
 set textwidth=80
 set splitbelow                 " intuitive split placement
 set splitright                 " intuitive split placement
+set nojoinspaces               " do not add a double space after .!? with gq and auto-formatting
 
 " set formatoptions-=t           " disable automatic linebreak at textwidth for non-comments
 " set formatoptions-=c           " disable automatic linebreak at textwidth for comments
