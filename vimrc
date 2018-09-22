@@ -27,6 +27,11 @@ Plug 'dag/vim-fish'
 Plug 'PotatoesMaster/i3-vim-syntax'
 Plug 'rust-lang/rust.vim'
 
+if has("gui_running")
+    Plug 'junegunn/goyo.vim'
+    Plug 'junegunn/limelight.vim'
+endif
+
 Plug 'airblade/vim-gitgutter'
 " Plug 'chrisjohnson/vim-foldfunctions'
 Plug 'eparreno/vim-matchit'
@@ -67,7 +72,9 @@ if has ('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
     Plug 'sebastianmarkow/deoplete-rust'
     Plug '~/repos/nilsvim_fzf'
-else
+endif
+
+if !(has('nvim') || has('gui_running'))
     Plug '~/.vim/plugged/YouCompleteMe' " use local path to manage updates manually
 endif
 
@@ -97,6 +104,7 @@ call plug#end()
 " {{{ Settings
 syntax enable                  " enables syntax highlighting
 filetype plugin indent on      " react on filetyps with plugins and syntax
+
 set fileformat=unix            " proper unix linebreaks
 set scrolloff=4                " minimum number of lines to display around cursor
 set sidescrolloff=4            " minimum number of columnes to display around cursors
@@ -374,9 +382,9 @@ augroup END
 if has('vim_starting')
     " do not change colorscheme if vim is already running
     color liquorice-approx
-    if has('gui_running')
-        colorscheme liquorice
-    endif
+    " if has('gui_running')
+    "     colorscheme liquorice
+    " endif
 endif
 
 " showmark settings
@@ -493,6 +501,19 @@ augroup status
     autocmd VimEnter,WinEnter,BufWinEnter,BufUnload * call SetStatus()
 augroup END
 
+" }}}
+" {{{ Gvim prose writing
+if has("gui_running")
+    function!
+    function! SpillProse()
+        " disable auto commands that update the custom status function
+        " setlocal eventignore=VimEnter,WinEnter,BufWinEnter,BufUnload
+        " set statusline='%f'
+        Goyo 100%-5x90%
+        Limelight
+    endfunction
+
+endif
 " }}}
 " }}}
 " {{{ EasyAlign
